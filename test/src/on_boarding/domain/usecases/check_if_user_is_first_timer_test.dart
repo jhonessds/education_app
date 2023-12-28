@@ -26,7 +26,7 @@ void main() {
     final result = await usecase();
 
     // Assert
-    expect(result, Right(true));
+    expect(result, const Right(true));
     verify(() => repository.checkIfUserIsFirstTimer()).called(1);
     verifyNoMoreInteractions(repository);
   });

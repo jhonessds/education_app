@@ -15,7 +15,7 @@ void main() {
 
   setUp(() {
     dataSource = MockOnBoardingLocalDataSource();
-    repository = OnBoardingRepoImpl(dataSource);
+    repository = OnBoardingRepoImpl(localDataSource: dataSource);
   });
 
   test('should be a subclass of [OnBoardingRepo]', () {
@@ -23,7 +23,7 @@ void main() {
   });
 
   group('cacheFirstTimer', () {
-    var tCacheFailure = const CacheFailure(message: 'Insufficient storage');
+    var tCacheFailure = const CacheFailure(message: 'Insufficient Permission');
     test('should complete successfully when call to local source is successful',
         () async {
       // Arrange

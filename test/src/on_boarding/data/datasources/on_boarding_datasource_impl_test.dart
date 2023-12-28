@@ -12,7 +12,7 @@ void main() {
 
   setUp(() {
     prefs = MockSharedPreferences();
-    dataSource = OnBoardingLocalDataSrcImpl(prefs);
+    dataSource = OnBoardingLocalDataSrcImpl(prefs: prefs);
   });
 
   group('cacheFirstTimer', () {

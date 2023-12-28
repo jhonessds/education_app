@@ -5,14 +5,14 @@ import 'package:education_app/src/on_boarding/data/datasources/on_boarding_datas
 import 'package:education_app/src/on_boarding/domain/repos/on_boarding_repo.dart';
 
 class OnBoardingRepoImpl implements OnBoardingRepo {
-  const OnBoardingRepoImpl(this._localDataSource);
+  const OnBoardingRepoImpl({required this.localDataSource});
 
-  final OnBoardingLocalDataSource _localDataSource;
+  final OnBoardingLocalDataSource localDataSource;
 
   @override
   ResultFuture<void> cacheFirstTimer() async {
     try {
-      await _localDataSource.cacheFirstTimer();
+      await localDataSource.cacheFirstTimer();
       return const Right(null);
     } on CacheFailure catch (e) {
       return Left(e);
@@ -20,8 +20,12 @@ class OnBoardingRepoImpl implements OnBoardingRepo {
   }
 
   @override
-  ResultFuture<bool> checkIfUserIsFirstTimer() {
-    // TODO: implement checkIfUserIsFirstTimer
-    throw UnimplementedError();
+  ResultFuture<bool> checkIfUserIsFirstTimer() async {
+    try {
+      final result = await localDataSource.checkIfUserIsFirstTimer();
+      return Right(result);
+    } on CacheFailure catch (e) {
+      return Left(e);
+    }
   }
 }

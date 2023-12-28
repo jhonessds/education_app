@@ -2,14 +2,14 @@ import 'package:education_app/core/res/media_res.dart';
 import 'package:equatable/equatable.dart';
 
 class PageContent extends Equatable {
-  PageContent({
+  const PageContent({
     required this.image,
     required this.title,
     required this.description,
   });
 
   factory PageContent.first() {
-    return PageContent(
+    return const PageContent(
       image: MediaRes.casualReading,
       title: 'Brand new curriculum',
       description: 'This is the first online education platform designed by'
@@ -18,7 +18,7 @@ class PageContent extends Equatable {
   }
 
   factory PageContent.second() {
-    return PageContent(
+    return const PageContent(
       image: MediaRes.casualLife,
       title: 'Brand new atmosphere',
       description: 'This is the first online education platform designed by'
@@ -26,7 +26,7 @@ class PageContent extends Equatable {
     );
   }
   factory PageContent.third() {
-    return PageContent(
+    return const PageContent(
       image: MediaRes.casualMeditationScience,
       title: 'Easy to join the lesson',
       description: 'This is the first online education platform designed by'
