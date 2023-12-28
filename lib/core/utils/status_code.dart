@@ -1,6 +1,7 @@
 enum StatusCode {
   unknow('UNKNOW', 0),
   firebase('FIREBASE', 5),
+  cache('CACHE', 6),
   connectionError('CONNECTION_ERROR', 10),
 
   //1xx Informativo
@@ -88,6 +89,8 @@ enum StatusCode {
     switch (code) {
       case 5:
         return StatusCode.firebase;
+      case 6:
+        return StatusCode.cache;
       case 10:
         return StatusCode.connectionError;
       case 100:
