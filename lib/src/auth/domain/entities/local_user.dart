@@ -3,10 +3,10 @@ import 'package:equatable/equatable.dart';
 class LocalUser extends Equatable {
   final String uid;
   final String email;
+  final String fullName;
+  final int points;
   final String? profilePicture;
   final String? bio;
-  final int points;
-  final String fullName;
   final List<String> groupIds;
   final List<String> enrollCourseIds;
   final List<String> following;
@@ -15,27 +15,18 @@ class LocalUser extends Equatable {
   const LocalUser({
     required this.uid,
     required this.email,
+    required this.fullName,
     this.profilePicture,
     this.bio,
-    required this.points,
-    required this.fullName,
-    required this.groupIds,
-    required this.enrollCourseIds,
-    required this.following,
-    required this.followers,
+    this.points = 0,
+    this.groupIds = const [],
+    this.enrollCourseIds = const [],
+    this.following = const [],
+    this.followers = const [],
   });
 
   factory LocalUser.empty() {
-    return const LocalUser(
-      uid: '',
-      email: '',
-      points: 0,
-      fullName: '',
-      groupIds: [],
-      enrollCourseIds: [],
-      following: [],
-      followers: [],
-    );
+    return const LocalUser(uid: '', email: '', fullName: '');
   }
 
   @override

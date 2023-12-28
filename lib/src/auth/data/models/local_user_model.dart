@@ -7,14 +7,14 @@ class LocalUserModel extends LocalUser {
   const LocalUserModel({
     required super.uid,
     required super.email,
+    required super.fullName,
     super.profilePicture,
     super.bio,
-    required super.points,
-    required super.groupIds,
-    required super.fullName,
-    required super.enrollCourseIds,
-    required super.following,
-    required super.followers,
+    super.points,
+    super.groupIds,
+    super.enrollCourseIds,
+    super.following,
+    super.followers,
   });
 
   LocalUserModel copyWith({
@@ -43,17 +43,17 @@ class LocalUserModel extends LocalUser {
     );
   }
 
+  factory LocalUserModel.empty() {
+    return const LocalUserModel(uid: '', email: '', fullName: '');
+  }
+
   DataMap toMap() {
     final result = <String, dynamic>{};
 
     result.addAll({'uid': uid});
     result.addAll({'email': email});
-    if (profilePicture != null) {
-      result.addAll({'profilePicture': profilePicture});
-    }
-    if (bio != null) {
-      result.addAll({'bio': bio});
-    }
+    result.addAll({'profilePicture': profilePicture});
+    result.addAll({'bio': bio});
     result.addAll({'points': points});
     result.addAll({'fullName': fullName});
     result.addAll({'groupIds': groupIds});
@@ -68,10 +68,10 @@ class LocalUserModel extends LocalUser {
     return LocalUserModel(
       uid: map['uid'] ?? '',
       email: map['email'] ?? '',
-      profilePicture: map['profilePicture'],
-      bio: map['bio'],
-      points: map['points']?.toInt() ?? 0,
-      fullName: map['fullName'],
+      profilePicture: map['profilePicture'] ?? '',
+      bio: map['bio'] ?? '',
+      points: map['points'] != null ? (map['points'] as num).toInt() : 0,
+      fullName: map['fullName'] ?? '',
       groupIds: List<String>.from(map['groupIds'] ?? const []),
       enrollCourseIds: List<String>.from(map['enrollCourseIds'] ?? const []),
       following: List<String>.from(map['following'] ?? const []),

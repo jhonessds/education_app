@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:education_app/core/errors/api_failure.dart';
+import 'package:education_app/core/errors/server_failure.dart';
 import 'package:education_app/core/utils/status_code.dart';
 import 'package:education_app/src/on_boarding/domain/repos/on_boarding_repo.dart';
 import 'package:education_app/src/on_boarding/domain/usecases/cache_first_timer.dart';
@@ -23,7 +23,7 @@ void main() {
     // Arrange
     when(() => repository.cacheFirstTimer()).thenAnswer(
       (_) async => const Left(
-        ApiFailure(message: 'Unknow Error', statusCode: StatusCode.unknow),
+        ServerFailure(message: 'Unknow Error', statusCode: StatusCode.unknow),
       ),
     );
     // Act
@@ -32,7 +32,7 @@ void main() {
     expect(
       result,
       const Left(
-        ApiFailure(message: 'Unknow Error', statusCode: StatusCode.unknow),
+        ServerFailure(message: 'Unknow Error', statusCode: StatusCode.unknow),
       ),
     );
     verify(() => repository.cacheFirstTimer()).called(1);

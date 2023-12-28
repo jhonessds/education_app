@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "931463522398",
+    "project_id": "education-app-1afa3",
+    "storage_bucket": "education-app-1afa3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931463522398:android:8ed7665224133173eaaccf",
+        "android_client_info": {
+          "package_name": "com.devjhones.education_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEiTlC7m7C905zYZJuFuhtaxow34EDNO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
