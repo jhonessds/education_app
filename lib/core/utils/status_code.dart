@@ -1,8 +1,7 @@
 enum StatusCode {
-  unknow('UNKNOW', 0),
-  firebase('FIREBASE', 5),
-  cache('CACHE', 6),
+  unknown('UNKNOWN', 0),
   connectionError('CONNECTION_ERROR', 10),
+  notAuthenticated('NOT_AUTHENTICATED', 20),
 
   //1xx Informativo
   continues('CONTINUE', 100),
@@ -75,7 +74,10 @@ enum StatusCode {
   loopDetected('LOOP_DETECTED', 508),
   notExtended('NOT_EXTENDED', 510),
   networkAuthenticationRequired('NETWORK_AUTHENTICATION_REQUIRED', 511),
-  networkConnectionTimeoutError('NETWORK_CONNECTION_TIMEOUT_ERROR', 599);
+  networkConnectionTimeoutError('NETWORK_CONNECTION_TIMEOUT_ERROR', 599),
+  firebase('FIREBASE', 600),
+  cache('CACHE', 700),
+  ;
 
   const StatusCode(this.name, this.value);
 
@@ -85,14 +87,36 @@ enum StatusCode {
   @override
   String toString() => name;
 
+  factory StatusCode.fromFirebase(String code) {
+    switch (code) {
+      case 'invalid-email':
+      case 'missing-android-pkg-name':
+      case 'missing-continue-uri':
+      case 'missing-ios-bundle-id':
+      case 'invalid-continue-uri':
+      case 'unauthorized-continue-uri':
+      case 'user-not-found':
+      case 'user-disabled':
+      case 'wrong-password':
+      case 'email-already-in-use':
+      case 'operation-not-allowed':
+      case 'weak-password':
+      case 'requires-recent-login':
+      case 'user-mismatch':
+      case 'invalid-credential':
+      case 'invalid-verification-code':
+      case 'invalid-verification-id':
+        return StatusCode.firebase;
+      default:
+        return StatusCode.firebase;
+    }
+  }
   factory StatusCode.fromInt(int code) {
     switch (code) {
-      case 5:
-        return StatusCode.firebase;
-      case 6:
-        return StatusCode.cache;
       case 10:
         return StatusCode.connectionError;
+      case 20:
+        return StatusCode.notAuthenticated;
       case 100:
         return StatusCode.continues;
       case 101:
@@ -219,8 +243,12 @@ enum StatusCode {
         return StatusCode.networkAuthenticationRequired;
       case 599:
         return StatusCode.networkConnectionTimeoutError;
+      case 600:
+        return StatusCode.firebase;
+      case 700:
+        return StatusCode.cache;
       default:
-        return StatusCode.unknow;
+        return StatusCode.unknown;
     }
   }
 }

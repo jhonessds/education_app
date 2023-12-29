@@ -23,7 +23,7 @@ void main() {
     // Arrange
     when(() => repository.cacheFirstTimer()).thenAnswer(
       (_) async => const Left(
-        ServerFailure(message: 'Unknow Error', statusCode: StatusCode.unknow),
+        ServerFailure(message: 'Unknow Error', statusCode: StatusCode.unknown),
       ),
     );
     // Act
@@ -32,7 +32,7 @@ void main() {
     expect(
       result,
       const Left(
-        ServerFailure(message: 'Unknow Error', statusCode: StatusCode.unknow),
+        ServerFailure(message: 'Unknow Error', statusCode: StatusCode.unknown),
       ),
     );
     verify(() => repository.cacheFirstTimer()).called(1);

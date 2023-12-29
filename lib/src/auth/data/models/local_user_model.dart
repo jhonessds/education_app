@@ -64,9 +64,20 @@ class LocalUserModel extends LocalUser {
     return result;
   }
 
-  factory LocalUserModel.fromMap(DataMap map) {
+  DataMap toInsertMap() {
+    final result = <String, dynamic>{};
+
+    result.addAll({'uid': uid});
+    result.addAll({'email': email});
+    result.addAll({'profilePicture': profilePicture});
+    result.addAll({'fullName': fullName});
+
+    return result;
+  }
+
+  factory LocalUserModel.fromMap(DataMap map, {String? uid}) {
     return LocalUserModel(
-      uid: map['uid'] ?? '',
+      uid: (uid ?? (map['uid'] ?? '')),
       email: map['email'] ?? '',
       profilePicture: map['profilePicture'] ?? '',
       bio: map['bio'] ?? '',

@@ -19,7 +19,7 @@ void main() {
   });
 
   test(
-    'should call the [AuthRepo]',
+    'should call the [AuthRepository]',
     () async {
       when(
         () => repository.signUp(

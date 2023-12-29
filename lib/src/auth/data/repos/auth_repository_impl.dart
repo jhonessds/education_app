@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:education_app/core/enums/update_user.dart';
 import 'package:education_app/core/errors/server_failure.dart';
@@ -60,6 +62,36 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await _datasource.updateUser(user: user, action: action);
       return const Right(null);
+    } on ServerFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<void> updatePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      await _datasource.updatePassword(
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      );
+      return const Right(null);
+    } on ServerFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<String> saveProfilePicture({
+    required File profilePicture,
+  }) async {
+    try {
+      final result = await _datasource.saveProfilePicture(
+        profilePicture: profilePicture,
+      );
+      return Right(result);
     } on ServerFailure catch (e) {
       return Left(e);
     }

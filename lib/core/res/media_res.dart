@@ -16,6 +16,9 @@ class MediaRes {
   static const steamCup = '$_baseVector/steam_cup.png';
   static const turquoisePotPlant = '$_baseVector/turquoise_pot_plant.png';
 
+  static const defaultAvatar =
+      'https://images.freeimages.com/fic/images/icons/573/must_have/256/user.png';
+
   /// Backgrounds
   static const onBoardingBackground = '$_baseImage/onBoarding_background.png';
   static const authGradientBackground =

@@ -18,7 +18,7 @@ void main() {
   setUp(() {
     remoteDataSource = MockAuthRemoteDataSource();
     repositoryImpl = AuthRepositoryImpl(remoteDataSource);
-    registerFallbackValue(UpdateUserAction.password);
+    registerFallbackValue(UpdateUserAction.displayName);
     registerFallbackValue(LocalUser.empty());
     registerFallbackValue(LocalUserModel.empty());
   });
@@ -26,7 +26,7 @@ void main() {
   const tPassword = 'Test password';
   const tFullName = 'Test full name';
   const tEmail = 'Test email';
-  const tUpdateAction = UpdateUserAction.password;
+  const tUpdateAction = UpdateUserAction.displayName;
 
   final tUser = LocalUserModel.empty();
 

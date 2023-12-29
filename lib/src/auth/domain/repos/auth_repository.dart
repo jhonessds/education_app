@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:education_app/core/enums/update_user.dart';
 import 'package:education_app/core/utils/typedefs.dart';
 import 'package:education_app/src/auth/domain/entities/local_user.dart';
@@ -12,6 +14,11 @@ abstract class AuthRepository {
     required String password,
   });
 
+  ResultFuture<void> updatePassword({
+    required String oldPassword,
+    required String newPassword,
+  });
+
   ResultFuture<void> signUp({
     required String email,
     required String password,
@@ -22,4 +29,6 @@ abstract class AuthRepository {
     required LocalUser user,
     required UpdateUserAction action,
   });
+
+  ResultFuture<String> saveProfilePicture({required File profilePicture});
 }
