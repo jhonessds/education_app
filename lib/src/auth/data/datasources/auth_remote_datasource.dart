@@ -1,8 +1,9 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_app/core/enums/update_user.dart';
 import 'package:education_app/core/errors/server_failure.dart';
-import 'package:education_app/core/firebase/user_collection.dart';
+import 'package:education_app/core/services/firebase/user_collection.dart';
 import 'package:education_app/core/res/media_res.dart';
 import 'package:education_app/core/utils/status_code.dart';
 import 'package:education_app/src/auth/data/models/local_user_model.dart';
@@ -41,23 +42,23 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
-  final FirebaseAuth _authClient;
-
-  final FirebaseStorage _storageClient;
-  final UserCollection _userCollection;
+  final FirebaseAuth authClient;
+  final FirebaseStorage storageClient;
+  final FirebaseFirestore firestoreClient;
+  late UserCollection userCollection;
 
   AuthRemoteDataSourceImpl({
-    required FirebaseAuth authClient,
-    required FirebaseStorage storageClient,
-    required UserCollection userCollection,
-  })  : _authClient = authClient,
-        _storageClient = storageClient,
-        _userCollection = userCollection;
+    required this.authClient,
+    required this.storageClient,
+    required this.firestoreClient,
+  }) {
+    userCollection = UserCollection(instance: firestoreClient);
+  }
 
   @override
   Future<void> forgotPassword({required String email}) async {
     try {
-      await _authClient.sendPasswordResetEmail(email: email);
+      await authClient.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       throw ServerFailure(
         message: e.message ?? 'Unknow Error',
@@ -78,7 +79,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     required String password,
   }) async {
     try {
-      final result = await _authClient.signInWithEmailAndPassword(
+      final result = await authClient.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -88,17 +89,17 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       if (user == null) {
         throw const ServerFailure(
           message: 'Try again later',
-          statusCode: StatusCode.unknown,
+          statusCode: StatusCode.notFound,
         );
       }
 
-      var userData = await _userCollection.getById(user.uid);
+      var userData = await userCollection.getById(user.uid);
 
       if (userData != null) return userData;
 
       await _createUser(user, email);
 
-      userData = await _userCollection.getById(user.uid);
+      userData = await userCollection.getById(user.uid);
 
       return userData!;
     } on ServerFailure {
@@ -124,7 +125,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     required String fullName,
   }) async {
     try {
-      final userCredential = await _authClient.createUserWithEmailAndPassword(
+      final userCredential = await authClient.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -132,7 +133,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       if (userCredential.user == null) {
         throw const ServerFailure(
           message: 'Try again later',
-          statusCode: StatusCode.unknown,
+          statusCode: StatusCode.notFound,
         );
       }
 
@@ -164,12 +165,12 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     try {
       switch (action) {
         case UpdateUserAction.email:
-          await _authClient.currentUser?.updateEmail(user.email);
+          await authClient.currentUser?.updateEmail(user.email);
         case UpdateUserAction.displayName:
-          await _authClient.currentUser?.updateDisplayName(user.fullName);
+          await authClient.currentUser?.updateDisplayName(user.fullName);
         default:
       }
-      await _userCollection.update(user as LocalUserModel);
+      await userCollection.update(user as LocalUserModel);
     } on ServerFailure {
       rethrow;
     } on FirebaseAuthException catch (e) {
@@ -189,8 +190,8 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   @override
   Future<String> saveProfilePicture({required File profilePicture}) async {
     try {
-      var userData = await _userCollection.getById(
-        _authClient.currentUser!.uid,
+      var userData = await userCollection.getById(
+        authClient.currentUser!.uid,
       );
 
       if (userData == null) {
@@ -200,13 +201,13 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         );
       }
       final ext = profilePicture.path.split('.').last;
-      final ref = _storageClient
+      final ref = storageClient
           .ref()
-          .child('profile_pic/${_authClient.currentUser?.uid}.$ext');
+          .child('profile_pic/${authClient.currentUser?.uid}.$ext');
       await ref.putFile(profilePicture);
       final url = await ref.getDownloadURL();
-      await _authClient.currentUser?.updatePhotoURL(url);
-      await _userCollection.update(userData.copyWith(profilePicture: url));
+      await authClient.currentUser?.updatePhotoURL(url);
+      await userCollection.update(userData.copyWith(profilePicture: url));
       return url;
     } on ServerFailure {
       rethrow;
@@ -225,18 +226,18 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     required String oldPassword,
   }) async {
     try {
-      if (_authClient.currentUser?.email == null) {
+      if (authClient.currentUser?.email == null) {
         throw const ServerFailure(
           message: 'User does not exist',
-          statusCode: StatusCode.firebase,
+          statusCode: StatusCode.notFound,
         );
       }
       var credential = EmailAuthProvider.credential(
-        email: _authClient.currentUser!.email!,
+        email: authClient.currentUser!.email!,
         password: oldPassword,
       );
-      await _authClient.currentUser?.reauthenticateWithCredential(credential);
-      await _authClient.currentUser?.updatePassword(newPassword);
+      await authClient.currentUser?.reauthenticateWithCredential(credential);
+      await authClient.currentUser?.updatePassword(newPassword);
     } on ServerFailure {
       rethrow;
     } on FirebaseAuthException catch (e) {
@@ -261,6 +262,6 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       profilePicture: user.photoURL ?? '',
     );
 
-    await _userCollection.create(userToInsert, id: user.uid);
+    await userCollection.create(userToInsert, id: user.uid);
   }
 }

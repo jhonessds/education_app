@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:education_app/core/enums/update_user.dart';
 import 'package:education_app/core/errors/server_failure.dart';
@@ -19,14 +21,15 @@ void main() {
     remoteDataSource = MockAuthRemoteDataSource();
     repositoryImpl = AuthRepositoryImpl(remoteDataSource);
     registerFallbackValue(UpdateUserAction.displayName);
-    registerFallbackValue(LocalUser.empty());
     registerFallbackValue(LocalUserModel.empty());
+    registerFallbackValue(File(''));
   });
 
   const tPassword = 'Test password';
   const tFullName = 'Test full name';
   const tEmail = 'Test email';
   const tUpdateAction = UpdateUserAction.displayName;
+  var tFile = File('');
 
   final tUser = LocalUserModel.empty();
 
@@ -247,6 +250,113 @@ void main() {
 
         verify(
           () => remoteDataSource.updateUser(action: tUpdateAction, user: tUser),
+        ).called(1);
+
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
+
+  group('updatePassword', () {
+    test(
+      'should return [void] when call to remote source is successful',
+      () async {
+        when(
+          () => remoteDataSource.updatePassword(
+            oldPassword: any(named: 'oldPassword'),
+            newPassword: any(named: 'newPassword'),
+          ),
+        ).thenAnswer((_) async => Future.value());
+
+        final result = await repositoryImpl.updatePassword(
+          oldPassword: tPassword,
+          newPassword: tPassword,
+        );
+
+        expect(result, equals(const Right<dynamic, void>(null)));
+
+        verify(
+          () => remoteDataSource.updatePassword(
+            oldPassword: tPassword,
+            newPassword: tPassword,
+          ),
+        ).called(1);
+
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+
+    test(
+      'should return [ServerFailure] when call to remote source is '
+      'unsuccessful',
+      () async {
+        when(
+          () => remoteDataSource.updatePassword(
+            oldPassword: any(named: 'oldPassword'),
+            newPassword: any(named: 'newPassword'),
+          ),
+        ).thenThrow(tFailure);
+
+        final result = await repositoryImpl.updatePassword(
+          oldPassword: tPassword,
+          newPassword: tPassword,
+        );
+
+        expect(result, equals(const Left<dynamic, void>(tFailure)));
+
+        verify(
+          () => remoteDataSource.updatePassword(
+            oldPassword: tPassword,
+            newPassword: tPassword,
+          ),
+        ).called(1);
+
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
+
+  group('saveProfilePicture', () {
+    test(
+      'should return [void] when call to remote source is successful',
+      () async {
+        when(
+          () => remoteDataSource.saveProfilePicture(
+            profilePicture: any(named: 'profilePicture'),
+          ),
+        ).thenAnswer((_) async => Future.value(''));
+
+        final result = await repositoryImpl.saveProfilePicture(
+          profilePicture: tFile,
+        );
+
+        expect(result, equals(const Right<dynamic, String>('')));
+
+        verify(
+          () => remoteDataSource.saveProfilePicture(profilePicture: tFile),
+        ).called(1);
+
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+
+    test(
+      'should return [ServerFailure] when call to remote source is '
+      'unsuccessful',
+      () async {
+        when(
+          () => remoteDataSource.saveProfilePicture(
+            profilePicture: any(named: 'profilePicture'),
+          ),
+        ).thenThrow(tFailure);
+
+        final result = await repositoryImpl.saveProfilePicture(
+          profilePicture: tFile,
+        );
+        expect(result, equals(const Left<dynamic, String>(tFailure)));
+
+        verify(
+          () => remoteDataSource.saveProfilePicture(profilePicture: tFile),
         ).called(1);
 
         verifyNoMoreInteractions(remoteDataSource);
