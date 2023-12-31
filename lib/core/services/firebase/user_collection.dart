@@ -32,7 +32,7 @@ class UserCollection implements ICollection<LocalUserModel> {
     final snapUser = await instance.collection('users').doc(id).get();
     if (!snapUser.exists) return null;
 
-    final user = LocalUserModel.fromMap(snapUser.data()!, uid: snapUser.id);
+    final user = LocalUserModel.fromMap(snapUser.data()!);
     return user;
   }
 

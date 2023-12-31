@@ -49,6 +49,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }) {
     userCollection = UserCollection(instance: firestoreClient);
   }
+
   final FirebaseAuth authClient;
   final FirebaseStorage storageClient;
   final FirebaseFirestore firestoreClient;
@@ -162,12 +163,13 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     required UpdateUserAction action,
   }) async {
     try {
-      switch (action) {
-        case UpdateUserAction.email:
-          await authClient.currentUser?.updateEmail(user.email);
-        case UpdateUserAction.displayName:
-          await authClient.currentUser?.updateDisplayName(user.fullName);
+      if (action == UpdateUserAction.email) {
+        await authClient.currentUser?.updateEmail(user.email);
       }
+      if (action == UpdateUserAction.displayName) {
+        await authClient.currentUser?.updateDisplayName(user.fullName);
+      }
+
       await userCollection.update(user as LocalUserModel);
     } on ServerFailure {
       rethrow;

@@ -26,14 +26,14 @@ class LocalUserModel extends LocalUser {
       points: map['points'] != null ? (map['points'] as num).toInt() : 0,
       fullName: (map['fullName'] as String?) ?? '',
       groupIds:
-          List<String>.from((map['groupIds'] as List<String>?) ?? const []),
+          List<String>.from((map['groupIds'] as List<dynamic>?) ?? const []),
       enrollCourseIds: List<String>.from(
-        (map['enrollCourseIds'] as List<String>?) ?? const [],
+        (map['enrollCourseIds'] as List<dynamic>?) ?? const [],
       ),
       following:
-          List<String>.from((map['following'] as List<String>?) ?? const []),
+          List<String>.from((map['following'] as List<dynamic>?) ?? const []),
       followers:
-          List<String>.from((map['followers'] as List<String>?) ?? const []),
+          List<String>.from((map['followers'] as List<dynamic>?) ?? const []),
     );
   }
 
