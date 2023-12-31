@@ -87,6 +87,7 @@ enum StatusCode {
   @override
   String toString() => name;
 
+  // ignore: sort_constructors_first
   factory StatusCode.fromFirebase(String code) {
     switch (code) {
       case 'invalid-email':
@@ -111,6 +112,8 @@ enum StatusCode {
         return StatusCode.firebase;
     }
   }
+
+  // ignore: sort_constructors_first
   factory StatusCode.fromInt(int code) {
     switch (code) {
       case 10:

@@ -1,7 +1,7 @@
 import 'package:education_app/core/utils/status_code.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class Failure extends Equatable {
+abstract class Failure extends Equatable implements Exception {
   const Failure({this.message, this.statusCode})
       : assert(statusCode is StatusCode, 'Status code cannot be a ');
 

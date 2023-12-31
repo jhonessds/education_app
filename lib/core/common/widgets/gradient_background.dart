@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class GradientBackground extends StatelessWidget {
   const GradientBackground({
-    super.key,
     required this.image,
     required this.child,
+    super.key,
   });
 
   final String image;

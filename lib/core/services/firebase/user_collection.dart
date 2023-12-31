@@ -3,9 +3,9 @@ import 'package:education_app/core/services/firebase/i_collection.dart';
 import 'package:education_app/src/auth/data/models/local_user_model.dart';
 
 class UserCollection implements ICollection<LocalUserModel> {
-  final FirebaseFirestore instance;
-
   UserCollection({required this.instance});
+
+  final FirebaseFirestore instance;
 
   // final collection = FirebaseFirestore.instance
   //   .collection('users')
@@ -29,10 +29,10 @@ class UserCollection implements ICollection<LocalUserModel> {
 
   @override
   Future<LocalUserModel?> getById(String id) async {
-    var snapUser = await instance.collection('users').doc(id).get();
+    final snapUser = await instance.collection('users').doc(id).get();
     if (!snapUser.exists) return null;
 
-    var user = LocalUserModel.fromMap(snapUser.data()!);
+    final user = LocalUserModel.fromMap(snapUser.data()!, uid: snapUser.id);
     return user;
   }
 

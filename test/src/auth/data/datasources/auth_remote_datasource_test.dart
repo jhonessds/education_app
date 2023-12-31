@@ -1,10 +1,10 @@
 import 'package:education_app/core/enums/update_user.dart';
 import 'package:education_app/src/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:education_app/src/auth/data/models/local_user_model.dart';
-import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:firebase_storage_mocks/firebase_storage_mocks.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 void main() {

@@ -29,7 +29,7 @@ void main() {
   const tFullName = 'Test full name';
   const tEmail = 'Test email';
   const tUpdateAction = UpdateUserAction.displayName;
-  var tFile = File('');
+  final tFile = File('');
 
   final tUser = LocalUserModel.empty();
 

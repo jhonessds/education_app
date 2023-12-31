@@ -1,8 +1,7 @@
-import 'package:equatable/equatable.dart';
-
 import 'package:education_app/core/usecases/usecase.dart';
 import 'package:education_app/core/utils/typedefs.dart';
 import 'package:education_app/src/auth/domain/repos/auth_repository.dart';
+import 'package:equatable/equatable.dart';
 
 class SignUp extends UsecaseWithParam<void, SignUpParams> {
   SignUp({required this.repository});
@@ -24,10 +23,6 @@ class SignUpParams extends Equatable {
     required this.fullName,
   });
 
-  final String email;
-  final String password;
-  final String fullName;
-
   factory SignUpParams.empty() {
     return const SignUpParams(
       email: '',
@@ -35,6 +30,10 @@ class SignUpParams extends Equatable {
       fullName: '',
     );
   }
+
+  final String email;
+  final String password;
+  final String fullName;
 
   @override
   List<Object> get props => [email, password];

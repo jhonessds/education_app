@@ -9,11 +9,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case OnBoardingView.routName:
       return _pageBuilder(
-          (_) => BlocProvider(
-                create: (context) => sl<OnBoardingCubit>(),
-                child: const OnBoardingView(),
-              ),
-          settings: settings);
+        (_) => BlocProvider(
+          create: (context) => sl<OnBoardingCubit>(),
+          child: const OnBoardingView(),
+        ),
+        settings: settings,
+      );
     default:
       return _pageBuilder(
         (_) => const PageUnderConstruction(),

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:education_app/core/errors/failure.dart';
 import 'package:education_app/core/errors/server_failure.dart';
 import 'package:education_app/core/utils/status_code.dart';
 import 'package:education_app/src/on_boarding/domain/repos/on_boarding_repo.dart';
@@ -31,7 +32,7 @@ void main() {
     // Assert
     expect(
       result,
-      const Left(
+      const Left<Failure, void>(
         ServerFailure(message: 'Unknow Error', statusCode: StatusCode.unknown),
       ),
     );

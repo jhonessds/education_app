@@ -17,6 +17,33 @@ class LocalUserModel extends LocalUser {
     super.followers,
   });
 
+  factory LocalUserModel.fromMap(DataMap map, {String? uid}) {
+    return LocalUserModel(
+      uid: uid ?? ((map['uid'] as String?) ?? ''),
+      email: (map['email'] as String?) ?? '',
+      profilePicture: (map['profilePicture'] as String?) ?? '',
+      bio: (map['bio'] as String?) ?? '',
+      points: map['points'] != null ? (map['points'] as num).toInt() : 0,
+      fullName: (map['fullName'] as String?) ?? '',
+      groupIds:
+          List<String>.from((map['groupIds'] as List<String>?) ?? const []),
+      enrollCourseIds: List<String>.from(
+        (map['enrollCourseIds'] as List<String>?) ?? const [],
+      ),
+      following:
+          List<String>.from((map['following'] as List<String>?) ?? const []),
+      followers:
+          List<String>.from((map['followers'] as List<String>?) ?? const []),
+    );
+  }
+
+  factory LocalUserModel.fromJson(String source) =>
+      LocalUserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  factory LocalUserModel.empty() {
+    return const LocalUserModel(uid: '', email: '', fullName: '');
+  }
+
   LocalUserModel copyWith({
     String? uid,
     String? email,
@@ -43,55 +70,25 @@ class LocalUserModel extends LocalUser {
     );
   }
 
-  factory LocalUserModel.empty() {
-    return const LocalUserModel(uid: '', email: '', fullName: '');
-  }
+  DataMap toMap() => {
+        'uid': uid,
+        'email': email,
+        'profilePicture': profilePicture,
+        'bio': bio,
+        'points': points,
+        'fullName': fullName,
+        'groupIds': groupIds,
+        'enrollCourseIds': enrollCourseIds,
+        'following': following,
+        'followers': followers,
+      };
 
-  DataMap toMap() {
-    final result = <String, dynamic>{};
-
-    result.addAll({'uid': uid});
-    result.addAll({'email': email});
-    result.addAll({'profilePicture': profilePicture});
-    result.addAll({'bio': bio});
-    result.addAll({'points': points});
-    result.addAll({'fullName': fullName});
-    result.addAll({'groupIds': groupIds});
-    result.addAll({'enrollCourseIds': enrollCourseIds});
-    result.addAll({'following': following});
-    result.addAll({'followers': followers});
-
-    return result;
-  }
-
-  DataMap toInsertMap() {
-    final result = <String, dynamic>{};
-
-    result.addAll({'uid': uid});
-    result.addAll({'email': email});
-    result.addAll({'profilePicture': profilePicture});
-    result.addAll({'fullName': fullName});
-
-    return result;
-  }
-
-  factory LocalUserModel.fromMap(DataMap map, {String? uid}) {
-    return LocalUserModel(
-      uid: (uid ?? (map['uid'] ?? '')),
-      email: map['email'] ?? '',
-      profilePicture: map['profilePicture'] ?? '',
-      bio: map['bio'] ?? '',
-      points: map['points'] != null ? (map['points'] as num).toInt() : 0,
-      fullName: map['fullName'] ?? '',
-      groupIds: List<String>.from(map['groupIds'] ?? const []),
-      enrollCourseIds: List<String>.from(map['enrollCourseIds'] ?? const []),
-      following: List<String>.from(map['following'] ?? const []),
-      followers: List<String>.from(map['followers'] ?? const []),
-    );
-  }
+  DataMap toInsertMap() => {
+        'uid': uid,
+        'email': email,
+        'profilePicture': profilePicture,
+        'fullName': fullName,
+      };
 
   String toJson() => json.encode(toMap());
-
-  factory LocalUserModel.fromJson(String source) =>
-      LocalUserModel.fromMap(json.decode(source));
 }

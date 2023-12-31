@@ -23,7 +23,7 @@ void main() {
   });
 
   group('cacheFirstTimer', () {
-    var tCacheFailure = const CacheFailure(message: 'Insufficient Permission');
+    const tCacheFailure = CacheFailure(message: 'Insufficient Permission');
     test('should complete successfully when call to local source is successful',
         () async {
       // Arrange
@@ -50,7 +50,7 @@ void main() {
       final result = await repository.cacheFirstTimer();
 
       // Assert
-      expect(result, equals(Left<CacheFailure, dynamic>(tCacheFailure)));
+      expect(result, equals(const Left<CacheFailure, dynamic>(tCacheFailure)));
       verify(() => dataSource.cacheFirstTimer()).called(1);
       verifyNoMoreInteractions(dataSource);
     });

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnBoardingBody extends StatelessWidget {
-  const OnBoardingBody({super.key, required this.pageContent});
+  const OnBoardingBody({required this.pageContent, super.key});
   final PageContent pageContent;
 
   @override

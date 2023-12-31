@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_app/core/enums/update_user.dart';
 import 'package:education_app/core/errors/server_failure.dart';
-import 'package:education_app/core/services/firebase/user_collection.dart';
 import 'package:education_app/core/res/media_res.dart';
+import 'package:education_app/core/services/firebase/user_collection.dart';
 import 'package:education_app/core/utils/status_code.dart';
 import 'package:education_app/src/auth/data/models/local_user_model.dart';
 import 'package:education_app/src/auth/domain/entities/local_user.dart';
@@ -42,11 +42,6 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
-  final FirebaseAuth authClient;
-  final FirebaseStorage storageClient;
-  final FirebaseFirestore firestoreClient;
-  late UserCollection userCollection;
-
   AuthRemoteDataSourceImpl({
     required this.authClient,
     required this.storageClient,
@@ -54,6 +49,10 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }) {
     userCollection = UserCollection(instance: firestoreClient);
   }
+  final FirebaseAuth authClient;
+  final FirebaseStorage storageClient;
+  final FirebaseFirestore firestoreClient;
+  late UserCollection userCollection;
 
   @override
   Future<void> forgotPassword({required String email}) async {
@@ -168,7 +167,6 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
           await authClient.currentUser?.updateEmail(user.email);
         case UpdateUserAction.displayName:
           await authClient.currentUser?.updateDisplayName(user.fullName);
-        default:
       }
       await userCollection.update(user as LocalUserModel);
     } on ServerFailure {
@@ -190,7 +188,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   @override
   Future<String> saveProfilePicture({required File profilePicture}) async {
     try {
-      var userData = await userCollection.getById(
+      final userData = await userCollection.getById(
         authClient.currentUser!.uid,
       );
 
@@ -232,7 +230,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
           statusCode: StatusCode.notFound,
         );
       }
-      var credential = EmailAuthProvider.credential(
+      final credential = EmailAuthProvider.credential(
         email: authClient.currentUser!.email!,
         password: oldPassword,
       );

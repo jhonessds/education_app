@@ -13,7 +13,7 @@ class PageContent extends Equatable {
       image: MediaRes.casualReading,
       title: 'Brand new curriculum',
       description: 'This is the first online education platform designed by'
-          ' the world\'s top professors',
+          " the world's top professors",
     );
   }
 
@@ -22,7 +22,7 @@ class PageContent extends Equatable {
       image: MediaRes.casualLife,
       title: 'Brand new atmosphere',
       description: 'This is the first online education platform designed by'
-          ' the world\'s top professors',
+          " the world's top professors",
     );
   }
   factory PageContent.third() {
@@ -30,7 +30,7 @@ class PageContent extends Equatable {
       image: MediaRes.casualMeditationScience,
       title: 'Easy to join the lesson',
       description: 'This is the first online education platform designed by'
-          ' the world\'s top professors',
+          " the world's top professors",
     );
   }
 

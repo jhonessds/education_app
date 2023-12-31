@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:education_app/core/errors/cache_failure.dart';
+import 'package:education_app/core/errors/failure.dart';
 import 'package:education_app/src/on_boarding/data/datasources/on_boarding_datasource.dart';
 import 'package:education_app/src/on_boarding/data/repos/on_boarding_repo_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +18,7 @@ void main() {
     repository = OnBoardingRepoImpl(localDataSource: dataSource);
   });
 
-  var tCacheFailure = const CacheFailure(message: 'Insufficient Permission');
+  const tCacheFailure = CacheFailure(message: 'Insufficient Permission');
 
   group('cacheFirstTimer', () {
     test(
@@ -32,13 +33,13 @@ void main() {
       final result = await repository.cacheFirstTimer();
 
       // Assert
-      expect(result, equals(const Right(null)));
+      expect(result, equals(const Right<dynamic, void>(null)));
       verify(() => dataSource.cacheFirstTimer()).called(1);
       verifyNoMoreInteractions(dataSource);
     });
 
     test(
-        'should return a [CacheFailure] when the call to the data'
+        'should return a [CacheFailure] when the call to the data '
         'source is unsuccessful', () async {
       // Arrange
       when(
@@ -49,7 +50,7 @@ void main() {
       final result = await repository.cacheFirstTimer();
 
       // Assert
-      expect(result, equals(Left(tCacheFailure)));
+      expect(result, equals(const Left<Failure, void>(tCacheFailure)));
       verify(() => dataSource.cacheFirstTimer()).called(1);
       verifyNoMoreInteractions(dataSource);
     });
@@ -65,7 +66,7 @@ void main() {
       final result = await repository.checkIfUserIsFirstTimer();
 
       // Assert
-      expect(result, equals(const Right(true)));
+      expect(result, equals(const Right<dynamic, bool>(true)));
       verify(() => dataSource.checkIfUserIsFirstTimer()).called(1);
       verifyNoMoreInteractions(dataSource);
     });
@@ -79,13 +80,13 @@ void main() {
       final result = await repository.checkIfUserIsFirstTimer();
 
       // Assert
-      expect(result, equals(const Right(false)));
+      expect(result, equals(const Right<dynamic, bool>(false)));
       verify(() => dataSource.checkIfUserIsFirstTimer()).called(1);
       verifyNoMoreInteractions(dataSource);
     });
 
     test(
-        'should return a [CacheFailure] when call to local source is'
+        'should return a [CacheFailure] when call to local source is '
         'unsuccessful', () async {
       // Arrange
       when(
@@ -96,7 +97,7 @@ void main() {
       final result = await repository.checkIfUserIsFirstTimer();
 
       // Assert
-      expect(result, equals(Left(tCacheFailure)));
+      expect(result, equals(const Left<Failure, void>(tCacheFailure)));
       verify(() => dataSource.checkIfUserIsFirstTimer()).called(1);
       verifyNoMoreInteractions(dataSource);
     });

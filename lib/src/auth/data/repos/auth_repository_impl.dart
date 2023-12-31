@@ -9,9 +9,9 @@ import 'package:education_app/src/auth/domain/entities/local_user.dart';
 import 'package:education_app/src/auth/domain/repos/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSource _datasource;
-
   AuthRepositoryImpl(this._datasource);
+
+  final AuthRemoteDataSource _datasource;
 
   @override
   ResultFuture<void> forgotPassword({required String email}) async {

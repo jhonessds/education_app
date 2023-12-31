@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:education_app/core/errors/cache_failure.dart';
 import 'package:education_app/src/on_boarding/domain/usecases/cache_first_timer.dart';
@@ -5,7 +6,6 @@ import 'package:education_app/src/on_boarding/domain/usecases/check_if_user_is_f
 import 'package:education_app/src/on_boarding/presentation/cubit/on_boarding_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:bloc_test/bloc_test.dart';
 
 class MockCacheFirstTimer extends Mock implements CacheFirstTimer {}
 
@@ -26,7 +26,7 @@ void main() {
     );
   });
 
-  var tCacheFailure = const CacheFailure(message: 'Unknow Error');
+  const tCacheFailure = CacheFailure(message: 'Unknow Error');
 
   test('inital state should be [OnBoardingInitial]', () async {
     expect(cubit.state, const OnBoardingInitial());
@@ -54,14 +54,14 @@ void main() {
       'should emits [CachingFirstTimer, OnBoardingError] when unsuccessful',
       build: () {
         when(() => cacheFirstTimer()).thenAnswer(
-          (_) async => Left(tCacheFailure),
+          (_) async => const Left(tCacheFailure),
         );
         return cubit;
       },
       act: (cubit) => cubit.cacheFirstTimer(),
       expect: () => [
         const CachingFirstTimer(),
-        OnBoardingError(message: tCacheFailure.message!)
+        OnBoardingError(message: tCacheFailure.message!),
       ],
       verify: (_) {
         expect(cubit.state, OnBoardingError(message: tCacheFailure.message!));
@@ -73,7 +73,8 @@ void main() {
 
   group('checkIfUserIsFirstTimer', () {
     blocTest<OnBoardingCubit, OnBoardingState>(
-      'should emits [CheckingIfUserIsFirstTimer, OnBoardingStatus] when successful',
+      'should emits [CheckingIfUserIsFirstTimer, OnBoardingStatus] when '
+      'successful',
       build: () {
         when(() => checkIfUserIsFirstTimer()).thenAnswer(
           (_) async => const Right(false),
@@ -93,10 +94,11 @@ void main() {
     );
 
     blocTest<OnBoardingCubit, OnBoardingState>(
-      'should emits [CheckingIfUserIsFirstTimer, OnBoardingStatus] when unsuccessful',
+      'should emits [CheckingIfUserIsFirstTimer, OnBoardingStatus] when '
+      'unsuccessful',
       build: () {
         when(() => checkIfUserIsFirstTimer()).thenAnswer(
-          (_) async => Left(tCacheFailure),
+          (_) async => const Left(tCacheFailure),
         );
         return cubit;
       },

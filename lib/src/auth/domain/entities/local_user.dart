@@ -1,17 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class LocalUser extends Equatable {
-  final String uid;
-  final String email;
-  final String fullName;
-  final int points;
-  final String? profilePicture;
-  final String? bio;
-  final List<String> groupIds;
-  final List<String> enrollCourseIds;
-  final List<String> following;
-  final List<String> followers;
-
   const LocalUser({
     required this.uid,
     required this.email,
@@ -29,12 +18,17 @@ class LocalUser extends Equatable {
     return const LocalUser(uid: '', email: '', fullName: '');
   }
 
-  @override
-  List<Object> get props => [uid, email];
+  final String uid;
+  final String email;
+  final String fullName;
+  final int points;
+  final String? profilePicture;
+  final String? bio;
+  final List<String> groupIds;
+  final List<String> enrollCourseIds;
+  final List<String> following;
+  final List<String> followers;
 
   @override
-  String toString() {
-    return 'LocalUser(uid: $uid, email: $email,'
-        ' bio: $bio, points: $points, fullName: $fullName)';
-  }
+  List<Object> get props => [uid, email];
 }
