@@ -213,11 +213,11 @@ void main() {
       ).thenAnswer((_) async => userCredential);
 
       when(() => userCredential.user!.updateDisplayName(any())).thenAnswer(
-        (_) async => Future.value(null),
+        (_) async => Future.value(),
       );
 
       when(() => userCredential.user!.updatePhotoURL(any())).thenAnswer(
-        (_) async => Future.value(null),
+        (_) async => Future.value(),
       );
 
       // Act
@@ -287,7 +287,7 @@ void main() {
       // Arrange
       when(
         () => mockUser.updateDisplayName(any()),
-      ).thenAnswer((_) async => Future.value(null));
+      ).thenAnswer((_) async => Future.value());
 
       // Act
       await dataSource.updateUser(
@@ -309,7 +309,7 @@ void main() {
       // Arrange
       when(
         () => mockUser.updateEmail(any()),
-      ).thenAnswer((_) async => Future.value(null));
+      ).thenAnswer((_) async => Future.value());
 
       // Act
       await dataSource.updateUser(
@@ -370,7 +370,7 @@ void main() {
       // Arrange
       when(
         () => mockUser.updatePassword(any()),
-      ).thenAnswer((_) async => Future.value(null));
+      ).thenAnswer((_) async => Future.value());
 
       when(
         () => mockUser.reauthenticateWithCredential(any()),
@@ -397,7 +397,7 @@ void main() {
       final newProfilePicture = File('assets/images/default_user.png');
       when(
         () => mockUser.updatePhotoURL(any()),
-      ).thenAnswer((_) async => Future.value(null));
+      ).thenAnswer((_) async => Future.value());
 
       // Act
       await dataSource.saveProfilePicture(profilePicture: newProfilePicture);
@@ -416,8 +416,10 @@ void main() {
       final methodCall = dataSource.saveProfilePicture;
 
       // Assert
-      expect(methodCall(profilePicture: newProfilePicture),
-          throwsA(isA<ServerFailure>()));
+      expect(
+        methodCall(profilePicture: newProfilePicture),
+        throwsA(isA<ServerFailure>()),
+      );
       verifyNever(() => mockUser.updatePhotoURL(any()));
     });
   });

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_app/core/errors/server_failure.dart';
 import 'package:education_app/core/services/firebase/i_collection.dart';
+import 'package:education_app/core/utils/status_code.dart';
 import 'package:education_app/src/auth/data/models/local_user_model.dart';
 
 class UserCollection implements ICollection<LocalUserModel> {
@@ -18,29 +20,68 @@ class UserCollection implements ICollection<LocalUserModel> {
 
   @override
   Future<void> create(LocalUserModel value, {String? id}) async {
-    await instance.collection('users').doc(id).set(value.toInsertMap());
+    try {
+      await instance.collection('users').doc(id).set(value.toInsertMap());
+    } catch (e) {
+      throw ServerFailure(
+        message: e.toString(),
+        statusCode: StatusCode.createUser,
+      );
+    }
   }
 
   @override
-  Future<void> delete(String id) => throw UnimplementedError();
+  Future<void> delete(String id) async {
+    try {
+      await instance.collection('users').doc(id).delete();
+    } catch (e) {
+      throw ServerFailure(
+        message: e.toString(),
+        statusCode: StatusCode.deleteUser,
+      );
+    }
+  }
 
   @override
-  Future<List<LocalUserModel>> getAll() => throw UnimplementedError();
+  Future<List<LocalUserModel>> getAll() async {
+    try {
+      throw UnimplementedError();
+    } catch (e) {
+      throw ServerFailure(
+        message: e.toString(),
+        statusCode: StatusCode.getUser,
+      );
+    }
+  }
 
   @override
   Future<LocalUserModel?> getById(String id) async {
-    final snapUser = await instance.collection('users').doc(id).get();
-    if (!snapUser.exists) return null;
+    try {
+      final snapUser = await instance.collection('users').doc(id).get();
+      if (!snapUser.exists) return null;
 
-    final user = LocalUserModel.fromMap(snapUser.data()!);
-    return user;
+      final user = LocalUserModel.fromMap(snapUser.data()!);
+      return user;
+    } catch (e) {
+      throw ServerFailure(
+        message: e.toString(),
+        statusCode: StatusCode.getUser,
+      );
+    }
   }
 
   @override
   Future<void> update(LocalUserModel value) async {
-    await instance
-        .collection('users')
-        .doc(value.uid)
-        .set(value.toMap(), SetOptions(merge: true));
+    try {
+      await instance
+          .collection('users')
+          .doc(value.uid)
+          .set(value.toMap(), SetOptions(merge: true));
+    } catch (e) {
+      throw ServerFailure(
+        message: e.toString(),
+        statusCode: StatusCode.updateUser,
+      );
+    }
   }
 }

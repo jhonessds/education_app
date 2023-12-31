@@ -76,6 +76,10 @@ enum StatusCode {
   networkAuthenticationRequired('NETWORK_AUTHENTICATION_REQUIRED', 511),
   networkConnectionTimeoutError('NETWORK_CONNECTION_TIMEOUT_ERROR', 599),
   firebase('FIREBASE', 600),
+  createUser('CREATE_USER', 601),
+  updateUser('UPDATE_USER', 602),
+  getUser('GET_USER', 603),
+  deleteUser('DELETE_USER', 604),
   cache('CACHE', 700),
   ;
 
