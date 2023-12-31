@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_app/core/enums/update_user.dart';
 import 'package:education_app/core/errors/server_failure.dart';
@@ -43,7 +45,7 @@ void main() {
   late AuthRemoteDataSource dataSource;
   late UserCredential userCredential;
   late DocumentReference<DataMap> documentReference;
-  late FirebaseFirestore firestoreClient;
+  late FakeFirebaseFirestore firestoreClient;
   late MockUser mockUser;
 
   final tUser = LocalUserModel.empty();
@@ -333,7 +335,6 @@ void main() {
       );
 
       // Assert
-
       final user =
           await firestoreClient.collection('users').doc(mockUser.uid).get();
       expect(user.data()!['bio'], tBio);
@@ -344,9 +345,25 @@ void main() {
 
   group('updatePassword', () {
     setUp(() {
-      when(() => authClient.currentUser).thenReturn(mockUser);
       registerFallbackValue(MockAuthCredential());
     });
+
+    test('should throw [ServerFailure] when email is null', () async {
+      // Arrange
+
+      // Act
+      final methodCall = dataSource.updatePassword;
+
+      // Assert
+      expect(
+        methodCall(
+          oldPassword: tPassword,
+          newPassword: tNewPassword,
+        ),
+        throwsA(isA<ServerFailure>()),
+      );
+    });
+
     test(
         'should update user password successfully when no [Exception] '
         'is throw ', () async {
@@ -369,6 +386,39 @@ void main() {
 
       // Assert
       verify(() => mockUser.updatePassword(tNewPassword)).called(1);
+    });
+  });
+
+  group('saveProfilePicture', () {
+    test(
+        'should update user profilePicture successfully when no [Exception] '
+        'is throw', () async {
+      // Arrange
+      final newProfilePicture = File('assets/images/default_user.png');
+      when(
+        () => mockUser.updatePhotoURL(any()),
+      ).thenAnswer((_) async => Future.value(null));
+
+      // Act
+      await dataSource.saveProfilePicture(profilePicture: newProfilePicture);
+
+      // Assert
+      verify(() => mockUser.updatePhotoURL(any())).called(1);
+      expect(storageClient.storedFilesMap.isNotEmpty, isTrue);
+    });
+
+    test('should throw [ServerFailure] when user not found', () async {
+      // Arrange
+      await firestoreClient.collection('users').doc(mockUser.uid).delete();
+      final newProfilePicture = File('assets/images/default_user.png');
+
+      // Act
+      final methodCall = dataSource.saveProfilePicture;
+
+      // Assert
+      expect(methodCall(profilePicture: newProfilePicture),
+          throwsA(isA<ServerFailure>()));
+      verifyNever(() => mockUser.updatePhotoURL(any()));
     });
   });
 }
