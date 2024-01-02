@@ -8,7 +8,7 @@ abstract class OnBoardingLocalDataSource {
   Future<bool> checkIfUserIsFirstTimer();
 }
 
-const kFirstTimerKey = 'first_timer';
+const kFirstTimerKey = 'isFirstTime';
 
 class OnBoardingLocalDataSrcImpl extends OnBoardingLocalDataSource {
   const OnBoardingLocalDataSrcImpl({required this.prefs});
