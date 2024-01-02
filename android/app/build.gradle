@@ -61,10 +61,12 @@ android {
     productFlavors {
       production {
         dimension "default"
+        resValue "string", "app_name", "DevJhones Demo"
         applicationIdSuffix ""
       }  
       development {
         dimension "default"
+        resValue "string", "app_name", "DevJhones Demo Dev"
         applicationIdSuffix ".dev"
       }
     }
@@ -76,5 +78,4 @@ flutter {
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:32.7.0')
-    implementation 'com.google.firebase:firebase-auth-ktx'
 }
