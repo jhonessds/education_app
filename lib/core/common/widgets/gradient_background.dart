@@ -7,8 +7,8 @@ class GradientBackground extends StatelessWidget {
     super.key,
   });
 
-  final String image;
   final Widget child;
+  final String image;
 
   @override
   Widget build(BuildContext context) {

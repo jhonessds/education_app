@@ -20,6 +20,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'dependencies/auth_dependencies.dart';
-part 'dependencies/on_boarding_dependencies.dart';
+part 'auth_dependencies.dart';
+part 'on_boarding_dependencies.dart';
 part 'injection_container.dart';

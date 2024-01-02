@@ -1,17 +1,4 @@
-import 'package:education_app/core/common/views/page_under_construction.dart';
-import 'package:education_app/core/extensions/context_extension.dart';
-import 'package:education_app/core/services/injection_container_imports.dart';
-import 'package:education_app/src/auth/data/models/local_user_model.dart';
-import 'package:education_app/src/auth/presentation/bloc/auth_bloc.dart';
-import 'package:education_app/src/auth/presentation/views/sign_in_view.dart';
-import 'package:education_app/src/auth/presentation/views/sign_up_view.dart';
-import 'package:education_app/src/dashboard/presentation/views/dashboard_view.dart';
-import 'package:education_app/src/on_boarding/presentation/cubit/on_boarding_cubit.dart';
-import 'package:education_app/src/on_boarding/presentation/views/on_boarding_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+part of 'router_main.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -43,9 +30,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         },
         settings: settings,
       );
+
     case SignInView.routeName:
-      return _pageBuilder((_) => const Dashboard(), settings: settings);
-    case Dashboard.routeName:
       return _pageBuilder(
         (_) => BlocProvider(
           create: (context) => sl<AuthBloc>(),
@@ -59,6 +45,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           create: (context) => sl<AuthBloc>(),
           child: const SignUpView(),
         ),
+        settings: settings,
+      );
+    case Dashboard.routeName:
+      return _pageBuilder((_) => const Dashboard(), settings: settings);
+    case '/forgot-password':
+      return _pageBuilder(
+        (_) => const ForgotPasswordView(),
         settings: settings,
       );
     default:

@@ -1,11 +1,12 @@
 import 'package:education_app/core/common/app/user_provider.dart';
 import 'package:education_app/core/res/colours.dart';
 import 'package:education_app/core/res/fonts.dart';
-import 'package:education_app/core/services/injection_container_imports.dart';
-import 'package:education_app/core/services/routes.dart';
+import 'package:education_app/core/services/dependencies/injection_container_main.dart';
+import 'package:education_app/core/services/routes/router_main.dart';
 import 'package:education_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -25,6 +26,7 @@ class MainApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => UserProvider(),
       child: MaterialApp(
+        navigatorKey: NavigationService.navigatorKey,
         title: 'Education App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -35,8 +37,19 @@ class MainApp extends StatelessWidget {
             accentColor: Colours.primaryColour,
           ),
         ),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         onGenerateRoute: generateRoute,
       ),
     );
   }
+}
+
+class NavigationService {
+  NavigationService._();
+
+  static NavigationService instance = NavigationService._();
+
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  BuildContext get currentContext => navigatorKey.currentContext!;
 }
