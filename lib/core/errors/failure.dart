@@ -1,4 +1,4 @@
-import 'package:education_app/core/utils/status_code.dart';
+import 'package:demo/core/utils/status_code.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class Failure extends Equatable implements Exception {

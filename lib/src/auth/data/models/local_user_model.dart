@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:education_app/core/utils/typedefs.dart';
-import 'package:education_app/src/auth/domain/entities/local_user.dart';
+import 'package:demo/core/utils/typedefs.dart';
+import 'package:demo/src/auth/domain/entities/local_user.dart';
 
 class LocalUserModel extends LocalUser {
   const LocalUserModel({

@@ -1,8 +1,8 @@
-import 'package:education_app/core/enums/update_user.dart';
-import 'package:education_app/core/usecases/usecase.dart';
-import 'package:education_app/core/utils/typedefs.dart';
-import 'package:education_app/src/auth/domain/entities/local_user.dart';
-import 'package:education_app/src/auth/domain/repos/auth_repository.dart';
+import 'package:demo/core/enums/update_user.dart';
+import 'package:demo/core/usecases/usecase.dart';
+import 'package:demo/core/utils/typedefs.dart';
+import 'package:demo/src/auth/domain/entities/local_user.dart';
+import 'package:demo/src/auth/domain/repos/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class UpdateUser extends UsecaseWithParam<void, UpdateUserParams> {

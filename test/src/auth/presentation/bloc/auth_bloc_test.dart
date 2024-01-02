@@ -2,16 +2,16 @@ import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:education_app/core/errors/server_failure.dart';
-import 'package:education_app/core/utils/status_code.dart';
-import 'package:education_app/src/auth/data/models/local_user_model.dart';
-import 'package:education_app/src/auth/domain/usecases/forgot_password.dart';
-import 'package:education_app/src/auth/domain/usecases/save_profile_picture.dart';
-import 'package:education_app/src/auth/domain/usecases/sign_in.dart';
-import 'package:education_app/src/auth/domain/usecases/sign_up.dart';
-import 'package:education_app/src/auth/domain/usecases/update_password.dart';
-import 'package:education_app/src/auth/domain/usecases/update_user.dart';
-import 'package:education_app/src/auth/presentation/bloc/auth_bloc.dart';
+import 'package:demo/core/errors/server_failure.dart';
+import 'package:demo/core/utils/status_code.dart';
+import 'package:demo/src/auth/data/models/local_user_model.dart';
+import 'package:demo/src/auth/domain/usecases/forgot_password.dart';
+import 'package:demo/src/auth/domain/usecases/save_profile_picture.dart';
+import 'package:demo/src/auth/domain/usecases/sign_in.dart';
+import 'package:demo/src/auth/domain/usecases/sign_up.dart';
+import 'package:demo/src/auth/domain/usecases/update_password.dart';
+import 'package:demo/src/auth/domain/usecases/update_user.dart';
+import 'package:demo/src/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

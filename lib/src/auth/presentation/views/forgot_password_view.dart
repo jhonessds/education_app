@@ -1,10 +1,10 @@
-import 'package:education_app/core/common/widgets/custom_input.dart';
-import 'package:education_app/core/common/widgets/simple_text.dart';
-import 'package:education_app/core/utils/core_utils.dart';
-import 'package:education_app/core/utils/language_constants.dart';
-import 'package:education_app/src/auth/presentation/widgets/forgot_password_button.dart';
-import 'package:education_app/src/auth/presentation/widgets/top_animation.dart';
-import 'package:education_app/src/auth/presentation/widgets/top_title.dart';
+import 'package:demo/core/common/widgets/custom_input.dart';
+import 'package:demo/core/common/widgets/simple_text.dart';
+import 'package:demo/core/utils/core_utils.dart';
+import 'package:demo/core/utils/language_constants.dart';
+import 'package:demo/src/auth/presentation/widgets/forgot_password_button.dart';
+import 'package:demo/src/auth/presentation/widgets/top_animation.dart';
+import 'package:demo/src/auth/presentation/widgets/top_title.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordView extends StatefulWidget {

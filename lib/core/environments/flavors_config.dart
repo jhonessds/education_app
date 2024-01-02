@@ -1,4 +1,4 @@
-import 'package:education_app/core/common/models/environment_model.dart';
+import 'package:demo/core/common/models/environment_model.dart';
 
 enum Flavor { dev, prod }
 

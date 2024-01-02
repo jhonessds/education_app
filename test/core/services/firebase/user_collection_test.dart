@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:education_app/core/services/firebase/user_collection.dart';
-import 'package:education_app/src/auth/data/models/local_user_model.dart';
+import 'package:demo/core/services/firebase/user_collection.dart';
+import 'package:demo/src/auth/data/models/local_user_model.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_exceptions/mock_exceptions.dart';

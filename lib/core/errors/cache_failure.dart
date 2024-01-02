@@ -1,5 +1,5 @@
-import 'package:education_app/core/errors/failure.dart';
-import 'package:education_app/core/utils/status_code.dart';
+import 'package:demo/core/errors/failure.dart';
+import 'package:demo/core/utils/status_code.dart';
 
 class CacheFailure extends Failure {
   const CacheFailure({

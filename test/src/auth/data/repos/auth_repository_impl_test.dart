@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:education_app/core/enums/update_user.dart';
-import 'package:education_app/core/errors/server_failure.dart';
-import 'package:education_app/core/utils/status_code.dart';
-import 'package:education_app/src/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:education_app/src/auth/data/models/local_user_model.dart';
-import 'package:education_app/src/auth/data/repos/auth_repository_impl.dart';
-import 'package:education_app/src/auth/domain/entities/local_user.dart';
+import 'package:demo/core/enums/update_user.dart';
+import 'package:demo/core/errors/server_failure.dart';
+import 'package:demo/core/utils/status_code.dart';
+import 'package:demo/src/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:demo/src/auth/data/models/local_user_model.dart';
+import 'package:demo/src/auth/data/repos/auth_repository_impl.dart';
+import 'package:demo/src/auth/domain/entities/local_user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

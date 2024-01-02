@@ -1,4 +1,4 @@
-import 'package:education_app/core/errors/cache_failure.dart';
+import 'package:demo/core/errors/cache_failure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class OnBoardingLocalDataSource {

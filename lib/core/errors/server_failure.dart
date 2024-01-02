@@ -1,4 +1,4 @@
-import 'package:education_app/core/errors/failure.dart';
+import 'package:demo/core/errors/failure.dart';
 
 class ServerFailure extends Failure {
   const ServerFailure({super.message, super.statusCode});

@@ -1,9 +1,9 @@
-import 'package:education_app/core/common/app/user_provider.dart';
-import 'package:education_app/core/res/fonts.dart';
-import 'package:education_app/core/services/routes/router_main.dart';
-import 'package:education_app/core/utils/flex_scheme_manager.dart';
-import 'package:education_app/core/utils/language_constants.dart';
-import 'package:education_app/core/utils/theme_manager.dart';
+import 'package:demo/core/common/app/user_provider.dart';
+import 'package:demo/core/res/fonts.dart';
+import 'package:demo/core/services/routes/router_main.dart';
+import 'package:demo/core/utils/flex_scheme_manager.dart';
+import 'package:demo/core/utils/language_constants.dart';
+import 'package:demo/core/utils/theme_manager.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

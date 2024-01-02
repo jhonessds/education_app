@@ -1,10 +1,10 @@
-import 'package:education_app/core/common/views/loading_view.dart';
-import 'package:education_app/core/common/widgets/gradient_background.dart';
-import 'package:education_app/core/res/colours.dart';
-import 'package:education_app/core/res/media_res.dart';
-import 'package:education_app/src/on_boarding/domain/entities/page_content.dart';
-import 'package:education_app/src/on_boarding/presentation/cubit/on_boarding_cubit.dart';
-import 'package:education_app/src/on_boarding/presentation/widgets/on_boarding_body.dart';
+import 'package:demo/core/common/views/loading_view.dart';
+import 'package:demo/core/common/widgets/gradient_background.dart';
+import 'package:demo/core/res/colours.dart';
+import 'package:demo/core/res/media_res.dart';
+import 'package:demo/src/on_boarding/domain/entities/page_content.dart';
+import 'package:demo/src/on_boarding/presentation/cubit/on_boarding_cubit.dart';
+import 'package:demo/src/on_boarding/presentation/widgets/on_boarding_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

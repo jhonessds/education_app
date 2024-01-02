@@ -1,4 +1,4 @@
-import 'package:education_app/core/extensions/context_extension.dart';
+import 'package:demo/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class LoadingView extends StatelessWidget {

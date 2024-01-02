@@ -1,6 +1,6 @@
-import 'package:education_app/core/common/widgets/custom_alert.dart';
-import 'package:education_app/core/common/widgets/simple_text.dart';
-import 'package:education_app/core/utils/language_constants.dart';
+import 'package:demo/core/common/widgets/custom_alert.dart';
+import 'package:demo/core/common/widgets/simple_text.dart';
+import 'package:demo/core/utils/language_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';

@@ -1,5 +1,5 @@
-import 'package:education_app/core/res/colours.dart';
-import 'package:education_app/src/app_widget.dart';
+import 'package:demo/core/res/colours.dart';
+import 'package:demo/src/app_widget.dart';
 import 'package:flutter/material.dart';
 
 class CoreUtils {

@@ -1,4 +1,4 @@
-name: education_app
+name: demo
 description: "Clean architecture example projet based"
 publish_to: 'none'
 version: 0.1.0

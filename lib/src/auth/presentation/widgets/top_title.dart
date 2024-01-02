@@ -1,5 +1,5 @@
-import 'package:education_app/core/common/widgets/simple_text.dart';
-import 'package:education_app/core/res/fonts.dart';
+import 'package:demo/core/common/widgets/simple_text.dart';
+import 'package:demo/core/res/fonts.dart';
 import 'package:flutter/material.dart';
 
 class TopTitle extends StatelessWidget {

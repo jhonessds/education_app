@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:education_app/core/common/models/environment_model.dart';
-import 'package:education_app/core/environments/config/env_prod.dart';
-import 'package:education_app/core/environments/flavors_config.dart';
-import 'package:education_app/core/services/dependencies/injection_container_main.dart';
-import 'package:education_app/core/utils/logger.dart';
-import 'package:education_app/src/app_widget.dart';
+import 'package:demo/core/common/models/environment_model.dart';
+import 'package:demo/core/environments/config/env_prod.dart';
+import 'package:demo/core/environments/flavors_config.dart';
+import 'package:demo/core/services/dependencies/injection_container_main.dart';
+import 'package:demo/core/utils/logger.dart';
+import 'package:demo/src/app_widget.dart';
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

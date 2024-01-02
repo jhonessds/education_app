@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
-import 'package:education_app/src/auth/domain/usecases/save_profile_picture.dart';
+import 'package:demo/src/auth/domain/usecases/save_profile_picture.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

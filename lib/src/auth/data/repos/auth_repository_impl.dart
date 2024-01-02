@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:education_app/core/enums/update_user.dart';
-import 'package:education_app/core/errors/server_failure.dart';
-import 'package:education_app/core/utils/typedefs.dart';
-import 'package:education_app/src/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:education_app/src/auth/domain/entities/local_user.dart';
-import 'package:education_app/src/auth/domain/repos/auth_repository.dart';
+import 'package:demo/core/enums/update_user.dart';
+import 'package:demo/core/errors/server_failure.dart';
+import 'package:demo/core/utils/typedefs.dart';
+import 'package:demo/src/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:demo/src/auth/domain/entities/local_user.dart';
+import 'package:demo/src/auth/domain/repos/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._datasource);

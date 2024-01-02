@@ -1,5 +1,5 @@
-import 'package:education_app/core/errors/cache_failure.dart';
-import 'package:education_app/src/on_boarding/data/datasources/on_boarding_datasource.dart';
+import 'package:demo/core/errors/cache_failure.dart';
+import 'package:demo/src/on_boarding/data/datasources/on_boarding_datasource.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';

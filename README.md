@@ -1,4 +1,4 @@
-# education_app
+# demo
 
 A new Flutter project.
 

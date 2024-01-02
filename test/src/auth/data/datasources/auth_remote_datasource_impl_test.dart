@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:education_app/core/enums/update_user.dart';
-import 'package:education_app/core/errors/server_failure.dart';
-import 'package:education_app/core/res/media_res.dart';
-import 'package:education_app/core/utils/typedefs.dart';
-import 'package:education_app/src/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:education_app/src/auth/data/models/local_user_model.dart';
+import 'package:demo/core/enums/update_user.dart';
+import 'package:demo/core/errors/server_failure.dart';
+import 'package:demo/core/res/media_res.dart';
+import 'package:demo/core/utils/typedefs.dart';
+import 'package:demo/src/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:demo/src/auth/data/models/local_user_model.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage_mocks/firebase_storage_mocks.dart';

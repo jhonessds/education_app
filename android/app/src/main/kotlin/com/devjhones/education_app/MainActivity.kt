@@ -1,4 +1,4 @@
-package com.devjhones.education_app
+package com.devjhones.demo
 
 import io.flutter.embedding.android.FlutterActivity
 
