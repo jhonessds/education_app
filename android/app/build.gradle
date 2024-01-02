@@ -53,8 +53,20 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+      production {
+        dimension "default"
+        applicationIdSuffix ""
+      }  
+      development {
+        dimension "default"
+        applicationIdSuffix ".dev"
+      }
     }
 }
 
@@ -64,4 +76,5 @@ flutter {
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-auth-ktx'
 }

@@ -69,7 +69,15 @@ PageRouteBuilder<dynamic> _pageBuilder(
   return PageRouteBuilder<dynamic>(
     settings: settings,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return FadeTransition(opacity: animation, child: child);
+      return FadeTransition(
+        opacity: animation,
+        child: MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.noScaling,
+          ),
+          child: child,
+        ),
+      );
     },
     pageBuilder: (context, animation, secondaryAnimation) => page(context),
   );

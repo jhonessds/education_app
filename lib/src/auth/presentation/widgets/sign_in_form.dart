@@ -1,5 +1,6 @@
 import 'package:education_app/core/common/widgets/custom_input.dart';
 import 'package:education_app/core/utils/language_constants.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
@@ -31,7 +32,7 @@ class _SignInFormState extends State<SignInForm> {
           children: [
             CustomInput(
               controller: widget.emailController,
-              hintText: 'Email Address',
+              hintText: translation().email.capitalize,
               keyboardType: TextInputType.emailAddress,
               mgBottom: 25,
               borderRadius: 70,
@@ -39,7 +40,7 @@ class _SignInFormState extends State<SignInForm> {
             ),
             CustomInput(
               controller: widget.passwordController,
-              hintText: 'Password',
+              hintText: translation().password.capitalize,
               obscureText: true,
               keyboardType: TextInputType.visiblePassword,
               maxlines: 1,
