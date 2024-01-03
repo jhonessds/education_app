@@ -203,6 +203,14 @@ class InputValidator {
     return null;
   }
 
+  static String? passValidator(String? t) {
+    if (t == null || t.isEmpty) return 'Informe uma senha';
+    if (t.length < 8) {
+      return 'mínimo oito caracteres';
+    }
+    return null;
+  }
+
   static String? mobileValidator(String? t) {
     if (t == null || t.trim().isEmpty) {
       return translation().provideAPhoneNumber;

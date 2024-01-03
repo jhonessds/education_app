@@ -31,6 +31,8 @@ class ForgotPasswordButton extends StatelessWidget {
         controller: btnCtrl,
         onPressed: () async {
           if (formKeyEmail.currentState!.validate()) {
+            //  context.read<AuthBloc>().f
+
             linkPop(context);
           } else {
             btnCtrl.stop();

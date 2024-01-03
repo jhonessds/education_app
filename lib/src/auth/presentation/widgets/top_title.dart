@@ -15,11 +15,11 @@ class TopTitle extends StatelessWidget {
     return SimpleText(
       mgLeft: 13,
       text: title,
-      fontSize: 30,
+      fontSize: 28,
       fontWeight: FontWeight.w700,
       alignment: Alignment.centerLeft,
       mgBottom: screenSize.height * 0.02,
-      mgTop: 16,
+      mgTop: 20,
       fontFamily: Fonts.aeonik,
       maxlines: 2,
     );

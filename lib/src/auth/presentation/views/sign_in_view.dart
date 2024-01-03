@@ -35,14 +35,14 @@ class _SignInViewState extends State<SignInView> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthError) {
-            CoreUtils.showSnackBar(state.message);
+            CoreUtils.showSnackBar(state.message, isError: true);
           } else if (state is SignedIn) {
             context.userProvider.initUser(state.user as LocalUserModel);
             Navigator.pushReplacementNamed(context, Dashboard.routeName);
           }
         },
         builder: (context, state) {
-          return const SignInBody();
+          return SignInBody(state: state);
         },
       ),
     );

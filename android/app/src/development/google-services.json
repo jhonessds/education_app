@@ -12,7 +12,12 @@
           "package_name": "com.devjhones.demo.dev"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "342591443241-g3m8vnjp2qvgvh9mbqcsifihj04khq0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBTUdNoQ2mt1KdovWslwKxvyqKMXbkSn20"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342591443241-g3m8vnjp2qvgvh9mbqcsifihj04khq0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -22,7 +22,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onBackground,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -66,9 +66,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               ),
               OutlinedButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  translation().goBack,
-                ),
+                child: Text(translation().goBack),
               ),
             ],
           ),
