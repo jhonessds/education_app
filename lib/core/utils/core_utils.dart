@@ -4,18 +4,28 @@ import 'package:flutter/material.dart';
 class CoreUtils {
   const CoreUtils._();
 
-  static void showSnackBar(String message, {bool isError = false}) {
+  static void showSnackBar(
+    String message, {
+    bool isError = false,
+    Widget? icon,
+  }) {
     final context = NavigationService.instance.currentContext;
     ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
           duration: const Duration(seconds: 3),
-          content: Text(
-            message,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+          content: Row(
+            children: [
+              if (icon != null) icon,
+              if (icon != null) const SizedBox(width: 5),
+              Text(
+                message,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
           backgroundColor: isError
               ? Theme.of(context).colorScheme.error

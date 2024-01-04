@@ -1,4 +1,5 @@
 import 'package:demo/core/utils/language_constants.dart';
+import 'package:flutter/material.dart';
 
 enum StatusCode {
   // Commons
@@ -522,6 +523,16 @@ enum StatusCode {
         return translation().invalidVerificationId;
       case StatusCode.cache:
         return translation().cache;
+    }
+  }
+
+  Widget get icon {
+    switch (this) {
+      case StatusCode.userNotFound:
+        return const Icon(Icons.error, color: Colors.white);
+      // ignore: no_default_cases
+      default:
+        return const Icon(Icons.error, color: Colors.white);
     }
   }
 }

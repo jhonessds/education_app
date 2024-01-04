@@ -38,6 +38,7 @@ class _SignInViewState extends State<SignInView> {
           CoreUtils.showSnackBar(
             state.statusCode.translated,
             isError: true,
+            icon: state.statusCode.icon,
           );
         } else if (state is SignedIn) {
           context.userProvider.initUser(state.user as LocalUserModel);
