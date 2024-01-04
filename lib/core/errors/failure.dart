@@ -8,7 +8,8 @@ abstract class Failure extends Equatable implements Exception {
   final String? message;
   final StatusCode? statusCode;
 
-  String get errorMessage => '${statusCode?.value} Error: $message';
+  String get errorMessage => '${statusCode?.name} Error: $message';
+  String get errorMessageTranslated => '${statusCode?.translated}';
 
   bool get hasRequestError => statusCode != null;
   bool get isConnectionError =>
