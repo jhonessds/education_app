@@ -31,6 +31,9 @@
     "register": "Register",
     "passwordResetLink": "A password reset link has been sent to your email",
     "verify": "Verify",
+    "discoverEverythingWeCanOffer": "Descubre todo lo que podemos ofrecerte.",
+    "signInToYourAccount": "Iniciar sesión en su cuenta",
+    "signIn": "Iniciar sesión",
     
     "commentStatusCode":"*********** COMMENT_STATUS_CODE ***********",
     "unknown": "Unknown",

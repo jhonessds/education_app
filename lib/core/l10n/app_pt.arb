@@ -31,6 +31,9 @@
     "register": "Cadastrar",
     "passwordResetLink": "Um link de redefinição de senha foi enviado para o seu email",
     "verify": "Verificar",
+    "discoverEverythingWeCanOffer": "Descubra tudo que podemos oferecer.",
+    "signInToYourAccount": "Faça login em sua conta",
+    "signIn": "Entrar",
 
     "commentStatusCode":"*********** COMMENT_STATUS_CODE ***********",
     "unknown": "Erro desconhecido",

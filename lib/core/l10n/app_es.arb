@@ -31,7 +31,10 @@
     "register": "Registrar",
     "passwordResetLink": "Se ha enviado un enlace para restablecer la contraseña a su correo electrónico",
     "verify": "Verificar",
-    
+    "discoverEverythingWeCanOffer": "Discover everything we can offer.",
+    "signInToYourAccount": "Sign in to your account",
+    "signIn": "Sign In",
+
     "commentStatusCode":"*********** COMMENT_STATUS_CODE ***********",
     "unknown": "Erro desconhecido",
     "connectionError": "¡Tuvimos un problema con tu solicitud, por favor inténtalo de nuevo!",

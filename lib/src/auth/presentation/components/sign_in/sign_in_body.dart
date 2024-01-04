@@ -1,10 +1,8 @@
-import 'package:demo/core/common/widgets/footer.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/utils/language_constants.dart';
 import 'package:demo/src/auth/presentation/bloc/auth_bloc.dart';
 import 'package:demo/src/auth/presentation/components/sign_in/login_row.dart';
-import 'package:demo/src/auth/presentation/components/sign_in/register_row.dart';
 import 'package:demo/src/auth/presentation/components/sign_in/sign_in_form.dart';
 import 'package:demo/src/auth/presentation/widgets/sign_in/sign_in_button.dart';
 import 'package:demo/src/auth/presentation/widgets/top_title.dart';
@@ -48,11 +46,11 @@ class _SignInBodyState extends State<SignInBody> {
                 height: context.height * 0.23,
               ),
             ),
-            const TopTitle(title: 'Descubra tudo que podemos oferecer.'),
-            const SimpleText(
+            TopTitle(title: translation().discoverEverythingWeCanOffer),
+            SimpleText(
               mgLeft: 13,
               mgRight: 13,
-              text: 'Sign in to your account.',
+              text: translation().signInToYourAccount,
               fontSize: 16,
               alignment: Alignment.centerLeft,
               mgBottom: 10,
@@ -90,7 +88,29 @@ class _SignInBodyState extends State<SignInBody> {
               color: Theme.of(context).disabledColor,
             ),
             const LoginRow(),
-            const RegisterRow(),
+            Container(
+              margin: const EdgeInsets.only(top: 15, bottom: 60),
+              height: 45,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SimpleText(
+                    text: translation().dontHaveAccount,
+                    withTextScale: false,
+                  ),
+                  SizedBox(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: SimpleText(
+                        text: translation().signup,
+                        fontWeight: FontWeight.bold,
+                        withTextScale: false,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

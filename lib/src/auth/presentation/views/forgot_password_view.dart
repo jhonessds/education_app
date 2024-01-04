@@ -64,7 +64,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 emailCtrl: emailCtrl,
                 formKeyEmail: formKeyEmail,
               ),
-              OutlinedButton(
+              TextButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text(translation().goBack),
               ),

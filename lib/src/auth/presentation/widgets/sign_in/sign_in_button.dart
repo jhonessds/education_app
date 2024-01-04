@@ -1,3 +1,4 @@
+import 'package:demo/core/utils/language_constants.dart';
 import 'package:demo/src/auth/presentation/bloc/auth_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -63,9 +64,9 @@ class _SignInButtonState extends State<SignInButton> {
               }
             },
             width: screenSize.width,
-            child: const Text(
-              'Sign In',
-              style: TextStyle(
+            child: Text(
+              translation().signIn,
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.white,
               ),

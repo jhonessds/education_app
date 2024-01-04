@@ -45,7 +45,7 @@ class _ForgotPasswordButtonState extends State<ForgotPasswordButton> {
         },
         builder: (_, state) {
           return RoundedLoadingButton(
-            borderRadius: 10,
+            borderRadius: 70,
             color: Theme.of(context).primaryColor,
             controller: btnCtrl,
             onPressed: () async {
