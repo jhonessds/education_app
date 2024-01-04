@@ -51,7 +51,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _pageBuilder((_) => const Dashboard(), settings: settings);
     case '/forgot-password':
       return _pageBuilder(
-        (_) => const ForgotPasswordView(),
+        (_) => BlocProvider(
+          create: (context) => sl<AuthBloc>(),
+          child: const ForgotPasswordView(),
+        ),
         settings: settings,
       );
     default:

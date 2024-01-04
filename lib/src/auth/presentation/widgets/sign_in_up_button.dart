@@ -51,6 +51,7 @@ class _SignInUpButtonState extends State<SignInUpButton> {
             onPressed: () async {
               await FirebaseAuth.instance.currentUser?.reload();
               if (widget.formKey.currentState!.validate()) {
+                // ignore: use_build_context_synchronously
                 context.read<AuthBloc>().add(
                       SignInEvent(
                         email: widget.email,

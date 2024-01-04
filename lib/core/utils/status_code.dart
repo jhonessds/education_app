@@ -1,8 +1,12 @@
+import 'package:demo/core/utils/language_constants.dart';
+
 enum StatusCode {
+  // Commons
   unknown('UNKNOWN', 0),
   connectionError('CONNECTION_ERROR', 10),
   notAuthenticated('NOT_AUTHENTICATED', 20),
 
+  // Server
   //1xx Informativo
   continues('CONTINUE', 100),
   switchingProtocol('SWITCHING_PROTOCOL', 101),
@@ -75,11 +79,32 @@ enum StatusCode {
   notExtended('NOT_EXTENDED', 510),
   networkAuthenticationRequired('NETWORK_AUTHENTICATION_REQUIRED', 511),
   networkConnectionTimeoutError('NETWORK_CONNECTION_TIMEOUT_ERROR', 599),
-  firebase('FIREBASE', 600),
+
+  // Firebase
+  firebaseUnknown('FIREBASE_UNKNOWN', 600),
   createUser('CREATE_USER', 601),
   updateUser('UPDATE_USER', 602),
   getUser('GET_USER', 603),
   deleteUser('DELETE_USER', 604),
+  invalidEmail('INVALID_EMAIL', 605),
+  emailAlreadyInUse('EMAIL_ALREADY_IN_USE', 606),
+  invalidContinueUri('INVALID_CONTINUE_URI', 607),
+  missingAndroidPkgName('MISSING_ANDROID_PKG_NAME', 608),
+  missingContinueUri('MISSING_CONTINUE_URI', 609),
+  missingIosBundleId('MISSING_IOS_BUNDLE_ID', 610),
+  unauthorizedContinueUri('UNAUTHORIZED_CONTINUE_URI', 611),
+  userNotFound('USER_NOT_FOUND', 612),
+  userDisabled('USER_DISABLED', 613),
+  userMismatch('USER_MISMATCH', 614),
+  wrongPassword('WRONG_PASSWORD', 615),
+  weakPassword('WEAK_PASSWORD', 616),
+  operationNotAllowed('OPERATION_NOT_ALLOWED', 617),
+  requiresRecentLogin('REQUIRES_RECENT_LOGIN', 618),
+  invalidCredential('INVALID_CREDENTIAL', 619),
+  invalidVerificationCode('INVALID_VERIFICATION_CODE', 620),
+  invalidVerificationId('INVALID_VERIFICATION_ID', 621),
+
+  // Cache
   cache('CACHE', 700),
   ;
 
@@ -95,25 +120,41 @@ enum StatusCode {
   factory StatusCode.fromFirebase(String code) {
     switch (code) {
       case 'invalid-email':
-      case 'missing-android-pkg-name':
-      case 'missing-continue-uri':
-      case 'missing-ios-bundle-id':
-      case 'invalid-continue-uri':
-      case 'unauthorized-continue-uri':
-      case 'user-not-found':
-      case 'user-disabled':
-      case 'wrong-password':
+        return StatusCode.invalidEmail;
       case 'email-already-in-use':
-      case 'operation-not-allowed':
-      case 'weak-password':
-      case 'requires-recent-login':
+        return StatusCode.emailAlreadyInUse;
+      case 'invalid-continue-uri':
+        return StatusCode.invalidContinueUri;
+      case 'missing-android-pkg-name':
+        return StatusCode.missingAndroidPkgName;
+      case 'missing-continue-uri':
+        return StatusCode.missingContinueUri;
+      case 'missing-ios-bundle-id':
+        return StatusCode.missingIosBundleId;
+      case 'unauthorized-continue-uri':
+        return StatusCode.unauthorizedContinueUri;
+      case 'user-not-found':
+        return StatusCode.userNotFound;
+      case 'user-disabled':
+        return StatusCode.userDisabled;
       case 'user-mismatch':
+        return StatusCode.userMismatch;
+      case 'wrong-password':
+        return StatusCode.wrongPassword;
+      case 'weak-password':
+        return StatusCode.weakPassword;
+      case 'operation-not-allowed':
+        return StatusCode.operationNotAllowed;
+      case 'requires-recent-login':
+        return StatusCode.requiresRecentLogin;
       case 'invalid-credential':
+        return StatusCode.invalidCredential;
       case 'invalid-verification-code':
+        return StatusCode.invalidVerificationCode;
       case 'invalid-verification-id':
-        return StatusCode.firebase;
+        return StatusCode.invalidVerificationId;
       default:
-        return StatusCode.firebase;
+        return StatusCode.firebaseUnknown;
     }
   }
 
@@ -251,11 +292,236 @@ enum StatusCode {
       case 599:
         return StatusCode.networkConnectionTimeoutError;
       case 600:
-        return StatusCode.firebase;
+        return StatusCode.firebaseUnknown;
+      case 601:
+        return StatusCode.createUser;
+      case 602:
+        return StatusCode.updateUser;
+      case 603:
+        return StatusCode.getUser;
+      case 604:
+        return StatusCode.deleteUser;
+      case 605:
+        return StatusCode.invalidEmail;
+      case 606:
+        return StatusCode.emailAlreadyInUse;
+      case 607:
+        return StatusCode.invalidContinueUri;
+      case 608:
+        return StatusCode.missingAndroidPkgName;
+      case 609:
+        return StatusCode.missingContinueUri;
+      case 610:
+        return StatusCode.missingIosBundleId;
+      case 611:
+        return StatusCode.unauthorizedContinueUri;
+      case 612:
+        return StatusCode.userNotFound;
+      case 613:
+        return StatusCode.notFound;
+      case 614:
+        return StatusCode.userMismatch;
+      case 615:
+        return StatusCode.wrongPassword;
+      case 616:
+        return StatusCode.weakPassword;
+      case 617:
+        return StatusCode.operationNotAllowed;
+      case 618:
+        return StatusCode.requiresRecentLogin;
+      case 619:
+        return StatusCode.invalidCredential;
+      case 620:
+        return StatusCode.invalidVerificationCode;
+      case 621:
+        return StatusCode.invalidVerificationId;
       case 700:
         return StatusCode.cache;
       default:
         return StatusCode.unknown;
+    }
+  }
+
+  String get translated {
+    switch (this) {
+      case StatusCode.unknown:
+        return translation().unknown;
+      case StatusCode.connectionError:
+        return translation().connectionError;
+      case StatusCode.notAuthenticated:
+        return translation().notAuthenticated;
+      case StatusCode.continues:
+        return translation().continues;
+      case StatusCode.switchingProtocol:
+        return translation().switchingProtocol;
+      case StatusCode.processing:
+        return translation().processing;
+      case StatusCode.ok:
+        return translation().ok;
+      case StatusCode.created:
+        return translation().created;
+      case StatusCode.accepted:
+        return translation().accepted;
+      case StatusCode.nonAuthoritativeInformation:
+        return translation().nonAuthoritativeInformation;
+      case StatusCode.noContent:
+        return translation().noContent;
+      case StatusCode.resetContent:
+        return translation().resetContent;
+      case StatusCode.partialContent:
+        return translation().partialContent;
+      case StatusCode.multiStatus:
+        return translation().multiStatus;
+      case StatusCode.alreadyReported:
+        return translation().alreadyReported;
+      case StatusCode.imUsed:
+        return translation().imUsed;
+      case StatusCode.multipleChoices:
+        return translation().multipleChoices;
+      case StatusCode.movedPermanently:
+        return translation().movedPermanently;
+      case StatusCode.found:
+        return translation().found;
+      case StatusCode.seeOther:
+        return translation().seeOther;
+      case StatusCode.notModified:
+        return translation().notModified;
+      case StatusCode.useProxy:
+        return translation().useProxy;
+      case StatusCode.temporaryRedirect:
+        return translation().temporaryRedirect;
+      case StatusCode.permanentRedirect:
+        return translation().permanentRedirect;
+      case StatusCode.badRequest:
+        return translation().badRequest;
+      case StatusCode.unauthorized:
+        return translation().unauthorized;
+      case StatusCode.paymentRequired:
+        return translation().paymentRequired;
+      case StatusCode.forbidden:
+        return translation().forbidden;
+      case StatusCode.notFound:
+        return translation().notFound;
+      case StatusCode.methodNotAllowed:
+        return translation().methodNotAllowed;
+      case StatusCode.notAcceptable:
+        return translation().notAcceptable;
+      case StatusCode.proxyAuthenticationRequired:
+        return translation().proxyAuthenticationRequired;
+      case StatusCode.requestTimeout:
+        return translation().requestTimeout;
+      case StatusCode.conflict:
+        return translation().conflict;
+      case StatusCode.gone:
+        return translation().gone;
+      case StatusCode.lengthRequired:
+        return translation().lengthRequired;
+      case StatusCode.preconditionFailed:
+        return translation().preconditionFailed;
+      case StatusCode.payloadTooLarge:
+        return translation().payloadTooLarge;
+      case StatusCode.requestURITooLong:
+        return translation().requestURITooLong;
+      case StatusCode.unsupportedMediaType:
+        return translation().unsupportedMediaType;
+      case StatusCode.requestedRangeNotSatisfiable:
+        return translation().requestedRangeNotSatisfiable;
+      case StatusCode.expectationFailed:
+        return translation().expectationFailed;
+      case StatusCode.iamATeapot:
+        return translation().iamATeapot;
+      case StatusCode.misdirectedRequest:
+        return translation().misdirectedRequest;
+      case StatusCode.unprocessableEntity:
+        return translation().unprocessableEntity;
+      case StatusCode.locked:
+        return translation().locked;
+      case StatusCode.failedDependency:
+        return translation().failedDependency;
+      case StatusCode.upgradeRequired:
+        return translation().upgradeRequired;
+      case StatusCode.preconditionRequired:
+        return translation().preconditionRequired;
+      case StatusCode.tooManyRequests:
+        return translation().tooManyRequests;
+      case StatusCode.requestHeaderFieldsTooLarge:
+        return translation().requestHeaderFieldsTooLarge;
+      case StatusCode.connectionClosedWithoutResponse:
+        return translation().connectionClosedWithoutResponse;
+      case StatusCode.unavailableForLegalReasons:
+        return translation().unavailableForLegalReasons;
+      case StatusCode.clientClosedRequest:
+        return translation().clientClosedRequest;
+      case StatusCode.internalServerError:
+        return translation().internalServerError;
+      case StatusCode.notImplemented:
+        return translation().notImplemented;
+      case StatusCode.badGateway:
+        return translation().badGateway;
+      case StatusCode.serviceUnavailable:
+        return translation().serviceUnavailable;
+      case StatusCode.gatewayTimeout:
+        return translation().gatewayTimeout;
+      case StatusCode.httpVersionNotSupported:
+        return translation().httpVersionNotSupported;
+      case StatusCode.variantAlsoNegociates:
+        return translation().variantAlsoNegociates;
+      case StatusCode.insufficientStorage:
+        return translation().insufficientStorage;
+      case StatusCode.loopDetected:
+        return translation().loopDetected;
+      case StatusCode.notExtended:
+        return translation().notExtended;
+      case StatusCode.networkAuthenticationRequired:
+        return translation().networkAuthenticationRequired;
+      case StatusCode.networkConnectionTimeoutError:
+        return translation().networkConnectionTimeoutError;
+      case StatusCode.firebaseUnknown:
+        return translation().firebaseUnknown;
+      case StatusCode.createUser:
+        return translation().createUser;
+      case StatusCode.updateUser:
+        return translation().updateUser;
+      case StatusCode.getUser:
+        return translation().getUser;
+      case StatusCode.deleteUser:
+        return translation().deleteUser;
+      case StatusCode.invalidEmail:
+        return translation().invalidEmail;
+      case StatusCode.emailAlreadyInUse:
+        return translation().emailAlreadyInUse;
+      case StatusCode.invalidContinueUri:
+        return translation().invalidContinueUri;
+      case StatusCode.missingAndroidPkgName:
+        return translation().missingAndroidPkgName;
+      case StatusCode.missingContinueUri:
+        return translation().missingContinueUri;
+      case StatusCode.missingIosBundleId:
+        return translation().missingIosBundleId;
+      case StatusCode.unauthorizedContinueUri:
+        return translation().unauthorizedContinueUri;
+      case StatusCode.userNotFound:
+        return translation().userNotFound;
+      case StatusCode.userDisabled:
+        return translation().userDisabled;
+      case StatusCode.userMismatch:
+        return translation().userMismatch;
+      case StatusCode.wrongPassword:
+        return translation().wrongPassword;
+      case StatusCode.weakPassword:
+        return translation().weakPassword;
+      case StatusCode.operationNotAllowed:
+        return translation().operationNotAllowed;
+      case StatusCode.requiresRecentLogin:
+        return translation().requiresRecentLogin;
+      case StatusCode.invalidCredential:
+        return translation().invalidCredential;
+      case StatusCode.invalidVerificationCode:
+        return translation().invalidVerificationCode;
+      case StatusCode.invalidVerificationId:
+        return translation().invalidVerificationId;
+      case StatusCode.cache:
+        return translation().cache;
     }
   }
 }
