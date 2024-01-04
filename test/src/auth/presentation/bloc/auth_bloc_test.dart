@@ -45,7 +45,7 @@ void main() {
   final tFile = File('');
   const tServerFailure = ServerFailure(
     message: 'User not found',
-    statusCode: StatusCode.notFound,
+    statusCode: StatusCode.userNotFound,
   );
 
   setUp(() {
@@ -55,6 +55,7 @@ void main() {
     updateUser = MockUpdateUser();
     updatePassword = MockUpdatePassword();
     saveProfilePicture = MockSaveProfilePicture();
+
     bloc = AuthBloc(
       signIn: signIn,
       signUp: signUp,
@@ -120,7 +121,10 @@ void main() {
       ),
       expect: () => [
         const AuthLoading(),
-        AuthError(message: tServerFailure.errorMessage),
+        AuthError(
+          message: tServerFailure.errorMessage,
+          statusCode: tServerFailure.statusCode,
+        ),
       ],
       verify: (_) {
         verify(() => signIn.call(tSignInParams)).called(1);
@@ -172,7 +176,10 @@ void main() {
       ),
       expect: () => [
         const AuthLoading(),
-        AuthError(message: tServerFailure.errorMessage),
+        AuthError(
+          message: tServerFailure.errorMessage,
+          statusCode: tServerFailure.statusCode,
+        ),
       ],
       verify: (_) {
         verify(() => signUp.call(tSignUpParams)).called(1);
@@ -223,7 +230,10 @@ void main() {
       ),
       expect: () => [
         const AuthLoading(),
-        AuthError(message: tServerFailure.errorMessage),
+        AuthError(
+          message: tServerFailure.errorMessage,
+          statusCode: tServerFailure.statusCode,
+        ),
       ],
       verify: (_) {
         verify(() => updateUser.call(tUpdateUserParams)).called(1);
@@ -264,7 +274,10 @@ void main() {
       act: (bloc) => bloc.add(const ForgotPasswordEvent(email: 'email')),
       expect: () => [
         const AuthLoading(),
-        AuthError(message: tServerFailure.errorMessage),
+        AuthError(
+          message: tServerFailure.errorMessage,
+          statusCode: tServerFailure.statusCode,
+        ),
       ],
       verify: (_) {
         verify(() => forgotPassword.call('email')).called(1);
@@ -315,7 +328,10 @@ void main() {
       ),
       expect: () => [
         const AuthLoading(),
-        AuthError(message: tServerFailure.errorMessage),
+        AuthError(
+          message: tServerFailure.errorMessage,
+          statusCode: tServerFailure.statusCode,
+        ),
       ],
       verify: (_) {
         verify(() => updatePassword.call(tUpdatePasswordParam)).called(1);
@@ -357,7 +373,10 @@ void main() {
       act: (bloc) => bloc.add(SaveProfilePictureEvent(file: tFile)),
       expect: () => [
         const AuthLoading(),
-        AuthError(message: tServerFailure.errorMessage),
+        AuthError(
+          message: tServerFailure.errorMessage,
+          statusCode: tServerFailure.statusCode,
+        ),
       ],
       verify: (_) {
         verify(() => saveProfilePicture.call(tFile)).called(1);

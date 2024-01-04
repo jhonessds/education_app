@@ -2,17 +2,14 @@ import 'package:demo/core/utils/status_code.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class Failure extends Equatable implements Exception {
-  const Failure({this.message, this.statusCode})
-      : assert(statusCode is StatusCode, 'Status code cannot be a ');
+  const Failure({required this.statusCode, this.message});
 
   final String? message;
-  final StatusCode? statusCode;
+  final StatusCode statusCode;
 
-  String get errorMessage => '${statusCode?.name} Error: $message';
-  String get errorMessageTranslated => '${statusCode?.translated}';
+  String get errorMessage => '${statusCode.name} Error: $message';
+  String get errorMessageTranslated => statusCode.translated;
 
-  bool get hasRequestError => statusCode != null;
-  bool get isConnectionError =>
-      statusCode != null && statusCode == StatusCode.connectionError;
-  bool get isServerError => statusCode != null && statusCode!.value > 500;
+  bool get isConnectionError => statusCode == StatusCode.connectionError;
+  bool get isServerError => statusCode.value > 500 && statusCode.value < 600;
 }

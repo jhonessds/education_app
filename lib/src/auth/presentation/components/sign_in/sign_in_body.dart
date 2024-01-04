@@ -1,8 +1,12 @@
+import 'package:demo/core/common/widgets/footer.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
+import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/utils/language_constants.dart';
 import 'package:demo/src/auth/presentation/bloc/auth_bloc.dart';
-import 'package:demo/src/auth/presentation/widgets/sign_in_form.dart';
-import 'package:demo/src/auth/presentation/widgets/sign_in_up_button.dart';
+import 'package:demo/src/auth/presentation/components/sign_in/login_row.dart';
+import 'package:demo/src/auth/presentation/components/sign_in/register_row.dart';
+import 'package:demo/src/auth/presentation/components/sign_in/sign_in_form.dart';
+import 'package:demo/src/auth/presentation/widgets/sign_in/sign_in_button.dart';
 import 'package:demo/src/auth/presentation/widgets/top_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,11 +37,6 @@ class _SignInBodyState extends State<SignInBody> {
       child: SafeArea(
         child: Column(
           children: [
-            // const TopAnimation(
-            //   animation: 'login',
-            //   maxHeight: 350,
-            //   minHeight: 350,
-            // ),
             Container(
               margin: const EdgeInsets.only(top: 15),
               child: SvgPicture.asset(
@@ -46,7 +45,7 @@ class _SignInBodyState extends State<SignInBody> {
                   Theme.of(context).colorScheme.onBackground,
                   BlendMode.srcIn,
                 ),
-                height: 200,
+                height: context.height * 0.23,
               ),
             ),
             const TopTitle(title: 'Descubra tudo que podemos oferecer.'),
@@ -66,7 +65,7 @@ class _SignInBodyState extends State<SignInBody> {
               buttonKey: buttonKey,
             ),
             Container(
-              margin: const EdgeInsets.only(right: 6, bottom: 30),
+              margin: EdgeInsets.only(right: 6, bottom: context.height * 0.02),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -77,12 +76,21 @@ class _SignInBodyState extends State<SignInBody> {
                 ),
               ),
             ),
-            SignInUpButton(
+            SignInButton(
               formKey: formKey,
               buttonKey: buttonKey,
               email: emailController.text,
               password: passwordController.text,
             ),
+            SimpleText(
+              mgTop: 10,
+              mgBottom: context.height * 0.01,
+              text: '- ${translation().or} -',
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).disabledColor,
+            ),
+            const LoginRow(),
+            const RegisterRow(),
           ],
         ),
       ),

@@ -89,7 +89,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       if (user == null) {
         throw const ServerFailure(
           message: 'Try again later',
-          statusCode: StatusCode.notFound,
+          statusCode: StatusCode.userNotFound,
         );
       }
 
@@ -133,7 +133,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       if (userCredential.user == null) {
         throw const ServerFailure(
           message: 'Try again later',
-          statusCode: StatusCode.notFound,
+          statusCode: StatusCode.userNotFound,
         );
       }
 
@@ -197,7 +197,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       if (userData == null) {
         throw const ServerFailure(
           message: 'User not found',
-          statusCode: StatusCode.notFound,
+          statusCode: StatusCode.userNotFound,
         );
       }
       final ext = profilePicture.path.split('.').last;
@@ -229,7 +229,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       if (authClient.currentUser?.email == null) {
         throw const ServerFailure(
           message: 'User does not exist',
-          statusCode: StatusCode.notFound,
+          statusCode: StatusCode.userNotFound,
         );
       }
       final credential = EmailAuthProvider.credential(

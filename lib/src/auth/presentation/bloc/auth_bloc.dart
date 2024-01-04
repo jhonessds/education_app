@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:demo/core/enums/update_user.dart';
+import 'package:demo/core/utils/status_code.dart';
 
 import 'package:demo/src/auth/domain/entities/local_user.dart';
 import 'package:demo/src/auth/domain/usecases/forgot_password.dart';
@@ -39,6 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ForgotPasswordEvent>(_forgotPasswordHandler);
     on<UpdatePasswordEvent>(_updatePasswordHandler);
     on<SaveProfilePictureEvent>(_saveProfilePictureHandler);
+    on<KeyboardOpenedEvent>(_keboardHandler);
   }
 
   final SignIn _signIn;
@@ -60,7 +62,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
 
     result.fold(
-      (failure) => emit(AuthError(message: failure.errorMessageTranslated)),
+      (failure) => emit(
+        AuthError(
+          message: failure.errorMessage,
+          statusCode: failure.statusCode,
+        ),
+      ),
       (user) => emit(SignedIn(user: user)),
     );
   }
@@ -78,7 +85,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
 
     result.fold(
-      (failure) => emit(AuthError(message: failure.errorMessageTranslated)),
+      (failure) => emit(
+        AuthError(
+          message: failure.errorMessage,
+          statusCode: failure.statusCode,
+        ),
+      ),
       (_) => emit(const SignedUp()),
     );
   }
@@ -95,7 +107,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
 
     result.fold(
-      (failure) => emit(AuthError(message: failure.errorMessageTranslated)),
+      (failure) => emit(
+        AuthError(
+          message: failure.errorMessage,
+          statusCode: failure.statusCode,
+        ),
+      ),
       (_) => emit(const UserUpdated()),
     );
   }
@@ -107,7 +124,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final result = await _forgotPassword(event.email);
 
     result.fold(
-      (failure) => emit(AuthError(message: failure.errorMessageTranslated)),
+      (failure) => emit(
+        AuthError(
+          message: failure.errorMessage,
+          statusCode: failure.statusCode,
+        ),
+      ),
       (_) => emit(const ForgotPasswordSent()),
     );
   }
@@ -124,7 +146,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
 
     result.fold(
-      (failure) => emit(AuthError(message: failure.errorMessageTranslated)),
+      (failure) => emit(
+        AuthError(
+          message: failure.errorMessage,
+          statusCode: failure.statusCode,
+        ),
+      ),
       (_) => emit(const PasswordUpdated()),
     );
   }
@@ -136,8 +163,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final result = await _saveProfilePicture(event.file);
 
     result.fold(
-      (failure) => emit(AuthError(message: failure.errorMessageTranslated)),
+      (failure) => emit(
+        AuthError(
+          message: failure.errorMessage,
+          statusCode: failure.statusCode,
+        ),
+      ),
       (urlImage) => emit(ProfilePictureSaved(urlImage: urlImage)),
     );
+  }
+
+  void _keboardHandler(
+    KeyboardOpenedEvent event,
+    Emitter<AuthState> emit,
+  ) {
+    emit(KeyboardOpened(isOpened: event.isOpened));
   }
 }

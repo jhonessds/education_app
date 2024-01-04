@@ -10,6 +10,7 @@ class CustomInput extends StatelessWidget {
     this.hintText,
     this.validator,
     this.onTap,
+    this.onTapOutside,
     this.onChange,
     this.keyboardType,
     this.formatter,
@@ -17,6 +18,7 @@ class CustomInput extends StatelessWidget {
     this.readOnly = false,
     this.withBorder = true,
     this.autoFocus = false,
+    this.unfocus = true,
     this.floatingLabel,
     this.disabled = false,
     this.filled = true,
@@ -53,6 +55,7 @@ class CustomInput extends StatelessWidget {
   final String? Function(String?)? validator;
   final void Function(String)? onChange;
   final void Function()? onTap;
+  final void Function()? onTapOutside;
   final List<TextInputFormatter>? formatter;
   final FloatingLabelBehavior? floatingLabel;
   final AutovalidateMode autovalidateMode;
@@ -83,6 +86,7 @@ class CustomInput extends StatelessWidget {
   final bool disabled;
   final bool autoFocus;
   final bool obscureText;
+  final bool unfocus;
   final int? maxlines;
   final int? maxLength;
   final Color? fontColor;
@@ -151,7 +155,13 @@ class CustomInput extends StatelessWidget {
             ),
           ),
         ),
-        onTapOutside: (_) => FocusScope.of(context).unfocus(),
+        onTapOutside: (_) {
+          if (unfocus) {
+            FocusScope.of(context).unfocus();
+          }
+
+          onTapOutside?.call();
+        },
         controller: controller,
         validator: validator,
         autovalidateMode: autovalidateMode,

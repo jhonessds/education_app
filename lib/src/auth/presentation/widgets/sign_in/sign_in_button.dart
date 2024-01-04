@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class SignInUpButton extends StatefulWidget {
-  const SignInUpButton({
+class SignInButton extends StatefulWidget {
+  const SignInButton({
     required this.formKey,
     required this.buttonKey,
     required this.email,
@@ -19,10 +19,10 @@ class SignInUpButton extends StatefulWidget {
   final GlobalKey<State<StatefulWidget>> buttonKey;
 
   @override
-  State<SignInUpButton> createState() => _SignInUpButtonState();
+  State<SignInButton> createState() => _SignInButtonState();
 }
 
-class _SignInUpButtonState extends State<SignInUpButton> {
+class _SignInButtonState extends State<SignInButton> {
   final btnController = RoundedLoadingButtonController();
 
   @override

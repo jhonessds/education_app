@@ -15,12 +15,13 @@ class AuthLoading extends AuthState {
 }
 
 class AuthError extends AuthState {
-  const AuthError({required this.message});
+  const AuthError({required this.statusCode, required this.message});
 
   final String message;
+  final StatusCode statusCode;
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [message, statusCode];
 }
 
 class SignedIn extends AuthState {
@@ -55,4 +56,13 @@ class ProfilePictureSaved extends AuthState {
 
   @override
   List<Object> get props => [urlImage];
+}
+
+class KeyboardOpened extends AuthState {
+  const KeyboardOpened({required this.isOpened});
+
+  final bool isOpened;
+
+  @override
+  List<Object> get props => [isOpened];
 }

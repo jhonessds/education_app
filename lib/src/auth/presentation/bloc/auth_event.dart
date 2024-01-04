@@ -72,3 +72,12 @@ class SaveProfilePictureEvent extends AuthEvent {
   @override
   List<Object> get props => [file];
 }
+
+class KeyboardOpenedEvent extends AuthEvent {
+  const KeyboardOpenedEvent({required this.isOpened});
+
+  final bool isOpened;
+
+  @override
+  List<Object> get props => [isOpened];
+}
