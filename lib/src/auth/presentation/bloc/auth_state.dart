@@ -57,12 +57,3 @@ class ProfilePictureSaved extends AuthState {
   @override
   List<Object> get props => [urlImage];
 }
-
-class KeyboardOpened extends AuthState {
-  const KeyboardOpened({required this.isOpened});
-
-  final bool isOpened;
-
-  @override
-  List<Object> get props => [isOpened];
-}

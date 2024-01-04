@@ -40,7 +40,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ForgotPasswordEvent>(_forgotPasswordHandler);
     on<UpdatePasswordEvent>(_updatePasswordHandler);
     on<SaveProfilePictureEvent>(_saveProfilePictureHandler);
-    on<KeyboardOpenedEvent>(_keboardHandler);
   }
 
   final SignIn _signIn;
@@ -171,12 +170,5 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ),
       (urlImage) => emit(ProfilePictureSaved(urlImage: urlImage)),
     );
-  }
-
-  void _keboardHandler(
-    KeyboardOpenedEvent event,
-    Emitter<AuthState> emit,
-  ) {
-    emit(KeyboardOpened(isOpened: event.isOpened));
   }
 }

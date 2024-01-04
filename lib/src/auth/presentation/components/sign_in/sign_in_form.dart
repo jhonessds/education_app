@@ -1,10 +1,8 @@
 import 'package:demo/core/common/widgets/custom_input.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:demo/core/utils/language_constants.dart';
-import 'package:demo/src/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconly/iconly.dart';
 
 class SignInForm extends StatefulWidget {
@@ -42,18 +40,9 @@ class _SignInFormState extends State<SignInForm> {
               mgBottom: 20,
               borderRadius: 70,
               validator: InputValidator.emailValidator,
-              onTap: () {
-                CoreUtils.scrollTo(widget.buttonKey);
-                context.read<AuthBloc>().add(
-                      const KeyboardOpenedEvent(isOpened: true),
-                    );
-              },
+              onTap: () => CoreUtils.scrollTo(widget.buttonKey),
               onChange: (_) => CoreUtils.scrollTo(widget.buttonKey),
-              onTapOutside: () {
-                context.read<AuthBloc>().add(
-                      const KeyboardOpenedEvent(isOpened: false),
-                    );
-              },
+              onTapOutside: () {},
             ),
             CustomInput(
               controller: widget.passwordController,
