@@ -1,5 +1,8 @@
+import 'package:demo/core/common/widgets/custom_alert.dart';
+import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/src/app_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class CoreUtils {
   const CoreUtils._();
@@ -37,6 +40,41 @@ class CoreUtils {
           margin: const EdgeInsets.all(10),
         ),
       );
+  }
+
+  static void popAnimated(
+    String animaton, {
+    String? text,
+    void Function()? callback,
+  }) {
+    customAlert(
+      showOkBtn: true,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Lottie.asset(
+            'assets/lottie/$animaton.json',
+            height: 150,
+            repeat: false,
+          ),
+          Visibility(
+            visible: text != null,
+            child: SimpleText(
+              mgTop: 20,
+              text: text!,
+              maxlines: 3,
+              textAlign: TextAlign.center,
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ),
+      callback: () {
+        final context = NavigationService.instance.currentContext;
+        Navigator.of(context).pop();
+        callback?.call();
+      },
+    );
   }
 
   static void scrollTo(GlobalKey key) {

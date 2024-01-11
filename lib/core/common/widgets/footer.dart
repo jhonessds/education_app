@@ -3,7 +3,6 @@ import 'package:demo/core/common/widgets/settings/language_selector.dart';
 import 'package:demo/core/common/widgets/settings/theme_selector.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/utils/language_constants.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';

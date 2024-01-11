@@ -46,7 +46,7 @@ void customAlert({
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
-      backgroundColor: Theme.of(context).colorScheme.onBackground,
+      backgroundColor: Theme.of(context).cardColor,
       content: content ??
           Column(
             mainAxisSize: MainAxisSize.min,

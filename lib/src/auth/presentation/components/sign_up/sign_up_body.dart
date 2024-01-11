@@ -3,29 +3,41 @@ import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/utils/language_constants.dart';
 import 'package:demo/src/auth/presentation/bloc/auth_bloc.dart';
 import 'package:demo/src/auth/presentation/components/sign_in/login_row.dart';
-import 'package:demo/src/auth/presentation/components/sign_in/sign_in_form.dart';
+import 'package:demo/src/auth/presentation/components/sign_up/sign_up_form.dart';
+import 'package:demo/src/auth/presentation/components/sign_up/sign_up_row.dart';
 import 'package:demo/src/auth/presentation/widgets/sign_in/sign_in_button.dart';
+import 'package:demo/src/auth/presentation/widgets/top_animation.dart';
 import 'package:demo/src/auth/presentation/widgets/top_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 
-class SignInBody extends StatefulWidget {
-  const SignInBody({required this.state, super.key});
+class SignUpBody extends StatefulWidget {
+  const SignUpBody({
+    required this.state,
+    required this.emailCtrl,
+    required this.passwordCtrl,
+    super.key,
+  });
+
   final AuthState state;
+  final TextEditingController emailCtrl;
+  final TextEditingController passwordCtrl;
 
   @override
-  State<SignInBody> createState() => _SignInBodyState();
+  State<SignUpBody> createState() => _SignUpBodyState();
 }
 
-class _SignInBodyState extends State<SignInBody> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+class _SignUpBodyState extends State<SignUpBody> {
+  final fullNameCtrl = TextEditingController();
+  final confirmaPasswordCtrl = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final buttonKey = GlobalKey();
+
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    fullNameCtrl.dispose();
+    confirmaPasswordCtrl.dispose();
     super.dispose();
   }
 
@@ -35,50 +47,40 @@ class _SignInBodyState extends State<SignInBody> {
       child: SafeArea(
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 15),
-              child: SvgPicture.asset(
-                'assets/svg/dev-jhones.svg',
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.onBackground,
-                  BlendMode.srcIn,
-                ),
-                height: context.height * 0.23,
-              ),
+            SizedBox(
+              height: context.height * 0.22,
+              child: Lottie.asset('assets/lottie/signup.json'),
             ),
-            TopTitle(title: translation().discoverEverythingWeCanOffer),
-            SimpleText(
-              mgLeft: 13,
-              mgRight: 13,
-              text: translation().signInToYourAccount,
-              fontSize: 16,
-              alignment: Alignment.centerLeft,
-              mgBottom: 10,
-              maxlines: 3,
+
+            // Container(
+            //   margin: const EdgeInsets.only(top: 15),
+            //   child: SvgPicture.asset(
+            //     'assets/svg/dev-jhones.svg',
+            //     colorFilter: ColorFilter.mode(
+            //       Theme.of(context).colorScheme.onBackground,
+            //       BlendMode.srcIn,
+            //     ),
+            //     height: context.height * 0.23,
+            //   ),
+            // ),
+            const TopTitle(
+              title: 'Cadastre-se para liberar todos os recursos.',
             ),
-            SignInForm(
-              emailController: emailController,
-              passwordController: passwordController,
+
+            SignUpForm(
+              emailCtrl: widget.emailCtrl,
+              confirmPasswordCtrl: confirmaPasswordCtrl,
+              fullNameCtrl: fullNameCtrl,
+              passwordCtrl: widget.passwordCtrl,
               formKey: formKey,
               buttonKey: buttonKey,
             ),
-            Container(
-              margin: EdgeInsets.only(right: 6, bottom: context.height * 0.02),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/forgot-password');
-                  },
-                  child: Text(translation().forgotPassword),
-                ),
-              ),
-            ),
+            Container(height: context.height * 0.02),
             SignInButton(
               formKey: formKey,
               buttonKey: buttonKey,
-              email: emailController.text,
-              password: passwordController.text,
+              email: widget.emailCtrl.text,
+              password: widget.passwordCtrl.text,
             ),
             SimpleText(
               mgTop: 10,
@@ -87,7 +89,7 @@ class _SignInBodyState extends State<SignInBody> {
               fontWeight: FontWeight.bold,
               color: Theme.of(context).disabledColor,
             ),
-            const LoginRow(),
+            const SignUpRow(),
             Container(
               margin: const EdgeInsets.only(top: 15, bottom: 60),
               height: 45,
@@ -95,16 +97,16 @@ class _SignInBodyState extends State<SignInBody> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SimpleText(
-                    text: translation().dontHaveAccount,
+                    text: translation().alreadyHaveAccount,
                     withTextScale: false,
                   ),
                   SizedBox(
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/sign-up');
+                        Navigator.pushReplacementNamed(context, '/sign-in');
                       },
                       child: SimpleText(
-                        text: translation().signup,
+                        text: translation().signUp,
                         fontWeight: FontWeight.bold,
                         withTextScale: false,
                       ),

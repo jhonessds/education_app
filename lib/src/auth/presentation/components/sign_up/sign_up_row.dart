@@ -3,8 +3,8 @@ import 'package:demo/src/auth/presentation/widgets/sign_in/login_option_icon_but
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-class LoginRow extends StatelessWidget {
-  const LoginRow({
+class SignUpRow extends StatelessWidget {
+  const SignUpRow({
     super.key,
   });
 
