@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:dartz/dartz.dart';
 import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/core/errors/server_failure.dart';
+import 'package:demo/core/utils/either.dart';
 import 'package:demo/core/utils/status_code.dart';
 import 'package:demo/src/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:demo/src/auth/data/models/local_user_model.dart';

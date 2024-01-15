@@ -1,5 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:demo/core/errors/cache_failure.dart';
+import 'package:demo/core/utils/either.dart';
 import 'package:demo/core/utils/typedefs.dart';
 import 'package:demo/src/on_boarding/data/datasources/on_boarding_datasource.dart';
 import 'package:demo/src/on_boarding/domain/repos/on_boarding_repo.dart';

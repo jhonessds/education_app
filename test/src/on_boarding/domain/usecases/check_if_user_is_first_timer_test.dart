@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:demo/core/utils/either.dart';
 import 'package:demo/src/on_boarding/domain/repos/on_boarding_repo.dart';
 import 'package:demo/src/on_boarding/domain/usecases/check_if_user_is_first_timer.dart';
 import 'package:flutter_test/flutter_test.dart';

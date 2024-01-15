@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:demo/core/utils/either.dart';
 import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/src/auth/domain/entities/local_user.dart';
 import 'package:demo/src/auth/domain/usecases/update_user.dart';

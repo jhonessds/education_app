@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:demo/core/utils/either.dart';
 import 'package:demo/src/auth/domain/usecases/sign_up.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:demo/core/utils/either.dart';
 import 'package:demo/core/errors/failure.dart';
 import 'package:demo/core/errors/server_failure.dart';
 import 'package:demo/core/utils/status_code.dart';
