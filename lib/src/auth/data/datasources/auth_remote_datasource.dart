@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/core/database/box_provider.dart';
 import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/core/errors/server_failure.dart';
 import 'package:demo/core/res/media_res.dart';
@@ -46,6 +47,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     required this.authClient,
     required this.storageClient,
     required this.firestoreClient,
+    required this.objectBoxDb,
   }) {
     userCollection = UserCollection(instance: firestoreClient);
   }
@@ -53,6 +55,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   final FirebaseAuth authClient;
   final FirebaseStorage storageClient;
   final FirebaseFirestore firestoreClient;
+  final ObjectBoxProvider objectBoxDb;
   late UserCollection userCollection;
 
   @override
@@ -140,7 +143,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       await userCredential.user?.updateDisplayName(fullName);
       await userCredential.user?.updatePhotoURL(MediaRes.defaultAvatar);
 
-      await _createUser(userCredential.user, email);
+      await _createUser(userCredential.user, email, fullName: fullName);
     } on ServerFailure {
       rethrow;
     } on FirebaseAuthException catch (e) {
@@ -254,11 +257,11 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     }
   }
 
-  Future<void> _createUser(User? user, String email) async {
+  Future<void> _createUser(User? user, String email, {String? fullName}) async {
     final userToInsert = LocalUserModel(
       uid: user!.uid,
       email: user.email ?? email,
-      fullName: user.displayName ?? '',
+      fullName: fullName ?? (user.displayName ?? ''),
       profilePicture: user.photoURL ?? '',
     );
 

@@ -104,7 +104,7 @@ class _SignInBodyState extends State<SignInBody> {
                         Navigator.pushReplacementNamed(context, '/sign-up');
                       },
                       child: SimpleText(
-                        text: translation().signup,
+                        text: translation().signUp,
                         fontWeight: FontWeight.bold,
                         withTextScale: false,
                       ),

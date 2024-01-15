@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/core/database/box_provider.dart';
 import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/core/errors/server_failure.dart';
 import 'package:demo/core/res/media_res.dart';
@@ -16,6 +17,8 @@ import 'package:mocktail/mocktail.dart';
 class MockAuthCredential extends Mock implements AuthCredential {}
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
+
+class MockObjectBoxDb extends Mock implements ObjectBoxProvider {}
 
 class MockUserCredential extends Mock implements UserCredential {
   MockUserCredential([User? user]) : _user = user;
@@ -47,10 +50,12 @@ void main() {
   late DocumentReference<DataMap> documentReference;
   late FakeFirebaseFirestore firestoreClient;
   late MockUser mockUser;
+  late ObjectBoxProvider objectBoxDb;
 
   final tUser = LocalUserModel.empty();
 
   setUpAll(() async {
+    objectBoxDb = MockObjectBoxDb();
     authClient = MockFirebaseAuth();
     storageClient = MockFirebaseStorage();
     firestoreClient = FakeFirebaseFirestore();
@@ -64,6 +69,7 @@ void main() {
       authClient: authClient,
       storageClient: storageClient,
       firestoreClient: firestoreClient,
+      objectBoxDb: objectBoxDb,
     );
 
     registerFallbackValue(LocalUserModel.empty());

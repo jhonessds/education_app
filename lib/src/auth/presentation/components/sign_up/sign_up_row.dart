@@ -1,5 +1,5 @@
 import 'package:demo/core/utils/core_utils.dart';
-import 'package:demo/src/auth/presentation/widgets/sign_in/login_option_icon_button.dart';
+import 'package:demo/src/auth/presentation/widgets/login_option_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -32,13 +32,6 @@ class SignUpRow extends StatelessWidget {
         ),
         LoginOptionIconButton(
           child: Brand(Brands.facebook_circled),
-          callback: () {},
-        ),
-        LoginOptionIconButton(
-          child: const Icon(
-            FontAwesome.user_secret_solid,
-            size: 22,
-          ),
           callback: () {},
         ),
       ],

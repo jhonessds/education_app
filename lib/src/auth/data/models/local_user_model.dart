@@ -8,6 +8,7 @@ class LocalUserModel extends LocalUser {
     required super.uid,
     required super.email,
     required super.fullName,
+    super.id,
     super.profilePicture,
     super.bio,
     super.points,
@@ -19,6 +20,7 @@ class LocalUserModel extends LocalUser {
 
   factory LocalUserModel.fromMap(DataMap map, {String? uid}) {
     return LocalUserModel(
+      id: (map['id'] as int?) ?? 0,
       uid: uid ?? ((map['uid'] as String?) ?? ''),
       email: (map['email'] as String?) ?? '',
       profilePicture: (map['profilePicture'] as String?) ?? '',
@@ -45,6 +47,7 @@ class LocalUserModel extends LocalUser {
   }
 
   LocalUserModel copyWith({
+    int? id,
     String? uid,
     String? email,
     String? profilePicture,
@@ -57,6 +60,7 @@ class LocalUserModel extends LocalUser {
     List<String>? followers,
   }) {
     return LocalUserModel(
+      id: id ?? this.id,
       uid: uid ?? this.uid,
       email: email ?? this.email,
       profilePicture: profilePicture ?? this.profilePicture,
@@ -71,6 +75,7 @@ class LocalUserModel extends LocalUser {
   }
 
   DataMap toMap() => {
+        'id': id,
         'uid': uid,
         'email': email,
         'profilePicture': profilePicture,

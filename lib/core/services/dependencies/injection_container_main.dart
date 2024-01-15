@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/core/database/box_provider.dart';
 import 'package:demo/src/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:demo/src/auth/data/repos/auth_repository_impl.dart';
 import 'package:demo/src/auth/domain/repos/auth_repository.dart';

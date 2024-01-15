@@ -28,8 +28,10 @@ Future<void> _initAuth() async {
         authClient: sl(),
         storageClient: sl(),
         firestoreClient: sl(),
+        objectBoxDb: sl(),
       ),
     )
+    ..registerLazySingleton(() => ObjectBoxProvider)
     ..registerLazySingleton(() => FirebaseAuth.instance)
     ..registerLazySingleton(() => FirebaseFirestore.instance)
     ..registerLazySingleton(() => FirebaseStorage.instance);

@@ -43,7 +43,7 @@ class _SignUpViewState extends State<SignUpView> {
           context.read<AuthBloc>().add(
                 SignInEvent(
                   email: emailCtrl.text.trim(),
-                  password: emailCtrl.text,
+                  password: passwordCtrl.text,
                 ),
               );
         } else if (state is SignedIn) {

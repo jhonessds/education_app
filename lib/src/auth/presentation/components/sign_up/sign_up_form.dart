@@ -40,10 +40,9 @@ class _SignUpFormState extends State<SignUpForm> {
             CustomInput(
               controller: widget.fullNameCtrl,
               hintText: translation().fullName,
-              keyboardType: TextInputType.emailAddress,
               mgBottom: 10,
               borderRadius: 70,
-              validator: InputValidator.emailValidator,
+              validator: InputValidator.emptyCheck('campo obrigatorio'),
               onTap: () => CoreUtils.scrollTo(widget.buttonKey),
               onChange: (_) => CoreUtils.scrollTo(widget.buttonKey),
               onTapOutside: () {},
@@ -86,7 +85,15 @@ class _SignUpFormState extends State<SignUpForm> {
               maxlines: 1,
               borderRadius: 70,
               mgBottom: 10,
-              validator: InputValidator.passValidator,
+              validator: (t) {
+                if (t == null || t.isEmpty) return 'Confirme a senha';
+
+                if (t != widget.passwordCtrl.text) {
+                  return 'Senhas precisam ser iguais';
+                }
+
+                return null;
+              },
               onTap: () => CoreUtils.scrollTo(widget.buttonKey),
               onChange: (_) => CoreUtils.scrollTo(widget.buttonKey),
               sufixIcon: IconButton(

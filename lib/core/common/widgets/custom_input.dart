@@ -34,7 +34,7 @@ class CustomInput extends StatelessWidget {
     this.borderRadius = 15,
     this.contentPaddingV = 0,
     this.contentPaddingH = 20,
-    this.borderWidth = 2,
+    this.borderWidth = 1,
     this.width = double.infinity,
     this.fillColor,
     this.fontColor,
