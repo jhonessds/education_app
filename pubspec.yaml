@@ -44,11 +44,12 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   swipe_to: ^1.0.5
   url_launcher: ^6.2.2
+  uuid: ^4.3.3
   video_thumbnail: ^0.5.3
   youtube_metadata: ^1.0.1
 
 dev_dependencies:
-  analyzer: ^5.13.0 
+  analyzer: ^5.13.0
   bloc_test: ^9.1.5
   build_runner: ^2.4.8
   fake_cloud_firestore: ^2.4.5

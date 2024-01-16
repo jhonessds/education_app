@@ -18,7 +18,7 @@ abstract class AuthRemoteDataSource {
 
   Future<void> forgotPassword({required String email});
 
-  Future<LocalUser> signIn({
+  Future<LocalUserModel> signIn({
     required String email,
     required String password,
   });
@@ -77,7 +77,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<LocalUser> signIn({
+  Future<LocalUserModel> signIn({
     required String email,
     required String password,
   }) async {

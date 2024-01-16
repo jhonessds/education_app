@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:demo/core/utils/either.dart';
 import 'package:demo/core/errors/cache_failure.dart';
+import 'package:demo/core/utils/either.dart';
 import 'package:demo/src/on_boarding/domain/usecases/cache_first_timer.dart';
 import 'package:demo/src/on_boarding/domain/usecases/check_if_user_is_first_timer.dart';
 import 'package:demo/src/on_boarding/presentation/cubit/on_boarding_cubit.dart';

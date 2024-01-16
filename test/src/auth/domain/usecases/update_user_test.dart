@@ -1,6 +1,6 @@
-import 'package:demo/core/utils/either.dart';
 import 'package:demo/core/enums/update_user.dart';
-import 'package:demo/src/auth/domain/entities/local_user.dart';
+import 'package:demo/core/utils/either.dart';
+import 'package:demo/src/auth/data/models/local_user_model.dart';
 import 'package:demo/src/auth/domain/usecases/update_user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -15,10 +15,10 @@ void main() {
     repository = MockAuthRepository();
     usecase = UpdateUser(repository: repository);
     registerFallbackValue(UpdateUserAction.email);
-    registerFallbackValue(LocalUser.empty());
+    registerFallbackValue(LocalUserModel.empty());
   });
 
-  final tLocalUser = LocalUser.empty();
+  final tLocalUser = LocalUserModel.empty();
 
   test(
     'should call the [AuthRepository]',

@@ -21,13 +21,6 @@ class UpdateUser extends UsecaseWithParam<void, UpdateUserParams> {
 class UpdateUserParams extends Equatable {
   const UpdateUserParams({required this.user, required this.action});
 
-  factory UpdateUserParams.empty() {
-    return UpdateUserParams(
-      user: LocalUser.empty(),
-      action: UpdateUserAction.email,
-    );
-  }
-
   final LocalUser user;
   final UpdateUserAction action;
 

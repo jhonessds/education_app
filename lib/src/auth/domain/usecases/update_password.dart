@@ -22,10 +22,6 @@ class UpdatePasswordParam extends Equatable {
     required this.newPassword,
   });
 
-  factory UpdatePasswordParam.empty() {
-    return const UpdatePasswordParam(oldPassword: '', newPassword: '');
-  }
-
   final String oldPassword;
   final String newPassword;
 

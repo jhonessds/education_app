@@ -1,4 +1,4 @@
-import 'package:demo/core/common/app/user_provider.dart';
+import 'package:demo/core/common/app/providers/user_provider.dart';
 import 'package:demo/src/auth/domain/entities/local_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

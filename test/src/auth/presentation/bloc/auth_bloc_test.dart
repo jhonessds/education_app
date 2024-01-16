@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:demo/core/utils/either.dart';
+import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/core/errors/server_failure.dart';
+import 'package:demo/core/utils/either.dart';
 import 'package:demo/core/utils/status_code.dart';
 import 'package:demo/src/auth/data/models/local_user_model.dart';
 import 'package:demo/src/auth/domain/usecases/forgot_password.dart';
@@ -36,11 +37,17 @@ void main() {
   late SaveProfilePicture saveProfilePicture;
   late AuthBloc bloc;
 
-  final tSignInParams = SignInParams.empty();
-  final tSignUpParams = SignUpParams.empty();
-  final tUpdateUserParams = UpdateUserParams.empty();
-  final tUpdatePasswordParam = UpdatePasswordParam.empty();
+  const tSignInParams = SignInParams(email: '', password: '');
+  const tSignUpParams = SignUpParams(email: '', password: '', fullName: '');
+  const tUpdatePasswordParam = UpdatePasswordParam(
+    newPassword: '',
+    oldPassword: '',
+  );
   final tUser = LocalUserModel.empty();
+  final tUpdateUserParams = UpdateUserParams(
+    action: UpdateUserAction.email,
+    user: tUser,
+  );
   const tUrlImage = 'oi';
   final tFile = File('');
   const tServerFailure = ServerFailure(

@@ -18,10 +18,6 @@ class LocalUser extends Equatable {
     this.followers = const [],
   });
 
-  factory LocalUser.empty() {
-    return const LocalUser(uid: '', email: '', fullName: '');
-  }
-
   set id(int value) {
     if (id != value) id = value;
   }
@@ -43,5 +39,5 @@ class LocalUser extends Equatable {
   final List<String> followers;
 
   @override
-  List<Object> get props => [uid, email];
+  List<Object> get props => [id, uid, email];
 }

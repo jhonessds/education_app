@@ -1,4 +1,4 @@
-import 'package:demo/core/common/app/user_provider.dart';
+import 'package:demo/core/common/app/providers/user_provider.dart';
 import 'package:demo/core/res/fonts.dart';
 import 'package:demo/core/services/routes/router_main.dart';
 import 'package:demo/core/utils/flex_scheme_manager.dart';

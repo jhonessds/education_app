@@ -22,13 +22,6 @@ class SignInParams extends Equatable {
     required this.password,
   });
 
-  factory SignInParams.empty() {
-    return const SignInParams(
-      email: '',
-      password: '',
-    );
-  }
-
   final String email;
   final String password;
 

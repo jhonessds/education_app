@@ -6,9 +6,12 @@ import 'package:mocktail/mocktail.dart';
 
 import 'auth_repo.mock.dart';
 
+class MockLocalUser extends Mock implements LocalUser {}
+
 void main() {
   late MockAuthRepository repository;
   late SignIn usecase;
+  late LocalUser tUser;
 
   const tEmail = 'Test email';
   const tPassword = 'Test password';
@@ -16,9 +19,8 @@ void main() {
   setUp(() {
     repository = MockAuthRepository();
     usecase = SignIn(repository: repository);
+    tUser = MockLocalUser();
   });
-
-  final tUser = LocalUser.empty();
 
   test(
     'should return [LocalUser] from the [AuthRepository]',
