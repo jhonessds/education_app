@@ -4,6 +4,7 @@ import 'package:demo/core/services/routes/router_main.dart';
 import 'package:demo/core/utils/flex_scheme_manager.dart';
 import 'package:demo/core/utils/language_constants.dart';
 import 'package:demo/core/utils/theme_manager.dart';
+import 'package:demo/src/dashboard/providers/dashboard_controller.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -82,8 +83,11 @@ class _AppWidgetState extends State<AppWidget> {
       DeviceOrientation.portraitDown,
     ]);
 
-    return ChangeNotifierProvider(
-      create: (context) => UserProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => DashboardController()),
+      ],
       child: MaterialApp(
         navigatorKey: NavigationService.navigatorKey,
         title: 'DevJhones Demo',
