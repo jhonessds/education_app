@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:demo/core/utils/typedefs.dart';
 import 'package:demo/core/common/entities/user.dart';
 import 'package:demo/core/common/enums/user_type.dart';
+import 'package:demo/core/utils/typedefs.dart';
 
 class UserModel extends User {
   const UserModel({

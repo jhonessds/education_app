@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:demo/core/common/entities/user.dart';
 import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/core/utils/typedefs.dart';
-import 'package:demo/core/common/entities/user.dart';
 
 abstract class AuthRepository {
   const AuthRepository();

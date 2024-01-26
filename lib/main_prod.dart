@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/app/app_module.dart';
 import 'package:demo/app/app_widget.dart';
 import 'package:demo/core/abstraction/logger.dart';
 import 'package:demo/core/common/models/environment_model.dart';
 import 'package:demo/core/environments/config/env_prod.dart';
 import 'package:demo/core/environments/flavors_config.dart';
-import 'package:demo/app/app_module.dart';
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

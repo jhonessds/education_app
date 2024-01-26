@@ -1,13 +1,13 @@
 import 'dart:io';
 
+import 'package:demo/app/modules/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:demo/app/modules/auth/data/repos/auth_repository_impl.dart';
+import 'package:demo/core/abstraction/either.dart';
+import 'package:demo/core/common/entities/user.dart';
+import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/core/errors/server_failure.dart';
-import 'package:demo/core/abstraction/either.dart';
 import 'package:demo/core/utils/status_code.dart';
-import 'package:demo/app/modules/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:demo/core/common/models/user_model.dart';
-import 'package:demo/app/modules/auth/data/repos/auth_repository_impl.dart';
-import 'package:demo/core/common/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

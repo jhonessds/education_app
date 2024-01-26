@@ -1,5 +1,5 @@
-import 'package:demo/core/utils/core_utils.dart';
 import 'package:demo/app/modules/auth/presentation/widgets/login_option_icon_button.dart';
+import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 

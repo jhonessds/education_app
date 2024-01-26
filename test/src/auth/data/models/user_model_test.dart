@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:demo/core/utils/typedefs.dart';
-import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/common/entities/user.dart';
 import 'package:demo/core/common/enums/user_type.dart';
+import 'package:demo/core/common/models/user_model.dart';
+import 'package:demo/core/utils/typedefs.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fixtures/fixture_reader.dart';

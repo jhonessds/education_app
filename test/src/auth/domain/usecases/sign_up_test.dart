@@ -1,5 +1,5 @@
-import 'package:demo/core/abstraction/either.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_up.dart';
+import 'package:demo/core/abstraction/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

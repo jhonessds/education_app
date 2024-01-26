@@ -1,7 +1,7 @@
-import 'package:demo/core/enums/update_user.dart';
+import 'package:demo/app/modules/auth/domain/usecases/update_user.dart';
 import 'package:demo/core/abstraction/either.dart';
 import 'package:demo/core/common/models/user_model.dart';
-import 'package:demo/app/modules/auth/domain/usecases/update_user.dart';
+import 'package:demo/core/enums/update_user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
