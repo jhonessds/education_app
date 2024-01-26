@@ -1,5 +1,5 @@
-import 'package:demo/core/utils/language_constants.dart';
-import 'package:demo/src/app_widget.dart';
+import 'package:demo/app/app_widget.dart';
+import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
 
 void customAlert({

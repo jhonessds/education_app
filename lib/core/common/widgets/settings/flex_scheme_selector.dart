@@ -1,6 +1,8 @@
-import 'package:demo/core/utils/flex_scheme_manager.dart';
-import 'package:demo/core/utils/theme_manager.dart';
-import 'package:demo/src/app_widget.dart';
+import 'dart:async';
+
+import 'package:demo/app/app_widget.dart';
+import 'package:demo/core/services/preferences/flex_scheme_manager.dart';
+import 'package:demo/core/services/preferences/theme_manager.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +44,22 @@ Future<String?> flexSchemeSelector(BuildContext context) async {
     {'sanJuanBlue': const Color(0xFF375778)},
     {'rosewood': const Color(0xFF5C000E)},
     {'blumineBlue': const Color(0xFF19647E)},
+    {'flutterDash': const Color(0xFF4496E0)},
+    {'materialBaseline': const Color(0xFF6750A4)},
+    {'verdunHemlock': const Color(0xFF616200)},
+    {'dellGenoa': const Color(0xFF386A20)},
+    {'redM3': const Color(0xFFBB1614)},
+    {'pinkM3': const Color(0xFFBC004B)},
+    {'purpleM3': const Color(0xFF9A25AE)},
+    {'indigoM3': const Color(0xFF4355B9)},
+    {'blueM3': const Color(0xFF0061A4)},
+    {'cyanM3': const Color(0xFF006876)},
+    {'tealM3': const Color(0xFF006A60)},
+    {'greenM3': const Color(0xFF006E1C)},
+    {'limeM3': const Color(0xFF556500)},
+    {'yellowM3': const Color(0xFF695F00)},
+    {'orangeM3': const Color(0xFF8B5000)},
+    {'deepOrangeM3': const Color(0xFFBF360C)},
   ];
 
   final actualTheme = await getTheme();
@@ -89,17 +107,16 @@ Future<String?> flexSchemeSelector(BuildContext context) async {
                         color: Colors.white,
                       )
                     : Container(),
-                onPressed: () async {
+                onPressed: () {
                   if (isDarkMode) {
-                    final flexScheme = await setDarkFlexScheme(data.keys.first);
-                    // ignore: use_build_context_synchronously
-                    AppWidget.setDarkFlexScheme(context, flexScheme);
+                    setDarkFlexScheme(data.keys.first).then((flexScheme) {
+                      AppWidget.setDarkFlexScheme(context, flexScheme);
+                    });
                   } else {
-                    final flexScheme = await setFlexScheme(data.keys.first);
-                    // ignore: use_build_context_synchronously
-                    AppWidget.setFlexScheme(context, flexScheme);
+                    setFlexScheme(data.keys.first).then((flexScheme) {
+                      AppWidget.setFlexScheme(context, flexScheme);
+                    });
                   }
-                  // ignore: use_build_context_synchronously
                   Navigator.of(context).pop();
                 },
               ),

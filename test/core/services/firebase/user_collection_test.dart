@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/core/services/firebase/user_collection.dart';
-import 'package:demo/src/auth/data/models/local_user_model.dart';
+import 'package:demo/core/common/models/user_model.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_exceptions/mock_exceptions.dart';
@@ -9,9 +9,9 @@ import 'package:mocktail/mocktail.dart';
 void main() {
   late UserCollection userCollection;
   late FakeFirebaseFirestore firestoreClient;
-  const uid = '123';
-  final tUser = LocalUserModel.empty();
-  const tFullname = 'fullName';
+  const id = '123';
+  final tUser = UserModel.empty();
+  const tName = 'name';
 
   const expectedDumpAfterDelete = '''
 {
@@ -21,7 +21,7 @@ void main() {
   setUp(() {
     firestoreClient = FakeFirebaseFirestore();
     userCollection = UserCollection(instance: firestoreClient);
-    registerFallbackValue(LocalUserModel.empty());
+    registerFallbackValue(UserModel.empty());
   });
 
   group('update', () {
@@ -31,16 +31,16 @@ void main() {
 
       // Assert
       expect(
-        methodCall(tUser.copyWith(uid: uid, fullName: tFullname)),
+        methodCall(tUser.copyWith(id: id, name: tName)),
         completes,
       );
-      final user = await firestoreClient.collection('users').doc(uid).get();
-      expect(user.data()!['fullName'], tFullname);
+      final user = await firestoreClient.collection('users').doc(id).get();
+      expect(user.data()!['name'], tName);
     });
 
     test('should throws [Exception] when update failure', () async {
       // Arrange
-      final doc = firestoreClient.collection('users').doc(uid);
+      final doc = firestoreClient.collection('users').doc(id);
       whenCalling(Invocation.method(#set, null))
           .on(doc)
           .thenThrow(FirebaseException(plugin: 'firestore'));
@@ -52,7 +52,7 @@ void main() {
       expect(() => doc.set({'name': 'Bob'}), throwsA(isA<FirebaseException>()));
       // Works on a different reference of the same document.
       expect(
-        () => firestoreClient.collection('users').doc(uid).set(
+        () => firestoreClient.collection('users').doc(id).set(
           {
             'name': 'Bob',
           },
@@ -63,7 +63,7 @@ void main() {
       expect(
         () => firestoreClient
             .collection('users')
-            .doc('${uid}abc')
+            .doc('${id}abc')
             .set({'name': 'Alice'}),
         returnsNormally,
       );
@@ -76,14 +76,14 @@ void main() {
       final methodCall = userCollection.create;
 
       // Assert
-      expect(methodCall(tUser.copyWith(uid: uid)), completes);
-      final user = await firestoreClient.collection('users').doc(uid).get();
-      expect(user.id, uid);
+      expect(methodCall(tUser.copyWith(id: id)), completes);
+      final user = await firestoreClient.collection('users').doc(id).get();
+      expect(user.id, id);
     });
 
     test('should throws [Exception] when create failure', () async {
       // Arrange
-      final doc = firestoreClient.collection('users').doc(uid);
+      final doc = firestoreClient.collection('users').doc(id);
       whenCalling(Invocation.method(#set, null))
           .on(doc)
           .thenThrow(FirebaseException(plugin: 'firestore'));
@@ -91,14 +91,14 @@ void main() {
       // Assert
       // Works on the same reference.
       expect(
-        () => doc.set({'fullName': 'Bob'}),
+        () => doc.set({'name': 'Bob'}),
         throwsA(isA<FirebaseException>()),
       );
       // Works on a different reference of the same document.
       expect(
-        () => firestoreClient.collection('users').doc(uid).set(
+        () => firestoreClient.collection('users').doc(id).set(
           {
-            'fullName': 'Bob',
+            'name': 'Bob',
           },
         ),
         throwsA(isA<FirebaseException>()),
@@ -107,8 +107,8 @@ void main() {
       expect(
         () => firestoreClient
             .collection('users')
-            .doc('${uid}abc')
-            .set({'fullName': 'Alice'}),
+            .doc('${id}abc')
+            .set({'name': 'Alice'}),
         returnsNormally,
       );
     });
@@ -117,21 +117,21 @@ void main() {
   group('getById', () {
     test('should get a user when no [Exception] is throw', () async {
       // Arrange
-      await firestoreClient.collection('users').doc(uid).set({
-        'uid': uid,
-        'fullName': 'Bob',
+      await firestoreClient.collection('users').doc(id).set({
+        'id': id,
+        'name': 'Bob',
       });
 
       // Act
-      final result = await userCollection.getById(uid);
+      final result = await userCollection.getById(id);
 
       // Assert
-      expect(result!.uid, uid);
+      expect(result!.id, id);
     });
 
     test('should throws [Exception] when update failure', () async {
       // Arrange
-      final doc = firestoreClient.collection('users').doc(uid);
+      final doc = firestoreClient.collection('users').doc(id);
       whenCalling(Invocation.method(#get, null))
           .on(doc)
           .thenThrow(FirebaseException(plugin: 'firestore'));
@@ -144,10 +144,10 @@ void main() {
   group('delete', () {
     test('should delete a user when no [Exception] is throw', () async {
       // Arrange
-      final user = firestoreClient.collection('users').doc(uid);
+      final user = firestoreClient.collection('users').doc(id);
       await user.set({
-        'uid': uid,
-        'fullName': 'Bob',
+        'id': id,
+        'name': 'Bob',
       });
 
       // Act
@@ -159,7 +159,7 @@ void main() {
 
     test('should throws [Exception] when update failure', () async {
       // Arrange
-      final doc = firestoreClient.collection('users').doc(uid);
+      final doc = firestoreClient.collection('users').doc(id);
       whenCalling(Invocation.method(#delete, null))
           .on(doc)
           .thenThrow(FirebaseException(plugin: 'firestore'));

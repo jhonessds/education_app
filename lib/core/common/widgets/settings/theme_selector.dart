@@ -1,5 +1,6 @@
-import 'package:demo/core/utils/theme_manager.dart';
-import 'package:demo/src/app_widget.dart';
+import 'package:demo/app/app_widget.dart';
+import 'package:demo/core/extensions/context_extension.dart';
+import 'package:demo/core/services/preferences/theme_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class _ThemeSelectorState extends State<ThemeSelector> {
         height: 48,
         child: Icon(
           isDark ? CupertinoIcons.sun_min_fill : CupertinoIcons.moon_stars,
-          color: widget.color,
+          color: widget.color ?? context.theme.colorScheme.onBackground,
         ),
       ),
     );

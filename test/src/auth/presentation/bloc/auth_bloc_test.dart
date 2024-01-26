@@ -3,16 +3,16 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/core/errors/server_failure.dart';
-import 'package:demo/core/utils/either.dart';
+import 'package:demo/core/abstraction/either.dart';
 import 'package:demo/core/utils/status_code.dart';
-import 'package:demo/src/auth/data/models/local_user_model.dart';
-import 'package:demo/src/auth/domain/usecases/forgot_password.dart';
-import 'package:demo/src/auth/domain/usecases/save_profile_picture.dart';
-import 'package:demo/src/auth/domain/usecases/sign_in.dart';
-import 'package:demo/src/auth/domain/usecases/sign_up.dart';
-import 'package:demo/src/auth/domain/usecases/update_password.dart';
-import 'package:demo/src/auth/domain/usecases/update_user.dart';
-import 'package:demo/src/auth/presentation/bloc/auth_bloc.dart';
+import 'package:demo/core/common/models/user_model.dart';
+import 'package:demo/app/modules/auth/domain/usecases/forgot_password.dart';
+import 'package:demo/app/modules/auth/domain/usecases/save_profile_picture.dart';
+import 'package:demo/app/modules/auth/domain/usecases/sign_in.dart';
+import 'package:demo/app/modules/auth/domain/usecases/sign_up.dart';
+import 'package:demo/app/modules/auth/domain/usecases/update_password.dart';
+import 'package:demo/app/modules/auth/domain/usecases/update_user.dart';
+import 'package:demo/app/modules/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -43,7 +43,7 @@ void main() {
     newPassword: '',
     oldPassword: '',
   );
-  final tUser = LocalUserModel.empty();
+  final tUser = UserModel.empty();
   final tUpdateUserParams = UpdateUserParams(
     action: UpdateUserAction.email,
     user: tUser,

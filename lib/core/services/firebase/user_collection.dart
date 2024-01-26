@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/core/errors/server_failure.dart';
 import 'package:demo/core/services/firebase/i_collection.dart';
 import 'package:demo/core/utils/status_code.dart';
-import 'package:demo/src/auth/data/models/local_user_model.dart';
+import 'package:demo/core/common/models/user_model.dart';
 
-class UserCollection implements ICollection<LocalUserModel> {
+class UserCollection implements ICollection<UserModel> {
   UserCollection({required this.instance});
 
   final FirebaseFirestore instance;
@@ -19,9 +19,9 @@ class UserCollection implements ICollection<LocalUserModel> {
   //   );
 
   @override
-  Future<void> create(LocalUserModel value, {String? id}) async {
+  Future<void> create(UserModel value, {String? id}) async {
     try {
-      await instance.collection('users').doc(id).set(value.toInsertMap());
+      await instance.collection('users').doc(id).set(value.toMap());
     } catch (e) {
       throw ServerFailure(
         message: e.toString(),
@@ -43,7 +43,7 @@ class UserCollection implements ICollection<LocalUserModel> {
   }
 
   @override
-  Future<List<LocalUserModel>> getAll() async {
+  Future<List<UserModel>> getAll() async {
     try {
       throw UnimplementedError();
     } catch (e) {
@@ -55,12 +55,12 @@ class UserCollection implements ICollection<LocalUserModel> {
   }
 
   @override
-  Future<LocalUserModel?> getById(String id) async {
+  Future<UserModel?> getById(String id) async {
     try {
       final snapUser = await instance.collection('users').doc(id).get();
       if (!snapUser.exists) return null;
 
-      final user = LocalUserModel.fromMap(snapUser.data()!);
+      final user = UserModel.fromMap(snapUser.data()!);
       return user;
     } catch (e) {
       throw ServerFailure(
@@ -71,11 +71,11 @@ class UserCollection implements ICollection<LocalUserModel> {
   }
 
   @override
-  Future<void> update(LocalUserModel value) async {
+  Future<void> update(UserModel value) async {
     try {
       await instance
           .collection('users')
-          .doc(value.uid)
+          .doc(value.id)
           .set(value.toMap(), SetOptions(merge: true));
     } catch (e) {
       throw ServerFailure(

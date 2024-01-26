@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demo/core/database/box_provider.dart';
+import 'package:demo/core/services/database/box_provider.dart';
 import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/core/errors/server_failure.dart';
-import 'package:demo/core/res/media_res.dart';
+import 'package:demo/core/utils/media_res.dart';
 import 'package:demo/core/utils/typedefs.dart';
-import 'package:demo/src/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:demo/src/auth/data/models/local_user_model.dart';
+import 'package:demo/app/modules/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:demo/core/common/models/user_model.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage_mocks/firebase_storage_mocks.dart';
@@ -17,8 +17,6 @@ import 'package:mocktail/mocktail.dart';
 class MockAuthCredential extends Mock implements AuthCredential {}
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
-
-class MockObjectBoxDb extends Mock implements ObjectBoxProvider {}
 
 class MockUserCredential extends Mock implements UserCredential {
   MockUserCredential([User? user]) : _user = user;
@@ -50,18 +48,16 @@ void main() {
   late DocumentReference<DataMap> documentReference;
   late FakeFirebaseFirestore firestoreClient;
   late MockUser mockUser;
-  late ObjectBoxProvider objectBoxDb;
 
-  final tUser = LocalUserModel.empty();
+  final tUser = UserModel.empty();
 
   setUpAll(() async {
-    objectBoxDb = MockObjectBoxDb();
     authClient = MockFirebaseAuth();
     storageClient = MockFirebaseStorage();
     firestoreClient = FakeFirebaseFirestore();
     documentReference = firestoreClient.collection('users').doc();
     await documentReference.set(
-      tUser.copyWith(uid: documentReference.id).toMap(),
+      tUser.copyWith(id: documentReference.id).toMap(),
     );
     mockUser = MockUser()..uid = documentReference.id;
     userCredential = MockUserCredential(mockUser);
@@ -69,17 +65,16 @@ void main() {
       authClient: authClient,
       storageClient: storageClient,
       firestoreClient: firestoreClient,
-      objectBoxDb: objectBoxDb,
     );
 
-    registerFallbackValue(LocalUserModel.empty());
+    registerFallbackValue(UserModel.empty());
 
     when(() => authClient.currentUser).thenReturn(mockUser);
   });
 
   const tPassword = 'password';
   const tNewPassword = 'newPassword';
-  const tFullName = 'fullname';
+  const tName = 'fullname';
   const tEmail = 'email@email.com';
   const tBio = 'bio';
   final tFirabaseException = FirebaseAuthException(
@@ -140,7 +135,7 @@ void main() {
       );
 
       // Assert
-      expect(result.uid, userCredential.user!.uid);
+      expect(result.id, userCredential.user!.uid);
       verify(
         () => authClient.signInWithEmailAndPassword(
           email: tEmail,
@@ -230,7 +225,7 @@ void main() {
       final methodCall = dataSource.signUp(
         email: tEmail,
         password: tPassword,
-        fullName: tFullName,
+        fullName: tName,
       );
 
       // Assert
@@ -246,9 +241,9 @@ void main() {
       await untilCalled(() => userCredential.user!.updateDisplayName(any()));
       await untilCalled(() => userCredential.user!.updatePhotoURL(any()));
 
-      verify(() => userCredential.user!.updateDisplayName(tFullName)).called(1);
+      verify(() => userCredential.user!.updateDisplayName(tName)).called(1);
       verify(
-        () => userCredential.user!.updatePhotoURL(MediaRes.defaultAvatar),
+        () => userCredential.user!.updatePhotoURL('MediaRes.defaultAvatar'),
       ).called(1);
       verifyNoMoreInteractions(authClient);
     });
@@ -271,7 +266,7 @@ void main() {
         () => methodCall(
           email: tEmail,
           password: tPassword,
-          fullName: tFullName,
+          fullName: tName,
         ),
         throwsA(isA<ServerFailure>()),
       );
@@ -297,16 +292,16 @@ void main() {
 
       // Act
       await dataSource.updateUser(
-        user: tUser.copyWith(fullName: tFullName, uid: mockUser.uid),
+        user: tUser.copyWith(name: tName, id: mockUser.uid),
         action: UpdateUserAction.displayName,
       );
 
       // Assert
-      verify(() => mockUser.updateDisplayName(tFullName)).called(1);
+      verify(() => mockUser.updateDisplayName(tName)).called(1);
       verifyNever(() => mockUser.updateEmail(any()));
       final user =
           await firestoreClient.collection('users').doc(mockUser.uid).get();
-      expect(user.data()!['fullName'], tFullName);
+      expect(user.data()!['fullName'], tName);
     });
 
     test(
@@ -319,7 +314,7 @@ void main() {
 
       // Act
       await dataSource.updateUser(
-        user: tUser.copyWith(email: tEmail, uid: mockUser.uid),
+        user: tUser.copyWith(email: tEmail, id: mockUser.uid),
         action: UpdateUserAction.email,
       );
 
@@ -336,7 +331,7 @@ void main() {
         'is throw ', () async {
       // Act
       await dataSource.updateUser(
-        user: tUser.copyWith(bio: tBio, uid: mockUser.uid),
+        user: tUser.copyWith(bio: tBio, id: mockUser.uid),
         action: UpdateUserAction.others,
       );
 

@@ -1,4 +1,4 @@
-import 'package:demo/core/utils/language_constants.dart';
+import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
 
 enum StatusCode {

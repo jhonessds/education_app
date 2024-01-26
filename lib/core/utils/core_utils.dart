@@ -1,6 +1,6 @@
+import 'package:demo/app/app_widget.dart';
 import 'package:demo/core/common/widgets/custom_alert.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
-import 'package:demo/src/app_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

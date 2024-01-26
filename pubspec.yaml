@@ -24,6 +24,7 @@ dependencies:
   flutter_keyboard_visibility: ^6.0.0
   flutter_localizations:
     sdk: flutter
+  flutter_modular: ^6.0.4+1
   flutter_svg: ^2.0.9
   font_awesome_flutter: ^10.6.0
   get_it: ^7.6.4
@@ -66,37 +67,18 @@ dev_dependencies:
   very_good_analysis: ^5.1.0
 
 objectbox:
-  output_dir: core/database
+  output_dir: core/services/database
 
 flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets/vectors/
     - assets/images/
     - assets/lottie/
-    - assets/icons/
     - assets/app/
     - assets/svg/
 
   fonts:
-    - family: Aeonik
-      fonts:
-        - asset: assets/fonts/aeonik/AeonikTRIAL-Bold.otf
-          weight: 700
-        - asset: assets/fonts/aeonik/AeonikTRIAL-BoldItalic.otf
-          style: italic
-          weight: 700
-        - asset: assets/fonts/aeonik/AeonikTRIAL-Light.otf
-          weight: 300
-        - asset: assets/fonts/aeonik/AeonikTRIAL-LightItalic.otf
-          style: italic
-          weight: 300
-        - asset: assets/fonts/aeonik/AeonikTRIAL-Regular.otf
-          weight: 400
-        - asset: assets/fonts/aeonik/AeonikTRIAL-RegularItalic.otf
-          style: italic
-          weight: 400
     - family: Poppins
       fonts:
         - asset: assets/fonts/poppins/Poppins-Thin.ttf

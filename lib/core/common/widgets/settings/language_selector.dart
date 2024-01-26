@@ -1,5 +1,6 @@
-import 'package:demo/core/utils/language_constants.dart';
-import 'package:demo/src/app_widget.dart';
+import 'package:demo/app/app_widget.dart';
+import 'package:demo/core/extensions/context_extension.dart';
+import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
 
 class LanguageSelector extends StatelessWidget {
@@ -14,24 +15,24 @@ class LanguageSelector extends StatelessWidget {
         height: 30,
         child: Icon(
           Icons.translate,
-          color: color,
+          color: color ?? context.theme.colorScheme.onBackground,
         ),
       ),
       itemBuilder: (ctx) => [
         _buildPopupMenuItem('English', () async {
-          final locale = await setLocale('en');
-          // ignore: use_build_context_synchronously
-          AppWidget.setLocale(context, locale);
+          await setLocale('en').then((locale) {
+            AppWidget.setLocale(context, locale);
+          });
         }),
         _buildPopupMenuItem('Español', () async {
-          final locale = await setLocale('es');
-          // ignore: use_build_context_synchronously
-          AppWidget.setLocale(context, locale);
+          await setLocale('es').then((locale) {
+            AppWidget.setLocale(context, locale);
+          });
         }),
         _buildPopupMenuItem('Português', () async {
-          final locale = await setLocale('pt');
-          // ignore: use_build_context_synchronously
-          AppWidget.setLocale(context, locale);
+          await setLocale('pt').then((locale) {
+            AppWidget.setLocale(context, locale);
+          });
         }),
       ],
     );

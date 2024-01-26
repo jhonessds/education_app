@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:demo/core/enums/update_user.dart';
 import 'package:demo/core/errors/server_failure.dart';
-import 'package:demo/core/utils/either.dart';
+import 'package:demo/core/abstraction/either.dart';
 import 'package:demo/core/utils/status_code.dart';
-import 'package:demo/src/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:demo/src/auth/data/models/local_user_model.dart';
-import 'package:demo/src/auth/data/repos/auth_repository_impl.dart';
-import 'package:demo/src/auth/domain/entities/local_user.dart';
+import 'package:demo/app/modules/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:demo/core/common/models/user_model.dart';
+import 'package:demo/app/modules/auth/data/repos/auth_repository_impl.dart';
+import 'package:demo/core/common/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -21,7 +21,7 @@ void main() {
     remoteDataSource = MockAuthRemoteDataSource();
     repositoryImpl = AuthRepositoryImpl(remoteDataSource);
     registerFallbackValue(UpdateUserAction.displayName);
-    registerFallbackValue(LocalUserModel.empty());
+    registerFallbackValue(UserModel.empty());
     registerFallbackValue(File(''));
   });
 
@@ -31,7 +31,7 @@ void main() {
   const tUpdateAction = UpdateUserAction.displayName;
   final tFile = File('');
 
-  final tUser = LocalUserModel.empty();
+  final tUser = UserModel.empty();
 
   const tFailure = ServerFailure(
     message: 'User does not exist',
@@ -91,7 +91,7 @@ void main() {
           password: tPassword,
         );
 
-        expect(result, equals(Right<dynamic, LocalUser>(tUser)));
+        expect(result, equals(Right<dynamic, User>(tUser)));
 
         verify(
           () => remoteDataSource.signIn(

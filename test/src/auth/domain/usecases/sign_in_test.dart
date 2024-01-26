@@ -1,17 +1,17 @@
-import 'package:demo/core/utils/either.dart';
-import 'package:demo/src/auth/domain/entities/local_user.dart';
-import 'package:demo/src/auth/domain/usecases/sign_in.dart';
+import 'package:demo/core/abstraction/either.dart';
+import 'package:demo/core/common/entities/user.dart';
+import 'package:demo/app/modules/auth/domain/usecases/sign_in.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'auth_repo.mock.dart';
 
-class MockLocalUser extends Mock implements LocalUser {}
+class MockLocalUser extends Mock implements User {}
 
 void main() {
   late MockAuthRepository repository;
   late SignIn usecase;
-  late LocalUser tUser;
+  late User tUser;
 
   const tEmail = 'Test email';
   const tPassword = 'Test password';
@@ -39,7 +39,7 @@ void main() {
         ),
       );
 
-      expect(result, Right<dynamic, LocalUser>(tUser));
+      expect(result, Right<dynamic, User>(tUser));
 
       verify(
         () => repository.signIn(

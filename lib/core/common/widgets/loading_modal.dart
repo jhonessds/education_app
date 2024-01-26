@@ -1,5 +1,5 @@
+import 'package:demo/app/app_widget.dart';
 import 'package:demo/core/common/widgets/loading_widget.dart';
-import 'package:demo/src/app_widget.dart';
 import 'package:flutter/material.dart';
 
 Future<void> loadingWidget({

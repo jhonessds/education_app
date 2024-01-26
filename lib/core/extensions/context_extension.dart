@@ -1,9 +1,4 @@
-import 'package:demo/core/common/app/providers/tab_navigator.dart';
-import 'package:demo/core/common/app/providers/user_provider.dart';
-import 'package:demo/src/auth/domain/entities/local_user.dart';
-import 'package:demo/src/dashboard/providers/dashboard_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 extension ContextExt on BuildContext {
   ThemeData get theme => Theme.of(this);
@@ -12,16 +7,4 @@ extension ContextExt on BuildContext {
   Size get size => mediaQuery.size;
   double get width => size.width;
   double get height => size.height;
-
-  UserProvider get userProvider => read<UserProvider>();
-
-  LocalUser? get currentUser => userProvider.user;
-
-  DashboardController get dashboardController => read<DashboardController>();
-
-  TabNavigator get tabNavigator => read<TabNavigator>();
-
-  void pop() => tabNavigator.pop();
-
-  void push(Widget page) => tabNavigator.push(TabItem(child: page));
 }
