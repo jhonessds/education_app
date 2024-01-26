@@ -13,13 +13,17 @@ class AuthModule extends Module {
   @override
   void exportedBinds(Injector i) {
     i
-      ..add<FirebaseFirestore>((_) => FirebaseFirestore.instance)
-      ..add<FirebaseStorage>((_) => FirebaseStorage.instance)
-      ..add<FirebaseAuth>((_) => FirebaseAuth.instance)
-      ..add<AuthRemoteDataSource>(AuthRemoteDataSourceImpl.new)
-      ..add<AuthRepository>(AuthRepositoryImpl.new)
-      ..add<SignIn>(SignIn.new)
-      ..add<AuthController>(AuthController.new);
+      ..addLazySingleton<AuthRemoteDataSource>(
+        () => AuthRemoteDataSourceImpl(
+          authClient: FirebaseAuth.instance,
+          firestoreClient: FirebaseFirestore.instance,
+          storageClient: FirebaseStorage.instance,
+        ),
+      )
+      ..addLazySingleton<AuthRepository>(AuthRepositoryImpl.new)
+      ..addLazySingleton<SignIn>(SignIn.new)
+      ..addLazySingleton<AuthController>(AuthController.new);
+    super.exportedBinds(i);
   }
 
   @override

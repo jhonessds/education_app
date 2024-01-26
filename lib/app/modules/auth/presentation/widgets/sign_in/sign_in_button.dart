@@ -1,6 +1,8 @@
+import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class SignInButton extends StatefulWidget {
@@ -23,6 +25,7 @@ class SignInButton extends StatefulWidget {
 
 class _SignInButtonState extends State<SignInButton> {
   final btnController = RoundedLoadingButtonController();
+  final controller = Modular.get<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +46,7 @@ class _SignInButtonState extends State<SignInButton> {
         onPressed: () async {
           await FirebaseAuth.instance.currentUser?.reload();
           if (widget.formKey.currentState!.validate()) {
+            await controller.signInWithEmail(widget.email, widget.password);
           } else {
             btnController.stop();
           }
