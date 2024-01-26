@@ -1,23 +1,20 @@
-import 'package:demo/core/common/widgets/simple_text.dart';
-import 'package:demo/core/extensions/context_extension.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
-import 'package:demo/app/modules/auth/presentation/bloc/auth_bloc.dart';
 import 'package:demo/app/modules/auth/presentation/components/sign_up/sign_up_form.dart';
 import 'package:demo/app/modules/auth/presentation/components/sign_up/sign_up_row.dart';
 import 'package:demo/app/modules/auth/presentation/widgets/sign_up/sign_up_button.dart';
 import 'package:demo/app/modules/auth/presentation/widgets/top_title.dart';
+import 'package:demo/core/common/widgets/simple_text.dart';
+import 'package:demo/core/extensions/context_extension.dart';
+import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class SignUpBody extends StatefulWidget {
   const SignUpBody({
-    required this.state,
     required this.emailCtrl,
     required this.passwordCtrl,
     super.key,
   });
 
-  final AuthState state;
   final TextEditingController emailCtrl;
   final TextEditingController passwordCtrl;
 

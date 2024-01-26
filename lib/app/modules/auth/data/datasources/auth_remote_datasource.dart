@@ -1,10 +1,13 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/common/entities/user.dart';
+import 'package:demo/core/common/enums/user_type.dart';
+import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/enums/update_user.dart';
+import 'package:demo/core/errors/server_failure.dart';
 import 'package:demo/core/services/firebase/user_collection.dart';
+import 'package:demo/core/utils/status_code.dart';
 import 'package:firebase_auth/firebase_auth.dart' as f_auth;
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -63,8 +66,47 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> signIn({required String email, required String password}) {
-    throw UnimplementedError();
+  Future<UserModel> signIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final result = await authClient.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      final user = result.user;
+
+      if (user == null) {
+        throw const ServerFailure(
+          message: 'Try again later',
+          statusCode: StatusCode.userNotFound,
+        );
+      }
+
+      var userData = await userCollection.getById(user.uid);
+
+      if (userData != null) return userData;
+
+      await _createUser(user, email);
+
+      userData = await userCollection.getById(user.uid);
+
+      return userData!;
+    } on ServerFailure {
+      rethrow;
+    } on f_auth.FirebaseAuthException catch (e) {
+      throw ServerFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw ServerFailure(
+        message: e.toString(),
+        statusCode: StatusCode.unknown,
+      );
+    }
   }
 
   @override
@@ -291,15 +333,20 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   //   }
   // }
 
-  // Future<void> _createUser(User? user, String email, {String? fullName})
-  // async {
-  //   final userToInsert = UserModel(
-  //     uid: user!.uid,
-  //     email: user.email ?? email,
-  //     fullName: fullName ?? (user.displayName ?? ''),
-  //     profilePicture: user.photoURL ?? '',
-  //   );
+  Future<void> _createUser(
+    f_auth.User user,
+    String email, {
+    String? name,
+  }) async {
+    final userToInsert = UserModel(
+      id: user.uid,
+      email: user.email ?? email,
+      name: name ?? (user.displayName ?? ''),
+      userType: UserType.common,
+      profilePicture: user.photoURL ?? '',
+      firebaseIds: List.filled(1, user.uid),
+    );
 
-  //   await userCollection.create(userToInsert, id: user.uid);
-  // }
+    await userCollection.create(userToInsert, id: user.uid);
+  }
 }

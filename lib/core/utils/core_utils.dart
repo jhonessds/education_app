@@ -2,10 +2,27 @@ import 'package:demo/app/app_widget.dart';
 import 'package:demo/core/common/widgets/custom_alert.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
 
 class CoreUtils {
   const CoreUtils._();
+
+  static CustomTransition customTransition() {
+    return CustomTransition(
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaler: TextScaler.noScaling,
+            ),
+            child: child,
+          ),
+        );
+      },
+    );
+  }
 
   static void showSnackBar(
     String message, {

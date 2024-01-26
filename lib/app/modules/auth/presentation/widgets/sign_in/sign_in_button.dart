@@ -1,8 +1,6 @@
 import 'package:demo/core/services/preferences/language_constants.dart';
-import 'package:demo/app/modules/auth/presentation/bloc/auth_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class SignInButton extends StatefulWidget {
@@ -38,41 +36,25 @@ class _SignInButtonState extends State<SignInButton> {
         right: 13,
         bottom: screenSize.height * 0.01,
       ),
-      child: BlocConsumer<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthError) {
+      child: RoundedLoadingButton(
+        borderRadius: 70,
+        color: Theme.of(context).primaryColor,
+        controller: btnController,
+        onPressed: () async {
+          await FirebaseAuth.instance.currentUser?.reload();
+          if (widget.formKey.currentState!.validate()) {
+          } else {
             btnController.stop();
           }
         },
-        builder: (context, state) {
-          return RoundedLoadingButton(
-            borderRadius: 70,
-            color: Theme.of(context).primaryColor,
-            controller: btnController,
-            onPressed: () async {
-              await FirebaseAuth.instance.currentUser?.reload();
-              if (widget.formKey.currentState!.validate()) {
-                // ignore: use_build_context_synchronously
-                context.read<AuthBloc>().add(
-                      SignInEvent(
-                        email: widget.email,
-                        password: widget.password,
-                      ),
-                    );
-              } else {
-                btnController.stop();
-              }
-            },
-            width: screenSize.width,
-            child: Text(
-              translation().signIn,
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-              ),
-            ),
-          );
-        },
+        width: screenSize.width,
+        child: Text(
+          translation().signIn,
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/errors/server_failure.dart';
 import 'package:demo/core/services/firebase/i_collection.dart';
 import 'package:demo/core/utils/status_code.dart';
-import 'package:demo/core/common/models/user_model.dart';
 
 class UserCollection implements ICollection<UserModel> {
   UserCollection({required this.instance});
