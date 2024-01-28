@@ -26,6 +26,7 @@ dependencies:
   flutter_modular: ^6.0.4+1
   flutter_svg: ^2.0.9
   font_awesome_flutter: ^10.6.0
+  google_sign_in: ^6.2.1
   iconly: ^1.0.1
   icons_plus: ^5.0.0
   image_picker: ^1.0.7

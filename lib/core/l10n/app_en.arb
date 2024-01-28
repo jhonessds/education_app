@@ -15,6 +15,7 @@
     "close": "Close",
     "edit": "Edit",
     "delete": "Delete",
+    "problemWithRequest": "We had a problem with your request, please try again!",
 
     "commentAuthModule":"*********** COMMENT_AUTH_MODULE ***********",
     "provideAPhoneNumber": "Provide a phone number",

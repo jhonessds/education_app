@@ -4,13 +4,14 @@ import 'package:demo/core/common/entities/user.dart';
 import 'package:demo/core/utils/typedefs.dart';
 import 'package:equatable/equatable.dart';
 
-class SignIn extends UsecaseWithParam<User, SignInParams> {
-  SignIn({required this.repository});
+class SignInWithEmail extends UsecaseWithParam<User, SignInParams> {
+  SignInWithEmail({required this.repository});
 
   final AuthRepository repository;
 
   @override
-  ResultFuture<User> call(SignInParams params) async => repository.signIn(
+  ResultFuture<User> call(SignInParams params) async =>
+      repository.signInWithEmail(
         email: params.email,
         password: params.password,
       );

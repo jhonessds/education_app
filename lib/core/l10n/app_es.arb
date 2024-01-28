@@ -15,7 +15,8 @@
     "close": "Cerca",
     "edit": "Editar",
     "delete": "Borrar",
-
+    "problemWithRequest": "¡Tuvimos un problema con tu solicitud, por favor inténtalo de nuevo!",
+    
     "commentAuthModule":"*********** COMMENT_AUTH_MODULE ***********",
     "provideAPhoneNumber": "Proporcionar un número de teléfono",
     "provideAValidPhoneNumber": "Proporcione un número válido",

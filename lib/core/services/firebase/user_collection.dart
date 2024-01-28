@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/core/common/models/user_model.dart';
-import 'package:demo/core/errors/server_failure.dart';
+import 'package:demo/core/errors/firebase_failure.dart';
 import 'package:demo/core/services/firebase/i_collection.dart';
+import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:demo/core/utils/status_code.dart';
 
 class UserCollection implements ICollection<UserModel> {
@@ -18,12 +19,17 @@ class UserCollection implements ICollection<UserModel> {
   //     toFirestore: (value, options) => value.toInsertMap(),
   //   );
 
+  Future<UserModel?> getCachedUser() async {
+    final cachedUser = await UserHelper.getUser();
+    return cachedUser;
+  }
+
   @override
   Future<void> create(UserModel value, {String? id}) async {
     try {
       await instance.collection('users').doc(id).set(value.toMap());
     } catch (e) {
-      throw ServerFailure(
+      throw FirebaseFailure(
         message: e.toString(),
         statusCode: StatusCode.createUser,
       );
@@ -35,7 +41,7 @@ class UserCollection implements ICollection<UserModel> {
     try {
       await instance.collection('users').doc(id).delete();
     } catch (e) {
-      throw ServerFailure(
+      throw FirebaseFailure(
         message: e.toString(),
         statusCode: StatusCode.deleteUser,
       );
@@ -47,7 +53,7 @@ class UserCollection implements ICollection<UserModel> {
     try {
       throw UnimplementedError();
     } catch (e) {
-      throw ServerFailure(
+      throw FirebaseFailure(
         message: e.toString(),
         statusCode: StatusCode.getUser,
       );
@@ -63,7 +69,7 @@ class UserCollection implements ICollection<UserModel> {
       final user = UserModel.fromMap(snapUser.data()!);
       return user;
     } catch (e) {
-      throw ServerFailure(
+      throw FirebaseFailure(
         message: e.toString(),
         statusCode: StatusCode.getUser,
       );
@@ -78,7 +84,7 @@ class UserCollection implements ICollection<UserModel> {
           .doc(value.id)
           .set(value.toMap(), SetOptions(merge: true));
     } catch (e) {
-      throw ServerFailure(
+      throw FirebaseFailure(
         message: e.toString(),
         statusCode: StatusCode.updateUser,
       );

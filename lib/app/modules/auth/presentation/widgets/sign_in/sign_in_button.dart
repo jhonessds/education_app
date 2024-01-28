@@ -1,6 +1,7 @@
 import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
+import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -29,29 +30,46 @@ class _SignInButtonState extends State<SignInButton> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
     return Container(
       key: widget.buttonKey,
       height: 45,
       margin: EdgeInsets.only(
         left: 13,
         right: 13,
-        bottom: screenSize.height * 0.01,
+        bottom: context.height * 0.01,
       ),
       child: RoundedLoadingButton(
         borderRadius: 70,
-        color: Theme.of(context).primaryColor,
+        color: context.theme.primaryColor,
         controller: btnController,
         onPressed: () async {
-          await FirebaseAuth.instance.currentUser?.reload();
           if (widget.formKey.currentState!.validate()) {
-            await controller.signInWithEmail(widget.email, widget.password);
+            final result = await controller.signInWithEmail(
+              widget.email,
+              widget.password,
+            );
+            btnController.stop();
+            if (result) {
+              CoreUtils.showSnackBar('Sucesso!');
+            } else {
+              if (controller.isRegistred) {
+                CoreUtils.showSnackBar(
+                  controller.failure.message!,
+                  isError: true,
+                );
+              } else {
+                // ignore: use_build_context_synchronously
+                await showDialog<void>(
+                  context: context,
+                  builder: (_) => Container(),
+                );
+              }
+            }
           } else {
             btnController.stop();
           }
         },
-        width: screenSize.width,
+        width: context.width,
         child: Text(
           translation().signIn,
           style: const TextStyle(

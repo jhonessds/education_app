@@ -1,4 +1,4 @@
-import 'package:demo/app/modules/auth/domain/usecases/sign_in.dart';
+import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:demo/core/abstraction/either.dart';
 import 'package:demo/core/common/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,7 +10,7 @@ class MockLocalUser extends Mock implements User {}
 
 void main() {
   late MockAuthRepository repository;
-  late SignIn usecase;
+  late SignInWithEmail usecase;
   late User tUser;
 
   const tEmail = 'Test email';
@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     repository = MockAuthRepository();
-    usecase = SignIn(repository: repository);
+    usecase = SignInWithEmail(repository: repository);
     tUser = MockLocalUser();
   });
 
@@ -26,7 +26,7 @@ void main() {
     'should return [LocalUser] from the [AuthRepository]',
     () async {
       when(
-        () => repository.signIn(
+        () => repository.signInWithEmail(
           email: any(named: 'email'),
           password: any(named: 'password'),
         ),
@@ -42,7 +42,7 @@ void main() {
       expect(result, Right<dynamic, User>(tUser));
 
       verify(
-        () => repository.signIn(
+        () => repository.signInWithEmail(
           email: tEmail,
           password: tPassword,
         ),

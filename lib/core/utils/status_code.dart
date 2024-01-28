@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 enum StatusCode {
   // Commons
   unknown('UNKNOWN', 0),
+  problemWithRequest('PROBLEM_WITH_REQUEST', 1),
   connectionError('CONNECTION_ERROR', 10),
   notAuthenticated('NOT_AUTHENTICATED', 20),
 
@@ -104,7 +105,10 @@ enum StatusCode {
   invalidCredential('INVALID_CREDENTIAL', 619),
   invalidVerificationCode('INVALID_VERIFICATION_CODE', 620),
   invalidVerificationId('INVALID_VERIFICATION_ID', 621),
-
+  // Firebase Generic
+  userNotAuthenticated('USER_NOT_AUTHENTICATED', 622),
+  firebaseAuthFailure('FIREBASE_AUTH_FAILURE', 623),
+  googleAuthFailure('GOOGLE_AUTH_FAILURE', 624),
   // Cache
   cache('CACHE', 700),
   ;
@@ -336,6 +340,12 @@ enum StatusCode {
         return StatusCode.invalidVerificationCode;
       case 621:
         return StatusCode.invalidVerificationId;
+      case 622:
+        return StatusCode.userNotAuthenticated;
+      case 623:
+        return StatusCode.firebaseAuthFailure;
+      case 624:
+        return StatusCode.googleAuthFailure;
       case 700:
         return StatusCode.cache;
       default:
@@ -347,6 +357,8 @@ enum StatusCode {
     switch (this) {
       case StatusCode.unknown:
         return translation().unknown;
+      case StatusCode.problemWithRequest:
+        return 'translation().problemWithRequest';
       case StatusCode.connectionError:
         return translation().connectionError;
       case StatusCode.notAuthenticated:
@@ -521,6 +533,12 @@ enum StatusCode {
         return translation().invalidVerificationCode;
       case StatusCode.invalidVerificationId:
         return translation().invalidVerificationId;
+      case StatusCode.userNotAuthenticated:
+        return 'userNotAuthenticated';
+      case StatusCode.firebaseAuthFailure:
+        return 'firebaseAuthFailure';
+      case StatusCode.googleAuthFailure:
+        return 'googleAuthFailure';
       case StatusCode.cache:
         return translation().cache;
     }
