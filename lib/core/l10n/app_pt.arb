@@ -16,7 +16,8 @@
     "edit": "Editar",
     "delete": "Excluir",
     "problemWithRequest": "Tivemos um problema com sua solicitação, por favor tente novamente mais tarde!",
-    
+    "requiredField": "campo obrigatório",
+
     "commentAuthModule":"*********** COMMENT_AUTH_MODULE ***********",
     "provideAPhoneNumber": "informe um número de telefone!",
     "provideAValidPhoneNumber": "informe um número válido!",
@@ -36,7 +37,9 @@
     "signInToYourAccount": "Faça login em sua conta",
     "signIn": "Entrar",
     "confirmPassword": "Confirmar senha",
-
+    "userNotRegistered": "Usuário não cadastrado!\n Deseja se cadastrar?",
+    "privacyPolicy": "Política de Privacidade",
+    
     "commentStatusCode":"*********** COMMENT_STATUS_CODE ***********",
     "unknown": "Erro desconhecido",
     "connectionError": "Tivemos um problema com sua solicitação, por favor tente novamente mais tarde!",

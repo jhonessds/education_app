@@ -21,21 +21,7 @@ class SessionController {
 
   void setUnloggedUser() => _currentUser = null;
 
-  // Future<void> logOut({
-  //   bool popRoute = true,
-  //   bool sessionExpired = false,
-  // }) async {
-  //   //PushNotificationsManager().resetClass();
-  //   await _logOut();
-
-  //   UserHelper.removeUser();
-  //   setUnloggedUser();
-  //   if (popRoute) {
-  //     Modular.to.popUntil(ModalRoute.withName('/home/'));
-  //     Modular.to.pushReplacementNamed('/home/project-page/');
-  //   }
-  //   if (sessionExpired) {
-  //     showToast(translation().sessionExpired);
-  //   }
-  // }
+  Future<void> logOut() async {
+    await _logOut();
+  }
 }

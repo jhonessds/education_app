@@ -1,4 +1,5 @@
 import 'package:demo/app/modules/auth/auth_module.dart';
+import 'package:demo/app/modules/register/register_module.dart';
 import 'package:demo/app/modules/splash/splash_module.dart';
 import 'package:demo/core/common/models/environment_model.dart';
 import 'package:demo/core/environments/flavors_config.dart';
@@ -12,7 +13,7 @@ class AppModule extends Module {
   }
 
   @override
-  List<Module> get imports => [AuthModule()];
+  List<Module> get imports => [AuthModule(), RegisterModule()];
 
   @override
   void routes(RouteManager r) {

@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     // ignore: inference_failure_on_instance_creation
-    Future.delayed(const Duration(seconds: 4)).then((value) {
+    Future.delayed(const Duration(seconds: 1)).then((value) {
       Modular.to.pushReplacementNamed('/auth/');
     });
   }

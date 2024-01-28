@@ -1,21 +1,19 @@
+import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:demo/core/common/widgets/custom_input.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:iconly/iconly.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({
-    required this.emailController,
-    required this.passwordController,
     required this.formKey,
     required this.buttonKey,
     super.key,
   });
 
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
   final GlobalKey<FormState> formKey;
   final GlobalKey buttonKey;
 
@@ -25,6 +23,9 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   bool obscureText = true;
+  final emailCtrl = TextEditingController();
+  final passwordCtrl = TextEditingController();
+  final authCtrl = Modular.get<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,18 +35,21 @@ class _SignInFormState extends State<SignInForm> {
         child: Column(
           children: [
             CustomInput(
-              controller: widget.emailController,
+              controller: emailCtrl,
               hintText: translation().email.capitalize,
               keyboardType: TextInputType.emailAddress,
               mgBottom: 20,
               borderRadius: 70,
               validator: InputValidator.emailValidator,
               onTap: () => CoreUtils.scrollTo(widget.buttonKey),
-              onChange: (_) => CoreUtils.scrollTo(widget.buttonKey),
+              onChange: (_) {
+                authCtrl.email = emailCtrl.text;
+                CoreUtils.scrollTo(widget.buttonKey);
+              },
               onTapOutside: () {},
             ),
             CustomInput(
-              controller: widget.passwordController,
+              controller: passwordCtrl,
               hintText: translation().password.capitalize,
               obscureText: obscureText,
               keyboardType: TextInputType.visiblePassword,
@@ -53,7 +57,10 @@ class _SignInFormState extends State<SignInForm> {
               borderRadius: 70,
               validator: InputValidator.passValidator,
               onTap: () => CoreUtils.scrollTo(widget.buttonKey),
-              onChange: (_) => CoreUtils.scrollTo(widget.buttonKey),
+              onChange: (_) {
+                authCtrl.password = passwordCtrl.text;
+                CoreUtils.scrollTo(widget.buttonKey);
+              },
               sufixIcon: IconButton(
                 onPressed: () => setState(() => obscureText = !obscureText),
                 icon: Icon(

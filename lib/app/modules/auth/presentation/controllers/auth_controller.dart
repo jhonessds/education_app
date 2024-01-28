@@ -1,5 +1,6 @@
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
+import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/errors/auth_failure.dart';
 import 'package:demo/core/errors/failure.dart';
@@ -14,10 +15,15 @@ class AuthController {
 
   final SignInWithEmail _signInWithEmail;
 
+  String email = '';
+  String password = '';
+  AuthMethodType authType = AuthMethodType.email;
+
   Failure failure = const AuthFailure(statusCode: StatusCode.unknown);
   bool isRegistred = true;
+  String errorMessage = '';
 
-  Future<bool> signInWithEmail(String email, String password) async {
+  Future<bool> signInWithEmail() async {
     final result = await _signInWithEmail(
       SignInParams(
         email: email,
@@ -28,12 +34,14 @@ class AuthController {
     return result.fold(
       (f) {
         failure = f;
-        if (f is FirebaseAuthFailure) {
-          failure.message = translation().problemWithRequest;
-        } else if (f is UserNotFound) {
+        if (f.statusCode == StatusCode.firebaseAuthFailure) {
+          isRegistred = true;
+          errorMessage = translation().problemWithRequest;
+        } else if (f.statusCode == StatusCode.userNotFound) {
           isRegistred = false;
         } else {
-          failure.message = f.statusCode.translated;
+          isRegistred = true;
+          errorMessage = f.statusCode.translated;
         }
         return false;
       },

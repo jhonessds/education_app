@@ -16,6 +16,7 @@
     "edit": "Edit",
     "delete": "Delete",
     "problemWithRequest": "We had a problem with your request, please try again!",
+    "requiredField": "required field",
 
     "commentAuthModule":"*********** COMMENT_AUTH_MODULE ***********",
     "provideAPhoneNumber": "Provide a phone number",
@@ -36,6 +37,8 @@
     "signInToYourAccount": "Sign in to your account",
     "signIn": "Sign In",
     "confirmPassword": "Confirm Password",
+    "userNotRegistered": "User not registered!\nDo you want to register?",
+    "privacyPolicy": "Privacy Policy",
     
     "commentStatusCode":"*********** COMMENT_STATUS_CODE ***********",
     "unknown": "Unknown",

@@ -16,16 +16,8 @@ class SignInBody extends StatefulWidget {
 }
 
 class _SignInBodyState extends State<SignInBody> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final buttonKey = GlobalKey();
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +30,7 @@ class _SignInBodyState extends State<SignInBody> {
               child: SvgPicture.asset(
                 'assets/svg/dev-jhones.svg',
                 colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.onBackground,
+                  context.theme.colorScheme.onBackground,
                   BlendMode.srcIn,
                 ),
                 height: context.height * 0.23,
@@ -55,8 +47,6 @@ class _SignInBodyState extends State<SignInBody> {
               maxlines: 3,
             ),
             SignInForm(
-              emailController: emailController,
-              passwordController: passwordController,
               formKey: formKey,
               buttonKey: buttonKey,
             ),
@@ -75,15 +65,13 @@ class _SignInBodyState extends State<SignInBody> {
             SignInButton(
               formKey: formKey,
               buttonKey: buttonKey,
-              email: emailController.text,
-              password: passwordController.text,
             ),
             SimpleText(
               mgTop: 10,
               mgBottom: context.height * 0.01,
               text: '- ${translation().or} -',
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).disabledColor,
+              color: context.theme.disabledColor,
             ),
             const LoginRow(),
             Container(

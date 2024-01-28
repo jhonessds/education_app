@@ -16,7 +16,8 @@
     "edit": "Editar",
     "delete": "Borrar",
     "problemWithRequest": "¡Tuvimos un problema con tu solicitud, por favor inténtalo de nuevo!",
-    
+    "requiredField": "campo tequerido",
+
     "commentAuthModule":"*********** COMMENT_AUTH_MODULE ***********",
     "provideAPhoneNumber": "Proporcionar un número de teléfono",
     "provideAValidPhoneNumber": "Proporcione un número válido",
@@ -36,6 +37,8 @@
     "signInToYourAccount": "Iniciar sesión en su cuenta",
     "signIn": "Iniciar sesión",
     "confirmPassword": "Confirm Password",
+    "userNotRegistered": "¡Usuario no registrado!\n¿Quieres registrarte?",
+    "privacyPolicy": "Política de Privacidad",
 
     "commentStatusCode":"*********** COMMENT_STATUS_CODE ***********",
     "unknown": "Erro desconhecido",

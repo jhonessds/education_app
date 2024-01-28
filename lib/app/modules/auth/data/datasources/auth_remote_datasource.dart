@@ -94,13 +94,21 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         password: password,
       );
 
-      if (result.user == null) throw const FirebaseAuthFailure();
+      if (result.user == null) {
+        throw const FirebaseFailure(
+          statusCode: StatusCode.firebaseAuthFailure,
+        );
+      }
 
       final userData = await userCollection.getById(result.user!.uid);
 
-      if (userData != null) throw const UserNotFound();
+      if (userData == null) {
+        throw const FirebaseFailure(
+          statusCode: StatusCode.userNotFound,
+        );
+      }
 
-      return userData!;
+      return userData;
     } on FirebaseFailure {
       rethrow;
     } on FirebaseAuthException catch (e) {
@@ -130,13 +138,28 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
       final firebaseUser =
           (await firebaseAuth.signInWithCredential(credential)).user;
-      if (firebaseUser == null) throw const FirebaseAuthFailure();
+      if (firebaseUser == null) {
+        throw const FirebaseFailure(
+          statusCode: StatusCode.firebaseAuthFailure,
+        );
+      }
 
       final user = await userCollection.getById(firebaseUser.uid);
 
-      if (user != null) throw const UserNotFound();
+      if (user == null) {
+        throw const FirebaseFailure(
+          statusCode: StatusCode.userNotFound,
+        );
+      }
 
-      return user!;
+      return user;
+    } on FirebaseFailure {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
     } catch (e) {
       throw FirebaseFailure(
         message: e.toString(),
