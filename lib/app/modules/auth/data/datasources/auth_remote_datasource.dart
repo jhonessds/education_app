@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/core/common/enums/user_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/errors/auth_failure.dart';
 import 'package:demo/core/errors/firebase_failure.dart';
@@ -18,6 +19,10 @@ abstract class AuthRemoteDataSource {
     required String password,
   });
   Future<UserModel> signInWithGoogle();
+  Future<UserModel> signInWithGithub();
+  Future<UserModel> signInWithFacebook();
+  Future<UserModel> signInWithApple();
+  Future<UserModel> signInAnonymously();
 }
 
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
@@ -55,7 +60,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
       final firebaseUser = firebaseAuth.currentUser;
       if (firebaseUser == null) throw const UserNotAuthenticated();
-      final user = await userCollection.getById(firebaseUser.uid);
+      final user = await userCollection.getByFirebaseId(firebaseUser.uid);
 
       return user;
     } catch (e) {
@@ -100,15 +105,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         );
       }
 
-      final userData = await userCollection.getById(result.user!.uid);
-
-      if (userData == null) {
-        throw const FirebaseFailure(
-          statusCode: StatusCode.userNotFound,
-        );
-      }
-
-      return userData;
+      return await _getUser(result.user);
     } on FirebaseFailure {
       rethrow;
     } on FirebaseAuthException catch (e) {
@@ -136,23 +133,10 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         idToken: googleAuth.idToken,
       );
 
-      final firebaseUser =
+      final fireUser =
           (await firebaseAuth.signInWithCredential(credential)).user;
-      if (firebaseUser == null) {
-        throw const FirebaseFailure(
-          statusCode: StatusCode.firebaseAuthFailure,
-        );
-      }
 
-      final user = await userCollection.getById(firebaseUser.uid);
-
-      if (user == null) {
-        throw const FirebaseFailure(
-          statusCode: StatusCode.userNotFound,
-        );
-      }
-
-      return user;
+      return await _getUser(fireUser);
     } on FirebaseFailure {
       rethrow;
     } on FirebaseAuthException catch (e) {
@@ -165,6 +149,126 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         message: e.toString(),
         statusCode: StatusCode.problemWithRequest,
       );
+    }
+  }
+
+  @override
+  Future<UserModel> signInWithGithub() async {
+    try {
+      // referencia: https://www.youtube.com/watch?v=xvma6IFL21s
+      final provider = GithubAuthProvider();
+      final fireUser = (await firebaseAuth.signInWithProvider(provider)).user;
+      return await _getUser(fireUser);
+    } on FirebaseFailure {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw FirebaseFailure(
+        message: e.toString(),
+        statusCode: StatusCode.problemWithRequest,
+      );
+    }
+  }
+
+  @override
+  Future<UserModel> signInWithFacebook() async {
+    try {
+      // referencia: https://www.youtube.com/watch?v=yjeocwN-Cqo&list=PLKKf8l1ne4_i3GK9zPYfCCXTdqRnGeSKN&index=6
+      final provider = FacebookAuthProvider();
+      final fireUser = (await firebaseAuth.signInWithProvider(provider)).user;
+      return await _getUser(fireUser);
+    } on FirebaseFailure {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw FirebaseFailure(
+        message: e.toString(),
+        statusCode: StatusCode.problemWithRequest,
+      );
+    }
+  }
+
+  @override
+  Future<UserModel> signInWithApple() async {
+    try {
+      final provider = AppleAuthProvider();
+      final fireUser = (await firebaseAuth.signInWithProvider(provider)).user;
+      return await _getUser(fireUser);
+    } on FirebaseFailure {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw FirebaseFailure(
+        message: e.toString(),
+        statusCode: StatusCode.problemWithRequest,
+      );
+    }
+  }
+
+  @override
+  Future<UserModel> signInAnonymously() async {
+    try {
+      await firebaseAuth.signInAnonymously();
+
+      final firebaseUser = firebaseAuth.currentUser;
+      if (firebaseUser == null) {
+        throw const FirebaseFailure(
+          statusCode: StatusCode.firebaseAuthFailure,
+        );
+      }
+
+      return UserModel(
+        id: '',
+        name: UserType.anonymous.translated,
+        firebaseIds: List.filled(1, firebaseUser.uid),
+        userType: UserType.anonymous,
+      );
+    } on FirebaseFailure {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw FirebaseFailure(
+        message: e.toString(),
+        statusCode: StatusCode.problemWithRequest,
+      );
+    }
+  }
+
+  Future<UserModel> _getUser(User? fireUser) async {
+    try {
+      if (fireUser == null) {
+        throw const FirebaseFailure(
+          statusCode: StatusCode.firebaseAuthFailure,
+        );
+      }
+
+      final user = await userCollection.getByFirebaseId(fireUser.uid);
+
+      if (user == null) {
+        throw const FirebaseFailure(
+          statusCode: StatusCode.userNotFound,
+        );
+      }
+
+      return user;
+    } on FirebaseFailure {
+      rethrow;
     }
   }
 }

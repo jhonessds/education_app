@@ -32,7 +32,9 @@ class RegisterButton extends StatelessWidget {
           onPressed: () async {
             if (tabController.index == 1) {
               if (formKey.currentState!.validate()) {
-                await loadingWidget();
+                Navigator.of(context).pop(context);
+                loadingWidget();
+
                 registerCtrl
                   ..password = authCtrl.password
                   ..email = authCtrl.email

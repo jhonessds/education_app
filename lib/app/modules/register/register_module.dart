@@ -22,6 +22,7 @@ class RegisterModule extends Module {
           firebaseMessaging: FirebaseMessaging.instance,
         ),
       )
+      ..addLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance)
       ..addLazySingleton<RegisterRepository>(RegisterRepositoryImpl.new)
       ..addLazySingleton<RegisterUser>(RegisterUser.new)
       ..addLazySingleton<RegisterUserByEmail>(RegisterUserByEmail.new)

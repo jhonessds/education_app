@@ -7,7 +7,6 @@ import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/enums/user_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/errors/failure.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart' as f_auth;
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:uuid/uuid.dart';
@@ -58,7 +57,7 @@ class RegisterController {
   Future<bool> _processResult(Either<Failure, User> result) async {
     return result.fold(
       (l) {
-        errorMessage = l.message ?? translation().problemWithRequest;
+        errorMessage = l.statusCode.translated;
         return false;
       },
       (user) async {

@@ -1,10 +1,7 @@
 import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
-import 'package:demo/app/modules/register/presenter/components/register_pop.dart';
-import 'package:demo/core/abstraction/logger.dart';
+import 'package:demo/app/modules/auth/presentation/validations/validte_auth_response.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
-import 'package:demo/core/utils/core_utils.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -45,21 +42,7 @@ class _SignInButtonState extends State<SignInButton> {
           if (widget.formKey.currentState!.validate()) {
             final result = await controller.signInWithEmail();
             btnController.stop();
-            logger(FirebaseAuth.instance.currentUser);
-            if (result) {
-              CoreUtils.showSnackBar('Sucesso!');
-            } else {
-              if (controller.isRegistred) {
-                CoreUtils.showSnackBar(controller.errorMessage, isError: true);
-              } else {
-                // ignore: use_build_context_synchronously
-                await showDialog<void>(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (_) => const RegisterDialog(),
-                );
-              }
-            }
+            validateAuthResponse(success: result);
           } else {
             btnController.stop();
           }

@@ -1,7 +1,10 @@
 enum AuthMethodType {
-  unknown('UNKNOWN', 0),
+  anonymous('ANONYMOUS', 0),
   email('EMAIL', 1),
-  google('GOOGLE', 2);
+  github('GITHUB', 2),
+  facebook('FACEBOOK', 3),
+  apple('APPLE', 4),
+  google('GOOGLE', 5);
 
   const AuthMethodType(this.name, this.value);
 
@@ -13,10 +16,16 @@ enum AuthMethodType {
     switch (value) {
       case 'GOOGLE':
         return AuthMethodType.google;
+      case 'GITHUB':
+        return AuthMethodType.github;
+      case 'FACEBOOK':
+        return AuthMethodType.facebook;
+      case 'APPLE':
+        return AuthMethodType.apple;
       case 'EMAIL':
         return AuthMethodType.email;
       default:
-        return AuthMethodType.unknown;
+        return AuthMethodType.anonymous;
     }
   }
 

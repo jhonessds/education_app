@@ -43,7 +43,7 @@ class _SignInFormState extends State<SignInForm> {
               validator: InputValidator.emailValidator,
               onTap: () => CoreUtils.scrollTo(widget.buttonKey),
               onChange: (_) {
-                authCtrl.email = emailCtrl.text;
+                authCtrl.email = emailCtrl.text.trim();
                 CoreUtils.scrollTo(widget.buttonKey);
               },
               onTapOutside: () {},

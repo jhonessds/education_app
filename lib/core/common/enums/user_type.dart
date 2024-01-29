@@ -27,7 +27,7 @@ enum UserType {
   @override
   String toString() => name;
 
-  String get translatedValue {
+  String get translated {
     switch (this) {
       case UserType.unknown:
         return 'unknown';

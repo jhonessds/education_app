@@ -12,11 +12,6 @@ class UserHelper {
   //   return user;
   // }
 
-  // static int scopeId() {
-  //   final user = Modular.get<SessionController>().currentUser;
-  //   return user.scope?.scopeId ?? 0;
-  // }
-
   static Future<bool> setUser(UserModel user) async {
     await removeUser();
     final prefs = await SharedPreferences.getInstance();

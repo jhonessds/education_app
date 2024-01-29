@@ -70,12 +70,22 @@ class RegisterDatasourceImpl implements RegisterDatasource {
     required String password,
   }) async {
     try {
-      final result = await firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      f_auth.User? firebaseUser;
 
-      final firebaseUser = result.user;
+      try {
+        final result = await firebaseAuth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        firebaseUser = result.user;
+      } catch (e) {
+        final result = await firebaseAuth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        firebaseUser = result.user;
+      }
+
       if (firebaseUser == null) {
         throw const FirebaseFailure(
           statusCode: StatusCode.firebaseAuthFailure,

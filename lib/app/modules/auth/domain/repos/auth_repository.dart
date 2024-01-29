@@ -12,4 +12,8 @@ abstract class AuthRepository {
     required String password,
   });
   ResultFuture<User> signInWithGoogle();
+  ResultFuture<User> signInAnonymously();
+  ResultFuture<User> signInWithGithub();
+  ResultFuture<User> signInWithFacebook();
+  ResultFuture<User> signInWithApple();
 }

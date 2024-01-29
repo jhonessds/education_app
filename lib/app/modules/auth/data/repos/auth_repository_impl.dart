@@ -65,4 +65,44 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(e);
     }
   }
+
+  @override
+  ResultFuture<User> signInAnonymously() async {
+    try {
+      final result = await _datasource.signInAnonymously();
+      return Right(result);
+    } on FirebaseFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<User> signInWithGithub() async {
+    try {
+      final result = await _datasource.signInWithGithub();
+      return Right(result);
+    } on FirebaseFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<User> signInWithApple() async {
+    try {
+      final result = await _datasource.signInWithApple();
+      return Right(result);
+    } on FirebaseFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<User> signInWithFacebook() async {
+    try {
+      final result = await _datasource.signInWithFacebook();
+      return Right(result);
+    } on FirebaseFailure catch (e) {
+      return Left(e);
+    }
+  }
 }

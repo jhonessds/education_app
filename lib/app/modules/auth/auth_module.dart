@@ -4,7 +4,11 @@ import 'package:demo/app/modules/auth/data/repos/auth_repository_impl.dart';
 import 'package:demo/app/modules/auth/domain/repos/auth_repository.dart';
 import 'package:demo/app/modules/auth/domain/usecases/get_session_user.dart';
 import 'package:demo/app/modules/auth/domain/usecases/log_out.dart';
+import 'package:demo/app/modules/auth/domain/usecases/sign_in_anonymously.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_email.dart';
+import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_facebook.dart';
+import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_github.dart';
+import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_google.dart';
 import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
 import 'package:demo/app/modules/auth/presentation/views/sign_in_view.dart';
@@ -26,6 +30,10 @@ class AuthModule extends Module {
       ..addLazySingleton<AuthRepository>(AuthRepositoryImpl.new)
       // Use Cases
       ..addLazySingleton<SignInWithEmail>(SignInWithEmail.new)
+      ..addLazySingleton<SignInWithGoogle>(SignInWithGoogle.new)
+      ..addLazySingleton<SignInWithGithub>(SignInWithGithub.new)
+      ..addLazySingleton<SignInWithFacebook>(SignInWithFacebook.new)
+      ..addLazySingleton<SignInAnonymously>(SignInAnonymously.new)
       ..addLazySingleton<LogOut>(LogOut.new)
       ..addLazySingleton<GetSessionUser>(GetSessionUser.new)
       // Controllers

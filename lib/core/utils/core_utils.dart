@@ -39,10 +39,12 @@ class CoreUtils {
             children: [
               if (icon != null) icon,
               if (icon != null) const SizedBox(width: 5),
-              Text(
-                message,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  message,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

@@ -65,7 +65,7 @@ class RegisterPopContent extends StatelessWidget {
                     validator: InputValidator.emptyCheck(
                       translation().requiredField,
                     ),
-                    onChange: (value) => registerCtrl.name = value,
+                    onChange: (value) => registerCtrl.name = value.trim(),
                   ),
                 ),
                 const PrivacyPolicyButton(),

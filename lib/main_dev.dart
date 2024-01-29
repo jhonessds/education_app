@@ -20,7 +20,7 @@ void main() {
     await Firebase.initializeApp();
 
     FlavorConfig(
-      flavor: Flavor.prod,
+      flavor: Flavor.dev,
       env: EnvironmentModel.fromJson(development),
     );
 
