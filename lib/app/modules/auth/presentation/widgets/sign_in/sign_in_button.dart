@@ -1,5 +1,5 @@
 import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
-import 'package:demo/app/modules/auth/presentation/validations/validte_auth_response.dart';
+import 'package:demo/app/modules/auth/presentation/validations/validate_auth_response.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';

@@ -1,3 +1,4 @@
+import 'package:demo/app/modules/auth/domain/usecases/forgot_password.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_anonymously.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_facebook.dart';
@@ -18,13 +19,15 @@ class AuthController {
   AuthController({
     required SignInWithEmail signInWithEmail,
     required SignInWithGoogle signInWithGoogle,
-    required SignInAnonymously signInAnonymously,
     required SignInWithGithub signInWithGithub,
     required SignInWithFacebook signInWithFacebook,
+    required SignInAnonymously signInAnonymously,
+    required ForgotPassword forgotPassword,
   })  : _signInWithEmail = signInWithEmail,
         _signInWithGoogle = signInWithGoogle,
         _signInWithGithub = signInWithGithub,
         _signInWithFacebook = signInWithFacebook,
+        _forgotPassword = forgotPassword,
         _signInAnonymously = signInAnonymously;
 
   final SignInWithEmail _signInWithEmail;
@@ -32,6 +35,7 @@ class AuthController {
   final SignInAnonymously _signInAnonymously;
   final SignInWithGithub _signInWithGithub;
   final SignInWithFacebook _signInWithFacebook;
+  final ForgotPassword _forgotPassword;
 
   String email = '';
   String password = '';
@@ -56,11 +60,6 @@ class AuthController {
     return processResult(result);
   }
 
-  Future<bool> signInAnonymously() async {
-    final result = await _signInAnonymously();
-    return processResult(result);
-  }
-
   Future<bool> signInWithEmail() async {
     final result = await _signInWithEmail(
       SignInParams(
@@ -69,6 +68,27 @@ class AuthController {
       ),
     );
     return processResult(result);
+  }
+
+  Future<bool> signInAnonymously() async {
+    final result = await _signInAnonymously();
+    return processResult(result);
+  }
+
+  Future<bool> forgotPassword({
+    required String email,
+  }) async {
+    final result = await _forgotPassword(email);
+
+    return result.fold(
+      (f) {
+        errorMessage = f.statusCode.translated;
+        return false;
+      },
+      (_) {
+        return true;
+      },
+    );
   }
 
   Future<bool> processResult(Either<Failure, User> result) async {

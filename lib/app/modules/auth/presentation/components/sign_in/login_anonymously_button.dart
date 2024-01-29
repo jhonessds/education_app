@@ -1,6 +1,6 @@
 import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
-import 'package:demo/app/modules/auth/presentation/validations/validte_auth_response.dart';
+import 'package:demo/app/modules/auth/presentation/validations/validate_auth_response.dart';
 import 'package:demo/app/modules/auth/presentation/widgets/login_option_icon_button.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/widgets/custom_alert.dart';

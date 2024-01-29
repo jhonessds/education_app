@@ -24,6 +24,25 @@ class CoreUtils {
     );
   }
 
+  static PageRouteBuilder<void> push(Widget child) {
+    return PageRouteBuilder<void>(
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return FadeTransition(
+          opacity: animation,
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaler: TextScaler.noScaling,
+            ),
+            child: child,
+          ),
+        );
+      },
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return child;
+      },
+    );
+  }
+
   static void showSnackBar(
     String message, {
     bool isError = false,

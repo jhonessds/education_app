@@ -1,10 +1,9 @@
-import 'package:demo/core/common/widgets/custom_alert.dart';
-import 'package:demo/core/common/widgets/simple_text.dart';
+import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class ForgotPasswordButton extends StatefulWidget {
@@ -37,10 +36,21 @@ class _ForgotPasswordButtonState extends State<ForgotPasswordButton> {
         controller: btnCtrl,
         onPressed: () async {
           if (widget.formKeyEmail.currentState!.validate()) {
-            await FirebaseAuth.instance.currentUser?.reload();
-            if (widget.formKeyEmail.currentState!.validate()) {
+            final authCtrl = Modular.get<AuthController>();
+            final result = await authCtrl.forgotPassword(
+              email: widget.emailCtrl.text,
+            );
+
+            btnCtrl.stop();
+
+            if (result) {
+              CoreUtils.popAnimated(
+                'send_email',
+                text: translation().passwordResetLink,
+                callback: () => Modular.to.pop(),
+              );
             } else {
-              btnCtrl.stop();
+              CoreUtils.showSnackBar(authCtrl.errorMessage, isError: true);
             }
           } else {
             btnCtrl.stop();
@@ -55,32 +65,6 @@ class _ForgotPasswordButtonState extends State<ForgotPasswordButton> {
           ),
         ),
       ),
-    );
-  }
-
-  void linkPop(BuildContext context) {
-    customAlert(
-      showOkBtn: true,
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Lottie.asset(
-            'assets/lottie/send_email.json',
-            repeat: false,
-          ),
-          SimpleText(
-            mgTop: 20,
-            text: translation().passwordResetLink,
-            maxlines: 3,
-            textAlign: TextAlign.center,
-            fontSize: 16,
-          ),
-        ],
-      ),
-      callback: () {
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
-      },
     );
   }
 }

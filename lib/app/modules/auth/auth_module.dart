@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/app/modules/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:demo/app/modules/auth/data/repos/auth_repository_impl.dart';
 import 'package:demo/app/modules/auth/domain/repos/auth_repository.dart';
+import 'package:demo/app/modules/auth/domain/usecases/forgot_password.dart';
 import 'package:demo/app/modules/auth/domain/usecases/get_session_user.dart';
 import 'package:demo/app/modules/auth/domain/usecases/log_out.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_anonymously.dart';
@@ -34,6 +35,7 @@ class AuthModule extends Module {
       ..addLazySingleton<SignInWithGithub>(SignInWithGithub.new)
       ..addLazySingleton<SignInWithFacebook>(SignInWithFacebook.new)
       ..addLazySingleton<SignInAnonymously>(SignInAnonymously.new)
+      ..addLazySingleton<ForgotPassword>(ForgotPassword.new)
       ..addLazySingleton<LogOut>(LogOut.new)
       ..addLazySingleton<GetSessionUser>(GetSessionUser.new)
       // Controllers
