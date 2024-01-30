@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/core/common/widgets/settings/theme_selector.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
@@ -6,21 +7,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+class SplashView extends StatefulWidget {
+  const SplashView({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashViewState extends State<SplashView> {
+  final sessionCtrl = Modular.get<SessionController>();
+
   @override
   void initState() {
     super.initState();
-
-    // ignore: inference_failure_on_instance_creation
-    Future.delayed(const Duration(seconds: 1)).then((value) {
-      Modular.to.pushReplacementNamed('/auth/');
+    sessionCtrl.getSessionUser().then((value) {
+      if (value) {
+        Modular.to.pushReplacementNamed('/home/');
+      } else {
+        Modular.to.pushReplacementNamed('/auth/');
+      }
     });
   }
 

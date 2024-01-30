@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
+import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/app/modules/register/presenter/components/register_button.dart';
 import 'package:demo/app/modules/register/presenter/components/register_pop_content.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';

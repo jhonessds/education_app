@@ -1,4 +1,4 @@
-import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
+import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/app/modules/register/domain/usecases/register_user.dart';
 import 'package:demo/app/modules/register/domain/usecases/register_user_by_email.dart';
 import 'package:demo/core/abstraction/either.dart';

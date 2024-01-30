@@ -1,4 +1,5 @@
 import 'package:demo/app/modules/auth/auth_module.dart';
+import 'package:demo/app/modules/home/home_module.dart';
 import 'package:demo/app/modules/register/register_module.dart';
 import 'package:demo/app/modules/splash/splash_module.dart';
 import 'package:demo/core/common/models/environment_model.dart';
@@ -19,13 +20,18 @@ class AppModule extends Module {
   void routes(RouteManager r) {
     r
       ..module(
+        '/splash',
+        module: SplashModule(),
+        customTransition: CoreUtils.customTransition(),
+      )
+      ..module(
         '/auth',
         module: AuthModule(),
         customTransition: CoreUtils.customTransition(),
       )
       ..module(
-        '/splash',
-        module: SplashModule(),
+        '/home',
+        module: HomeModule(),
         customTransition: CoreUtils.customTransition(),
       );
   }

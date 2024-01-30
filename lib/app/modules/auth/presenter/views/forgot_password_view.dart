@@ -1,6 +1,6 @@
-import 'package:demo/app/modules/auth/presentation/widgets/sign_in/forgot_password_button.dart';
-import 'package:demo/app/modules/auth/presentation/widgets/top_animation.dart';
-import 'package:demo/app/modules/auth/presentation/widgets/top_title.dart';
+import 'package:demo/app/modules/auth/presenter/widgets/sign_in/forgot_password_button.dart';
+import 'package:demo/app/modules/auth/presenter/widgets/top_animation.dart';
+import 'package:demo/app/modules/auth/presenter/widgets/top_title.dart';
 import 'package:demo/core/common/widgets/custom_input.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';

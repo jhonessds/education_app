@@ -1,9 +1,9 @@
-import 'package:demo/app/modules/auth/presentation/components/social_sign_in_up.dart';
-import 'package:demo/app/modules/auth/presentation/components/sign_in/sign_in_form.dart';
-import 'package:demo/app/modules/auth/presentation/views/forgot_password_view.dart';
-import 'package:demo/app/modules/auth/presentation/views/sign_up_view.dart';
-import 'package:demo/app/modules/auth/presentation/widgets/sign_in/sign_in_button.dart';
-import 'package:demo/app/modules/auth/presentation/widgets/top_title.dart';
+import 'package:demo/app/modules/auth/presenter/components/social_sign_in_up.dart';
+import 'package:demo/app/modules/auth/presenter/components/sign_in/sign_in_form.dart';
+import 'package:demo/app/modules/auth/presenter/views/forgot_password_view.dart';
+import 'package:demo/app/modules/auth/presenter/views/sign_up_view.dart';
+import 'package:demo/app/modules/auth/presenter/widgets/sign_in/sign_in_button.dart';
+import 'package:demo/app/modules/auth/presenter/widgets/top_title.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';

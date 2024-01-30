@@ -1,6 +1,6 @@
-import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
-import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
-import 'package:demo/app/modules/auth/presentation/validations/validate_auth_response.dart';
+import 'package:demo/app/modules/auth/presenter/controllers/auth_controller.dart';
+import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
+import 'package:demo/app/modules/auth/presenter/validations/validate_auth_response.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';

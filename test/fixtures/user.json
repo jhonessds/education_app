@@ -1,1 +1,1 @@
-{"id":"id","name":"name","userType":"UNKNOWN","firebaseIds":[],"email":null,"profilePicture":null,"bio":null,"fcmToken":null}
+{"id":"id","name":"name","email":"email","userType":"UNKNOWN","authMethod":"ANONYMOUS","firstAccess":true, "profilePicture":null,"bio":null,"fcmToken":null}

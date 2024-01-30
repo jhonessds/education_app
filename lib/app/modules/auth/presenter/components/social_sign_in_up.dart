@@ -1,9 +1,9 @@
-import 'package:demo/app/modules/auth/presentation/components/sign_in/login_anonymously_button.dart';
-import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
-import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
-import 'package:demo/app/modules/auth/presentation/validations/validate_auth_response.dart';
-import 'package:demo/app/modules/auth/presentation/validations/validate_social_login.dart';
-import 'package:demo/app/modules/auth/presentation/widgets/login_option_icon_button.dart';
+import 'package:demo/app/modules/auth/presenter/components/sign_in/login_anonymously_button.dart';
+import 'package:demo/app/modules/auth/presenter/controllers/auth_controller.dart';
+import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
+import 'package:demo/app/modules/auth/presenter/validations/validate_auth_response.dart';
+import 'package:demo/app/modules/auth/presenter/validations/validate_social_login.dart';
+import 'package:demo/app/modules/auth/presenter/widgets/login_option_icon_button.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';

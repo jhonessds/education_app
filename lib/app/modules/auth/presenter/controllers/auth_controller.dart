@@ -4,7 +4,7 @@ import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_facebook.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_github.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_google.dart';
-import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
+import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/core/abstraction/either.dart';
 import 'package:demo/core/common/entities/user.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';

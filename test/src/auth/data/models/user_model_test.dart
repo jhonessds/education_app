@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:demo/core/common/entities/user.dart';
+import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/enums/user_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/utils/typedefs.dart';
@@ -12,8 +13,9 @@ void main() {
   const tModel = UserModel(
     id: 'id',
     name: 'name',
+    email: '',
     userType: UserType.unknown,
-    firebaseIds: <String>[],
+    authMethod: AuthMethodType.anonymous,
   );
   final tJson = fixture('user');
   final tMap = json.decode(tJson) as DataMap;

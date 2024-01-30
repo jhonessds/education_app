@@ -1,4 +1,4 @@
-import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
+import 'package:demo/app/modules/auth/presenter/controllers/auth_controller.dart';
 import 'package:demo/app/modules/register/presenter/controllers/register_controller.dart';
 import 'package:demo/core/common/widgets/loading_modal.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
@@ -45,7 +45,7 @@ class RegisterButton extends StatelessWidget {
                 Modular.to.pop();
 
                 if (result) {
-                  CoreUtils.showSnackBar('Sucesso registro');
+                  await Modular.to.pushReplacementNamed('/home/');
                 } else {
                   CoreUtils.showSnackBar(
                     registerCtrl.errorMessage,
