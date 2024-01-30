@@ -1,6 +1,7 @@
 import 'package:demo/app/app_widget.dart';
 import 'package:demo/core/common/widgets/custom_alert.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
+import 'package:demo/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
@@ -69,8 +70,8 @@ class CoreUtils {
             ],
           ),
           backgroundColor: isError
-              ? Theme.of(context).colorScheme.error
-              : Theme.of(context).primaryColor,
+              ? context.theme.colorScheme.error
+              : context.theme.primaryColor,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

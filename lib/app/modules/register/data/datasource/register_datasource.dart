@@ -93,9 +93,7 @@ class RegisterDatasourceImpl implements RegisterDatasource {
       }
       user as UserModel;
 
-      final userToInsert = user.copyWith(
-        firebaseIds: List.filled(1, firebaseUser.uid),
-      );
+      final userToInsert = user.copyWith(id: firebaseUser.uid);
       var userSaved = user;
 
       try {

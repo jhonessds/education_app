@@ -24,26 +24,6 @@ class UserCollection implements ICollection<UserModel> {
     return cachedUser;
   }
 
-  Future<UserModel?> getByFirebaseId(String id) async {
-    final query = await instance
-        .collection('users')
-        .where('firebaseIds', arrayContains: id)
-        .get();
-    if (query.docs.isEmpty) {
-      return null;
-    }
-
-    final snapUser = query.docs.first;
-
-    if (!snapUser.exists) {
-      return null;
-    }
-
-    final user = UserModel.fromMap(snapUser.data());
-    await UserHelper.setUser(user);
-    return user;
-  }
-
   @override
   Future<void> create(UserModel value, {String? id}) async {
     try {

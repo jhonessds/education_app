@@ -5,7 +5,7 @@ import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-void validateAuthResponse({required bool success}) {
+void validateAuthResponse({required bool success, bool isSignInView = true}) {
   final authCtrl = Modular.get<AuthController>();
   final context = NavigationService.instance.currentContext;
   if (success) {
@@ -17,7 +17,7 @@ void validateAuthResponse({required bool success}) {
       showDialog<void>(
         context: context,
         barrierDismissible: false,
-        builder: (_) => const RegisterDialog(),
+        builder: (_) => RegisterDialog(isSignInView: isSignInView),
       );
     }
   }

@@ -1,4 +1,5 @@
 import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
+import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
 import 'package:demo/app/modules/auth/presentation/validations/validate_auth_response.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
@@ -22,7 +23,8 @@ class SignInButton extends StatefulWidget {
 
 class _SignInButtonState extends State<SignInButton> {
   final btnController = RoundedLoadingButtonController();
-  final controller = Modular.get<AuthController>();
+  final authCtrl = Modular.get<AuthController>();
+  final sessionCtrl = Modular.get<SessionController>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,8 @@ class _SignInButtonState extends State<SignInButton> {
         controller: btnController,
         onPressed: () async {
           if (widget.formKey.currentState!.validate()) {
-            final result = await controller.signInWithEmail();
+            await sessionCtrl.logOut();
+            final result = await authCtrl.signInWithEmail();
             btnController.stop();
             validateAuthResponse(success: result);
           } else {

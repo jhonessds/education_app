@@ -1,23 +1,19 @@
+import 'package:demo/app/modules/register/presenter/controllers/register_controller.dart';
+import 'package:demo/core/common/enums/auth_method_type.dart';
+import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class SignUpButton extends StatefulWidget {
   const SignUpButton({
     required this.formKey,
     required this.buttonKey,
-    required this.email,
-    required this.password,
-    required this.fullName,
-    required this.confirmPassword,
     super.key,
   });
 
-  final String fullName;
-  final String email;
-  final String password;
-  final String confirmPassword;
   final GlobalKey<FormState> formKey;
   final GlobalKey<State<StatefulWidget>> buttonKey;
 
@@ -27,31 +23,38 @@ class SignUpButton extends StatefulWidget {
 
 class _SignUpButtonState extends State<SignUpButton> {
   final btnController = RoundedLoadingButtonController();
+  final registerCtrl = Modular.get<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
     return Container(
       key: widget.buttonKey,
       height: 45,
       margin: EdgeInsets.only(
         left: 13,
         right: 13,
-        bottom: screenSize.height * 0.01,
+        bottom: context.height * 0.01,
       ),
       child: RoundedLoadingButton(
         borderRadius: 70,
         color: Theme.of(context).primaryColor,
         controller: btnController,
         onPressed: () async {
-          await FirebaseAuth.instance.currentUser?.reload();
           if (widget.formKey.currentState!.validate()) {
+            registerCtrl.authMethod = AuthMethodType.email;
+            final result = await registerCtrl.registerUser();
+            btnController.stop();
+
+            if (result) {
+              CoreUtils.showSnackBar('Sucesso!');
+            } else {
+              CoreUtils.showSnackBar(registerCtrl.errorMessage, isError: true);
+            }
           } else {
             btnController.stop();
           }
         },
-        width: screenSize.width,
+        width: context.width,
         child: Text(
           translation().signUp,
           style: const TextStyle(

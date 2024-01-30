@@ -1,11 +1,12 @@
 import 'package:demo/app/modules/auth/presentation/components/sign_up/sign_up_form.dart';
-import 'package:demo/app/modules/auth/presentation/components/sign_up/sign_up_row.dart';
+import 'package:demo/app/modules/auth/presentation/components/social_sign_in_up.dart';
 import 'package:demo/app/modules/auth/presentation/widgets/sign_up/sign_up_button.dart';
 import 'package:demo/app/modules/auth/presentation/widgets/top_title.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
 
 class SignUpBody extends StatefulWidget {
@@ -49,10 +50,6 @@ class _SignUpBodyState extends State<SignUpBody> {
               title: 'Cadastre-se para liberar todos os recursos.',
             ),
             SignUpForm(
-              emailCtrl: widget.emailCtrl,
-              confirmPasswordCtrl: confirmaPasswordCtrl,
-              fullNameCtrl: fullNameCtrl,
-              passwordCtrl: widget.passwordCtrl,
               formKey: formKey,
               buttonKey: buttonKey,
             ),
@@ -60,10 +57,6 @@ class _SignUpBodyState extends State<SignUpBody> {
             SignUpButton(
               formKey: formKey,
               buttonKey: buttonKey,
-              email: widget.emailCtrl.text,
-              password: widget.passwordCtrl.text,
-              fullName: fullNameCtrl.text,
-              confirmPassword: confirmaPasswordCtrl.text,
             ),
             SimpleText(
               mgTop: 10,
@@ -72,7 +65,7 @@ class _SignUpBodyState extends State<SignUpBody> {
               fontWeight: FontWeight.bold,
               color: Theme.of(context).disabledColor,
             ),
-            const SignUpRow(),
+            const SocialSignInUp(isSignInView: false),
             Container(
               margin: const EdgeInsets.only(top: 15, bottom: 60),
               height: 45,
@@ -85,11 +78,9 @@ class _SignUpBodyState extends State<SignUpBody> {
                   ),
                   SizedBox(
                     child: TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/sign-in');
-                      },
+                      onPressed: () => Modular.to.pop(),
                       child: SimpleText(
-                        text: translation().signUp,
+                        text: translation().signIn,
                         fontWeight: FontWeight.bold,
                         withTextScale: false,
                       ),

@@ -1,16 +1,15 @@
 import 'dart:ui';
-
-import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
 import 'package:demo/app/modules/register/presenter/components/register_button.dart';
 import 'package:demo/app/modules/register/presenter/components/register_pop_content.dart';
-import 'package:demo/app/modules/register/presenter/controllers/register_controller.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RegisterDialog extends StatefulWidget {
-  const RegisterDialog({super.key});
+  const RegisterDialog({required this.isSignInView, super.key});
+
+  final bool isSignInView;
 
   @override
   State<RegisterDialog> createState() => _RegisterDialogState();
@@ -18,18 +17,15 @@ class RegisterDialog extends StatefulWidget {
 
 class _RegisterDialogState extends State<RegisterDialog>
     with SingleTickerProviderStateMixin {
-  final txtCtrl = TextEditingController();
-  final registerCtrl = Modular.get<RegisterController>();
-  final authCtrl = Modular.get<AuthController>();
   final formKey = GlobalKey<FormState>();
-  ValueNotifier<String> txtButton = ValueNotifier<String>(translation().yes);
+
   late TabController tabController;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(vsync: this, length: 2);
-    tabController.index = 0;
+    tabController.index = widget.isSignInView ? 0 : 1;
   }
 
   @override
@@ -59,8 +55,6 @@ class _RegisterDialogState extends State<RegisterDialog>
           content: RegisterPopContent(
             tabController: tabController,
             formKey: formKey,
-            txtCtrl: txtCtrl,
-            registerCtrl: registerCtrl,
           ),
           actionsAlignment: MainAxisAlignment.center,
           actionsPadding: const EdgeInsets.only(
@@ -84,11 +78,9 @@ class _RegisterDialogState extends State<RegisterDialog>
                   ),
                 ),
                 RegisterButton(
-                  txtButton: txtButton,
                   tabController: tabController,
                   formKey: formKey,
-                  registerCtrl: registerCtrl,
-                  authCtrl: authCtrl,
+                  isSignInView: widget.isSignInView,
                 ),
               ],
             ),

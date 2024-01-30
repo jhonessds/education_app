@@ -39,7 +39,7 @@ class AuthController {
 
   String email = '';
   String password = '';
-  AuthMethodType authType = AuthMethodType.email;
+  AuthMethodType authMethod = AuthMethodType.email;
 
   Failure failure = const AuthFailure(statusCode: StatusCode.unknown);
   bool isRegistred = false;

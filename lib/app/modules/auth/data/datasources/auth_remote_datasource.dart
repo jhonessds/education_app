@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/enums/user_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/errors/auth_failure.dart';
@@ -60,7 +61,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
       final firebaseUser = firebaseAuth.currentUser;
       if (firebaseUser == null) throw const UserNotAuthenticated();
-      final user = await userCollection.getByFirebaseId(firebaseUser.uid);
+      final user = await userCollection.getById(firebaseUser.uid);
 
       return user;
     } catch (e) {
@@ -230,9 +231,10 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       }
 
       return UserModel(
-        id: '',
+        id: firebaseUser.uid,
         name: UserType.anonymous.translated,
-        firebaseIds: List.filled(1, firebaseUser.uid),
+        email: '',
+        authMethod: AuthMethodType.anonymous,
         userType: UserType.anonymous,
       );
     } on FirebaseFailure {
@@ -258,7 +260,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         );
       }
 
-      final user = await userCollection.getByFirebaseId(fireUser.uid);
+      final user = await userCollection.getById(fireUser.uid);
 
       if (user == null) {
         throw const FirebaseFailure(

@@ -1,8 +1,8 @@
 import 'package:demo/app/modules/auth/presentation/components/sign_in/login_anonymously_button.dart';
 import 'package:demo/app/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:demo/app/modules/auth/presentation/controllers/session_controller.dart';
-import 'package:demo/app/modules/auth/presentation/validations/validate_social_login.dart';
 import 'package:demo/app/modules/auth/presentation/validations/validate_auth_response.dart';
+import 'package:demo/app/modules/auth/presentation/validations/validate_social_login.dart';
 import 'package:demo/app/modules/auth/presentation/widgets/login_option_icon_button.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/utils/core_utils.dart';
@@ -10,10 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-class LoginRow extends StatelessWidget {
-  const LoginRow({
+class SocialSignInUp extends StatelessWidget {
+  const SocialSignInUp({
+    this.isSignInView = true,
     super.key,
   });
+
+  final bool isSignInView;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +40,9 @@ class LoginRow extends StatelessWidget {
           callback: () async {
             await validateSocialLogin(() async {
               await sessionCtrl.logOut();
-              authCtrl.authType = AuthMethodType.google;
+              authCtrl.authMethod = AuthMethodType.google;
               final result = await authCtrl.signInWithGoogle();
-              validateAuthResponse(success: result);
+              validateAuthResponse(success: result, isSignInView: isSignInView);
             });
           },
         ),
@@ -48,9 +51,9 @@ class LoginRow extends StatelessWidget {
           callback: () async {
             await validateSocialLogin(() async {
               await sessionCtrl.logOut();
-              authCtrl.authType = AuthMethodType.github;
+              authCtrl.authMethod = AuthMethodType.github;
               final result = await authCtrl.signInWithGithub();
-              validateAuthResponse(success: result);
+              validateAuthResponse(success: result, isSignInView: isSignInView);
             });
           },
         ),
@@ -59,9 +62,9 @@ class LoginRow extends StatelessWidget {
           callback: () async {
             await validateSocialLogin(() async {
               await sessionCtrl.logOut();
-              authCtrl.authType = AuthMethodType.facebook;
+              authCtrl.authMethod = AuthMethodType.facebook;
               final result = await authCtrl.signInWithFacebook();
-              validateAuthResponse(success: result);
+              validateAuthResponse(success: result, isSignInView: isSignInView);
             });
           },
         ),

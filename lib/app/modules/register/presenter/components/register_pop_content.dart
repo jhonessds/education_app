@@ -4,24 +4,23 @@ import 'package:demo/core/common/widgets/custom_input.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
 
 class RegisterPopContent extends StatelessWidget {
   const RegisterPopContent({
     required this.tabController,
     required this.formKey,
-    required this.txtCtrl,
-    required this.registerCtrl,
     super.key,
   });
 
   final TabController tabController;
   final GlobalKey<FormState> formKey;
-  final TextEditingController txtCtrl;
-  final RegisterController registerCtrl;
 
   @override
   Widget build(BuildContext context) {
+    final txtCtrl = TextEditingController();
+    final registerCtrl = Modular.get<RegisterController>();
     return SizedBox(
       height: 280,
       width: 320,

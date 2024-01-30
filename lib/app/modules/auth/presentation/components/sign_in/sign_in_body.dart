@@ -1,6 +1,7 @@
-import 'package:demo/app/modules/auth/presentation/components/sign_in/login_row.dart';
+import 'package:demo/app/modules/auth/presentation/components/social_sign_in_up.dart';
 import 'package:demo/app/modules/auth/presentation/components/sign_in/sign_in_form.dart';
 import 'package:demo/app/modules/auth/presentation/views/forgot_password_view.dart';
+import 'package:demo/app/modules/auth/presentation/views/sign_up_view.dart';
 import 'package:demo/app/modules/auth/presentation/widgets/sign_in/sign_in_button.dart';
 import 'package:demo/app/modules/auth/presentation/widgets/top_title.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
@@ -76,7 +77,7 @@ class _SignInBodyState extends State<SignInBody> {
               fontWeight: FontWeight.bold,
               color: context.theme.disabledColor,
             ),
-            const LoginRow(),
+            const SocialSignInUp(),
             Container(
               margin: const EdgeInsets.only(top: 15, bottom: 60),
               height: 45,
@@ -90,7 +91,7 @@ class _SignInBodyState extends State<SignInBody> {
                   SizedBox(
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/sign-up');
+                        Modular.to.push(CoreUtils.push(const SignUpView()));
                       },
                       child: SimpleText(
                         text: translation().signUp,

@@ -8,22 +8,23 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class RegisterButton extends StatelessWidget {
   const RegisterButton({
-    required this.txtButton,
     required this.tabController,
     required this.formKey,
-    required this.registerCtrl,
-    required this.authCtrl,
+    required this.isSignInView,
     super.key,
   });
 
-  final ValueNotifier<String> txtButton;
   final TabController tabController;
   final GlobalKey<FormState> formKey;
-  final RegisterController registerCtrl;
-  final AuthController authCtrl;
-
+  final bool isSignInView;
   @override
   Widget build(BuildContext context) {
+    final registerCtrl = Modular.get<RegisterController>();
+    final authCtrl = Modular.get<AuthController>();
+    final txtButton = ValueNotifier<String>(
+      isSignInView ? translation().yes : translation().signUp,
+    );
+
     return ValueListenableBuilder<String>(
       valueListenable: txtButton,
       builder: (context, value, child) {
@@ -38,13 +39,13 @@ class RegisterButton extends StatelessWidget {
                 registerCtrl
                   ..password = authCtrl.password
                   ..email = authCtrl.email
-                  ..authType = authCtrl.authType;
+                  ..authMethod = authCtrl.authMethod;
 
                 final result = await registerCtrl.registerLoggedUser();
                 Modular.to.pop();
 
                 if (result) {
-                  CoreUtils.showSnackBar('suecce');
+                  CoreUtils.showSnackBar('Sucesso registro');
                 } else {
                   CoreUtils.showSnackBar(
                     registerCtrl.errorMessage,

@@ -46,7 +46,7 @@ class LoginAnonymouslyButton extends StatelessWidget {
             Modular.to.pop();
             loadingWidget();
             await sessionCtrl.logOut();
-            authCtrl.authType = AuthMethodType.anonymous;
+            authCtrl.authMethod = AuthMethodType.anonymous;
             final result = await authCtrl.signInAnonymously();
             Modular.to.pop();
             validateAuthResponse(success: result);

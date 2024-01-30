@@ -1,3 +1,4 @@
+import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/enums/user_type.dart';
 import 'package:equatable/equatable.dart';
 
@@ -6,21 +7,24 @@ class User extends Equatable {
     required this.id,
     required this.name,
     required this.userType,
-    required this.firebaseIds,
-    this.email,
+    required this.authMethod,
+    required this.email,
+    this.firstAccess = true,
     this.profilePicture,
     this.bio,
     this.fcmToken,
   });
 
   final String id;
+
   final String name;
   final UserType userType;
-  final List<String> firebaseIds;
-  final String? email;
+  final AuthMethodType authMethod;
+  final String email;
   final String? profilePicture;
   final String? bio;
   final String? fcmToken;
+  final bool firstAccess;
 
   @override
   List<Object> get props => [id, name];

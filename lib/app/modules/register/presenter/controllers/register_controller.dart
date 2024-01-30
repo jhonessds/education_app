@@ -9,7 +9,6 @@ import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/errors/failure.dart';
 import 'package:firebase_auth/firebase_auth.dart' as f_auth;
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:uuid/uuid.dart';
 
 class RegisterController {
   RegisterController({
@@ -24,20 +23,32 @@ class RegisterController {
   final RegisterUser _registerUser;
   final RegisterUserByEmail _registerUserByEmail;
 
-  AuthMethodType authType = AuthMethodType.email;
+  AuthMethodType authMethod = AuthMethodType.email;
   String name = '';
   String email = '';
   String password = '';
   String errorMessage = '';
 
+  Future<bool> registerUser() async {
+    final userToInsert = _userFormatedToInsert();
+    final result = await _registerUserByEmail(
+      RegisterParams(
+        user: userToInsert,
+        email: email,
+        password: password,
+      ),
+    );
+    return _processResult(result);
+  }
+
   Future<bool> registerLoggedUser() async {
     Either<Failure, User> result;
 
-    if (authType != AuthMethodType.email) {
+    if (authMethod != AuthMethodType.email) {
       final userToInsert = _userFormatedToInsert(
         profilePictureParam: _firebaseAuth.currentUser!.photoURL,
         emailParam: _firebaseAuth.currentUser!.email,
-        loginParam: List.filled(1, _firebaseAuth.currentUser!.uid),
+        idParam: _firebaseAuth.currentUser!.uid,
       );
       result = await _registerUser(userToInsert);
     } else {
@@ -69,18 +80,18 @@ class RegisterController {
 
   UserModel _userFormatedToInsert({
     String? nameParam,
+    String? idParam,
     String? profilePictureParam,
     String? emailParam,
     UserType? userTypeParam,
-    List<String>? loginParam,
+    AuthMethodType? authMethodParam,
   }) {
-    final uuid = const Uuid().v4();
     return UserModel(
-      id: uuid,
+      id: idParam ?? '',
       name: nameParam ?? name,
       email: emailParam ?? email,
       profilePicture: profilePictureParam,
-      firebaseIds: loginParam ?? List.empty(),
+      authMethod: authMethodParam ?? authMethod,
       userType: userTypeParam ?? UserType.common,
     );
   }
