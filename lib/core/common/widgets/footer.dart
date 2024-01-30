@@ -1,6 +1,5 @@
 import 'package:demo/core/common/widgets/settings/flex_scheme_selector.dart';
 import 'package:demo/core/common/widgets/settings/language_selector.dart';
-import 'package:demo/core/common/widgets/settings/theme_selector.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +55,6 @@ class _FooterState extends State<Footer> {
           LanguageSelector(
             color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
           ),
-          const ThemeSelector(),
           IconButton(
             onPressed: () async => flexSchemeSelector(context),
             icon: const Icon(

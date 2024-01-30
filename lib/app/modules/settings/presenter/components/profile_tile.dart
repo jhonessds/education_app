@@ -1,0 +1,56 @@
+import 'dart:math' as math;
+
+import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
+import 'package:demo/core/common/widgets/profile/profile_picture.dart';
+import 'package:demo/core/extensions/context_extension.dart';
+import 'package:demo/core/utils/helpers/user_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:icons_plus/icons_plus.dart';
+
+class ProfileTile extends StatelessWidget {
+  const ProfileTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const ProfilePicture(
+        mRight: 0,
+        height: 50,
+        width: 50,
+      ),
+      title: Text(
+        'Welcome',
+        style: TextStyle(
+          fontSize: 12,
+          color: context.theme.disabledColor,
+        ),
+      ),
+      subtitle: Text(
+        UserHelper.name(),
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: context.theme.colorScheme.onBackground,
+        ),
+      ),
+      trailing: IconButton(
+        splashRadius: 25,
+        onPressed: () async {
+          await Modular.get<SessionController>().logOut();
+          await Modular.to.pushReplacementNamed('/auth/');
+        },
+        icon: Transform.rotate(
+          angle: 180 * math.pi / 180,
+          child: Icon(
+            Iconsax.logout_outline,
+            color: context.theme.primaryColor,
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,10 +1,8 @@
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
-import 'package:demo/app/modules/home/presenter/components/home_app_bar.dart';
+import 'package:demo/app/modules/home/presenter/components/change_nav_bottom_type.dart';
 import 'package:demo/app/modules/home/presenter/components/custom_bottom_nav.dart';
-import 'package:demo/app/modules/home/presenter/components/nav_option_content.dart';
-import 'package:demo/core/common/widgets/custom_alert.dart';
-import 'package:demo/core/common/widgets/profile/profile_picture.dart';
-import 'package:demo/core/common/widgets/settings/theme_selector.dart';
+import 'package:demo/app/modules/home/presenter/components/home_app_bar.dart';
+import 'package:demo/app/modules/settings/presenter/views/settings_view.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/notifications/push_notification_service.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +31,7 @@ class _HomeViewState extends State<HomeView>
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: const HomeAppBar(),
       body: AnimatedContainer(
         duration: const Duration(seconds: 1),
@@ -46,22 +45,11 @@ class _HomeViewState extends State<HomeView>
                   context.theme.colorScheme.onBackground.withOpacity(0.1),
             ),
             Container(color: Colors.blue),
-            Container(color: Colors.cyan),
+            const SettingsView(),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          customAlert(
-            contentPadding: 10,
-            insetPadding: const EdgeInsets.all(8),
-            content: const NavOptionContent(),
-            callback: () => Modular.to.pop(),
-            showOkBtn: true,
-          );
-        },
-        child: const Icon(Icons.edit),
-      ),
+      floatingActionButton: const ChangeBottomNavType(),
       bottomNavigationBar: CustomBottomNav(tabController: tabController),
     );
   }
