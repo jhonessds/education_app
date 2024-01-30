@@ -1,5 +1,5 @@
-import 'package:demo/app/modules/auth/presenter/components/social_sign_in_up.dart';
 import 'package:demo/app/modules/auth/presenter/components/sign_in/sign_in_form.dart';
+import 'package:demo/app/modules/auth/presenter/components/social_sign_in_up.dart';
 import 'package:demo/app/modules/auth/presenter/views/forgot_password_view.dart';
 import 'package:demo/app/modules/auth/presenter/views/sign_up_view.dart';
 import 'package:demo/app/modules/auth/presenter/widgets/sign_in/sign_in_button.dart';
