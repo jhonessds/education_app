@@ -1,8 +1,8 @@
 import 'package:demo/app/app_widget.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/theme_manager.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class ThemeSelector extends StatefulWidget {
   const ThemeSelector({super.key, this.color});
@@ -30,8 +30,9 @@ class _ThemeSelectorState extends State<ThemeSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
+    return IconButton(
+      splashRadius: 25,
+      onPressed: () async {
         var actualTheme = await getTheme();
         if (actualTheme == ThemeMode.dark) {
           actualTheme = await setTheme(ThemeMode.light);
@@ -43,12 +44,9 @@ class _ThemeSelectorState extends State<ThemeSelector> {
           AppWidget.setTheme(context, actualTheme);
         }
       },
-      child: SizedBox(
-        height: 48,
-        child: Icon(
-          isDark ? CupertinoIcons.sun_min_fill : CupertinoIcons.moon_stars,
-          color: widget.color ?? context.theme.colorScheme.onBackground,
-        ),
+      icon: Icon(
+        isDark ? FontAwesome.sun : FontAwesome.moon,
+        color: widget.color ?? context.theme.colorScheme.onBackground,
       ),
     );
   }

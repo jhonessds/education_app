@@ -1,16 +1,18 @@
+import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/core/common/models/user_model.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserHelper {
-  // static String id() {
-  //   final user = Modular.get<SessionController>().currentUser;
-  //   return user.id;
-  // }
+  static String name() {
+    final user = Modular.get<SessionController>().currentUser;
+    return user.name;
+  }
 
-  // static UserModel user() {
-  //   final user = Modular.get<SessionController>().currentUser;
-  //   return user;
-  // }
+  static String? profilePicture() {
+    final user = Modular.get<SessionController>().currentUser;
+    return user.profilePicture;
+  }
 
   static Future<bool> setUser(UserModel user) async {
     await removeUser();
