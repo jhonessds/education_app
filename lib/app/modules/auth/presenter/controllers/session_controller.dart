@@ -15,6 +15,7 @@ class SessionController {
 
   UserModel? _currentUser;
   UserModel get currentUser => _currentUser!;
+  bool get hasCurrentUser => _currentUser != null;
 
   Future<void> setLoggedUser(UserModel user) async {
     _currentUser = user;
@@ -40,6 +41,8 @@ class SessionController {
 
   Future<void> logOut() async {
     await PushNotificationsManager().resetClass();
+    await UserHelper.removeUser();
+    setUnloggedUser();
     await _logOut();
   }
 }

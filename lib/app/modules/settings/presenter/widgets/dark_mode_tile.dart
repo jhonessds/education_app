@@ -74,7 +74,7 @@ class _DarkModeTileState extends State<DarkModeTile> {
           color: context.theme.disabledColor,
           indent: 10,
           endIndent: 10,
-          height: 10,
+          height: 5,
         ),
       ],
     );

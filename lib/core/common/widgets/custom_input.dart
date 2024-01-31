@@ -206,17 +206,17 @@ class InputValidator {
   }
 
   static String? emailValidator(String? t) {
-    if (t == null || t.isEmpty) return 'Informe um email';
+    if (t == null || t.isEmpty) return translation().provideAEmail;
     if (!RegExp(
       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
-    ).hasMatch(t)) return 'Informe um email válido';
+    ).hasMatch(t)) return translation().invalidEmail;
     return null;
   }
 
   static String? passValidator(String? t) {
-    if (t == null || t.isEmpty) return 'Informe uma senha';
+    if (t == null || t.isEmpty) return translation().enterAPassword;
     if (t.length < 8) {
-      return 'mínimo oito caracteres';
+      return translation().minimumEightCharacters;
     }
     return null;
   }
@@ -226,14 +226,14 @@ class InputValidator {
       return translation().provideAPhoneNumber;
     }
     final temp = t.trim().replaceAll(RegExp('[^a-zA-Z0-9]'), '');
-    if (temp.length < 11) return translation().provideAValidPhoneNumber;
+    if (temp.length < 11) return translation().invalidNumber;
     return null;
   }
 
   static String? phoneValidator(String? t) {
     if (t == null || t.trim().isEmpty) return null;
     final temp = t.trim().replaceAll(RegExp('[^a-zA-Z0-9]'), '');
-    if (temp.length < 10) return 'Número inválido';
+    if (temp.length < 10) return translation().invalidNumber;
     return null;
   }
 }

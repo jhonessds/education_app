@@ -36,7 +36,11 @@ class _NotificationTileState extends State<NotificationTile> {
         return Column(
           children: [
             ListTile(
-              leading: const Icon(Iconsax.notification_status_outline),
+              leading: Icon(
+                fcmTokenState.value
+                    ? Clarity.notification_outline_badged
+                    : Clarity.notification_line,
+              ),
               title: Text(
                 translation().pushNotification,
                 style: const TextStyle(fontWeight: FontWeight.w500),
@@ -65,10 +69,7 @@ class _NotificationTileState extends State<NotificationTile> {
                   );
 
                   if (!result) {
-                    CoreUtils.showSnackBar(
-                      profileCtrl.errorMessage,
-                      isError: true,
-                    );
+                    CoreUtils.bottomSnackBar(profileCtrl.errorMessage);
                   }
                 },
               ),
@@ -77,7 +78,7 @@ class _NotificationTileState extends State<NotificationTile> {
               color: context.theme.disabledColor,
               indent: 10,
               endIndent: 10,
-              height: 10,
+              height: 5,
             ),
           ],
         );

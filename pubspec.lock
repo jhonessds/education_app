@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.13.0"
+  animated_snack_bar:
+    dependency: "direct main"
+    description:
+      name: animated_snack_bar
+      sha256: "9ec2d79507546f65b82038c9ac5ddfc3c2fccf285def43070606b0ec0fc56d34"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
   another_flushbar:
     dependency: "direct main"
     description:
@@ -789,6 +797,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  icon_animated:
+    dependency: "direct main"
+    description:
+      name: icon_animated
+      sha256: "0847039648c98e53ac9be16cac170c025461caeb4d890cf4f88c78578ef9e7aa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
   iconly:
     dependency: "direct main"
     description:

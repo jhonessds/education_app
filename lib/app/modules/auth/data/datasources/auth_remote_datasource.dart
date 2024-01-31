@@ -99,18 +99,27 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     required String password,
   }) async {
     try {
-      final result = await firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      User? firebaseUser;
 
-      if (result.user == null) {
+      try {
+        final result = await firebaseAuth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        firebaseUser = result.user;
+      } catch (_) {
+        throw const FirebaseFailure(
+          statusCode: StatusCode.userNotFound,
+        );
+      }
+
+      if (firebaseUser == null) {
         throw const FirebaseFailure(
           statusCode: StatusCode.firebaseAuthFailure,
         );
       }
 
-      return await _getUser(result.user);
+      return await _getUser(firebaseUser);
     } on FirebaseFailure {
       rethrow;
     } on FirebaseAuthException catch (e) {

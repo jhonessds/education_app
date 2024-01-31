@@ -50,7 +50,7 @@ class _ForgotPasswordButtonState extends State<ForgotPasswordButton> {
                 callback: () => Modular.to.pop(),
               );
             } else {
-              CoreUtils.showSnackBar(authCtrl.errorMessage, isError: true);
+              CoreUtils.bottomSnackBar(authCtrl.errorMessage);
             }
           } else {
             btnCtrl.stop();

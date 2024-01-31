@@ -1,10 +1,8 @@
 import 'package:asp/asp.dart';
-import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
+import 'package:demo/app/modules/home/presenter/components/profile_home_tile.dart';
 import 'package:demo/app/modules/home/presenter/controllers/states/home_state.dart';
-import 'package:demo/core/common/widgets/profile/profile_picture.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key});
@@ -19,20 +17,30 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             opacity: indexState.value == 2 ? 1 : 0,
             child: AppBar(
               backgroundColor: Colors.transparent,
+              title: const ProfileHomeTile(),
               actions: [
-                IconButton(
-                  splashRadius: 25,
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.notifications,
-                    color: context.theme.colorScheme.primary,
+                Card(
+                  margin: const EdgeInsets.only(right: 12),
+                  shape: const CircleBorder(),
+                  elevation: 2,
+                  child: InkWell(
+                    customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    onTap: () {},
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      ),
+                      child: Icon(
+                        Icons.notifications,
+                        color: context.theme.colorScheme.primary,
+                      ),
+                    ),
                   ),
-                ),
-                ProfilePicture(
-                  onTap: () async {
-                    await Modular.get<SessionController>().logOut();
-                    await Modular.to.pushReplacementNamed('/auth/');
-                  },
                 ),
               ],
             ),

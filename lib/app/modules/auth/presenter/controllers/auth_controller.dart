@@ -106,7 +106,11 @@ class AuthController {
 
     return result.fold(
       (f) {
-        errorMessage = f.statusCode.translated;
+        if (f.statusCode == StatusCode.invalidCredential) {
+          errorMessage = translation().previousPasswordInvalid;
+        } else {
+          errorMessage = f.statusCode.translated;
+        }
         return false;
       },
       (_) {

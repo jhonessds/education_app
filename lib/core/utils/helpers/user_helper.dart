@@ -6,29 +6,32 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserHelper {
+  static SessionController sessionCtrl = Modular.get<SessionController>();
   static String name() {
-    final user = Modular.get<SessionController>().currentUser;
-    return user.name;
+    return sessionCtrl.hasCurrentUser ? sessionCtrl.currentUser.name : '';
   }
 
   static bool pushNotification() {
-    final user = Modular.get<SessionController>().currentUser;
-    return user.fcmToken != null;
+    return sessionCtrl.hasCurrentUser &&
+        sessionCtrl.currentUser.fcmToken != null;
   }
 
   static GenderType gender() {
-    final user = Modular.get<SessionController>().currentUser;
-    return user.gender;
+    return sessionCtrl.hasCurrentUser
+        ? sessionCtrl.currentUser.gender
+        : GenderType.male;
   }
 
   static AuthMethodType authMethod() {
-    final user = Modular.get<SessionController>().currentUser;
-    return user.authMethod;
+    return sessionCtrl.hasCurrentUser
+        ? sessionCtrl.currentUser.authMethod
+        : AuthMethodType.anonymous;
   }
 
   static String? profilePicture() {
-    final user = Modular.get<SessionController>().currentUser;
-    return user.profilePicture;
+    return sessionCtrl.hasCurrentUser
+        ? sessionCtrl.currentUser.profilePicture
+        : null;
   }
 
   static Future<bool> setUser(UserModel user) async {

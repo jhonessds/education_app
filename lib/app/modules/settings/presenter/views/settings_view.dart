@@ -5,10 +5,13 @@ import 'package:demo/app/modules/settings/presenter/widgets/dark_mode_tile.dart'
 import 'package:demo/app/modules/settings/presenter/widgets/language_tile.dart';
 import 'package:demo/app/modules/settings/presenter/widgets/notification_tile.dart';
 import 'package:demo/app/modules/settings/presenter/widgets/settings_tile.dart';
+import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/widgets/settings/flex_scheme_selector.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
+import 'package:demo/core/utils/core_utils.dart';
+import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -47,10 +50,13 @@ class SettingsView extends StatelessWidget {
               SettingsTile(
                 icon: Iconsax.profile_circle_outline,
                 title: translation().userProfile,
-                onTap: () {},
+                onTap: () {
+                  CoreUtils.bottomSnackBar('message');
+                  CoreUtils.topSnackBar('message');
+                },
               ),
-              // if (UserHelper.authMethod() == AuthMethodType.email)
-              const ChangePasswordTile(),
+              if (UserHelper.authMethod() == AuthMethodType.email)
+                const ChangePasswordTile(),
               SettingsTile(
                 icon: Iconsax.color_swatch_outline,
                 title: translation().themeColor,

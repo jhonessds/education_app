@@ -48,7 +48,7 @@ class _SignUpButtonState extends State<SignUpButton> {
             if (result) {
               await Modular.to.pushReplacementNamed('/home/');
             } else {
-              CoreUtils.showSnackBar(registerCtrl.errorMessage, isError: true);
+              CoreUtils.bottomSnackBar(registerCtrl.errorMessage);
             }
           } else {
             btnController.stop();

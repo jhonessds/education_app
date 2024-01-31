@@ -2,6 +2,7 @@ import 'package:demo/app/modules/auth/presenter/controllers/session_controller.d
 import 'package:demo/app/modules/home/presenter/components/change_nav_bottom_type.dart';
 import 'package:demo/app/modules/home/presenter/components/custom_bottom_nav.dart';
 import 'package:demo/app/modules/home/presenter/components/home_app_bar.dart';
+import 'package:demo/app/modules/home/presenter/controllers/states/home_state.dart';
 import 'package:demo/app/modules/settings/presenter/views/settings_view.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/notifications/push_notification_service.dart';
@@ -23,7 +24,10 @@ class _HomeViewState extends State<HomeView>
   @override
   void initState() {
     super.initState();
-    PushNotificationsManager().init(userId: sessionCtrl.currentUser.id);
+    indexState.value = 2;
+    if (sessionCtrl.hasCurrentUser) {
+      PushNotificationsManager().init(userId: sessionCtrl.currentUser.id);
+    }
     tabController = TabController(vsync: this, length: 5, initialIndex: 2);
   }
 

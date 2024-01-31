@@ -37,7 +37,7 @@ class SettingsTile extends StatelessWidget {
           color: context.theme.disabledColor,
           indent: 10,
           endIndent: 10,
-          height: 10,
+          height: 5,
         ),
       ],
     );

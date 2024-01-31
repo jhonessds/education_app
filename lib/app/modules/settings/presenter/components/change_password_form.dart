@@ -19,8 +19,8 @@ class ChangePasswordForm extends StatefulWidget {
 }
 
 class _ChangePasswordFormState extends State<ChangePasswordForm> {
-  final passwordCtrl = TextEditingController();
-  final confirmPasswordCtrl = TextEditingController();
+  final oldPasswordCtrl = TextEditingController();
+  final newPasswordCtrl = TextEditingController();
   final authCtrl = Modular.get<AuthController>();
   bool obscureText = true;
 
@@ -33,8 +33,8 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
         child: Column(
           children: [
             CustomInput(
-              controller: passwordCtrl,
-              hintText: translation().password.capitalize,
+              controller: oldPasswordCtrl,
+              hintText: translation().oldPassword.capitalize,
               obscureText: obscureText,
               keyboardType: TextInputType.visiblePassword,
               maxlines: 1,
@@ -51,8 +51,8 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
               ),
             ),
             CustomInput(
-              controller: confirmPasswordCtrl,
-              hintText: translation().confirmPassword.capitalize,
+              controller: newPasswordCtrl,
+              hintText: translation().newPassword.capitalize,
               obscureText: obscureText,
               keyboardType: TextInputType.visiblePassword,
               maxlines: 1,
@@ -60,10 +60,10 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
               mgBottom: 10,
               onChange: (value) => authCtrl.newPassword = value,
               validator: (t) {
-                if (t == null || t.isEmpty) return 'Informe uma senha';
+                if (t == null || t.isEmpty) return translation().enterAPassword;
 
-                if (t == passwordCtrl.text) {
-                  return 'Senhas precisam ser diferentes';
+                if (t == oldPasswordCtrl.text) {
+                  return translation().passwordNeedDifferent;
                 }
 
                 return null;

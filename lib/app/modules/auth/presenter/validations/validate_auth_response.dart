@@ -12,7 +12,7 @@ void validateAuthResponse({required bool success, bool isSignInView = true}) {
     Modular.to.pushReplacementNamed('/home/');
   } else {
     if (authCtrl.isRegistred) {
-      CoreUtils.showSnackBar(authCtrl.errorMessage, isError: true);
+      CoreUtils.bottomSnackBar(authCtrl.errorMessage);
     } else {
       showDialog<void>(
         context: context,

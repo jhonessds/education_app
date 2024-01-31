@@ -8,6 +8,6 @@ Future<void> openWhatsapp({required String whatsapp}) async {
   if (await canLaunchUrl(whatsappUrl)) {
     await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
   } else {
-    CoreUtils.showSnackBar('Whatsapp não instalado!', isError: true);
+    CoreUtils.topSnackBar('Whatsapp não instalado!');
   }
 }

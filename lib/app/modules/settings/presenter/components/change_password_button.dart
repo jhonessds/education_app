@@ -1,6 +1,5 @@
 import 'package:demo/app/modules/auth/presenter/controllers/auth_controller.dart';
-import 'package:demo/app/modules/register/presenter/controllers/register_controller.dart';
-import 'package:demo/core/common/enums/auth_method_type.dart';
+import 'package:demo/core/abstraction/icon_snack_bar.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:demo/core/utils/core_utils.dart';
@@ -43,9 +42,12 @@ class _ChangePasswordButtonState extends State<ChangePasswordButton> {
             btnController.stop();
             if (result) {
               Modular.to.pop();
-              CoreUtils.showSnackBar('Sucesso!');
+              CoreUtils.bottomSnackBar(
+                translation().passwordChanged,
+                type: SnackBarType.save,
+              );
             } else {
-              CoreUtils.showSnackBar(authCtrl.errorMessage, isError: true);
+              CoreUtils.topSnackBar(authCtrl.errorMessage);
             }
           } else {
             btnController.stop();

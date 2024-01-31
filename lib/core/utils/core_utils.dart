@@ -1,4 +1,6 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:demo/app/app_widget.dart';
+import 'package:demo/core/abstraction/icon_snack_bar.dart';
 import 'package:demo/core/common/widgets/custom_alert.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
@@ -44,41 +46,35 @@ class CoreUtils {
     );
   }
 
-  static void showSnackBar(
+  static void bottomSnackBar(
     String message, {
-    bool isError = false,
-    Widget? icon,
+    SnackBarType type = SnackBarType.fail,
   }) {
     final context = NavigationService.instance.currentContext;
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 3),
-          content: Row(
-            children: [
-              if (icon != null) icon,
-              if (icon != null) const SizedBox(width: 5),
-              Expanded(
-                child: Text(
-                  message,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          backgroundColor: isError
-              ? context.theme.colorScheme.error
-              : context.theme.primaryColor,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          margin: const EdgeInsets.all(10),
-        ),
-      );
+
+    IconSnackBar.show(
+      duration: const Duration(seconds: 4),
+      context: context,
+      snackBarType: type,
+      label: message,
+    );
+  }
+
+  static void topSnackBar(
+    String message, {
+    AnimatedSnackBarType type = AnimatedSnackBarType.error,
+  }) {
+    final context = NavigationService.instance.currentContext;
+
+    AnimatedSnackBar.material(
+      message,
+      type: type,
+      duration: const Duration(seconds: 4),
+      mobilePositionSettings: MobilePositionSettings(
+        topOnAppearance: context.height * 0.04,
+        bottomOnAppearance: context.height * 0.05,
+      ),
+    ).show(context);
   }
 
   static void popAnimated(
