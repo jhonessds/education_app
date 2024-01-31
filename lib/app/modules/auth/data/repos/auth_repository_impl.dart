@@ -105,4 +105,20 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(e);
     }
   }
+
+  @override
+  ResultFuture<void> updatePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      final result = await _datasource.updatePassword(
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      );
+      return Right(result);
+    } on FirebaseFailure catch (e) {
+      return Left(e);
+    }
+  }
 }

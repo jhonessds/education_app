@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:demo/core/common/entities/user.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
+import 'package:demo/core/common/enums/gender_type.dart';
 import 'package:demo/core/common/enums/user_type.dart';
 import 'package:demo/core/utils/typedefs.dart';
 
@@ -13,6 +14,7 @@ class UserModel extends User {
     required super.userType,
     required super.authMethod,
     super.profilePicture,
+    super.gender,
     super.bio,
     super.fcmToken,
     super.firstAccess,
@@ -25,6 +27,9 @@ class UserModel extends User {
       userType: map['userType'] != null
           ? UserType.fromString(map['userType'] as String)
           : UserType.unknown,
+      gender: map['gender'] != null
+          ? GenderType.fromString(map['userType'] as String)
+          : GenderType.male,
       authMethod: map['authMethod'] != null
           ? AuthMethodType.fromString(map['authMethod'] as String)
           : AuthMethodType.anonymous,
@@ -54,6 +59,7 @@ class UserModel extends User {
     String? name,
     UserType? userType,
     AuthMethodType? authMethod,
+    GenderType? gender,
     String? email,
     String? profilePicture,
     String? bio,
@@ -67,6 +73,7 @@ class UserModel extends User {
       authMethod: authMethod ?? this.authMethod,
       email: email ?? this.email,
       profilePicture: profilePicture ?? this.profilePicture,
+      gender: gender ?? this.gender,
       bio: bio ?? this.bio,
       fcmToken: fcmToken ?? this.fcmToken,
       firstAccess: firstAccess ?? this.firstAccess,
@@ -79,6 +86,7 @@ class UserModel extends User {
         'email': email,
         'userType': userType.name,
         'authMethod': authMethod.name,
+        'gender': gender.name,
         'profilePicture': profilePicture,
         'bio': bio,
         'fcmToken': fcmToken,

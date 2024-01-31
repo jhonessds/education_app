@@ -80,49 +80,60 @@ Future<String?> flexSchemeSelector(BuildContext context) async {
         top: Radius.circular(25),
       ),
     ),
+    isScrollControlled: true,
     builder: (context) {
-      return GridView.builder(
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(4),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 5,
-          mainAxisSpacing: 2,
-          crossAxisSpacing: 2,
-        ),
-        itemCount: flexSchemes.length,
-        itemBuilder: (context, index) {
-          final data = flexSchemes[index];
+      return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.75,
+        child: GridView.builder(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(4),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 5,
+            mainAxisSpacing: 2,
+            crossAxisSpacing: 2,
+          ),
+          itemCount: flexSchemes.length,
+          itemBuilder: (context, index) {
+            final data = flexSchemes[index];
 
-          return Center(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                color: data.values.first,
+            return Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  color: data.values.first,
+                ),
+                child: IconButton(
+                  splashRadius: 35,
+                  icon: scheme.name == data.keys.first
+                      ? const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        )
+                      : FittedBox(
+                          child: Text(
+                            data.keys.first,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                  onPressed: () {
+                    if (isDarkMode) {
+                      setDarkFlexScheme(data.keys.first).then((flexScheme) {
+                        AppWidget.setDarkFlexScheme(context, flexScheme);
+                      });
+                    } else {
+                      setFlexScheme(data.keys.first).then((flexScheme) {
+                        AppWidget.setFlexScheme(context, flexScheme);
+                      });
+                    }
+                    Navigator.of(context).pop();
+                  },
+                ),
               ),
-              child: IconButton(
-                splashRadius: 35,
-                icon: scheme.name == data.keys.first
-                    ? const Icon(
-                        Icons.check,
-                        color: Colors.white,
-                      )
-                    : Container(),
-                onPressed: () {
-                  if (isDarkMode) {
-                    setDarkFlexScheme(data.keys.first).then((flexScheme) {
-                      AppWidget.setDarkFlexScheme(context, flexScheme);
-                    });
-                  } else {
-                    setFlexScheme(data.keys.first).then((flexScheme) {
-                      AppWidget.setFlexScheme(context, flexScheme);
-                    });
-                  }
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       );
     },
   );

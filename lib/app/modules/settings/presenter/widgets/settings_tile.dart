@@ -6,10 +6,12 @@ class SettingsTile extends StatelessWidget {
   const SettingsTile({
     required this.icon,
     required this.title,
+    this.trailing,
     super.key,
     this.onTap,
   });
   final IconData icon;
+  final Widget? trailing;
   final String title;
   final void Function()? onTap;
 
@@ -23,11 +25,12 @@ class SettingsTile extends StatelessWidget {
             title,
             style: const TextStyle(fontWeight: FontWeight.w500),
           ),
-          trailing: Icon(
-            Iconsax.arrow_right_1_outline,
-            size: 18,
-            color: context.theme.primaryColor,
-          ),
+          trailing: trailing ??
+              Icon(
+                Iconsax.arrow_right_3_outline,
+                size: 18,
+                color: context.theme.primaryColor,
+              ),
           onTap: onTap,
         ),
         Divider(

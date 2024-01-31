@@ -4,6 +4,7 @@ import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_facebook.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_github.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_google.dart';
+import 'package:demo/app/modules/auth/domain/usecases/update_password.dart';
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/core/abstraction/either.dart';
 import 'package:demo/core/common/entities/user.dart';
@@ -23,11 +24,13 @@ class AuthController {
     required SignInWithFacebook signInWithFacebook,
     required SignInAnonymously signInAnonymously,
     required ForgotPassword forgotPassword,
+    required UpdatePassword updatePassword,
   })  : _signInWithEmail = signInWithEmail,
         _signInWithGoogle = signInWithGoogle,
         _signInWithGithub = signInWithGithub,
         _signInWithFacebook = signInWithFacebook,
         _forgotPassword = forgotPassword,
+        _updatePassword = updatePassword,
         _signInAnonymously = signInAnonymously;
 
   final SignInWithEmail _signInWithEmail;
@@ -36,9 +39,11 @@ class AuthController {
   final SignInWithGithub _signInWithGithub;
   final SignInWithFacebook _signInWithFacebook;
   final ForgotPassword _forgotPassword;
+  final UpdatePassword _updatePassword;
 
   String email = '';
   String password = '';
+  String newPassword = '';
   AuthMethodType authMethod = AuthMethodType.email;
 
   Failure failure = const AuthFailure(statusCode: StatusCode.unknown);
@@ -79,6 +84,25 @@ class AuthController {
     required String email,
   }) async {
     final result = await _forgotPassword(email);
+
+    return result.fold(
+      (f) {
+        errorMessage = f.statusCode.translated;
+        return false;
+      },
+      (_) {
+        return true;
+      },
+    );
+  }
+
+  Future<bool> updatePassword() async {
+    final result = await _updatePassword(
+      UpdatePasswordParams(
+        oldPassword: password,
+        newPassword: newPassword,
+      ),
+    );
 
     return result.fold(
       (f) {

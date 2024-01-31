@@ -1,4 +1,4 @@
-import 'package:demo/app/modules/profile/presenter/views/profile_view.dart';
+import 'package:demo/app/modules/settings/presenter/views/settings_view.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class SettingsModule extends Module {
@@ -6,7 +6,7 @@ class SettingsModule extends Module {
   void routes(RouteManager r) {
     r.child(
       Modular.initialRoute,
-      child: (_) => const ProfileView(),
+      child: (_) => const SettingsView(),
     );
   }
 }

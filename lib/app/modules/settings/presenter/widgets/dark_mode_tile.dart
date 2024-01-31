@@ -1,5 +1,6 @@
 import 'package:demo/app/app_widget.dart';
 import 'package:demo/core/extensions/context_extension.dart';
+import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:demo/core/services/preferences/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -37,9 +38,9 @@ class _DarkModeTileState extends State<DarkModeTile> {
           leading: Icon(
             isDark ? Iconsax.moon_outline : Iconsax.sun_1_outline,
           ),
-          title: const Text(
-            'Dark Mode',
-            style: TextStyle(fontWeight: FontWeight.w500),
+          title: Text(
+            translation().darkMode,
+            style: const TextStyle(fontWeight: FontWeight.w500),
           ),
           trailing: Switch(
             value: isDark,

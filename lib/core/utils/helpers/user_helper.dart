@@ -1,4 +1,6 @@
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
+import 'package:demo/core/common/enums/auth_method_type.dart';
+import 'package:demo/core/common/enums/gender_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,6 +9,21 @@ class UserHelper {
   static String name() {
     final user = Modular.get<SessionController>().currentUser;
     return user.name;
+  }
+
+  static bool pushNotification() {
+    final user = Modular.get<SessionController>().currentUser;
+    return user.fcmToken != null;
+  }
+
+  static GenderType gender() {
+    final user = Modular.get<SessionController>().currentUser;
+    return user.gender;
+  }
+
+  static AuthMethodType authMethod() {
+    final user = Modular.get<SessionController>().currentUser;
+    return user.authMethod;
   }
 
   static String? profilePicture() {

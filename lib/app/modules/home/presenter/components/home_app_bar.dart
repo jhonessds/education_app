@@ -1,6 +1,6 @@
 import 'package:asp/asp.dart';
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
-import 'package:demo/app/modules/home/presenter/states/home_state.dart';
+import 'package:demo/app/modules/home/presenter/controllers/states/home_state.dart';
 import 'package:demo/core/common/widgets/profile/profile_picture.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';

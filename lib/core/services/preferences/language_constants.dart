@@ -1,6 +1,7 @@
 import 'package:demo/app/app_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: constant_identifier_names
@@ -29,13 +30,26 @@ Future<Locale> getLocale() async {
 Locale _locale(String languageCode) {
   switch (languageCode) {
     case ENGLISH:
-      return const Locale(ENGLISH, '');
+      return const Locale(ENGLISH);
     case PORTUGUESE:
-      return const Locale(PORTUGUESE, '');
+      return const Locale(PORTUGUESE);
     case SPANISH:
-      return const Locale(SPANISH, '');
+      return const Locale(SPANISH);
     default:
-      return const Locale(ENGLISH, '');
+      return const Locale(ENGLISH);
+  }
+}
+
+Flag getLocaleFlag(String languageCode) {
+  switch (languageCode) {
+    case ENGLISH:
+      return Flag(Flags.united_states_of_america, size: 28);
+    case PORTUGUESE:
+      return Flag(Flags.brazil, size: 28);
+    case SPANISH:
+      return Flag(Flags.mexico, size: 28);
+    default:
+      return Flag(Flags.united_states_of_america, size: 28);
   }
 }
 

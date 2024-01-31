@@ -5,8 +5,8 @@ import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class HomeModule extends Module {
-  // @override
-  // List<Module> get imports => [AuthModule(), RegisterModule()];
+  @override
+  List<Module> get imports => [ProfileModule()];
 
   @override
   void routes(RouteManager r) {

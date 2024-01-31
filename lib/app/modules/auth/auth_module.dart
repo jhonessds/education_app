@@ -10,6 +10,7 @@ import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_facebook.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_github.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_google.dart';
+import 'package:demo/app/modules/auth/domain/usecases/update_password.dart';
 import 'package:demo/app/modules/auth/presenter/controllers/auth_controller.dart';
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/app/modules/auth/presenter/views/sign_in_view.dart';
@@ -36,6 +37,7 @@ class AuthModule extends Module {
       ..addLazySingleton<SignInWithFacebook>(SignInWithFacebook.new)
       ..addLazySingleton<SignInAnonymously>(SignInAnonymously.new)
       ..addLazySingleton<ForgotPassword>(ForgotPassword.new)
+      ..addLazySingleton<UpdatePassword>(UpdatePassword.new)
       ..addLazySingleton<LogOut>(LogOut.new)
       ..addLazySingleton<GetSessionUser>(GetSessionUser.new)
       // Controllers

@@ -14,6 +14,10 @@ abstract class AuthRemoteDataSource {
 
   Future<UserModel?> getSessionUser();
   Future<void> logOut();
+  Future<void> updatePassword({
+    required String oldPassword,
+    required String newPassword,
+  });
   Future<void> forgotPassword({required String email});
   Future<UserModel> signInWithEmail({
     required String email,
@@ -271,6 +275,33 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       return user;
     } on FirebaseFailure {
       rethrow;
+    }
+  }
+
+  @override
+  Future<void> updatePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      final credential = EmailAuthProvider.credential(
+        email: firebaseAuth.currentUser!.email!,
+        password: oldPassword,
+      );
+      await firebaseAuth.currentUser?.reauthenticateWithCredential(credential);
+      await firebaseAuth.currentUser?.updatePassword(newPassword);
+    } on FirebaseFailure {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw FirebaseFailure(
+        message: e.toString(),
+        statusCode: StatusCode.problemWithRequest,
+      );
     }
   }
 }

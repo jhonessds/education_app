@@ -39,7 +39,25 @@
     "confirmPassword": "Confirmar senha",
     "userNotRegistered": "Usuário não cadastrado!\n Deseja se cadastrar?",
     "privacyPolicy": "Política de Privacidade",
-    
+        
+    "commentProfile":"*********** COMMENT_PROFILE ***********",
+    "gender": "Gênero",
+    "male": "Masculino",
+    "female": "Feminino",
+
+    "commentSettings":"*********** COMMENT_SETTINGS ***********",
+    "settings": "Configurações",
+    "welcomeF": "Bem-vinda",
+    "welcomeM": "Bem-vindo",
+    "userProfile": "Perfil",
+    "changePassword": "Alterar Senha",
+    "themeColor": "Cor do Tema",
+    "language": "Idioma",
+    "pushNotification": "Notificatições",
+    "darkMode": "Modo Escuro",
+    "whatsAppUsText": "Se você tiver outra dúvida, pode entrar em contato conosco.",
+    "whatsAppUs": "Envie-nos um WhatsApp",
+
     "commentStatusCode":"*********** COMMENT_STATUS_CODE ***********",
     "unknown": "Erro desconhecido",
     "connectionError": "Tivemos um problema com sua solicitação, por favor tente novamente mais tarde!",

@@ -37,6 +37,7 @@ class _HomeViewState extends State<HomeView>
         duration: const Duration(seconds: 1),
         child: TabBarView(
           controller: tabController,
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             Container(color: Colors.red),
             Container(color: Colors.green),

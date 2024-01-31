@@ -7,6 +7,10 @@ abstract class AuthRepository {
   ResultFuture<User?> getSessionUser();
   ResultFuture<void> logOut();
   ResultFuture<void> forgotPassword({required String email});
+  ResultFuture<void> updatePassword({
+    required String oldPassword,
+    required String newPassword,
+  });
   ResultFuture<User> signInWithEmail({
     required String email,
     required String password,

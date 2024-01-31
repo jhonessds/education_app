@@ -1,5 +1,5 @@
 import 'package:asp/asp.dart';
-import 'package:demo/app/modules/home/presenter/states/home_state.dart';
+import 'package:demo/app/modules/home/presenter/controllers/states/home_state.dart';
 import 'package:demo/app/modules/home/presenter/widgets/nav_option.dart';
 import 'package:demo/core/common/entities/bottom_nav_config.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
