@@ -4,27 +4,27 @@ import 'package:flutter/material.dart';
 
 class ProfileName extends StatelessWidget {
   const ProfileName({
-    required this.height,
-    required this.width,
+    required this.size,
+    this.fontSize = 19,
     super.key,
   });
 
-  final double height;
-  final double width;
+  final double size;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height,
-      width: width,
+      height: size,
+      width: size,
       color: context.theme.primaryColor,
       alignment: Alignment.center,
       child: Text(
         UserHelper.name()[0],
-        style: const TextStyle(
+        style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
-          fontSize: 19,
+          fontSize: fontSize,
         ),
       ),
     );

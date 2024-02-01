@@ -81,32 +81,31 @@ class CoreUtils {
     String animaton, {
     String? text,
     void Function()? callback,
+    bool showOkBtn = true,
+    bool repeat = false,
   }) {
     customAlert(
-      showOkBtn: true,
+      showOkBtn: showOkBtn,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Lottie.asset(
             'assets/lottie/$animaton.json',
             height: 150,
-            repeat: false,
+            repeat: repeat,
           ),
-          Visibility(
-            visible: text != null,
-            child: SimpleText(
+          if (text != null)
+            SimpleText(
               mgTop: 20,
-              text: text!,
+              text: text,
               maxlines: 3,
               textAlign: TextAlign.center,
               fontSize: 16,
             ),
-          ),
         ],
       ),
       callback: () {
-        final context = NavigationService.instance.currentContext;
-        Navigator.of(context).pop();
+        Modular.to.pop();
         callback?.call();
       },
     );

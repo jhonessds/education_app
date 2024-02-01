@@ -1,12 +1,11 @@
 import 'dart:async';
-
 import 'package:demo/app/app_widget.dart';
+import 'package:demo/core/common/states/app_state.dart';
 import 'package:demo/core/services/preferences/flex_scheme_manager.dart';
-import 'package:demo/core/services/preferences/theme_manager.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-Future<String?> flexSchemeSelector(BuildContext context) async {
+Future<void> flexSchemeSelector() async {
   final flexSchemes = [
     {'material': const Color(0xff6200ee)},
     {'materialHc': const Color(0xff0000ba)},
@@ -62,18 +61,16 @@ Future<String?> flexSchemeSelector(BuildContext context) async {
     {'deepOrangeM3': const Color(0xFFBF360C)},
   ];
 
-  final actualTheme = await getTheme();
-  final isDarkMode = actualTheme == ThemeMode.dark;
-
   late FlexScheme scheme;
-  if (isDarkMode) {
-    scheme = await getDarkFlexScheme();
+  if (appConfigState.value.isDarkMode) {
+    scheme = appConfigState.value.darkFlexScheme;
   } else {
-    scheme = await getFlexScheme();
+    scheme = appConfigState.value.flexScheme;
   }
 
-  // ignore: use_build_context_synchronously
-  final result = await showModalBottomSheet<String>(
+  final context = NavigationService.instance.currentContext;
+
+  await showModalBottomSheet<String>(
     context: context,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
@@ -118,14 +115,10 @@ Future<String?> flexSchemeSelector(BuildContext context) async {
                           ),
                         ),
                   onPressed: () {
-                    if (isDarkMode) {
-                      setDarkFlexScheme(data.keys.first).then((flexScheme) {
-                        AppWidget.setDarkFlexScheme(context, flexScheme);
-                      });
+                    if (appConfigState.value.isDarkMode) {
+                      setDarkFlexScheme(data.keys.first);
                     } else {
-                      setFlexScheme(data.keys.first).then((flexScheme) {
-                        AppWidget.setFlexScheme(context, flexScheme);
-                      });
+                      setFlexScheme(data.keys.first);
                     }
                     Navigator.of(context).pop();
                   },
@@ -137,5 +130,4 @@ Future<String?> flexSchemeSelector(BuildContext context) async {
       );
     },
   );
-  return result;
 }

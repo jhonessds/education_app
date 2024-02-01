@@ -52,11 +52,14 @@ class _FooterState extends State<Footer> {
               withTextScale: false,
             ),
           ),
-          LanguageSelector(
-            color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+          IconButton(
+            onPressed: () async => languageSelector(),
+            icon: const Icon(
+              Icons.translate,
+            ),
           ),
           IconButton(
-            onPressed: () async => flexSchemeSelector(context),
+            onPressed: () async => flexSchemeSelector(),
             icon: const Icon(
               Icons.palette,
             ),

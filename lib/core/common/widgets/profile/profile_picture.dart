@@ -7,14 +7,12 @@ import 'package:flutter/material.dart';
 
 class ProfilePicture extends StatelessWidget {
   const ProfilePicture({
-    this.height = 35,
-    this.width = 35,
+    this.size = 35,
     this.mRight = 10,
     this.onTap,
     super.key,
   });
-  final double height;
-  final double width;
+  final double size;
   final double mRight;
   final void Function()? onTap;
 
@@ -24,19 +22,19 @@ class ProfilePicture extends StatelessWidget {
 
     return Container(
       margin: EdgeInsets.only(right: mRight),
-      height: height,
-      width: width,
+      height: size,
+      width: size,
       child: Stack(
         alignment: Alignment.center,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(100),
             child: profilePicture.isNullOrEmpty
-                ? ProfileName(height: height, width: width)
+                ? ProfileName(size: size)
                 : FastCachedImage(
                     url: profilePicture!,
-                    cacheHeight: 158,
-                    cacheWidth: 160,
+                    cacheHeight: size.toInt(),
+                    cacheWidth: size.toInt(),
                     fit: BoxFit.cover,
                     loadingBuilder: (context, progress) {
                       if (progress.isDownloading &&
@@ -52,7 +50,7 @@ class ProfilePicture extends StatelessWidget {
                       return const SizedBox.shrink();
                     },
                     errorBuilder: (context, error, stackTrace) {
-                      return ProfileName(height: height, width: width);
+                      return ProfileName(size: size);
                     },
                   ),
           ),

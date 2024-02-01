@@ -5,6 +5,7 @@ import 'package:demo/app/modules/auth/presenter/validations/validate_auth_respon
 import 'package:demo/app/modules/auth/presenter/validations/validate_social_login.dart';
 import 'package:demo/app/modules/auth/presenter/widgets/login_option_icon_button.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
+import 'package:demo/core/common/widgets/loading_modal.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -39,9 +40,11 @@ class SocialSignInUp extends StatelessWidget {
           child: Brand(Brands.google),
           callback: () async {
             await validateSocialLogin(() async {
+              loadingWidget();
               await sessionCtrl.logOut();
               authCtrl.authMethod = AuthMethodType.google;
               final result = await authCtrl.signInWithGoogle();
+              Modular.to.pop();
               validateAuthResponse(success: result, isSignInView: isSignInView);
             });
           },

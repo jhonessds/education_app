@@ -1,53 +1,37 @@
 import 'package:demo/app/app_widget.dart';
+import 'package:demo/core/common/models/language_model.dart';
+import 'package:demo/core/common/states/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// ignore: constant_identifier_names
-const String LANGUAGE_CODE = 'languageCode';
-
-//languages code
-// ignore: constant_identifier_names
-const String ENGLISH = 'en';
-// ignore: constant_identifier_names
-const String PORTUGUESE = 'pt';
-// ignore: constant_identifier_names
-const String SPANISH = 'es';
-
-Future<Locale> setLocale(String languageCode) async {
+Future<void> setLocale(LanguageModel language) async {
   final prefs = await SharedPreferences.getInstance();
-  await prefs.setString(LANGUAGE_CODE, languageCode);
-  return _locale(languageCode);
+  await prefs.setString('languageCode', language.locale.languageCode);
+  appConfigState.value = appConfigState.value.copyWith(language: language);
 }
 
-Future<Locale> getLocale() async {
+Future<void> getLocale() async {
   final prefs = await SharedPreferences.getInstance();
-  final languageCode = prefs.getString(LANGUAGE_CODE) ?? PORTUGUESE;
-  return _locale(languageCode);
+  final languageCode = prefs.getString('languageCode');
+  final language = languages.firstWhere(
+    (l) {
+      return l.locale.languageCode == languageCode;
+    },
+    orElse: () => languages.first,
+  );
+  appConfigState.value = appConfigState.value.copyWith(language: language);
 }
 
-Locale _locale(String languageCode) {
-  switch (languageCode) {
-    case ENGLISH:
-      return const Locale(ENGLISH);
-    case PORTUGUESE:
-      return const Locale(PORTUGUESE);
-    case SPANISH:
-      return const Locale(SPANISH);
-    default:
-      return const Locale(ENGLISH);
-  }
-}
-
-Flag getLocaleFlag(String languageCode) {
-  switch (languageCode) {
-    case ENGLISH:
+Flag getLocaleFlag(Locale locale) {
+  switch (locale.languageCode) {
+    case 'en':
       return Flag(Flags.united_states_of_america, size: 28);
-    case PORTUGUESE:
+    case 'pt':
       return Flag(Flags.brazil, size: 28);
-    case SPANISH:
-      return Flag(Flags.mexico, size: 28);
+    case 'es':
+      return Flag(Flags.spain, size: 28);
     default:
       return Flag(Flags.united_states_of_america, size: 28);
   }

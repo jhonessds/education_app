@@ -1,3 +1,4 @@
+import 'package:demo/app/modules/profile/presenter/views/profile_view.dart';
 import 'package:demo/app/modules/settings/presenter/components/change_password_tile.dart';
 import 'package:demo/app/modules/settings/presenter/components/profile_tile.dart';
 import 'package:demo/app/modules/settings/presenter/components/whatsapp_us.dart';
@@ -7,12 +8,14 @@ import 'package:demo/app/modules/settings/presenter/widgets/notification_tile.da
 import 'package:demo/app/modules/settings/presenter/widgets/settings_tile.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/widgets/settings/flex_scheme_selector.dart';
+import 'package:demo/core/common/widgets/settings/font_selector.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class SettingsView extends StatelessWidget {
@@ -51,8 +54,7 @@ class SettingsView extends StatelessWidget {
                 icon: Iconsax.profile_circle_outline,
                 title: translation().userProfile,
                 onTap: () {
-                  CoreUtils.bottomSnackBar('message');
-                  CoreUtils.topSnackBar('message');
+                  Modular.to.push(CoreUtils.push(const ProfileView()));
                 },
               ),
               if (UserHelper.authMethod() == AuthMethodType.email)
@@ -60,9 +62,12 @@ class SettingsView extends StatelessWidget {
               SettingsTile(
                 icon: Iconsax.color_swatch_outline,
                 title: translation().themeColor,
-                onTap: () {
-                  flexSchemeSelector(context);
-                },
+                onTap: flexSchemeSelector,
+              ),
+              const SettingsTile(
+                icon: Iconsax.text_outline,
+                title: 'Font',
+                onTap: fontSelector,
               ),
               const LanguageTile(),
               const NotificationTile(),

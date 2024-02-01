@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:demo/app/modules/profile/data/datasources/profile_datasource.dart';
 import 'package:demo/app/modules/profile/domain/repos/profile_repository.dart';
 import 'package:demo/core/abstraction/either.dart';
@@ -24,6 +26,18 @@ class ProfileRepositoryImpl extends ProfileRepository {
   ResultFuture<User> updateUser({required User user}) async {
     try {
       final result = await _datasource.updateUser(user: user);
+      return Right(result);
+    } on FirebaseFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<User> saveProfilePicture({required File profilePicture}) async {
+    try {
+      final result = await _datasource.saveProfilePicture(
+        profilePicture: profilePicture,
+      );
       return Right(result);
     } on FirebaseFailure catch (e) {
       return Left(e);

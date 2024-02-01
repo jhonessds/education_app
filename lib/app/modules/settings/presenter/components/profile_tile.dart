@@ -2,9 +2,11 @@ import 'dart:math' as math;
 
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/core/common/enums/gender_type.dart';
+import 'package:demo/core/common/widgets/loading_modal.dart';
 import 'package:demo/core/common/widgets/profile/profile_picture.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/preferences/language_constants.dart';
+import 'package:demo/core/utils/core_utils.dart';
 import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -21,8 +23,7 @@ class ProfileTile extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: const ProfilePicture(
         mRight: 0,
-        height: 50,
-        width: 50,
+        size: 50,
       ),
       title: Text(
         UserHelper.gender() == GenderType.male
@@ -44,8 +45,18 @@ class ProfileTile extends StatelessWidget {
       trailing: IconButton(
         splashRadius: 25,
         onPressed: () async {
-          await Modular.get<SessionController>().logOut();
-          await Modular.to.pushReplacementNamed('/auth/');
+          CoreUtils.popAnimated(
+            'exit_app',
+            text: 'Deseja se desconectar?',
+            showOkBtn: false,
+            repeat: true,
+            callback: () async {
+              loadingWidget();
+              await Modular.get<SessionController>().logOut();
+              Modular.to.pop();
+              await Modular.to.pushReplacementNamed('/auth/');
+            },
+          );
         },
         icon: Transform.rotate(
           angle: 180 * math.pi / 180,

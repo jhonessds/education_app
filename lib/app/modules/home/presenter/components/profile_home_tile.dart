@@ -12,10 +12,10 @@ class ProfileHomeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: const ProfilePicture(
+      leading: ProfilePicture(
         mRight: 0,
-        height: 50,
-        width: 50,
+        size: 50,
+        onTap: () {},
       ),
       title: Text(
         'Olá',

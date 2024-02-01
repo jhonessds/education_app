@@ -1,14 +1,17 @@
+import 'package:demo/core/common/states/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<ThemeMode> setTheme(ThemeMode theme) async {
+Future<void> setTheme(ThemeMode themMode) async {
   final prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('isDarkMode', theme == ThemeMode.dark);
-  return theme;
+  await prefs.setBool('isDarkMode', themMode == ThemeMode.dark);
+  appConfigState.value = appConfigState.value.copyWith(themeMode: themMode);
 }
 
-Future<ThemeMode> getTheme() async {
+Future<void> getTheme() async {
   final prefs = await SharedPreferences.getInstance();
   final isDarkMode = prefs.getBool('isDarkMode') ?? false;
-  return isDarkMode ? ThemeMode.dark : ThemeMode.light;
+  appConfigState.value = appConfigState.value.copyWith(
+    themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+  );
 }
