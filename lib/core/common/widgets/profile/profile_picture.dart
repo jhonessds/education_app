@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:asp/asp.dart';
 import 'package:demo/core/common/states/user_state.dart';
 import 'package:demo/core/common/widgets/profile/profile_name.dart';
@@ -35,6 +37,7 @@ class ProfilePicture extends StatelessWidget {
                     : FastCachedImage(
                         height: size,
                         width: size,
+                        key: ValueKey(Random().nextInt(100)),
                         url: currentUserState.value.profilePicture!,
                         cacheHeight: size.toInt(),
                         cacheWidth: size.toInt(),

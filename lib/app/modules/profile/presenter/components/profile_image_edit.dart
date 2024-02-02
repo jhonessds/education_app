@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:asp/asp.dart';
 import 'package:demo/app/modules/profile/presenter/components/change_profile_image.dart';
 import 'package:demo/core/common/states/user_state.dart';
@@ -36,6 +38,7 @@ class ProfileImageEdit extends StatelessWidget {
                       : FastCachedImage(
                           width: context.height * 0.15,
                           height: context.height * 0.15,
+                          key: ValueKey(Random().nextInt(100)),
                           url: currentUserState.value.profilePicture!,
                           cacheHeight: (context.height * 0.15).toInt(),
                           cacheWidth: (context.height * 0.15).toInt(),

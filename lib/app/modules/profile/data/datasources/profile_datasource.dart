@@ -66,9 +66,9 @@ class ProfileDataSourceImpl implements ProfileDataSource {
           .child('profilePictures/${firebaseAuth.currentUser?.uid}.$ext');
       await ref.putFile(profilePicture);
       final url = await ref.getDownloadURL();
-      await firebaseAuth.currentUser?.updatePhotoURL(url);
-      await userCollection.update(userData.copyWith(profilePicture: url));
-      return userData;
+      final userToUpdate = userData.copyWith(profilePicture: url);
+      await userCollection.update(userToUpdate);
+      return userToUpdate;
     } on FirebaseFailure {
       rethrow;
     } on FirebaseException catch (e) {

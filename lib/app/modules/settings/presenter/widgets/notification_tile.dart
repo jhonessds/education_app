@@ -1,5 +1,4 @@
 import 'package:asp/asp.dart';
-import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/app/modules/profile/presenter/controllers/profile_controller.dart';
 import 'package:demo/app/modules/settings/presenter/controllers/states/setting_state.dart';
 import 'package:demo/core/common/actions/app_actions.dart';
