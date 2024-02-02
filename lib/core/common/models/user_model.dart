@@ -48,6 +48,7 @@ class UserModel extends User {
       id: '',
       name: '',
       email: '',
+      profilePicture: '',
       userType: UserType.unknown,
       authMethod: AuthMethodType.anonymous,
     );

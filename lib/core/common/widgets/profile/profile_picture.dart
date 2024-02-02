@@ -32,7 +32,8 @@ class ProfilePicture extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(99),
-                child: currentUserState.value.profilePicture.isNullOrEmpty
+                child: currentUserState.value.profilePicture != null &&
+                        currentUserState.value.profilePicture.isNullOrEmpty
                     ? ProfileName(size: size)
                     : FastCachedImage(
                         height: size,

@@ -54,7 +54,7 @@ class ProfileTile extends StatelessWidget {
               loadingWidget();
               await Modular.get<SessionController>().logOut();
               Modular.to.pop();
-              await Modular.to.pushReplacementNamed('/auth/');
+              //await Modular.to.pushReplacementNamed('/auth/');
             },
           );
         },

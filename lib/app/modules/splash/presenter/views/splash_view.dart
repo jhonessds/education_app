@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'package:asp/asp.dart';
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
+import 'package:demo/app/modules/auth/presenter/views/sign_in_view.dart';
+import 'package:demo/core/common/states/app_state.dart';
 import 'package:demo/core/extensions/context_extension.dart';
+import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -42,30 +45,35 @@ class _SplashViewState extends State<SplashView> {
 
     return PopScope(
       canPop: false,
-      child: Scaffold(
-        body: SizedBox(
-          width: context.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: 30),
-                child: SvgPicture.asset(
-                  'assets/svg/dev-jhones-colored.svg',
-                  colorFilter: ColorFilter.mode(
-                    context.theme.colorScheme.onBackground,
-                    BlendMode.srcIn,
+      child: RxBuilder(
+        builder: (context) {
+          final isDarkMode = appConfigState.value.isDarkMode;
+          return Scaffold(
+            body: Stack(
+              alignment: Alignment.center,
+              children: [
+                Center(
+                  child: Image.asset(
+                    'assets/app/splash${isDarkMode ? '-dark' : ''}.png',
+                    height: context.height * 0.28,
                   ),
-                  height: context.height * 0.23,
                 ),
+                Positioned(
+                  bottom: context.height * 0.3,
+                  child: const CircularProgressIndicator(),
+                ),
+              ],
+            ),
+            extendBody: true,
+            bottomNavigationBar: Align(
+              alignment: Alignment.bottomCenter,
+              child: Image.asset(
+                'assets/app/brand${isDarkMode ? '-dark' : ''}.png',
+                height: context.height * 0.1,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: LinearProgressIndicator(),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
