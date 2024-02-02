@@ -62,6 +62,7 @@
     "minimumEightCharacters": "minimum eight characters",
     "themeColor": "Theme Color",
     "language": "Language",
+    "font": "Font",
     "pushNotification": "Push Notification",
     "darkMode": "Dark Mode",
     "whatsAppUsText": "If you have other query you can reach out to us.",

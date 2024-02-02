@@ -4,9 +4,9 @@ import 'package:demo/app/modules/auth/presenter/views/forgot_password_view.dart'
 import 'package:demo/app/modules/auth/presenter/views/sign_up_view.dart';
 import 'package:demo/app/modules/auth/presenter/widgets/sign_in/sign_in_button.dart';
 import 'package:demo/app/modules/auth/presenter/widgets/top_title.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

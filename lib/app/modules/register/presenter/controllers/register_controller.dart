@@ -1,14 +1,13 @@
-import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/app/modules/register/domain/usecases/register_user.dart';
 import 'package:demo/app/modules/register/domain/usecases/register_user_by_email.dart';
 import 'package:demo/core/abstraction/either.dart';
+import 'package:demo/core/common/actions/user_actions.dart';
 import 'package:demo/core/common/entities/user.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/enums/user_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/errors/failure.dart';
 import 'package:firebase_auth/firebase_auth.dart' as f_auth;
-import 'package:flutter_modular/flutter_modular.dart';
 
 class RegisterController {
   RegisterController({
@@ -72,7 +71,7 @@ class RegisterController {
         return false;
       },
       (user) async {
-        await Modular.get<SessionController>().setLoggedUser(user as UserModel);
+        await setLoggedUser(user as UserModel);
         return true;
       },
     );

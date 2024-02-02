@@ -1,7 +1,8 @@
+import 'package:asp/asp.dart';
+import 'package:demo/core/common/states/user_state.dart';
 import 'package:demo/core/common/widgets/profile/profile_name.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/extensions/string_ext.dart';
-import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -18,55 +19,59 @@ class ProfilePicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final profilePicture = UserHelper.profilePicture();
-
-    return Container(
-      margin: EdgeInsets.only(right: mRight),
-      height: size,
-      width: size,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: profilePicture.isNullOrEmpty
-                ? ProfileName(size: size)
-                : FastCachedImage(
-                    url: profilePicture!,
-                    cacheHeight: size.toInt(),
-                    cacheWidth: size.toInt(),
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, progress) {
-                      if (progress.isDownloading &&
-                          progress.totalBytes != null) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value:
-                                progress.downloadedBytes / progress.totalBytes!,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        );
-                      }
-                      return const SizedBox.shrink();
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      return ProfileName(size: size);
-                    },
-                  ),
-          ),
-          Material(
-            shape: const CircleBorder(),
-            clipBehavior: Clip.hardEdge,
-            color: Colors.transparent,
-            child: Ink(
-              child: InkWell(
-                splashColor: context.theme.primaryColor.withAlpha(120),
-                onTap: onTap,
+    return RxBuilder(
+      builder: (context) {
+        return Container(
+          margin: EdgeInsets.only(right: mRight),
+          height: size,
+          width: size,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(99),
+                child: currentUserState.value.profilePicture.isNullOrEmpty
+                    ? ProfileName(size: size)
+                    : FastCachedImage(
+                        height: size,
+                        width: size,
+                        url: currentUserState.value.profilePicture!,
+                        cacheHeight: size.toInt(),
+                        cacheWidth: size.toInt(),
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, progress) {
+                          if (progress.isDownloading &&
+                              progress.totalBytes != null) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                value: progress.downloadedBytes /
+                                    progress.totalBytes!,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
+                        errorBuilder: (context, error, stackTrace) {
+                          return ProfileName(size: size);
+                        },
+                      ),
               ),
-            ),
+              Material(
+                shape: const CircleBorder(),
+                clipBehavior: Clip.hardEdge,
+                color: Colors.transparent,
+                child: Ink(
+                  child: InkWell(
+                    splashColor: context.theme.primaryColor.withAlpha(120),
+                    onTap: onTap,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

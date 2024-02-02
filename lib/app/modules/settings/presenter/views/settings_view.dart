@@ -6,12 +6,12 @@ import 'package:demo/app/modules/settings/presenter/widgets/dark_mode_tile.dart'
 import 'package:demo/app/modules/settings/presenter/widgets/language_tile.dart';
 import 'package:demo/app/modules/settings/presenter/widgets/notification_tile.dart';
 import 'package:demo/app/modules/settings/presenter/widgets/settings_tile.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/widgets/settings/flex_scheme_selector.dart';
 import 'package:demo/core/common/widgets/settings/font_selector.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:flutter/material.dart';
@@ -64,9 +64,9 @@ class SettingsView extends StatelessWidget {
                 title: translation().themeColor,
                 onTap: flexSchemeSelector,
               ),
-              const SettingsTile(
+              SettingsTile(
                 icon: Iconsax.text_outline,
-                title: 'Font',
+                title: translation().font,
                 onTap: fontSelector,
               ),
               const LanguageTile(),

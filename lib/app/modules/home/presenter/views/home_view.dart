@@ -25,9 +25,9 @@ class _HomeViewState extends State<HomeView>
   void initState() {
     super.initState();
     indexState.value = 2;
-    if (sessionCtrl.hasCurrentUser) {
-      PushNotificationsManager().init(userId: sessionCtrl.currentUser.id);
-    }
+
+    PushNotificationsManager().init();
+
     tabController = TabController(vsync: this, length: 5, initialIndex: 2);
   }
 

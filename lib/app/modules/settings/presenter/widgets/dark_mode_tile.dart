@@ -1,7 +1,6 @@
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/states/app_state.dart';
 import 'package:demo/core/extensions/context_extension.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
-import 'package:demo/core/services/preferences/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 

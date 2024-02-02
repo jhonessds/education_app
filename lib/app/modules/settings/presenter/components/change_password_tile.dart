@@ -1,9 +1,9 @@
 import 'package:demo/app/modules/settings/presenter/components/change_password_button.dart';
 import 'package:demo/app/modules/settings/presenter/components/change_password_form.dart';
 import 'package:demo/app/modules/settings/presenter/widgets/settings_tile.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 

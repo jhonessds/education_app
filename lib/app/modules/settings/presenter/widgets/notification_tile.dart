@@ -2,9 +2,10 @@ import 'package:asp/asp.dart';
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/app/modules/profile/presenter/controllers/profile_controller.dart';
 import 'package:demo/app/modules/settings/presenter/controllers/states/setting_state.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/models/user_model.dart';
+import 'package:demo/core/common/states/user_state.dart';
 import 'package:demo/core/extensions/context_extension.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -49,8 +50,8 @@ class _NotificationTileState extends State<NotificationTile> {
                 value: fcmTokenState.value,
                 onChanged: (_) async {
                   final profileCtrl = Modular.get<ProfileController>();
-                  final user = Modular.get<SessionController>().currentUser;
-                  final sharedPrefs = await SharedPreferences.getInstance();
+                  final user = currentUserState.value;
+                  final sharedPrefs = Modular.get<SharedPreferences>();
                   late UserModel userToUpdate;
 
                   if (fcmTokenState.value) {

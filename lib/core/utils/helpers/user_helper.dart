@@ -1,37 +1,28 @@
-import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/enums/gender_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:demo/core/common/states/user_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserHelper {
-  static SessionController sessionCtrl = Modular.get<SessionController>();
   static String name() {
-    return sessionCtrl.hasCurrentUser ? sessionCtrl.currentUser.name : '';
+    return currentUserState.value.name;
   }
 
   static bool pushNotification() {
-    return sessionCtrl.hasCurrentUser &&
-        sessionCtrl.currentUser.fcmToken != null;
+    return currentUserState.value.fcmToken != null;
   }
 
   static GenderType gender() {
-    return sessionCtrl.hasCurrentUser
-        ? sessionCtrl.currentUser.gender
-        : GenderType.male;
+    return currentUserState.value.gender;
   }
 
   static AuthMethodType authMethod() {
-    return sessionCtrl.hasCurrentUser
-        ? sessionCtrl.currentUser.authMethod
-        : AuthMethodType.anonymous;
+    return currentUserState.value.authMethod;
   }
 
   static String? profilePicture() {
-    return sessionCtrl.hasCurrentUser
-        ? sessionCtrl.currentUser.profilePicture
-        : null;
+    return currentUserState.value.profilePicture;
   }
 
   static Future<bool> setUser(UserModel user) async {

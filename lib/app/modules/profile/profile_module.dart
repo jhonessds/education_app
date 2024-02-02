@@ -16,7 +16,7 @@ class ProfileModule extends Module {
       ..addLazySingleton<ProfileRepository>(ProfileRepositoryImpl.new)
       // Use Cases
       ..addLazySingleton<UpdateUser>(UpdateUser.new)
-      ..addLazySingleton<SaveProfilePicture>(UpdateUser.new)
+      ..addLazySingleton<SaveProfilePicture>(SaveProfilePicture.new)
       ..addLazySingleton<DeleteUser>(DeleteUser.new)
       // Controllers
       ..addLazySingleton<ProfileController>(ProfileController.new);

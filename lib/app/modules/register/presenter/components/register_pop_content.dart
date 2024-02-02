@@ -1,8 +1,8 @@
 import 'package:demo/app/modules/auth/presenter/widgets/sign_up/privay_policy_button.dart';
 import 'package:demo/app/modules/register/presenter/controllers/register_controller.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/widgets/custom_input.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';

@@ -16,6 +16,7 @@ import 'package:demo/app/modules/auth/presenter/controllers/session_controller.d
 import 'package:demo/app/modules/auth/presenter/views/sign_in_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -25,6 +26,7 @@ class AuthModule extends Module {
     i
       ..addLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance)
       ..addLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance)
+      ..addLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance)
       ..addLazySingleton<FirebaseMessaging>(() => FirebaseMessaging.instance)
       ..addLazySingleton<GoogleSignIn>(GoogleSignIn.new)
       ..addLazySingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl.new)

@@ -1,6 +1,6 @@
 import 'package:demo/app/app_widget.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/states/app_state.dart';
-import 'package:demo/core/services/preferences/font_manager.dart';
 import 'package:demo/core/utils/fonts.dart';
 import 'package:flutter/material.dart';
 

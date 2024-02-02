@@ -1,9 +1,9 @@
 import 'package:asp/asp.dart';
 
 import 'package:demo/app/modules/settings/presenter/widgets/settings_tile.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/states/app_state.dart';
 import 'package:demo/core/common/widgets/settings/language_selector.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 

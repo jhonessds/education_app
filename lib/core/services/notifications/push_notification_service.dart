@@ -1,6 +1,12 @@
+import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
+import 'package:demo/app/modules/profile/presenter/controllers/profile_controller.dart';
+import 'package:demo/app/modules/settings/presenter/controllers/states/setting_state.dart';
+import 'package:demo/core/common/models/user_model.dart';
+import 'package:demo/core/common/states/user_state.dart';
 import 'package:demo/core/services/notifications/notification_functions.dart';
 import 'package:demo/core/services/notifications/notification_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PushNotificationsManager {
@@ -8,25 +14,23 @@ class PushNotificationsManager {
 
   PushNotificationsManager._();
   static final _instance = PushNotificationsManager._();
-
-  final _firebaseMessaging = FirebaseMessaging.instance;
-  SharedPreferences? _sharedPreferences;
+  SharedPreferences? _prefs;
 
   bool _initialized = false;
 
   Future<void> resetClass() async {
     _initialized = false;
-    await _sharedPreferences?.remove('isTokenSent');
+    await _prefs?.remove('isTokenSent');
   }
 
-  Future<void> init({required String userId}) async {
+  Future<void> init() async {
     if (!_initialized) {
-      _sharedPreferences = await SharedPreferences.getInstance();
-      final settings = await _firebaseMessaging.requestPermission();
+      final firebaseMessaging = Modular.get<FirebaseMessaging>();
+      _prefs = await SharedPreferences.getInstance();
+      final settings = await firebaseMessaging.requestPermission();
 
       // Com app fechado
-      // ignore: unawaited_futures
-      _firebaseMessaging.getInitialMessage().then((message) {
+      await firebaseMessaging.getInitialMessage().then((message) {
         if (message == null) return;
         _onAppClosedAction(settings, message);
       });
@@ -47,19 +51,18 @@ class PushNotificationsManager {
         await showNotificationAlert(notification);
       });
 
-      final isTokenSent = _sharedPreferences!.getBool('isTokenSent') ?? false;
+      final isTokenSent = _prefs!.getBool('isTokenSent') ?? false;
 
       if (!isTokenSent) {
-        //final token = await _firebaseMessaging.getToken();
+        final profileCtrl = Modular.get<ProfileController>();
+        final user = currentUserState.value;
+        late UserModel userToUpdate;
 
-        // final result = await SetFcmToken().call(
-        //   userId: userId,
-        //   fcmToken: token ?? '',
-        // );
+        final fcmToken = await firebaseMessaging.getToken();
+        userToUpdate = user.copyWith(fcmToken: fcmToken);
+        fcmTokenState.value = true;
 
-        // if (result && token != null) {
-        //   await _sharedPreferences!.setBool('isTokenSent', true);
-        // }
+        await profileCtrl.updateUser(user: userToUpdate);
       }
 
       _initialized = true;

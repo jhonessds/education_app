@@ -1,9 +1,6 @@
 import 'package:asp/asp.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/states/app_state.dart';
-import 'package:demo/core/services/preferences/flex_scheme_manager.dart';
-import 'package:demo/core/services/preferences/font_manager.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
-import 'package:demo/core/services/preferences/theme_manager.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,11 +17,7 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   void didChangeDependencies() {
-    getLocale();
-    getTheme();
-    getFlexScheme();
-    getFont();
-    getDarkFlexScheme();
+    initApp();
     super.didChangeDependencies();
   }
 

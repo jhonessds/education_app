@@ -62,6 +62,7 @@
     "minimumEightCharacters": "mínimo ocho caracteres",
     "themeColor": "Color del Tema",
     "language": "Idioma",
+    "font": "Fuente",
     "pushNotification": "Notificaciones",
     "darkMode": "Modo Oscuro",
     "whatsAppUsText": "Si tiene otra consulta puede comunicarse con nosotros.",

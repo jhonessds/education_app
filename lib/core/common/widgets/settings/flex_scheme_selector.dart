@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:demo/app/app_widget.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/states/app_state.dart';
-import 'package:demo/core/services/preferences/flex_scheme_manager.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 

@@ -2,9 +2,9 @@ import 'package:demo/app/modules/auth/presenter/components/sign_up/sign_up_form.
 import 'package:demo/app/modules/auth/presenter/components/social_sign_in_up.dart';
 import 'package:demo/app/modules/auth/presenter/widgets/sign_up/sign_up_button.dart';
 import 'package:demo/app/modules/auth/presenter/widgets/top_title.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
-import 'package:demo/core/services/preferences/language_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
