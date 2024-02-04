@@ -17,6 +17,12 @@
     "delete": "Borrar",
     "problemWithRequest": "¡Tuvimos un problema con tu solicitud, por favor inténtalo de nuevo!",
     "requiredField": "campo tequerido",
+    "anonymous": "Anónimo",
+    "common": "Común",
+    "success": "Éxito",
+    "savedSuccessfully": "Guardado exitosamente",
+    "savedChanges": "Cambios guardados",
+    "hello": "Hola,",
 
     "commentAuthModule":"*********** COMMENT_AUTH_MODULE ***********",
     "provideAEmail": "proporcionar un correo electrónico",
@@ -41,11 +47,15 @@
     "confirmPassword": "Confirm Password",
     "userNotRegistered": "¡Usuario no registrado!\n¿Quieres registrarte?",
     "privacyPolicy": "Política de Privacidad",
-    
+    "anonymousDisclaimer": "Al iniciar sesión de forma anónima, no podrá sincronizar datos y tendrá acceso limitado a ciertas funciones. ¿Desea continuar?",
+
     "commentProfile":"*********** COMMENT_PROFILE ***********",
     "gender": "Género",
     "male": "Masculino",
     "female": "Femenino",
+    "chooseTheOrigin": "Elige el origen",
+    "fromCamera": "Desde la cámara",
+    "fromGallery": "De la galería",
 
     "commentSettings":"*********** COMMENT_SETTINGS ***********",
     "settings": "Ajustes",

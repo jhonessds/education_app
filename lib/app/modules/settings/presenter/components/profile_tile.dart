@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
+import 'package:demo/app/modules/profile/presenter/controllers/profile_controller.dart';
 import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/enums/gender_type.dart';
 import 'package:demo/core/common/widgets/loading_modal.dart';
@@ -52,9 +53,14 @@ class ProfileTile extends StatelessWidget {
             repeat: true,
             callback: () async {
               loadingWidget();
+              if (UserHelper.isAnonymous()) {
+                await Modular.get<ProfileController>().deleteUser(
+                  userId: UserHelper.id(),
+                );
+              }
               await Modular.get<SessionController>().logOut();
               Modular.to.pop();
-              //await Modular.to.pushReplacementNamed('/auth/');
+              await Modular.to.pushReplacementNamed('/auth/');
             },
           );
         },

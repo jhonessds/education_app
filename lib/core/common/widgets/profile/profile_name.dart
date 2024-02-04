@@ -20,7 +20,7 @@ class ProfileName extends StatelessWidget {
       color: context.theme.primaryColor,
       alignment: Alignment.center,
       child: Text(
-        UserHelper.name()[0],
+        UserHelper.firstLetter(),
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,

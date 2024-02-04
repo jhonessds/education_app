@@ -6,6 +6,7 @@ import 'package:demo/app/modules/home/presenter/controllers/states/home_state.da
 import 'package:demo/app/modules/settings/presenter/views/settings_view.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/notifications/push_notification_service.dart';
+import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -26,7 +27,7 @@ class _HomeViewState extends State<HomeView>
     super.initState();
     indexState.value = 2;
 
-    PushNotificationsManager().init();
+    if (!UserHelper.isAnonymous()) PushNotificationsManager().init();
 
     tabController = TabController(vsync: this, length: 5, initialIndex: 2);
   }

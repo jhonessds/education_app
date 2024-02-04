@@ -45,14 +45,14 @@ Future<void> changeProfilePicture() async {
             SimpleText(
               mgTop: 10,
               mgBottom: 20,
-              text: 'Escolha a origem',
+              text: translation().chooseTheOrigin,
               fontWeight: FontWeight.w600,
               color: context.theme.primaryColor,
               fontSize: 21,
             ),
             ListTile(
               leading: const Icon(Icons.camera_alt_outlined),
-              title: const Text('From Camera'),
+              title: Text(translation().fromCamera),
               onTap: () async => processRequest(source: ImageSource.camera),
             ),
             Divider(
@@ -63,7 +63,7 @@ Future<void> changeProfilePicture() async {
             ),
             ListTile(
               leading: const Icon(Icons.photo),
-              title: const Text('From Gallery'),
+              title: Text(translation().fromGallery),
               onTap: () async => processRequest(source: ImageSource.gallery),
             ),
             Container(
@@ -111,11 +111,11 @@ Future<void> processRequest({required ImageSource source}) async {
     Modular.to.pop();
     if (result) {
       CoreUtils.bottomSnackBar(
-        'Sucesso!',
+        translation().savedChanges,
         type: SnackBarType.save,
       );
     } else {
-      CoreUtils.bottomSnackBar('Falha!');
+      CoreUtils.bottomSnackBar(translation().problemWithRequest);
     }
   }
 }

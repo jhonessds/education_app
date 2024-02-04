@@ -14,7 +14,7 @@ void main() {
     id: 'id',
     name: 'name',
     email: '',
-    userType: UserType.unknown,
+    userType: UserType.anonymous,
     authMethod: AuthMethodType.anonymous,
   );
   final tJson = fixture('user');

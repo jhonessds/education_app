@@ -85,7 +85,22 @@ class ProfileDataSourceImpl implements ProfileDataSource {
   }
 
   @override
-  Future<bool> deleteUser({required String userId}) {
-    throw UnimplementedError();
+  Future<bool> deleteUser({required String userId}) async {
+    try {
+      await userCollection.delete(userId);
+      return Future.value(true);
+    } on FirebaseFailure {
+      rethrow;
+    } on FirebaseException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw FirebaseFailure(
+        message: e.toString(),
+        statusCode: StatusCode.problemWithRequest,
+      );
+    }
   }
 }

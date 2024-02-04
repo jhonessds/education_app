@@ -17,6 +17,12 @@
     "delete": "Delete",
     "problemWithRequest": "We had a problem with your request, please try again!",
     "requiredField": "required field",
+    "anonymous": "Anonymous",
+    "common": "Common",
+    "success": "Success",
+    "savedSuccessfully": "Saved successfully",
+    "savedChanges": "Saved changes",
+    "hello": "Hello,",
 
     "commentAuthModule":"*********** COMMENT_AUTH_MODULE ***********",
     "provideAEmail": "provide a email",
@@ -41,11 +47,15 @@
     "confirmPassword": "Confirm Password",
     "userNotRegistered": "User not registered!\nDo you want to register?",
     "privacyPolicy": "Privacy Policy",
+    "anonymousDisclaimer": "When logging in anonymously you will not be able to synchronize data, and will have limited access to certain features. Do you wish to continue?",
 
     "commentProfile":"*********** COMMENT_PROFILE ***********",
     "gender": "Gender",
     "male": "Male",
     "female": "Female",
+    "chooseTheOrigin": "Choose the origin",
+    "fromCamera": "From Camera",
+    "fromGallery": "From Gallery",
 
     "commentSettings":"*********** COMMENT_SETTINGS ***********",
     "settings": "Settings",

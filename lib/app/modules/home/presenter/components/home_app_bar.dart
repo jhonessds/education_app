@@ -2,6 +2,7 @@ import 'package:asp/asp.dart';
 import 'package:demo/app/modules/home/presenter/components/profile_home_tile.dart';
 import 'package:demo/app/modules/home/presenter/controllers/states/home_state.dart';
 import 'package:demo/core/extensions/context_extension.dart';
+import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -19,29 +20,30 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               backgroundColor: Colors.transparent,
               title: const ProfileHomeTile(),
               actions: [
-                Card(
-                  margin: const EdgeInsets.only(right: 12),
-                  shape: const CircleBorder(),
-                  elevation: 2,
-                  child: InkWell(
-                    customBorder: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    onTap: () {},
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                if (!UserHelper.isAnonymous())
+                  Card(
+                    margin: const EdgeInsets.only(right: 12),
+                    shape: const CircleBorder(),
+                    elevation: 2,
+                    child: InkWell(
+                      customBorder: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                      child: Icon(
-                        Icons.notifications,
-                        color: context.theme.colorScheme.primary,
+                      onTap: () {},
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
+                        child: Icon(
+                          Icons.notifications,
+                          color: context.theme.colorScheme.primary,
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           );

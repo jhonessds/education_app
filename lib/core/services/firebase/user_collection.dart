@@ -4,6 +4,8 @@ import 'package:demo/core/errors/firebase_failure.dart';
 import 'package:demo/core/services/firebase/i_collection.dart';
 import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:demo/core/utils/status_code.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class UserCollection implements ICollection<UserModel> {
   UserCollection({required this.instance});
@@ -39,7 +41,17 @@ class UserCollection implements ICollection<UserModel> {
   @override
   Future<void> delete(String id) async {
     try {
-      await instance.collection('users').doc(id).delete();
+      final snapUser = await instance.collection('users').doc(id).get();
+      if (snapUser.exists) {
+        final user = UserModel.fromMap(snapUser.data()!);
+
+        await instance.collection('users').doc(id).delete();
+        await instance.collection('usersDeleted').doc(id).set(
+              user.toDeleteMap(),
+            );
+      }
+      final auth = Modular.get<FirebaseAuth>();
+      await auth.currentUser!.delete();
     } catch (e) {
       throw FirebaseFailure(
         message: e.toString(),

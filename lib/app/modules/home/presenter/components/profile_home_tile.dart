@@ -1,3 +1,4 @@
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/widgets/profile/profile_picture.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/utils/helpers/user_helper.dart';
@@ -18,7 +19,7 @@ class ProfileHomeTile extends StatelessWidget {
         onTap: () {},
       ),
       title: Text(
-        'Olá',
+        translation().hello,
         style: TextStyle(
           fontSize: 12,
           color: context.theme.disabledColor,

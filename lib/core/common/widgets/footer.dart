@@ -1,5 +1,4 @@
 import 'package:demo/core/common/actions/app_actions.dart';
-import 'package:demo/core/common/widgets/settings/flex_scheme_selector.dart';
 import 'package:demo/core/common/widgets/settings/language_selector.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
@@ -56,12 +55,6 @@ class _FooterState extends State<Footer> {
             onPressed: () async => languageSelector(),
             icon: const Icon(
               Icons.translate,
-            ),
-          ),
-          IconButton(
-            onPressed: () async => flexSchemeSelector(),
-            icon: const Icon(
-              Icons.palette,
             ),
           ),
         ],

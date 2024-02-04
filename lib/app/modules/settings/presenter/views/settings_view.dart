@@ -50,13 +50,14 @@ class SettingsView extends StatelessWidget {
                   height: 1,
                 ),
               ),
-              SettingsTile(
-                icon: Iconsax.profile_circle_outline,
-                title: translation().userProfile,
-                onTap: () {
-                  Modular.to.push(CoreUtils.push(const ProfileView()));
-                },
-              ),
+              if (!UserHelper.isAnonymous())
+                SettingsTile(
+                  icon: Iconsax.profile_circle_outline,
+                  title: translation().userProfile,
+                  onTap: () {
+                    Modular.to.push(CoreUtils.push(const ProfileView()));
+                  },
+                ),
               if (UserHelper.authMethod() == AuthMethodType.email)
                 const ChangePasswordTile(),
               SettingsTile(
@@ -70,7 +71,7 @@ class SettingsView extends StatelessWidget {
                 onTap: fontSelector,
               ),
               const LanguageTile(),
-              const NotificationTile(),
+              if (!UserHelper.isAnonymous()) const NotificationTile(),
               const DarkModeTile(),
               const WhatsappUs(),
             ],

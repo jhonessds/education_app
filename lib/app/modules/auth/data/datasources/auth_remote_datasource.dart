@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
+import 'package:demo/core/common/enums/gender_type.dart';
 import 'package:demo/core/common/enums/user_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/errors/auth_failure.dart';
@@ -247,6 +248,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         id: firebaseUser.uid,
         name: UserType.anonymous.translated,
         email: '',
+        profilePicture: '',
         authMethod: AuthMethodType.anonymous,
         userType: UserType.anonymous,
       );

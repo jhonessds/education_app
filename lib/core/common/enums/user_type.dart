@@ -1,5 +1,6 @@
+import 'package:demo/core/common/actions/app_actions.dart';
+
 enum UserType {
-  unknown('UNKNOWN', 0),
   anonymous('ANONYMOUS', 10),
   common('COMMON', 20),
   master('MASTER', 100);
@@ -8,8 +9,6 @@ enum UserType {
 
   factory UserType.fromString(String value) {
     switch (value) {
-      case 'UNKNOWN':
-        return UserType.unknown;
       case 'ANONYMOUS':
         return UserType.anonymous;
       case 'COMMON':
@@ -17,7 +16,7 @@ enum UserType {
       case 'MASTER':
         return UserType.master;
       default:
-        return UserType.unknown;
+        return UserType.anonymous;
     }
   }
 
@@ -29,12 +28,10 @@ enum UserType {
 
   String get translated {
     switch (this) {
-      case UserType.unknown:
-        return 'unknown';
       case UserType.anonymous:
-        return 'anonymous';
+        return translation().anonymous;
       case UserType.common:
-        return 'common';
+        return translation().common;
       case UserType.master:
         return 'Master';
     }

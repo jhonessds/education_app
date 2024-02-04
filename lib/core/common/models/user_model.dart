@@ -26,7 +26,7 @@ class UserModel extends User {
       name: (map['name'] as String?) ?? '',
       userType: map['userType'] != null
           ? UserType.fromString(map['userType'] as String)
-          : UserType.unknown,
+          : UserType.anonymous,
       gender: map['gender'] != null
           ? GenderType.fromString(map['userType'] as String)
           : GenderType.male,
@@ -49,7 +49,7 @@ class UserModel extends User {
       name: '',
       email: '',
       profilePicture: '',
-      userType: UserType.unknown,
+      userType: UserType.anonymous,
       authMethod: AuthMethodType.anonymous,
     );
   }
@@ -92,6 +92,13 @@ class UserModel extends User {
         'bio': bio,
         'fcmToken': fcmToken,
         'firstAccess': firstAccess,
+      };
+
+  DataMap toDeleteMap() => {
+        'id': id,
+        'userType': userType.name,
+        'authMethod': authMethod.name,
+        'gender': gender.name,
       };
 
   String toJson() => json.encode(toMap());

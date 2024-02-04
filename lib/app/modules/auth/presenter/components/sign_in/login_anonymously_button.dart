@@ -2,6 +2,7 @@ import 'package:demo/app/modules/auth/presenter/controllers/auth_controller.dart
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/app/modules/auth/presenter/validations/validate_auth_response.dart';
 import 'package:demo/app/modules/auth/presenter/widgets/login_option_icon_button.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/widgets/custom_alert.dart';
 import 'package:demo/core/common/widgets/loading_modal.dart';
@@ -34,10 +35,8 @@ class LoginAnonymouslyButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Lottie.asset('assets/lottie/incognito.json'),
-              const SimpleText(
-                text: 'Ao iniciar a sessão anonimamente você não '
-                    'será capaz de sincronizar os dados, e tera acesso '
-                    'limitado a certos recursos. Deseja continuar?',
+              SimpleText(
+                text: translation().anonymousDisclaimer,
                 maxlines: 10,
               ),
             ],
