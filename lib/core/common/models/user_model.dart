@@ -18,6 +18,7 @@ class UserModel extends User {
     super.bio,
     super.fcmToken,
     super.firstAccess,
+    super.verified,
   });
 
   factory UserModel.fromMap(DataMap map, {String? id}) {
@@ -37,6 +38,8 @@ class UserModel extends User {
       profilePicture: (map['profilePicture'] as String?) ?? '',
       bio: (map['bio'] as String?) ?? '',
       fcmToken: (map['fcmToken'] as String?) ?? '',
+      firstAccess: map['firstAccess'] as bool,
+      verified: map['verified'] as bool,
     );
   }
 
@@ -48,7 +51,6 @@ class UserModel extends User {
       id: '',
       name: '',
       email: '',
-      profilePicture: '',
       userType: UserType.anonymous,
       authMethod: AuthMethodType.anonymous,
     );
@@ -66,6 +68,7 @@ class UserModel extends User {
     String? bio,
     String? fcmToken,
     bool? firstAccess,
+    bool? verified,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -78,6 +81,7 @@ class UserModel extends User {
       bio: bio ?? this.bio,
       fcmToken: fcmToken ?? this.fcmToken,
       firstAccess: firstAccess ?? this.firstAccess,
+      verified: verified ?? this.verified,
     );
   }
 
@@ -92,6 +96,7 @@ class UserModel extends User {
         'bio': bio,
         'fcmToken': fcmToken,
         'firstAccess': firstAccess,
+        'verified': verified,
       };
 
   DataMap toDeleteMap() => {

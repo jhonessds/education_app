@@ -39,10 +39,10 @@ class _SignUpFormState extends State<SignUpForm> {
           children: [
             CustomInput(
               controller: fullNameCtrl,
-              hintText: translation().fullName,
+              labelText: translation().fullName,
               mgBottom: 10,
               borderRadius: 70,
-              validator: InputValidator.emptyCheck('campo obrigatorio'),
+              validator: InputValidator.emptyCheck(translation().requiredField),
               onTap: () => CoreUtils.scrollTo(widget.buttonKey),
               onChange: (value) {
                 registerCtrl.name = value.trim();
@@ -52,7 +52,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             CustomInput(
               controller: emailCtrl,
-              hintText: translation().email.capitalize,
+              labelText: translation().email.capitalize,
               keyboardType: TextInputType.emailAddress,
               mgBottom: 10,
               borderRadius: 70,
@@ -66,7 +66,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             CustomInput(
               controller: passwordCtrl,
-              hintText: translation().password.capitalize,
+              labelText: translation().password.capitalize,
               obscureText: obscureText,
               keyboardType: TextInputType.visiblePassword,
               maxlines: 1,
@@ -88,7 +88,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             CustomInput(
               controller: confirmPasswordCtrl,
-              hintText: translation().confirmPassword.capitalize,
+              labelText: translation().confirmPassword.capitalize,
               obscureText: obscureText,
               keyboardType: TextInputType.visiblePassword,
               maxlines: 1,

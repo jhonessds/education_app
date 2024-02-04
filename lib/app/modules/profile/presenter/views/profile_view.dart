@@ -1,9 +1,19 @@
+import 'package:demo/app/modules/profile/presenter/components/profile_form.dart';
 import 'package:demo/app/modules/profile/presenter/components/profile_image_edit.dart';
+import 'package:demo/app/modules/profile/presenter/components/update_profile_button.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
+
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +21,7 @@ class ProfileView extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: context.theme.primaryColor),
         title: Text(
-          'User Profile',
+          translation().userProfile,
           style: TextStyle(color: context.theme.colorScheme.onBackground),
         ),
         centerTitle: true,
@@ -20,11 +30,13 @@ class ProfileView extends StatelessWidget {
       body: SingleChildScrollView(
         child: SizedBox(
           width: context.width,
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 10),
-              ProfileImageEdit(),
+              const SizedBox(height: 10),
+              const ProfileImageEdit(),
+              ProfileForm(formKey: formKey),
+              UpdateProfileButton(formKey: formKey),
             ],
           ),
         ),

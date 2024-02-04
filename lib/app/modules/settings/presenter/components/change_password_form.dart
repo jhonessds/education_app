@@ -34,7 +34,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
           children: [
             CustomInput(
               controller: oldPasswordCtrl,
-              hintText: translation().oldPassword.capitalize,
+              labelText: translation().oldPassword.capitalize,
               obscureText: obscureText,
               keyboardType: TextInputType.visiblePassword,
               maxlines: 1,
@@ -52,7 +52,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
             ),
             CustomInput(
               controller: newPasswordCtrl,
-              hintText: translation().newPassword.capitalize,
+              labelText: translation().newPassword.capitalize,
               obscureText: obscureText,
               keyboardType: TextInputType.visiblePassword,
               maxlines: 1,

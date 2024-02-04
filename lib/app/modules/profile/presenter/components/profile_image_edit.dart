@@ -39,7 +39,7 @@ class ProfileImageEdit extends StatelessWidget {
                           width: context.height * 0.15,
                           height: context.height * 0.15,
                           key: ValueKey(Random().nextInt(100)),
-                          url: currentUserState.value.profilePicture!,
+                          url: currentUserState.value.profilePicture,
                           cacheHeight: (context.height * 0.15).toInt(),
                           cacheWidth: (context.height * 0.15).toInt(),
                           fit: BoxFit.cover,
@@ -87,7 +87,7 @@ class ProfileImageEdit extends StatelessWidget {
                     child: Icon(
                       Icons.camera_alt_outlined,
                       size: 16,
-                      color: context.theme.colorScheme.onBackground,
+                      color: context.theme.primaryColor,
                     ),
                   ),
                 ),

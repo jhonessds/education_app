@@ -10,9 +10,10 @@ class User extends Equatable {
     required this.userType,
     required this.authMethod,
     required this.email,
+    this.profilePicture = '',
     this.gender = GenderType.male,
     this.firstAccess = true,
-    this.profilePicture,
+    this.verified = false,
     this.bio,
     this.fcmToken,
   });
@@ -24,10 +25,11 @@ class User extends Equatable {
   final AuthMethodType authMethod;
   final GenderType gender;
   final String email;
-  final String? profilePicture;
+  final String profilePicture;
   final String? bio;
   final String? fcmToken;
   final bool firstAccess;
+  final bool verified;
 
   @override
   List<Object> get props => [id, name];

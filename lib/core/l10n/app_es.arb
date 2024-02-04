@@ -56,7 +56,9 @@
     "chooseTheOrigin": "Elige el origen",
     "fromCamera": "Desde la cámara",
     "fromGallery": "De la galería",
-
+    "chooseYourGender": "Elige tu género",
+    "bio": "Bio",
+    
     "commentSettings":"*********** COMMENT_SETTINGS ***********",
     "settings": "Ajustes",
     "welcomeF": "Bienvenida",

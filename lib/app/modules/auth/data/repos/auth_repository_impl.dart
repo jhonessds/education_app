@@ -121,4 +121,36 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(e);
     }
   }
+
+  @override
+  ResultFuture<void> sendEmailVerification() async {
+    try {
+      final result = await _datasource.sendEmailVerification();
+      return Right(result);
+    } on FirebaseFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<void> setLanguageCode({required String languageCode}) async {
+    try {
+      final result = await _datasource.setLanguageCode(
+        languageCode: languageCode,
+      );
+      return Right(result);
+    } on FirebaseFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<bool> emailHasVerified() async {
+    try {
+      final result = await _datasource.emailHasVerified();
+      return Right(result);
+    } on FirebaseFailure catch (e) {
+      return Left(e);
+    }
+  }
 }

@@ -1,4 +1,6 @@
+import 'package:demo/app/modules/auth/domain/usecases/email_has_verified.dart';
 import 'package:demo/app/modules/auth/domain/usecases/forgot_password.dart';
+import 'package:demo/app/modules/auth/domain/usecases/send_email_verification.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_anonymously.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:demo/app/modules/auth/domain/usecases/sign_in_with_facebook.dart';
@@ -24,11 +26,15 @@ class AuthController {
     required SignInAnonymously signInAnonymously,
     required ForgotPassword forgotPassword,
     required UpdatePassword updatePassword,
+    required SendEmailVerification sendEmailVerification,
+    required EmailHasVerified emailHasVerified,
   })  : _signInWithEmail = signInWithEmail,
         _signInWithGoogle = signInWithGoogle,
         _signInWithGithub = signInWithGithub,
         _signInWithFacebook = signInWithFacebook,
+        _sendEmailVerification = sendEmailVerification,
         _forgotPassword = forgotPassword,
+        _emailHasVerified = emailHasVerified,
         _updatePassword = updatePassword,
         _signInAnonymously = signInAnonymously;
 
@@ -39,6 +45,8 @@ class AuthController {
   final SignInWithFacebook _signInWithFacebook;
   final ForgotPassword _forgotPassword;
   final UpdatePassword _updatePassword;
+  final SendEmailVerification _sendEmailVerification;
+  final EmailHasVerified _emailHasVerified;
 
   String email = '';
   String password = '';
@@ -114,6 +122,34 @@ class AuthController {
       },
       (_) {
         return true;
+      },
+    );
+  }
+
+  Future<bool> sendEmailVerification() async {
+    final result = await _sendEmailVerification();
+
+    return result.fold(
+      (f) {
+        errorMessage = f.statusCode.translated;
+        return false;
+      },
+      (_) {
+        return true;
+      },
+    );
+  }
+
+  Future<bool> emailHasVerified() async {
+    final result = await _emailHasVerified();
+
+    return result.fold(
+      (f) {
+        errorMessage = f.statusCode.translated;
+        return false;
+      },
+      (r) {
+        return r;
       },
     );
   }

@@ -1,5 +1,7 @@
 import 'package:demo/app/modules/auth/auth_module.dart';
+import 'package:demo/app/modules/auth/presenter/views/verify_email_view.dart';
 import 'package:demo/app/modules/home/home_module.dart';
+import 'package:demo/app/modules/profile/profile_module.dart';
 import 'package:demo/app/modules/register/register_module.dart';
 import 'package:demo/app/modules/splash/splash_module.dart';
 import 'package:demo/core/common/models/environment_model.dart';
@@ -14,7 +16,11 @@ class AppModule extends Module {
   }
 
   @override
-  List<Module> get imports => [AuthModule(), RegisterModule()];
+  List<Module> get imports => [
+        AuthModule(),
+        RegisterModule(),
+        ProfileModule(),
+      ];
 
   @override
   void routes(RouteManager r) {
@@ -33,6 +39,7 @@ class AppModule extends Module {
         '/home',
         module: HomeModule(),
         customTransition: CoreUtils.customTransition(),
-      );
+      )
+      ..child('/verify-email', child: (_) => const VerifyEmailView());
   }
 }

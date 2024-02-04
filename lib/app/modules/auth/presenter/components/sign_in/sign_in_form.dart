@@ -36,7 +36,7 @@ class _SignInFormState extends State<SignInForm> {
           children: [
             CustomInput(
               controller: emailCtrl,
-              hintText: translation().email.capitalize,
+              labelText: translation().email.capitalize,
               keyboardType: TextInputType.emailAddress,
               mgBottom: 20,
               borderRadius: 70,
@@ -50,7 +50,7 @@ class _SignInFormState extends State<SignInForm> {
             ),
             CustomInput(
               controller: passwordCtrl,
-              hintText: translation().password.capitalize,
+              labelText: translation().password.capitalize,
               obscureText: obscureText,
               keyboardType: TextInputType.visiblePassword,
               maxlines: 1,

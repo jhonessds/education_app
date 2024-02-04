@@ -7,6 +7,8 @@ abstract class AuthRepository {
   ResultFuture<User?> getSessionUser();
   ResultFuture<void> logOut();
   ResultFuture<void> forgotPassword({required String email});
+  ResultFuture<void> setLanguageCode({required String languageCode});
+  ResultFuture<void> sendEmailVerification();
   ResultFuture<void> updatePassword({
     required String oldPassword,
     required String newPassword,
@@ -20,4 +22,5 @@ abstract class AuthRepository {
   ResultFuture<User> signInWithGithub();
   ResultFuture<User> signInWithFacebook();
   ResultFuture<User> signInWithApple();
+  ResultFuture<bool> emailHasVerified();
 }

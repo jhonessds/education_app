@@ -1,10 +1,9 @@
 import 'dart:io';
 import 'package:asp/asp.dart';
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
-import 'package:demo/app/modules/auth/presenter/views/sign_in_view.dart';
 import 'package:demo/core/common/states/app_state.dart';
+import 'package:demo/core/common/states/user_state.dart';
 import 'package:demo/core/extensions/context_extension.dart';
-import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -24,7 +23,11 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
     sessionCtrl.getSessionUser().then((value) {
       if (value) {
-        Modular.to.pushReplacementNamed('/home/');
+        if (currentUserState.value.verified) {
+          Modular.to.pushReplacementNamed('/home/');
+        } else {
+          Modular.to.pushReplacementNamed('/verify-email');
+        }
       } else {
         Modular.to.pushReplacementNamed('/auth/');
       }

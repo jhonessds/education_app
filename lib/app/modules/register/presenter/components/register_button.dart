@@ -1,6 +1,8 @@
 import 'package:demo/app/modules/auth/presenter/controllers/auth_controller.dart';
+import 'package:demo/app/modules/auth/presenter/views/verify_email_view.dart';
 import 'package:demo/app/modules/register/presenter/controllers/register_controller.dart';
 import 'package:demo/core/common/actions/app_actions.dart';
+import 'package:demo/core/common/enums/auth_method_type.dart';
 import 'package:demo/core/common/widgets/loading_modal.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,13 @@ class RegisterButton extends StatelessWidget {
                 Modular.to.pop();
 
                 if (result) {
-                  await Modular.to.pushReplacementNamed('/home/');
+                  if (authCtrl.authMethod == AuthMethodType.email) {
+                    await Modular.to.push(
+                      CoreUtils.push(const VerifyEmailView()),
+                    );
+                  } else {
+                    await Modular.to.pushReplacementNamed('/home/');
+                  }
                 } else {
                   CoreUtils.bottomSnackBar(registerCtrl.errorMessage);
                 }

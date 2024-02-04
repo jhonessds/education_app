@@ -52,7 +52,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                   mgLeft: 13,
                   mgRight: 13,
                   maxlines: 1,
-                  hintText: translation().email,
+                  labelText: translation().email,
                   keyboardType: TextInputType.emailAddress,
                   validator: InputValidator.emailValidator,
                   onTap: () => CoreUtils.scrollTo(buttonKey),

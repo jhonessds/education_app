@@ -54,14 +54,11 @@ class PushNotificationsManager {
 
       if (!isTokenSent) {
         final profileCtrl = Modular.get<ProfileController>();
-        final user = currentUserState.value;
-        late UserModel userToUpdate;
-
         final fcmToken = await firebaseMessaging.getToken();
-        userToUpdate = user.copyWith(fcmToken: fcmToken);
-        fcmTokenState.value = true;
-
-        await profileCtrl.updateUser(user: userToUpdate);
+        if (fcmToken != null) {
+          fcmTokenState.value = true;
+          await profileCtrl.updateFcmToken(fcmToken: fcmToken);
+        }
       }
 
       _initialized = true;

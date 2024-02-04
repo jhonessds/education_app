@@ -48,6 +48,7 @@ class RegisterController {
         profilePictureParam: _firebaseAuth.currentUser!.photoURL,
         emailParam: _firebaseAuth.currentUser!.email,
         idParam: _firebaseAuth.currentUser!.uid,
+        verifiedParam: true,
       );
       result = await _registerUser(userToInsert);
     } else {
@@ -84,14 +85,16 @@ class RegisterController {
     String? emailParam,
     UserType? userTypeParam,
     AuthMethodType? authMethodParam,
+    bool? verifiedParam,
   }) {
     return UserModel(
       id: idParam ?? '',
       name: nameParam ?? name,
       email: emailParam ?? email,
-      profilePicture: profilePictureParam,
+      profilePicture: profilePictureParam ?? '',
       authMethod: authMethodParam ?? authMethod,
       userType: userTypeParam ?? UserType.common,
+      verified: verifiedParam ?? false,
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
-import 'package:demo/core/common/enums/gender_type.dart';
 import 'package:demo/core/common/enums/user_type.dart';
 import 'package:demo/core/common/models/user_model.dart';
 import 'package:demo/core/errors/auth_failure.dart';
@@ -19,6 +18,9 @@ abstract class AuthRemoteDataSource {
     required String oldPassword,
     required String newPassword,
   });
+  Future<bool> emailHasVerified();
+  Future<void> sendEmailVerification();
+  Future<void> setLanguageCode({required String languageCode});
   Future<void> forgotPassword({required String email});
   Future<UserModel> signInWithEmail({
     required String email,
@@ -248,12 +250,63 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         id: firebaseUser.uid,
         name: UserType.anonymous.translated,
         email: '',
-        profilePicture: '',
         authMethod: AuthMethodType.anonymous,
         userType: UserType.anonymous,
       );
     } on FirebaseFailure {
       rethrow;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw FirebaseFailure(
+        message: e.toString(),
+        statusCode: StatusCode.problemWithRequest,
+      );
+    }
+  }
+
+  @override
+  Future<void> sendEmailVerification() async {
+    try {
+      await firebaseAuth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw FirebaseFailure(
+        message: e.toString(),
+        statusCode: StatusCode.problemWithRequest,
+      );
+    }
+  }
+
+  @override
+  Future<bool> emailHasVerified() async {
+    try {
+      await firebaseAuth.currentUser?.reload();
+      return Future.value(firebaseAuth.currentUser?.emailVerified);
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseFailure(
+        message: e.message ?? 'Unknow Error',
+        statusCode: StatusCode.fromFirebase(e.code),
+      );
+    } catch (e) {
+      throw FirebaseFailure(
+        message: e.toString(),
+        statusCode: StatusCode.problemWithRequest,
+      );
+    }
+  }
+
+  @override
+  Future<void> setLanguageCode({required String languageCode}) async {
+    try {
+      await firebaseAuth.setLanguageCode(languageCode);
     } on FirebaseAuthException catch (e) {
       throw FirebaseFailure(
         message: e.message ?? 'Unknow Error',

@@ -1,5 +1,4 @@
 import 'package:demo/core/common/actions/app_actions.dart';
-import 'package:flutter/material.dart';
 
 enum GenderType {
   male('MALE', 0),
@@ -18,14 +17,13 @@ enum GenderType {
         return GenderType.male;
     }
   }
-
-  static String translated(String value, BuildContext context) {
-    switch (value) {
-      case 'MALE':
+  String get translated {
+    switch (this) {
+      case GenderType.male:
         return translation().male;
-      case 'FEMALE':
+      case GenderType.female:
         return translation().female;
-      default:
+      case GenderType.none:
         return translation().male;
     }
   }

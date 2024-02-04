@@ -1,3 +1,4 @@
+import 'package:demo/app/modules/auth/presenter/views/verify_email_view.dart';
 import 'package:demo/app/modules/register/presenter/controllers/register_controller.dart';
 import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/enums/auth_method_type.dart';
@@ -46,7 +47,8 @@ class _SignUpButtonState extends State<SignUpButton> {
             btnController.stop();
 
             if (result) {
-              await Modular.to.pushReplacementNamed('/home/');
+              await Modular.to.push(CoreUtils.push(const VerifyEmailView()));
+              // await Modular.to.pushReplacementNamed('/home/');
             } else {
               CoreUtils.bottomSnackBar(registerCtrl.errorMessage);
             }
