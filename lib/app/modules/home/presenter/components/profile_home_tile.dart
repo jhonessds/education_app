@@ -1,8 +1,11 @@
+import 'package:demo/app/modules/profile/presenter/views/profile_view.dart';
 import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/widgets/profile/profile_picture.dart';
 import 'package:demo/core/extensions/context_extension.dart';
+import 'package:demo/core/utils/core_utils.dart';
 import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ProfileHomeTile extends StatelessWidget {
   const ProfileHomeTile({
@@ -16,7 +19,11 @@ class ProfileHomeTile extends StatelessWidget {
       leading: ProfilePicture(
         mRight: 0,
         size: 50,
-        onTap: () {},
+        onTap: () {
+          if (!UserHelper.isAnonymous()) {
+            Modular.to.push(CoreUtils.push(const ProfileView()));
+          }
+        },
       ),
       title: Text(
         translation().hello,

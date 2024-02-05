@@ -38,6 +38,7 @@ class _ChangePasswordButtonState extends State<ChangePasswordButton> {
         controller: btnController,
         onPressed: () async {
           if (widget.formKey.currentState!.validate()) {
+            FocusScope.of(context).unfocus();
             final result = await authCtrl.updatePassword();
             btnController.stop();
             if (result) {

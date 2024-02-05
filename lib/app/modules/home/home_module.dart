@@ -1,4 +1,5 @@
 import 'package:demo/app/modules/auth/auth_module.dart';
+import 'package:demo/app/modules/currency/currency_module.dart';
 import 'package:demo/app/modules/home/presenter/views/home_view.dart';
 import 'package:demo/app/modules/profile/profile_module.dart';
 import 'package:demo/app/modules/settings/settings_module.dart';
@@ -24,6 +25,11 @@ class HomeModule extends Module {
       ..module(
         '/auth',
         module: AuthModule(),
+        customTransition: CoreUtils.customTransition(),
+      )
+      ..module(
+        '/currency',
+        module: CurrencyModule(),
         customTransition: CoreUtils.customTransition(),
       )
       ..module(

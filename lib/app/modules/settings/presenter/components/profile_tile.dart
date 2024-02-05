@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:asp/asp.dart';
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/app/modules/profile/presenter/controllers/profile_controller.dart';
+import 'package:demo/app/modules/profile/presenter/views/profile_view.dart';
 import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/enums/gender_type.dart';
 import 'package:demo/core/common/widgets/loading_modal.dart';
@@ -25,9 +26,14 @@ class ProfileTile extends StatelessWidget {
       builder: (context) {
         return ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: const ProfilePicture(
+          leading: ProfilePicture(
             mRight: 0,
             size: 50,
+            onTap: () {
+              if (!UserHelper.isAnonymous()) {
+                Modular.to.push(CoreUtils.push(const ProfileView()));
+              }
+            },
           ),
           title: Text(
             UserHelper.gender() == GenderType.male

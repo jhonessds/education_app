@@ -30,6 +30,7 @@ class SettingsView extends StatelessWidget {
             left: 10,
             right: 10,
             top: context.height * 0.05,
+            bottom: context.height * 0.1,
           ),
           child: Column(
             children: [

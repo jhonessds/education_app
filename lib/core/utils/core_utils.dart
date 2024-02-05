@@ -41,7 +41,15 @@ class CoreUtils {
         );
       },
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return child;
+        return FadeTransition(
+          opacity: animation,
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaler: TextScaler.noScaling,
+            ),
+            child: child,
+          ),
+        );
       },
     );
   }

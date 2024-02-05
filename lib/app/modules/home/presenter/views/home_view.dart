@@ -1,11 +1,14 @@
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
+import 'package:demo/app/modules/currency/presenter/views/currency_view.dart';
 import 'package:demo/app/modules/home/presenter/components/change_nav_bottom_type.dart';
 import 'package:demo/app/modules/home/presenter/components/custom_bottom_nav.dart';
 import 'package:demo/app/modules/home/presenter/components/home_app_bar.dart';
 import 'package:demo/app/modules/home/presenter/controllers/states/home_state.dart';
 import 'package:demo/app/modules/settings/presenter/views/settings_view.dart';
+import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/services/notifications/push_notification_service.dart';
+import 'package:demo/core/utils/core_utils.dart';
 import 'package:demo/core/utils/helpers/user_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -47,8 +50,45 @@ class _HomeViewState extends State<HomeView>
             Container(color: Colors.red),
             Container(color: Colors.green),
             Scaffold(
-              backgroundColor:
-                  context.theme.colorScheme.onBackground.withOpacity(0.1),
+              body: SizedBox(
+                width: context.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: context.theme.primaryColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Ink(
+                          child: InkWell(
+                            onTap: () => Modular.to
+                                .push(CoreUtils.push(const CurrencyView())),
+                            child: const Column(
+                              children: [
+                                Icon(
+                                  Icons.money,
+                                  color: Colors.white,
+                                ),
+                                SimpleText(
+                                  text: 'Currency',
+                                  color: Colors.white,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Container(color: Colors.blue),
             const SettingsView(),
