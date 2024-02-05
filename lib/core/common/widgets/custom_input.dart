@@ -18,7 +18,7 @@ class CustomInput extends StatelessWidget {
     this.readOnly = false,
     this.withBorder = true,
     this.autoFocus = false,
-    this.unfocus = true,
+    this.unfocus = false,
     this.floatingLabel,
     this.disabled = false,
     this.filled = true,

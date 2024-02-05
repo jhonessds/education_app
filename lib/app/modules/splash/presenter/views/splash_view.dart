@@ -26,7 +26,7 @@ class _SplashViewState extends State<SplashView> {
         if (currentUserState.value.verified) {
           Modular.to.pushReplacementNamed('/home/');
         } else {
-          Modular.to.pushReplacementNamed('/verify-email');
+          Modular.to.pushReplacementNamed('/verify-email', arguments: true);
         }
       } else {
         Modular.to.pushReplacementNamed('/auth/');

@@ -23,6 +23,7 @@
     "savedSuccessfully": "Guardado exitosamente",
     "savedChanges": "Cambios guardados",
     "hello": "Hola,",
+    "continuee": "Continuar",
 
     "commentAuthModule":"*********** COMMENT_AUTH_MODULE ***********",
     "provideAEmail": "proporcionar un correo electrónico",
@@ -48,6 +49,14 @@
     "userNotRegistered": "¡Usuario no registrado!\n¿Quieres registrarte?",
     "privacyPolicy": "Política de Privacidad",
     "anonymousDisclaimer": "Al iniciar sesión de forma anónima, no podrá sincronizar datos y tendrá acceso limitado a ciertas funciones. ¿Desea continuar?",
+    "verifyYourEmail": "¡Verifique su dirección de correo electrónico!",
+    "verifyEmailDisclaimerOne": "Acabamos de enviar un enlace de confirmación a su correo electrónico. Compruébalo y haz clic en el enlace recibido.",
+    "verifyEmailDisclaimerTwo": "Si no se le redirige automáticamente después de la verificación, haga clic en el botón Continuar.",
+    "resendEmailLink": "Reenviar enlace de verificación",
+    "backToLogin": "Atrás para iniciar sesión",
+    "goToLogin": "Ir a iniciar sesión",
+    "linkResent": "Enlace reenviado",
+    "emailNotVerified": "Email has not yet been verified",
 
     "commentProfile":"*********** COMMENT_PROFILE ***********",
     "gender": "Género",

@@ -23,6 +23,7 @@
     "savedSuccessfully": "Salvo com sucesso",
     "savedChanges": "Alterações salvas",
     "hello": "Olá,",
+    "continuee": "Continuar",
 
     "commentAuthModule":"*********** COMMENT_AUTH_MODULE ***********",
     "provideAEmail": "informe um email",
@@ -48,7 +49,15 @@
     "userNotRegistered": "Usuário não cadastrado!\n Deseja se cadastrar?",
     "privacyPolicy": "Política de Privacidade",
     "anonymousDisclaimer": "Ao iniciar a sessão anonimamente você não será capaz de sincronizar os dados, e tera acesso limitado a certos recursos. Deseja continuar?",
-        
+    "verifyYourEmail": "Verifique seu email!",
+    "verifyEmailDisclaimerOne": "Acabamos de enviar um link de confirmação para seu email. Verifique-o e clique no link recebido.",
+    "verifyEmailDisclaimerTwo": "Se não for redirecionado automaticamente após a verificação, clique no botão Continuar.",
+    "resendEmailLink": "Reenviar link de verificação",
+    "backToLogin": "Voltar para o login",
+    "goToLogin": "Ir para o login",
+    "linkResent": "Link reenviado",
+    "emailNotVerified": "Email ainda não foi verificado",
+
     "commentProfile":"*********** COMMENT_PROFILE ***********",
     "gender": "Gênero",
     "male": "Masculino",

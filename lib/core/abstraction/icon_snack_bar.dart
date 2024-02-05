@@ -80,7 +80,7 @@ class IconSnackBar {
                 ScaffoldMessenger.of(context).removeCurrentSnackBar();
               },
               label: label,
-              backgroundColor: context.theme.colorScheme.inversePrimary,
+              backgroundColor: context.theme.colorScheme.secondary,
               labelTextStyle: snackBarStyle.labelTextStyle,
               iconType: IconType.alert,
             ),

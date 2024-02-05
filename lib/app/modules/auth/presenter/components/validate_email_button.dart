@@ -37,20 +37,20 @@ class _ValidateEmailButtonState extends State<ValidateEmailButton> {
         controller: btnController,
         onPressed: () async {
           final result = await authCtrl.emailHasVerified();
-          btnController.stop();
           if (result) {
             await profileCtrl.updateEmailVerified(emailVerified: result);
             await Modular.to.pushReplacementNamed('/home/');
           } else {
             CoreUtils.bottomSnackBar(
-              'email ainda nao foi verificado',
+              translation().emailNotVerified,
               type: SnackBarType.alert,
             );
           }
+          btnController.stop();
         },
         width: context.width,
         child: Text(
-          translation().continues,
+          translation().continuee,
           style: const TextStyle(
             fontSize: 18,
             color: Colors.white,

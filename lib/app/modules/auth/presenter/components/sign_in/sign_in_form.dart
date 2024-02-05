@@ -46,7 +46,6 @@ class _SignInFormState extends State<SignInForm> {
                 authCtrl.email = emailCtrl.text.trim();
                 CoreUtils.scrollTo(widget.buttonKey);
               },
-              onTapOutside: () {},
             ),
             CustomInput(
               controller: passwordCtrl,
@@ -61,6 +60,7 @@ class _SignInFormState extends State<SignInForm> {
                 authCtrl.password = passwordCtrl.text;
                 CoreUtils.scrollTo(widget.buttonKey);
               },
+              unfocus: true,
               sufixIcon: IconButton(
                 onPressed: () => setState(() => obscureText = !obscureText),
                 icon: Icon(

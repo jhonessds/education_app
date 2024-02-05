@@ -4,6 +4,8 @@ import 'package:demo/app/modules/auth/presenter/components/validate_email_button
 import 'package:demo/app/modules/auth/presenter/controllers/auth_controller.dart';
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
 import 'package:demo/app/modules/profile/presenter/controllers/profile_controller.dart';
+import 'package:demo/core/abstraction/icon_snack_bar.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/utils/core_utils.dart';
@@ -12,7 +14,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
 
 class VerifyEmailView extends StatefulWidget {
-  const VerifyEmailView({super.key});
+  const VerifyEmailView({this.fromSplash = false, super.key});
+
+  final bool fromSplash;
 
   @override
   State<VerifyEmailView> createState() => _VerifyEmailViewState();
@@ -27,6 +31,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
   void initState() {
     super.initState();
     authCtrl.sendEmailVerification();
+
     _timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
       final result = await authCtrl.emailHasVerified();
 
@@ -57,20 +62,18 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
               height: 170,
               repeat: false,
             ),
-            const SimpleText(
+            SimpleText(
               mgTop: 40,
               alignment: Alignment.center,
-              text: 'Verify your email address!',
+              text: translation().verifyYourEmail,
               fontWeight: FontWeight.bold,
               fontSize: 23,
             ),
-            const SimpleText(
+            SimpleText(
               mgTop: 20,
               textAlign: TextAlign.center,
               alignment: Alignment.center,
-              text: 'We have just send email verification link on your email. '
-                  'Please check email and click on that link to verify your '
-                  'Email address.',
+              text: translation().verifyEmailDisclaimerOne,
               maxlines: 6,
             ),
             SimpleText(
@@ -78,23 +81,33 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
               mgBottom: context.height * 0.07,
               textAlign: TextAlign.center,
               alignment: Alignment.center,
-              text: 'If not auto redirected after verification, click on'
-                  ' the Continue button.',
+              text: translation().verifyEmailDisclaimerTwo,
               maxlines: 6,
             ),
             const ValidateEmailButton(),
             TextButton(
               onPressed: () async {
                 await authCtrl.sendEmailVerification();
-                CoreUtils.bottomSnackBar('Link resended');
+                CoreUtils.bottomSnackBar(
+                  translation().linkResent,
+                  type: SnackBarType.alert,
+                );
               },
-              child: const Text('Resend E-Mail link'),
+              child: Text(translation().resendEmailLink),
             ),
             TextButton.icon(
-              label: const Text('back to login'),
+              label: Text(
+                widget.fromSplash
+                    ? translation().goToLogin
+                    : translation().backToLogin,
+              ),
               onPressed: () async {
                 await Modular.get<SessionController>().logOut();
-                await Modular.to.pushReplacementNamed('/auth/');
+                if (widget.fromSplash) {
+                  await Modular.to.pushReplacementNamed('/auth/');
+                } else {
+                  Modular.to.pop();
+                }
               },
               icon: const Icon(Icons.arrow_back),
             ),

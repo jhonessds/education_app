@@ -40,6 +40,11 @@ class AppModule extends Module {
         module: HomeModule(),
         customTransition: CoreUtils.customTransition(),
       )
-      ..child('/verify-email', child: (_) => const VerifyEmailView());
+      ..child(
+        '/verify-email',
+        child: (_) => VerifyEmailView(
+          fromSplash: r.args.data as bool,
+        ),
+      );
   }
 }
