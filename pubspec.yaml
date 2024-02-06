@@ -21,6 +21,7 @@ dependencies:
   flex_color_scheme: ^7.3.1
   flutter:
     sdk: flutter
+  flutter_custom_clippers: ^2.1.0
   flutter_keyboard_visibility: ^6.0.0
   flutter_localizations:
     sdk: flutter
@@ -84,7 +85,7 @@ flutter_native_splash:
   image_dark: assets/app/splash-dark.png
   branding: assets/app/brand.png
   branding_dark: assets/app/brand-dark.png
- 
+
   android_12:
     color: "#ffffff"
     color_dark: "#121212"
@@ -93,7 +94,7 @@ flutter_native_splash:
     branding: assets/app/brand.png
     icon_background_color: "#ffffff"
     icon_background_color_dark: "#121212"
- 
+
   android: true
   ios: false
   web: false
@@ -146,4 +147,20 @@ flutter:
         - asset: assets/fonts/poppins/Poppins-Bold.ttf
           weight: 700
         - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
+          weight: 800
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat/Montserrat-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/montserrat/Montserrat-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/montserrat/Montserrat-Light.ttf
+          weight: 300
+        - asset: assets/fonts/montserrat/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/montserrat/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/montserrat/Montserrat-ExtraBold.ttf
           weight: 800

@@ -18,17 +18,6 @@ Future<void> fontSelector() async {
         child: Wrap(
           children: [
             ListTile(
-              title: const Text(Fonts.poppins),
-              onTap: () async {
-                await setFont(Fonts.poppins).then((_) {
-                  Navigator.pop(context);
-                });
-              },
-              trailing: appConfigState.value.font == Fonts.poppins
-                  ? const Icon(Icons.check)
-                  : null,
-            ),
-            ListTile(
               title: const Text(Fonts.aeonik),
               onTap: () async {
                 await setFont(Fonts.aeonik).then((_) {
@@ -36,6 +25,28 @@ Future<void> fontSelector() async {
                 });
               },
               trailing: appConfigState.value.font == Fonts.aeonik
+                  ? const Icon(Icons.check)
+                  : null,
+            ),
+            ListTile(
+              title: const Text(Fonts.montserrat),
+              onTap: () async {
+                await setFont(Fonts.montserrat).then((_) {
+                  Navigator.pop(context);
+                });
+              },
+              trailing: appConfigState.value.font == Fonts.montserrat
+                  ? const Icon(Icons.check)
+                  : null,
+            ),
+            ListTile(
+              title: const Text(Fonts.poppins),
+              onTap: () async {
+                await setFont(Fonts.poppins).then((_) {
+                  Navigator.pop(context);
+                });
+              },
+              trailing: appConfigState.value.font == Fonts.poppins
                   ? const Icon(Icons.check)
                   : null,
             ),

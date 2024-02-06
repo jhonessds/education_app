@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:asp/asp.dart';
-import 'package:demo/app/modules/profile/presenter/views/profile_view.dart';
 import 'package:demo/core/common/states/user_state.dart';
 import 'package:demo/core/common/widgets/profile/profile_name.dart';
 import 'package:demo/core/extensions/context_extension.dart';

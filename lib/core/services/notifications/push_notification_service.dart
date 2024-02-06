@@ -1,7 +1,5 @@
 import 'package:demo/app/modules/profile/presenter/controllers/profile_controller.dart';
 import 'package:demo/app/modules/settings/presenter/controllers/states/setting_state.dart';
-import 'package:demo/core/common/models/user_model.dart';
-import 'package:demo/core/common/states/user_state.dart';
 import 'package:demo/core/services/notifications/notification_functions.dart';
 import 'package:demo/core/services/notifications/notification_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

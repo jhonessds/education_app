@@ -1,5 +1,5 @@
 import 'package:demo/app/modules/auth/presenter/controllers/session_controller.dart';
-import 'package:demo/app/modules/currency/presenter/views/currency_view.dart';
+import 'package:demo/app/modules/currency/presenter/views/currency_splash_view.dart';
 import 'package:demo/app/modules/home/presenter/components/change_nav_bottom_type.dart';
 import 'package:demo/app/modules/home/presenter/components/custom_bottom_nav.dart';
 import 'package:demo/app/modules/home/presenter/components/home_app_bar.dart';
@@ -66,22 +66,21 @@ class _HomeViewState extends State<HomeView>
                           color: context.theme.primaryColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Ink(
-                          child: InkWell(
-                            onTap: () => Modular.to
-                                .push(CoreUtils.push(const CurrencyView())),
-                            child: const Column(
-                              children: [
-                                Icon(
-                                  Icons.money,
-                                  color: Colors.white,
-                                ),
-                                SimpleText(
-                                  text: 'Currency',
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
+                        child: InkWell(
+                          onTap: () => Modular.to.push(
+                            CoreUtils.push(const CurrencySplashView()),
+                          ),
+                          child: const Column(
+                            children: [
+                              Icon(
+                                Icons.money,
+                                color: Colors.white,
+                              ),
+                              SimpleText(
+                                text: 'Currency',
+                                color: Colors.white,
+                              ),
+                            ],
                           ),
                         ),
                       ),
