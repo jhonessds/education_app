@@ -1,5 +1,5 @@
 import 'package:demo/app/modules/register/data/datasource/register_datasource.dart';
-import 'package:demo/app/modules/register/data/repositories/register_repository_impl.dart';
+import 'package:demo/app/modules/register/data/repos/register_repository_impl.dart';
 import 'package:demo/app/modules/register/domain/repositories/register_repository.dart';
 import 'package:demo/app/modules/register/domain/usecases/register_user.dart';
 import 'package:demo/app/modules/register/domain/usecases/register_user_by_email.dart';
