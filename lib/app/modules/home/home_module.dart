@@ -8,7 +8,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class HomeModule extends Module {
   @override
-  List<Module> get imports => [ProfileModule(), AuthModule()];
+  List<Module> get imports => [
+        ProfileModule(),
+        AuthModule(),
+        CurrencyModule(),
+      ];
 
   @override
   void routes(RouteManager r) {

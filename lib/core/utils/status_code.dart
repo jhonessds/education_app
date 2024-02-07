@@ -166,6 +166,8 @@ enum StatusCode {
   // ignore: sort_constructors_first
   factory StatusCode.fromInt(int code) {
     switch (code) {
+      case 1:
+        return StatusCode.problemWithRequest;
       case 10:
         return StatusCode.connectionError;
       case 20:
