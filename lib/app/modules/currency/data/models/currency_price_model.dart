@@ -5,7 +5,7 @@ import 'package:demo/app/modules/currency/domain/entities/currency.dart';
 import 'package:demo/app/modules/currency/domain/entities/currency_price.dart';
 
 class CurrencyPriceModel extends CurrencyPrice {
-  CurrencyPriceModel({
+  const CurrencyPriceModel({
     required super.usd,
     required super.eur,
     required super.gbp,

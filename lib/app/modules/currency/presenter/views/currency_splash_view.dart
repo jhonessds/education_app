@@ -23,7 +23,7 @@ class _CurrencySplashViewState extends State<CurrencySplashView> {
     super.initState();
     setFont(Fonts.montserrat);
 
-    Future.delayed(const Duration(seconds: 3))
+    Future<void>.delayed(const Duration(seconds: 3))
         .then((value) => Modular.to.pushReplacementNamed('/home/currency/'));
   }
 

@@ -1,17 +1,27 @@
-import 'package:demo/app/modules/currency/domain/entities/currency.dart';
+// ignore_for_file: must_be_immutable
 
-abstract class Quotation {
+import 'package:demo/app/modules/currency/domain/entities/currency.dart';
+import 'package:equatable/equatable.dart';
+import 'package:objectbox/objectbox.dart';
+
+@Entity()
+class Quotation extends Equatable {
   Quotation({
     required this.date,
     required this.currrencies,
     this.id = 0,
   });
 
-  final int id;
+  int id;
+  @Property(type: PropertyType.date)
   final DateTime date;
-  final List<Currency> currrencies;
+  @Backlink('quotation')
+  ToMany<Currency> currrencies = ToMany<Currency>();
 
   @override
   String toString() => 'Quotation(id: $id, date: $date, currrencies:'
       ' $currrencies)';
+
+  @override
+  List<Object> get props => [id];
 }

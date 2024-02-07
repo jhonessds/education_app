@@ -36,6 +36,7 @@ app.*.symbols
 
 google-services.json
 
+*.g.dart
 # Obfuscation related
 app.*.map.json
 

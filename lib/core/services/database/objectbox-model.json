@@ -1,0 +1,88 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:1356901571056101257",
+      "lastPropertyId": "2:9193649179851216128",
+      "name": "Quotation",
+      "properties": [
+        {
+          "id": "1:623651796936212462",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:9193649179851216128",
+          "name": "date",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:7166404485610055101",
+      "lastPropertyId": "8:589111626369934704",
+      "name": "Currency",
+      "properties": [
+        {
+          "id": "1:5939038832330791267",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1417595957350714852",
+          "name": "code",
+          "type": 9
+        },
+        {
+          "id": "3:7663489182673383274",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:668823344271036131",
+          "name": "buy",
+          "type": 8
+        },
+        {
+          "id": "5:3176283561276962208",
+          "name": "sell",
+          "type": 8
+        },
+        {
+          "id": "6:3990875950768703397",
+          "name": "variation",
+          "type": 8
+        },
+        {
+          "id": "8:589111626369934704",
+          "name": "quotationId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:6356226495738518737",
+          "relationTarget": "Quotation"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:7166404485610055101",
+  "lastIndexId": "2:6356226495738518737",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [
+    8943152762162809433
+  ],
+  "retiredPropertyUids": [
+    1240353994706892832
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

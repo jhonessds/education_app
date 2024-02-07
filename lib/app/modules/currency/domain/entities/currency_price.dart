@@ -1,7 +1,8 @@
 import 'package:demo/app/modules/currency/domain/entities/currency.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class CurrencyPrice {
-  CurrencyPrice({
+abstract class CurrencyPrice extends Equatable {
+  const CurrencyPrice({
     required this.usd,
     required this.eur,
     required this.gbp,
@@ -22,4 +23,7 @@ abstract class CurrencyPrice {
   final Currency jpy;
   final Currency cny;
   final Currency btc;
+
+  @override
+  List<Object> get props => [usd, eur, gbp, ars, cad, jpy, cny, btc];
 }
