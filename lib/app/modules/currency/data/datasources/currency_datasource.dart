@@ -2,16 +2,16 @@ import 'package:demo/app/modules/currency/data/models/currency_price_model.dart'
 import 'package:demo/app/modules/currency/data/models/quotation_model.dart';
 import 'package:demo/app/modules/currency/domain/entities/currency.dart';
 import 'package:demo/app/modules/currency/domain/entities/quotation.dart';
-import 'package:demo/core/abstraction/logger.dart';
+import 'package:demo/core/errors/cache_failure.dart';
 import 'package:demo/core/errors/server_failure.dart';
 import 'package:demo/core/services/database/box_repository.dart';
+import 'package:demo/core/services/database/objectbox.g.dart';
 import 'package:demo/core/services/web/web_service.dart';
-import 'package:demo/core/utils/status_code.dart';
-import 'package:objectbox/objectbox.dart';
 
 abstract class CurrencyDataSource {
-  Future<QuotationModel> getCotation();
-  Future<void> saveCotation();
+  Future<QuotationModel> getWebQuotation();
+  Future<Quotation?> getLocalQuotation();
+  Future<void> saveQuotation({required Quotation quotation});
 }
 
 class CurrencyDataSourceImpl implements CurrencyDataSource {
@@ -25,7 +25,7 @@ class CurrencyDataSourceImpl implements CurrencyDataSource {
   final ObjectBoxRepository _boxRepository;
 
   @override
-  Future<QuotationModel> getCotation() async {
+  Future<QuotationModel> getWebQuotation() async {
     try {
       final result = await _webService.getModel<Map<String, dynamic>>(
         '',
@@ -45,13 +45,8 @@ class CurrencyDataSourceImpl implements CurrencyDataSource {
       );
       if (result.success) {
         final quotation = QuotationModel.fromMap(result.data);
-        final saved = await _boxRepository.create<Quotation>(value: quotation);
-
-        if (saved) {
-          return quotation;
-        } else {
-          throw const ServerFailure(statusCode: StatusCode.cache);
-        }
+        await saveQuotation(quotation: quotation);
+        return quotation;
       } else {
         throw result.failure ?? const ServerFailure();
       }
@@ -65,7 +60,39 @@ class CurrencyDataSourceImpl implements CurrencyDataSource {
   }
 
   @override
-  Future<void> saveCotation() {
-    throw UnimplementedError();
+  Future<Quotation?> getLocalQuotation() async {
+    try {
+      final result = await _boxRepository.query<Quotation>(
+        Quotation_.date.lessThan(
+          DateTime.now()
+              .subtract(const Duration(hours: 24))
+              .millisecondsSinceEpoch,
+        ),
+      );
+      if (result.isNotEmpty) return result.first;
+
+      return null;
+    } catch (e) {
+      throw CacheFailure(
+        message: e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<void> saveQuotation({required Quotation quotation}) async {
+    try {
+      final saved = await _boxRepository.create<Quotation>(value: quotation);
+
+      if (!saved) {
+        throw const CacheFailure();
+      }
+    } on CacheFailure {
+      rethrow;
+    } catch (e) {
+      throw CacheFailure(
+        message: e.toString(),
+      );
+    }
   }
 }

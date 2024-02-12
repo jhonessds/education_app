@@ -21,7 +21,7 @@ class Currency extends Equatable {
   final double buy;
   final double? sell;
   final double variation;
-
+  @Transient()
   final quotation = ToOne<Quotation>();
 
   @override

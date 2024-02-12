@@ -6,10 +6,41 @@ import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 
 class CoreUtils {
   const CoreUtils._();
+
+  static Widget getFlag({
+    required String currencyCode,
+    double size = 35,
+  }) {
+    switch (currencyCode) {
+      case 'USD':
+        return Flag(Flags.united_states_of_america, size: size);
+      case 'EUR':
+        return Flag(Flags.european_union, size: size);
+      case 'GBP':
+        return Flag(Flags.united_kingdom, size: size);
+      case 'ARS':
+        return Flag(Flags.argentina, size: size);
+      case 'BRL':
+        return Flag(Flags.brazil, size: size);
+      case 'CAD':
+        return Flag(Flags.canada, size: size);
+      case 'AUD':
+        return Flag(Flags.australia, size: size);
+      case 'JPY':
+        return Flag(Flags.japan, size: size);
+      case 'CNY':
+        return Flag(Flags.china, size: size);
+      case 'BTC':
+        return Icon(Iconsax.bitcoin_btc_outline, size: size);
+      default:
+        return Flag(Flags.brazil, size: size);
+    }
+  }
 
   static CustomTransition customTransition() {
     return CustomTransition(
@@ -27,8 +58,8 @@ class CoreUtils {
     );
   }
 
-  static PageRouteBuilder<void> push(Widget child) {
-    return PageRouteBuilder<void>(
+  static PageRouteBuilder<T> push<T>(Widget child) {
+    return PageRouteBuilder<T>(
       pageBuilder: (context, animation, secondaryAnimation) {
         return FadeTransition(
           opacity: animation,

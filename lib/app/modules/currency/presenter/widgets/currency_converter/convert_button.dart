@@ -26,7 +26,7 @@ class ConvertButton extends StatelessWidget {
         ),
         onPressed: () async {
           final controller = Modular.get<CurrencyDataSource>();
-          final result = await controller.getCotation();
+          final result = await controller.getWebQuotation();
           logger(result);
         },
         child: const Text(

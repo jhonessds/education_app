@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:convert';
 
 import 'package:demo/app/modules/currency/domain/entities/currency.dart';
@@ -19,6 +21,15 @@ class CurrencyModel extends Currency {
       buy: map['buy'] as double? ?? 0.0,
       sell: map['sell'] as double?,
       variation: map['variation'] as double? ?? 0.0,
+    );
+  }
+
+  factory CurrencyModel.brl() {
+    return CurrencyModel(
+      code: 'BRL',
+      name: 'Brazilian Real',
+      buy: 1,
+      variation: 0,
     );
   }
 

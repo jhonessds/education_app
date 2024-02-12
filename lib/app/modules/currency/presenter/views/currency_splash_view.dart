@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:demo/app/modules/currency/presenter/controllers/currency_controller.dart';
 import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/common/widgets/wave_animation.dart';
@@ -18,13 +19,23 @@ class CurrencySplashView extends StatefulWidget {
 }
 
 class _CurrencySplashViewState extends State<CurrencySplashView> {
+  final currencyCtrl = Modular.get<CurrencyController>();
   @override
   void initState() {
     super.initState();
     setFont(Fonts.montserrat);
 
-    Future<void>.delayed(const Duration(seconds: 3))
-        .then((value) => Modular.to.pushReplacementNamed('/home/currency/'));
+    currencyCtrl.getLocalQuotation().then((hasData) {
+      if (hasData) {
+        Modular.to.pushReplacementNamed('/home/currency/');
+      } else {
+        currencyCtrl.getWebQuotation().then((value) {
+          if (value) {
+            Modular.to.pushReplacementNamed('/home/currency/');
+          }
+        });
+      }
+    });
   }
 
   @override

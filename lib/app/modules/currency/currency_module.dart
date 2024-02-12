@@ -1,4 +1,10 @@
 import 'package:demo/app/modules/currency/data/datasources/currency_datasource.dart';
+import 'package:demo/app/modules/currency/data/repos/currency_repository_impl.dart';
+import 'package:demo/app/modules/currency/domain/repos/currency_repository.dart';
+import 'package:demo/app/modules/currency/domain/usecases/get_local_quotation.dart';
+import 'package:demo/app/modules/currency/domain/usecases/get_web_quotation.dart';
+import 'package:demo/app/modules/currency/domain/usecases/save_quotation.dart';
+import 'package:demo/app/modules/currency/presenter/controllers/currency_controller.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_view.dart';
 import 'package:demo/core/environments/flavors_config.dart';
 import 'package:demo/core/services/database/box_repository.dart';
@@ -18,7 +24,12 @@ class CurrencyModule extends Module {
         ),
       )
       ..addLazySingleton<ObjectBoxRepository>(ObjectBoxRepositoryImpl.new)
-      ..addLazySingleton<CurrencyDataSource>(CurrencyDataSourceImpl.new);
+      ..addLazySingleton<CurrencyDataSource>(CurrencyDataSourceImpl.new)
+      ..addLazySingleton<CurrencyRepository>(CurrencyRepositoryImpl.new)
+      ..addLazySingleton<GetLocalQuotation>(GetLocalQuotation.new)
+      ..addLazySingleton<GetWebQuotation>(GetWebQuotation.new)
+      ..addLazySingleton<SaveQuotation>(SaveQuotation.new)
+      ..addLazySingleton<CurrencyController>(CurrencyController.new);
     super.exportedBinds(i);
   }
 

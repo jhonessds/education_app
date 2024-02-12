@@ -1,10 +1,13 @@
 import 'package:demo/app/modules/currency/presenter/components/currency_bottom_nav.dart';
-import 'package:demo/app/modules/currency/presenter/views/converter_view.dart';
+import 'package:demo/app/modules/currency/presenter/controllers/currency_controller.dart';
+import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
+import 'package:demo/app/modules/currency/presenter/views/converter/currency_converter_view.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_group_view.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_history_view.dart';
 import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/states/app_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class CurrencyView extends StatefulWidget {
   const CurrencyView({super.key});
@@ -16,10 +19,12 @@ class CurrencyView extends StatefulWidget {
 class _CurrencyViewState extends State<CurrencyView>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+  final currencyCtrl = Modular.get<CurrencyController>();
 
   @override
   void initState() {
     super.initState();
+    currencyState.setValue(currencyCtrl.quotation.currrencies);
     tabController = TabController(vsync: this, length: 4);
   }
 
@@ -32,7 +37,7 @@ class _CurrencyViewState extends State<CurrencyView>
           controller: tabController,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            const ConverterView(),
+            const CurrencyConverterView(),
             const CurrencyHistoryView(),
             const CurrencyGroupView(),
             Container(color: Colors.blue),

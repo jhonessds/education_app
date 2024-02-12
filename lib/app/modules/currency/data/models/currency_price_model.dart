@@ -10,6 +10,7 @@ class CurrencyPriceModel extends CurrencyPrice {
     required super.eur,
     required super.gbp,
     required super.ars,
+    required super.brl,
     required super.cad,
     required super.aud,
     required super.jpy,
@@ -35,6 +36,7 @@ class CurrencyPriceModel extends CurrencyPrice {
         map['ARS'] as Map<String, dynamic>,
         code: 'ARS',
       ),
+      brl: CurrencyModel.brl(),
       cad: CurrencyModel.fromMap(
         map['CAD'] as Map<String, dynamic>,
         code: 'CAD',
@@ -66,6 +68,7 @@ class CurrencyPriceModel extends CurrencyPrice {
     Currency? eur,
     Currency? gbp,
     Currency? ars,
+    Currency? brl,
     Currency? cad,
     Currency? aud,
     Currency? jpy,
@@ -77,6 +80,7 @@ class CurrencyPriceModel extends CurrencyPrice {
       eur: eur ?? this.eur,
       gbp: gbp ?? this.gbp,
       ars: ars ?? this.ars,
+      brl: brl ?? this.brl,
       cad: cad ?? this.cad,
       aud: aud ?? this.aud,
       jpy: jpy ?? this.jpy,
@@ -90,6 +94,7 @@ class CurrencyPriceModel extends CurrencyPrice {
         'EUR': eur,
         'GBP': gbp,
         'ARS': ars,
+        'BRL': brl,
         'CAD': cad,
         'AUD': aud,
         'JPY': jpy,
@@ -100,6 +105,6 @@ class CurrencyPriceModel extends CurrencyPrice {
   String toJson() => json.encode(toMap());
 
   List<Currency> getProperties() {
-    return [usd, eur, gbp, ars, cad, aud, jpy, cny, btc];
+    return [usd, eur, gbp, ars, brl, cad, aud, jpy, cny, btc];
   }
 }
