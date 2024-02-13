@@ -1,4 +1,5 @@
 import 'package:asp/asp.dart';
+import 'package:demo/app/modules/currency/presenter/components/currency_converter/one_currency.dart';
 import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
 import 'package:demo/app/modules/currency/presenter/widgets/currency_converter/card_converter.dart';
 import 'package:demo/app/modules/currency/presenter/widgets/currency_converter/convert_button.dart';
@@ -28,45 +29,8 @@ class CurrencyConverterView extends StatelessWidget {
             const ConvertButton(),
             RxBuilder(
               builder: (context) {
-                if (currencyGroupState.value.currencies.length == 1) {
-                  final currrency = currencyGroupState.value.currencies[0];
-                  return Container(
-                    margin: EdgeInsets.only(
-                      top: context.height * 0.43,
-                      bottom: 20,
-                      left: 15,
-                      right: 15,
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CoreUtils.getFlag(
-                              currencyCode: currrency.code,
-                              size: 50,
-                            ),
-                            SimpleText(
-                              mgLeft: 10,
-                              mgRight: 5,
-                              text: currrency.value.toString(),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 45,
-                            ),
-                            const Icon(
-                              Icons.arrow_upward,
-                              color: Colors.green,
-                            ),
-                          ],
-                        ),
-                        SimpleText(
-                          text: '1 USD = 1.129 USD',
-                          color: context.theme.disabledColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ],
-                    ),
-                  );
+                if (currencyGroupState.value.hasOne) {
+                  return const OneCurrency();
                 }
                 return Container(
                   margin: EdgeInsets.only(
@@ -95,8 +59,8 @@ class CurrencyConverterView extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
-                        trailing: SimpleText(
-                          text: currrency.value.toString(),
+                        trailing: const SimpleText(
+                          text: 'currrency.value.toString()',
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),

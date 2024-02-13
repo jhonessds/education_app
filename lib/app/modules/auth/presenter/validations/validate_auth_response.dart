@@ -14,7 +14,7 @@ void validateAuthResponse({required bool success, bool isSignInView = true}) {
     if (currentUserState.value.verified) {
       Modular.to.pushReplacementNamed('/home/');
     } else {
-      Modular.to.push(CoreUtils.push(const VerifyEmailView()));
+      Modular.to.push(CoreUtils.push<void>(const VerifyEmailView()));
     }
   } else {
     if (authCtrl.isRegistred) {

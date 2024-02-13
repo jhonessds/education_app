@@ -22,7 +22,7 @@ class _CurrencySelectViewState extends State<CurrencySelectView> {
   void initState() {
     super.initState();
     _disposer = rxObserver(
-      () => currencyAvailableState.value,
+      () => currencyState.value,
       effect: (value) {
         final allIsChecked = value?.any((element) => element.checked == false);
         if (allIsChecked != null && !allIsChecked) {

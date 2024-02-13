@@ -47,7 +47,8 @@ class _SignUpButtonState extends State<SignUpButton> {
             btnController.stop();
 
             if (result) {
-              await Modular.to.push(CoreUtils.push(const VerifyEmailView()));
+              await Modular.to
+                  .push(CoreUtils.push<void>(const VerifyEmailView()));
               // await Modular.to.pushReplacementNamed('/home/');
             } else {
               CoreUtils.bottomSnackBar(registerCtrl.errorMessage);

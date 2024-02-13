@@ -31,7 +31,7 @@ class ProfileTile extends StatelessWidget {
             size: 50,
             onTap: () {
               if (!UserHelper.isAnonymous()) {
-                Modular.to.push(CoreUtils.push(const ProfileView()));
+                Modular.to.push(CoreUtils.push<void>(const ProfileView()));
               }
             },
           ),

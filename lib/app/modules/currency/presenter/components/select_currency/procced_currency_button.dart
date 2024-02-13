@@ -23,7 +23,7 @@ class _ProceedCurrencyButtonState extends State<ProceedCurrencyButton> {
   void initState() {
     super.initState();
     _disposer = rxObserver(
-      () => currencyAvailableState.value,
+      () => currencyState.value,
       effect: (value) {
         final anyChecked = value?.any((element) => element.checked);
         if (anyChecked != null && anyChecked) {
@@ -58,9 +58,8 @@ class _ProceedCurrencyButtonState extends State<ProceedCurrencyButton> {
         ),
         onPressed: enableButton
             ? () async {
-                final result = currencyAvailableState.value
-                    .where((e) => e.checked)
-                    .toList();
+                final result =
+                    currencyState.value.where((e) => e.checked).toList();
                 changeAllCurrenciesCheck(checked: false);
                 Modular.to.pop(CurrencyGroup(name: 'GRP', currencies: result));
               }

@@ -60,7 +60,8 @@ class _SignInBodyState extends State<SignInBody> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    Modular.to.push(CoreUtils.push(const ForgotPasswordView()));
+                    Modular.to
+                        .push(CoreUtils.push<void>(const ForgotPasswordView()));
                   },
                   child: Text(translation().forgotPassword),
                 ),
@@ -91,7 +92,9 @@ class _SignInBodyState extends State<SignInBody> {
                   SizedBox(
                     child: TextButton(
                       onPressed: () {
-                        Modular.to.push(CoreUtils.push(const SignUpView()));
+                        Modular.to.push(
+                          CoreUtils.push<void>(const SignUpView()),
+                        );
                       },
                       child: SimpleText(
                         text: translation().signUp,

@@ -29,9 +29,9 @@ class CurrencyListView extends StatelessWidget {
               endIndent: isRight ? 15 : 0,
               height: 5,
             ),
-            itemCount: currencyAvailableState.value.length,
+            itemCount: currencyState.value.length,
             itemBuilder: (context, index) {
-              final currrency = currencyAvailableState.value[index];
+              final currrency = currencyState.value[index];
               return ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: CoreUtils.getFlag(
@@ -45,7 +45,7 @@ class CurrencyListView extends StatelessWidget {
                 onTap: () {
                   if (isRight) {
                     currrency.checked = !currrency.checked;
-                    currencyAvailableState.call();
+                    currencyState.call();
                   } else {
                     Modular.to.pop(currrency);
                   }
@@ -59,7 +59,7 @@ class CurrencyListView extends StatelessWidget {
                         onChanged: (_) {
                           if (isRight) {
                             currrency.checked = !currrency.checked;
-                            currencyAvailableState.call();
+                            currencyState.call();
                           } else {
                             Modular.to.pop(currrency);
                           }

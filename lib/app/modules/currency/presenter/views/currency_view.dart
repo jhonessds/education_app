@@ -25,6 +25,7 @@ class _CurrencyViewState extends State<CurrencyView>
   void initState() {
     super.initState();
     currencyState.setValue(currencyCtrl.quotation.currrencies);
+    currencyLeftSate.setValue(currencyCtrl.quotation.currrencies.first);
     tabController = TabController(vsync: this, length: 4);
   }
 

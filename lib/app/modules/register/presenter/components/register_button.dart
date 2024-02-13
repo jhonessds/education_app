@@ -49,7 +49,7 @@ class RegisterButton extends StatelessWidget {
                 if (result) {
                   if (authCtrl.authMethod == AuthMethodType.email) {
                     await Modular.to.push(
-                      CoreUtils.push(const VerifyEmailView()),
+                      CoreUtils.push<void>(const VerifyEmailView()),
                     );
                   } else {
                     await Modular.to.pushReplacementNamed('/home/');

@@ -12,10 +12,12 @@ class Currency extends Equatable {
     required this.buy,
     required this.variation,
     this.id = 0,
+    this.checked = false,
     this.sell,
   });
 
   int id;
+  bool checked;
   final String code;
   final String name;
   final double buy;

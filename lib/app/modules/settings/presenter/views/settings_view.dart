@@ -56,7 +56,7 @@ class SettingsView extends StatelessWidget {
                   icon: Iconsax.profile_circle_outline,
                   title: translation().userProfile,
                   onTap: () {
-                    Modular.to.push(CoreUtils.push(const ProfileView()));
+                    Modular.to.push(CoreUtils.push<void>(const ProfileView()));
                   },
                 ),
               if (UserHelper.authMethod() == AuthMethodType.email)

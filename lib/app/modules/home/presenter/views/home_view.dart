@@ -68,7 +68,7 @@ class _HomeViewState extends State<HomeView>
                         ),
                         child: InkWell(
                           onTap: () => Modular.to.push(
-                            CoreUtils.push(const CurrencySplashView()),
+                            CoreUtils.push<void>(const CurrencySplashView()),
                           ),
                           child: const Column(
                             children: [
