@@ -1,5 +1,5 @@
-import 'package:demo/app/modules/currency/presenter/components/currency_converter/select_currency_left.dart';
-import 'package:demo/app/modules/currency/presenter/components/currency_converter/select_currency_right.dart';
+import 'package:demo/app/modules/currency/presenter/components/converter/select_currency_left.dart';
+import 'package:demo/app/modules/currency/presenter/components/converter/select_currency_right.dart';
 import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
 import 'package:demo/core/common/widgets/custom_input.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';

@@ -6,5 +6,6 @@ abstract class ObjectBoxRepository {
   Future<bool> delete<T>({required int id});
   Future<T?> getById<T>({required int id});
   Future<List<T>> getAll<T>();
+  Future<bool> deleteAll<T>();
   Future<List<T>> query<T>([Condition<T>? qc]);
 }

@@ -7,9 +7,10 @@ Atom<List<Currency>> currencyState = Atom<List<Currency>>([]);
 
 Atom<Currency?> currencyLeftSate = Atom<Currency?>(null);
 
-Atom<CurrencyGroup> currencyGroupState = Atom<CurrencyGroup>(
+Atom<CurrencyGroup> cGroupState = Atom<CurrencyGroup>(
   CurrencyGroup(
     name: 'GRP',
+    code: 'GRP',
     currencies: [],
   ),
 );

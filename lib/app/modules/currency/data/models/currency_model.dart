@@ -12,10 +12,12 @@ class CurrencyModel extends Currency {
     required super.buy,
     required super.variation,
     super.sell,
+    super.id,
   });
 
   factory CurrencyModel.fromMap(Map<String, dynamic> map, {String? code}) {
     return CurrencyModel(
+      id: map['id'] as int? ?? 0,
       code: (code ?? (map['code'] as String?)) ?? '',
       name: map['name'] as String? ?? '',
       buy: map['buy'] as double? ?? 0.0,
@@ -37,6 +39,7 @@ class CurrencyModel extends Currency {
       CurrencyModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   CurrencyModel copyWith({
+    int? id,
     String? code,
     String? name,
     double? buy,
@@ -44,6 +47,7 @@ class CurrencyModel extends Currency {
     double? variation,
   }) {
     return CurrencyModel(
+      id: id ?? this.id,
       code: code ?? this.code,
       name: name ?? this.name,
       buy: buy ?? this.buy,
@@ -53,6 +57,7 @@ class CurrencyModel extends Currency {
   }
 
   DataMap toMap() => {
+        'id': id,
         'code': code,
         'name': name,
         'buy': buy,

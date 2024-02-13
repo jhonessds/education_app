@@ -24,7 +24,7 @@
     },
     {
       "id": "2:7166404485610055101",
-      "lastPropertyId": "8:589111626369934704",
+      "lastPropertyId": "10:8139811334581124547",
       "name": "Currency",
       "properties": [
         {
@@ -59,29 +59,75 @@
           "type": 8
         },
         {
-          "id": "8:589111626369934704",
+          "id": "9:4230795316302467768",
+          "name": "checked",
+          "type": 1
+        },
+        {
+          "id": "10:8139811334581124547",
           "name": "quotationId",
           "type": 11,
           "flags": 520,
-          "indexId": "2:6356226495738518737",
+          "indexId": "3:8497793461173662522",
           "relationTarget": "Quotation"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:2025963102896358134",
+      "lastPropertyId": "6:3807325016158916988",
+      "name": "CurrencyHistory",
+      "properties": [
+        {
+          "id": "1:1265745664240606470",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2058328295909026876",
+          "name": "currency",
+          "type": 8
+        },
+        {
+          "id": "3:7006777561967198443",
+          "name": "currencyConverted",
+          "type": 9
+        },
+        {
+          "id": "4:2180329148440598595",
+          "name": "origin",
+          "type": 9
+        },
+        {
+          "id": "5:4241632329172693139",
+          "name": "destiny",
+          "type": 9
+        },
+        {
+          "id": "6:3807325016158916988",
+          "name": "date",
+          "type": 10
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:7166404485610055101",
-  "lastIndexId": "2:6356226495738518737",
+  "lastEntityId": "3:2025963102896358134",
+  "lastIndexId": "3:8497793461173662522",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [
-    8943152762162809433
+    8943152762162809433,
+    6356226495738518737
   ],
   "retiredPropertyUids": [
-    1240353994706892832
+    1240353994706892832,
+    589111626369934704
   ],
   "retiredRelationUids": [],
   "version": 1

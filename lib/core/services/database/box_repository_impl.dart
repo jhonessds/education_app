@@ -88,4 +88,16 @@ class ObjectBoxRepositoryImpl implements ObjectBoxRepository {
       return <T>[];
     }
   }
+
+  @override
+  Future<bool> deleteAll<T>() async {
+    try {
+      final box = await _getBox<T>();
+      final removed = box.removeAll();
+      return removed > 1;
+    } catch (ex) {
+      logger(ex);
+      return false;
+    }
+  }
 }

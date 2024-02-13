@@ -4,6 +4,7 @@ import 'package:demo/app/modules/currency/presenter/interactor/state/currency_st
 import 'package:demo/app/modules/currency/presenter/views/converter/currency_converter_view.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_group_view.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_history_view.dart';
+import 'package:demo/app/modules/currency/presenter/views/currency_profile.dart';
 import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/states/app_state.dart';
 import 'package:flutter/material.dart';
@@ -37,11 +38,11 @@ class _CurrencyViewState extends State<CurrencyView>
         child: TabBarView(
           controller: tabController,
           physics: const NeverScrollableScrollPhysics(),
-          children: [
-            const CurrencyConverterView(),
-            const CurrencyHistoryView(),
-            const CurrencyGroupView(),
-            Container(color: Colors.blue),
+          children: const [
+            CurrencyConverterView(),
+            CurrencyHistoryView(),
+            CurrencyGroupView(),
+            CurrencyProfile(),
           ],
         ),
       ),

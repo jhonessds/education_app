@@ -1,4 +1,5 @@
 import 'package:asp/asp.dart';
+import 'package:demo/app/modules/currency/presenter/interactor/actions/currency_action.dart';
 import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/utils/core_utils.dart';
@@ -17,6 +18,11 @@ class CurrencyListView extends StatelessWidget {
     return Expanded(
       child: RxBuilder(
         builder: (context) {
+          final available = currencyState.value
+              .where(
+                (element) => element.code != currencyLeftSate.value!.code,
+              )
+              .toList();
           return ListView.separated(
             padding: EdgeInsets.only(
               left: 15,
@@ -29,9 +35,9 @@ class CurrencyListView extends StatelessWidget {
               endIndent: isRight ? 15 : 0,
               height: 5,
             ),
-            itemCount: currencyState.value.length,
+            itemCount: available.length,
             itemBuilder: (context, index) {
-              final currrency = currencyState.value[index];
+              final currrency = available[index];
               return ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: CoreUtils.getFlag(
@@ -47,6 +53,7 @@ class CurrencyListView extends StatelessWidget {
                     currrency.checked = !currrency.checked;
                     currencyState.call();
                   } else {
+                    resetConversion();
                     Modular.to.pop(currrency);
                   }
                 },
@@ -57,12 +64,8 @@ class CurrencyListView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(99),
                         ),
                         onChanged: (_) {
-                          if (isRight) {
-                            currrency.checked = !currrency.checked;
-                            currencyState.call();
-                          } else {
-                            Modular.to.pop(currrency);
-                          }
+                          currrency.checked = !currrency.checked;
+                          currencyState.call();
                         },
                       )
                     : const Icon(Icons.arrow_forward_ios),

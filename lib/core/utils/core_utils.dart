@@ -37,8 +37,15 @@ class CoreUtils {
         return Flag(Flags.china, size: size);
       case 'BTC':
         return Icon(Iconsax.bitcoin_btc_outline, size: size);
+      case 'GRP':
+        return Icon(Bootstrap.currency_exchange, size: size);
       default:
-        return Flag(Flags.brazil, size: size);
+        return const Padding(
+          padding: EdgeInsets.only(right: 5),
+          child: Icon(
+            FontAwesome.money_bill_transfer_solid,
+          ),
+        );
     }
   }
 

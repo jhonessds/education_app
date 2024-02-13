@@ -61,7 +61,14 @@ class _ProceedCurrencyButtonState extends State<ProceedCurrencyButton> {
                 final result =
                     currencyState.value.where((e) => e.checked).toList();
                 changeAllCurrenciesCheck(checked: false);
-                Modular.to.pop(CurrencyGroup(name: 'GRP', currencies: result));
+                resetConversion();
+                Modular.to.pop(
+                  CurrencyGroup(
+                    code: 'GRP',
+                    name: 'GRP',
+                    currencies: result,
+                  ),
+                );
               }
             : null,
         child: const Text(

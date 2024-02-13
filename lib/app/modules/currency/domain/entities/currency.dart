@@ -14,6 +14,7 @@ class Currency extends Equatable {
     this.id = 0,
     this.checked = false,
     this.sell,
+    this.conversion = '0.0',
   });
 
   int id;
@@ -24,6 +25,8 @@ class Currency extends Equatable {
   final double? sell;
   final double variation;
   @Transient()
+  String conversion;
+
   final quotation = ToOne<Quotation>();
 
   @override

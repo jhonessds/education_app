@@ -1,4 +1,5 @@
 import 'package:demo/app/modules/currency/data/datasources/currency_datasource.dart';
+import 'package:demo/app/modules/currency/domain/entities/currency_history.dart';
 import 'package:demo/app/modules/currency/domain/entities/quotation.dart';
 import 'package:demo/app/modules/currency/domain/repos/currency_repository.dart';
 import 'package:demo/core/abstraction/either.dart';
@@ -33,6 +34,36 @@ class CurrencyRepositoryImpl implements CurrencyRepository {
   ResultFuture<void> saveQuotation({required Quotation quotation}) async {
     try {
       final result = await _datasource.saveQuotation(quotation: quotation);
+      return Right(result);
+    } on CacheFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<void> deleteAllHistory() async {
+    try {
+      final result = await _datasource.deleteAllHistory();
+      return Right(result);
+    } on CacheFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<List<CurrencyHistory>> getAllHistory() async {
+    try {
+      final result = await _datasource.getAllHistory();
+      return Right(result);
+    } on CacheFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  ResultFuture<void> saveHistory({required CurrencyHistory model}) async {
+    try {
+      final result = await _datasource.saveHistory(model: model);
       return Right(result);
     } on CacheFailure catch (e) {
       return Left(e);

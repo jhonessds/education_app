@@ -1,3 +1,4 @@
+import 'package:demo/core/common/states/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -16,10 +17,11 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ext = appConfigState.value.isDarkMode ? '' : '_dark';
     return Center(
       child: withAnimation
           ? Lottie.asset(
-              'assets/lottie/$svg.json',
+              'assets/lottie/$svg$ext.json',
               height: animationHeight,
             )
           : SizedBox(

@@ -1,6 +1,7 @@
 import 'package:demo/app/modules/currency/data/models/currency_price_model.dart';
 import 'package:demo/app/modules/currency/data/models/quotation_model.dart';
 import 'package:demo/app/modules/currency/domain/entities/currency.dart';
+import 'package:demo/app/modules/currency/domain/entities/currency_history.dart';
 import 'package:demo/app/modules/currency/domain/entities/quotation.dart';
 import 'package:demo/core/errors/cache_failure.dart';
 import 'package:demo/core/errors/server_failure.dart';
@@ -12,6 +13,9 @@ abstract class CurrencyDataSource {
   Future<QuotationModel> getWebQuotation();
   Future<Quotation?> getLocalQuotation();
   Future<void> saveQuotation({required Quotation quotation});
+  Future<void> saveHistory({required CurrencyHistory model});
+  Future<List<CurrencyHistory>> getAllHistory();
+  Future<void> deleteAllHistory();
 }
 
 class CurrencyDataSourceImpl implements CurrencyDataSource {
@@ -62,6 +66,9 @@ class CurrencyDataSourceImpl implements CurrencyDataSource {
   @override
   Future<Quotation?> getLocalQuotation() async {
     try {
+      for (var i = 1; i <= 17; i++) {
+        await _boxRepository.delete<Quotation>(id: i);
+      }
       final result = await _boxRepository.query<Quotation>(
         Quotation_.date.lessThan(
           DateTime.now()
@@ -87,6 +94,50 @@ class CurrencyDataSourceImpl implements CurrencyDataSource {
       if (!saved) {
         throw const CacheFailure();
       }
+    } on CacheFailure {
+      rethrow;
+    } catch (e) {
+      throw CacheFailure(
+        message: e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<void> saveHistory({required CurrencyHistory model}) async {
+    try {
+      final saved = await _boxRepository.create<CurrencyHistory>(value: model);
+
+      if (!saved) {
+        throw const CacheFailure();
+      }
+    } on CacheFailure {
+      rethrow;
+    } catch (e) {
+      throw CacheFailure(
+        message: e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<List<CurrencyHistory>> getAllHistory() async {
+    try {
+      final result = await _boxRepository.getAll<CurrencyHistory>();
+      return result;
+    } on CacheFailure {
+      rethrow;
+    } catch (e) {
+      throw CacheFailure(
+        message: e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<void> deleteAllHistory() async {
+    try {
+      await _boxRepository.deleteAll<CurrencyHistory>();
     } on CacheFailure {
       rethrow;
     } catch (e) {
