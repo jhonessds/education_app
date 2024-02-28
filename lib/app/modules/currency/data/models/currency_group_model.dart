@@ -1,8 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:convert';
+import 'package:demo/app/modules/currency/data/models/currency_simple_model.dart';
 import 'package:demo/app/modules/currency/domain/entities/currency_group.dart';
+import 'package:demo/app/modules/currency/domain/entities/currency_simple.dart';
 import 'package:demo/core/utils/typedefs.dart';
+import 'package:objectbox/objectbox.dart';
 
 class CurrencyGroupModel extends CurrencyGroup {
   CurrencyGroupModel({
@@ -17,7 +20,12 @@ class CurrencyGroupModel extends CurrencyGroup {
       id: map['id'] as int? ?? 0,
       code: map['code'] as String? ?? '',
       name: map['name'] as String? ?? '',
-      currencies: List<String>.from(map['currencies'] as List<String>),
+      currencies: ToMany<CurrencySimple>(
+        items: List<CurrencySimpleModel>.from(
+          (map['currencies'] as List<Map<String, dynamic>>)
+              .map(CurrencySimpleModel.fromMap),
+        ),
+      ),
     );
   }
 
@@ -31,7 +39,7 @@ class CurrencyGroupModel extends CurrencyGroup {
     if (currencies.isEmpty) {
       return 'Select';
     } else if (currencies.length == 1) {
-      return currencies.first;
+      return currencies.first.code;
     } else {
       return 'Group';
     }
@@ -41,7 +49,7 @@ class CurrencyGroupModel extends CurrencyGroup {
     int? id,
     String? code,
     String? name,
-    List<String>? currencies,
+    ToMany<CurrencySimple>? currencies,
   }) {
     return CurrencyGroupModel(
       id: id ?? this.id,
@@ -55,7 +63,8 @@ class CurrencyGroupModel extends CurrencyGroup {
         'id': id,
         'name': name,
         'code': code,
-        'currrencies': currencies.toList(),
+        'currrencies':
+            currencies.map((x) => (x as CurrencySimpleModel).toMap()).toList(),
       };
 
   String toJson() => json.encode(toMap());

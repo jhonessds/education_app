@@ -36,18 +36,18 @@ class CurrencyConvertedList extends StatelessWidget {
                 return ListTile(
                   contentPadding: EdgeInsets.zero,
                   leading: Text(
-                    CurrencyUtils.currencyToEmoji(currency),
+                    CurrencyUtils.currencyToEmoji(currency.code),
                     style: const TextStyle(
                       fontSize: 35,
                     ),
                   ),
                   title: SimpleText(
-                    text: currency,
+                    text: currency.code,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
-                  trailing: const SimpleText(
-                    text: 'currency.conversion',
+                  trailing: SimpleText(
+                    text: currency.conversion,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),

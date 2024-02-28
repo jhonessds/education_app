@@ -1,14 +1,6 @@
 // import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
 
-// void changeAllCurrenciesCheck({required bool checked}) {
-//   for (final c in currencyState.value) {
-//     if (currencyLeftSate.value!.code != c.code) {
-//       c.checked = checked;
-//     }
-//   }
-//   checkAllCurrencyState.setValue(checked);
-//   currencyState.call();
-// }
+ 
 
 // void convert() {
 //   final currency = double.tryParse(currencyCtrlState.value.text) ?? 1;
@@ -19,7 +11,7 @@
 //         ? '0.0'
 //         : (val / element.buy).toStringAsFixed(fixed);
 //   }
-//   cGroupState.call();
+ 
 // }
 
 // void resetConversion() {

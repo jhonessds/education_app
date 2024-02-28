@@ -1,6 +1,6 @@
 import 'package:demo/app/modules/currency/data/models/currency_history_model.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/currency_controller.dart';
-import 'package:demo/app/modules/currency/presenter/interactor/actions/currency_action.dart';
+import 'package:demo/app/modules/currency/presenter/controllers/store/currency_store.dart';
 import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/utils/core_utils.dart';
@@ -14,6 +14,8 @@ class ConvertButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final store = Modular.get<CurrencyListStore>();
+    final currencyCtrl = Modular.get<CurrencyController>();
     return Positioned(
       top: context.height * 0.32,
       child: ElevatedButton(
@@ -28,23 +30,23 @@ class ConvertButton extends StatelessWidget {
           ),
         ),
         onPressed: () async {
-          // convert();
-          // final controller = Modular.get<CurrencyController>();
-          // final history = CurrencyHistoryModel(
-          //   date: DateTime.now(),
-          //   currency: double.tryParse(currencyCtrlState.value.text) ?? 0,
-          //   currencyConverted: cGroupState.value.hasOne
-          //       ? cGroupState.value.currencies.first.conversion
-          //       : null,
-          //   origin: currencyLeftSate.value!.code,
-          //   destiny: cGroupState.value.hasOne
-          //       ? cGroupState.value.currencies.first.code
-          //       : cGroupState.value.name,
-          // );
-          // final result = await controller.saveHistory(history: history);
-          // if (!result) {
-          //   CoreUtils.bottomSnackBar(controller.errorMessage);
-          // }
+          store.convert();
+
+          final history = CurrencyHistoryModel(
+            date: DateTime.now(),
+            currency: double.tryParse(currencyCtrlState.value.text) ?? 0,
+            currencyConverted: store.group.hasOne
+                ? store.group.currencies.first.conversion
+                : null,
+            origin: store.currencyLeft!,
+            destiny: store.group.hasOne
+                ? store.group.currencies.first.code
+                : store.group.name,
+          );
+          final result = await currencyCtrl.saveHistory(history: history);
+          if (!result) {
+            CoreUtils.bottomSnackBar(currencyCtrl.errorMessage);
+          }
         },
         child: const Text(
           'Convert',

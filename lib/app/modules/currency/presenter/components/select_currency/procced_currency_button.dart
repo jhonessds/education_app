@@ -1,4 +1,3 @@
-import 'package:demo/app/modules/currency/data/models/currency_group_model.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/state/currency_state.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/store/currency_store.dart';
 import 'package:demo/core/extensions/context_extension.dart';

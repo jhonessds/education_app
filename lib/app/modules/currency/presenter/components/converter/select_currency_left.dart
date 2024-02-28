@@ -1,7 +1,5 @@
-import 'package:demo/app/modules/currency/domain/entities/currency.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/state/currency_state.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/store/currency_store.dart';
-import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
 import 'package:demo/app/modules/currency/presenter/views/converter/currency_select_view.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';

@@ -1,18 +1,17 @@
-import 'package:demo/app/modules/currency/domain/entities/currency_local.dart';
-
-class CurrencyLocalModel extends CurrencyLocal {
+class CurrencyLocalModel {
   CurrencyLocalModel({
-    required super.code,
-    required super.name,
-    required super.symbol,
-    required super.flag,
-    required super.number,
-    required super.decimalDigits,
-    required super.namePlural,
-    required super.symbolOnLeft,
-    required super.decimalSeparator,
-    required super.thousandsSeparator,
-    required super.spaceBetweenAmountAndSymbol,
+    required this.code,
+    required this.name,
+    required this.symbol,
+    required this.flag,
+    required this.number,
+    required this.decimalDigits,
+    required this.namePlural,
+    required this.symbolOnLeft,
+    required this.decimalSeparator,
+    required this.thousandsSeparator,
+    required this.spaceBetweenAmountAndSymbol,
+    this.checked = false,
   });
 
   factory CurrencyLocalModel.fromMap(Map<String, dynamic> map) {
@@ -31,4 +30,40 @@ class CurrencyLocalModel extends CurrencyLocal {
           map['space_between_amount_and_symbol'] as bool,
     );
   }
+
+  ///The currency code
+  final String code;
+
+  ///The currency name in English
+  final String name;
+
+  ///The currency symbol
+  final String symbol;
+
+  ///The currency flag code
+  /// To get flag unicode(Emoji) use CurrencyUtils.currencyToEmoji
+  final String flag;
+
+  ///The currency number
+  final int number;
+
+  ///The currency decimal digits
+  final int decimalDigits;
+
+  ///The currency plural name in English
+  final String namePlural;
+
+  ///The decimal separator
+  final String decimalSeparator;
+
+  ///The thousands separator
+  final String thousandsSeparator;
+
+  ///True if symbol is on the Left of the amount
+  final bool symbolOnLeft;
+
+  ///True if symbol has space with amount
+  final bool spaceBetweenAmountAndSymbol;
+
+  bool checked;
 }

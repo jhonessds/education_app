@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:demo/app/modules/currency/domain/entities/currency_simple.dart';
 import 'package:equatable/equatable.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -15,7 +16,8 @@ class CurrencyGroup extends Equatable {
   int id;
   final String name;
   final String code;
-  final List<String> currencies;
+  @Backlink('currencyGroup')
+  ToMany<CurrencySimple> currencies = ToMany<CurrencySimple>();
 
   @override
   List<Object> get props => [id];

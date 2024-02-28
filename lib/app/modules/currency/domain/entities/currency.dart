@@ -11,9 +11,7 @@ class Currency extends Equatable {
     required this.name,
     required this.buy,
     this.id = 0,
-    this.checked = false,
     this.sell,
-    this.conversion = '0.0',
   });
 
   int id;
@@ -21,13 +19,8 @@ class Currency extends Equatable {
   final String name;
   final double buy;
   final double? sell;
-  @Transient()
-  bool checked;
-  @Transient()
-  String conversion;
 
   final quotation = ToOne<Quotation>();
-  final currencyGroup = ToOne<Quotation>();
 
   @override
   String toString() {

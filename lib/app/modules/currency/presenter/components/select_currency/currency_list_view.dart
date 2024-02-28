@@ -74,7 +74,7 @@ class _CurrencyListViewState extends State<CurrencyListView> {
                     if (widget.isRight) {
                       store.check(index: index, check: !currency.checked);
                     } else {
-                      store.currencyLeft = currency.code;
+                      store.setCurrencyLeft(currency.code);
                       Modular.to.pop();
                     }
                   },
