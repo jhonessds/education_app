@@ -1,41 +1,52 @@
-import 'package:asp/asp.dart';
-import 'package:demo/app/modules/currency/presenter/interactor/models/currency_group.dart';
-import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
+import 'package:demo/app/modules/currency/data/models/currency_group_model.dart';
+import 'package:demo/app/modules/currency/presenter/controllers/state/currency_state.dart';
+import 'package:demo/app/modules/currency/presenter/controllers/store/currency_store.dart';
 import 'package:demo/app/modules/currency/presenter/views/converter/currency_select_view.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/utils/core_utils.dart';
+import 'package:demo/core/utils/currency_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class SelectCurrencyRight extends StatelessWidget {
+class SelectCurrencyRight extends StatefulWidget {
   const SelectCurrencyRight({
     super.key,
   });
 
   @override
+  State<SelectCurrencyRight> createState() => _SelectCurrencyRightState();
+}
+
+class _SelectCurrencyRightState extends State<SelectCurrencyRight> {
+  @override
   Widget build(BuildContext context) {
-    return RxBuilder(
-      builder: (context) {
+    final store = Modular.get<CurrencyListStore>();
+
+    return ValueListenableBuilder<CurrencyListState>(
+      valueListenable: store,
+      builder: (context, value, _) {
         return TextButton(
-          onPressed: () async {
-            final result = await Modular.to.push<CurrencyGroup?>(
-              CoreUtils.push<CurrencyGroup?>(
+          onPressed: () {
+            Modular.to.push(
+              CoreUtils.push<CurrencyGroupModel?>(
                 const CurrencySelectView(),
               ),
             );
-
-            if (result != null) cGroupState.setValue(result);
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CoreUtils.getFlag(
-                currencyCode: cGroupState.value.currencyCode(),
-              ),
+              if (store.group.hasZero) CurrencyUtils.getFlag(),
+              if (!store.group.hasZero)
+                CurrencyUtils.getFlag(
+                  store.group.hasOne
+                      ? store.group.currencyCode()
+                      : store.group.code,
+                ),
               const SizedBox(width: 10),
               SimpleText(
-                text: cGroupState.value.currencyCode(),
+                text: store.group.currencyCode(),
                 color: context.theme.colorScheme.onBackground,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,

@@ -1,6 +1,7 @@
 import 'package:demo/app/modules/currency/data/models/currency_price_model.dart';
 import 'package:demo/app/modules/currency/data/models/quotation_model.dart';
 import 'package:demo/app/modules/currency/domain/entities/currency.dart';
+import 'package:demo/app/modules/currency/domain/entities/currency_group.dart';
 import 'package:demo/app/modules/currency/domain/entities/currency_history.dart';
 import 'package:demo/app/modules/currency/domain/entities/quotation.dart';
 import 'package:demo/core/errors/cache_failure.dart';
@@ -10,12 +11,18 @@ import 'package:demo/core/services/database/objectbox.g.dart';
 import 'package:demo/core/services/web/web_service.dart';
 
 abstract class CurrencyDataSource {
+  // Quotation
   Future<QuotationModel> getWebQuotation();
   Future<Quotation?> getLocalQuotation();
   Future<void> saveQuotation({required Quotation quotation});
+  // History
   Future<void> saveHistory({required CurrencyHistory model});
   Future<List<CurrencyHistory>> getAllHistory();
   Future<void> deleteAllHistory();
+  // Group
+  Future<void> saveGroup({required CurrencyGroup group});
+  Future<List<CurrencyGroup>> getAllGroups();
+  Future<void> deleteGroup({required int groupId});
 }
 
 class CurrencyDataSourceImpl implements CurrencyDataSource {
@@ -40,7 +47,7 @@ class CurrencyDataSourceImpl implements CurrencyDataSource {
                 as Map<String, dynamic>,
           );
           final quotation = QuotationModel(
-            currrencies: ToMany<Currency>(items: currencies.getProperties()),
+            currencies: ToMany<Currency>(items: currencies.getProperties()),
             date: DateTime.now(),
           );
 
@@ -138,6 +145,49 @@ class CurrencyDataSourceImpl implements CurrencyDataSource {
   Future<void> deleteAllHistory() async {
     try {
       await _boxRepository.deleteAll<CurrencyHistory>();
+    } on CacheFailure {
+      rethrow;
+    } catch (e) {
+      throw CacheFailure(
+        message: e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<void> deleteGroup({required int groupId}) async {
+    try {
+      await _boxRepository.delete<CurrencyHistory>(id: groupId);
+    } on CacheFailure {
+      rethrow;
+    } catch (e) {
+      throw CacheFailure(
+        message: e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<List<CurrencyGroup>> getAllGroups() async {
+    try {
+      final result = await _boxRepository.getAll<CurrencyGroup>();
+      return result;
+    } on CacheFailure {
+      rethrow;
+    } catch (e) {
+      throw CacheFailure(
+        message: e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<void> saveGroup({required CurrencyGroup group}) async {
+    try {
+      final saved = await _boxRepository.create<CurrencyGroup>(value: group);
+      if (!saved) {
+        throw const CacheFailure();
+      }
     } on CacheFailure {
       rethrow;
     } catch (e) {

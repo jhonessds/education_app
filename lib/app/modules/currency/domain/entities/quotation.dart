@@ -8,7 +8,7 @@ import 'package:objectbox/objectbox.dart';
 class Quotation extends Equatable {
   Quotation({
     required this.date,
-    required this.currrencies,
+    required this.currencies,
     this.id = 0,
   });
 
@@ -16,11 +16,11 @@ class Quotation extends Equatable {
   @Property(type: PropertyType.date)
   final DateTime date;
   @Backlink('quotation')
-  ToMany<Currency> currrencies = ToMany<Currency>();
+  ToMany<Currency> currencies = ToMany<Currency>();
 
   @override
   String toString() => 'Quotation(id: $id, date: $date, currrencies:'
-      ' $currrencies)';
+      ' $currencies)';
 
   @override
   List<Object> get props => [id];

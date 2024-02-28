@@ -8,6 +8,7 @@ import 'package:demo/app/modules/currency/domain/usecases/get_web_quotation.dart
 import 'package:demo/app/modules/currency/domain/usecases/save_history.dart';
 import 'package:demo/app/modules/currency/domain/usecases/save_quotation.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/currency_controller.dart';
+import 'package:demo/app/modules/currency/presenter/controllers/store/currency_store.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/store/history_store.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_view.dart';
 import 'package:demo/core/environments/flavors_config.dart';
@@ -37,6 +38,7 @@ class CurrencyModule extends Module {
       ..addLazySingleton<GetAllHistory>(GetAllHistory.new)
       ..addLazySingleton<DeleteAllHistory>(DeleteAllHistory.new)
       ..addLazySingleton<HistoryListStore>(HistoryListStore.new)
+      ..addLazySingleton<CurrencyListStore>(CurrencyListStore.new)
       ..addLazySingleton<CurrencyController>(CurrencyController.new);
     super.exportedBinds(i);
   }

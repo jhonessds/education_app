@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:convert';
-
 import 'package:demo/app/modules/currency/domain/entities/currency.dart';
 import 'package:demo/core/utils/typedefs.dart';
 
@@ -10,7 +9,6 @@ class CurrencyModel extends Currency {
     required super.code,
     required super.name,
     required super.buy,
-    required super.variation,
     super.sell,
     super.id,
   });
@@ -22,7 +20,6 @@ class CurrencyModel extends Currency {
       name: map['name'] as String? ?? '',
       buy: map['buy'] as double? ?? 0.0,
       sell: map['sell'] as double?,
-      variation: map['variation'] as double? ?? 0.0,
     );
   }
 
@@ -31,7 +28,6 @@ class CurrencyModel extends Currency {
       code: 'BRL',
       name: 'Brazilian Real',
       buy: 1,
-      variation: 0,
     );
   }
 
@@ -52,7 +48,6 @@ class CurrencyModel extends Currency {
       name: name ?? this.name,
       buy: buy ?? this.buy,
       sell: sell ?? this.sell,
-      variation: variation ?? this.variation,
     );
   }
 
@@ -62,7 +57,6 @@ class CurrencyModel extends Currency {
         'name': name,
         'buy': buy,
         'sell': sell,
-        'variation': variation,
       };
 
   String toJson() => json.encode(toMap());

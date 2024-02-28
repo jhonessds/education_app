@@ -24,7 +24,7 @@
     },
     {
       "id": "2:7166404485610055101",
-      "lastPropertyId": "10:8139811334581124547",
+      "lastPropertyId": "11:5622483667290549900",
       "name": "Currency",
       "properties": [
         {
@@ -54,21 +54,19 @@
           "type": 8
         },
         {
-          "id": "6:3990875950768703397",
-          "name": "variation",
-          "type": 8
-        },
-        {
-          "id": "9:4230795316302467768",
-          "name": "checked",
-          "type": 1
-        },
-        {
           "id": "10:8139811334581124547",
           "name": "quotationId",
           "type": 11,
           "flags": 520,
           "indexId": "3:8497793461173662522",
+          "relationTarget": "Quotation"
+        },
+        {
+          "id": "11:5622483667290549900",
+          "name": "currencyGroupId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "4:2627334481061616400",
           "relationTarget": "Quotation"
         }
       ],
@@ -112,10 +110,39 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:426964183182267877",
+      "lastPropertyId": "4:4707135762292969199",
+      "name": "CurrencyGroup",
+      "properties": [
+        {
+          "id": "1:606016740890476363",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:9042295020628149566",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:9048072610961477566",
+          "name": "code",
+          "type": 9
+        },
+        {
+          "id": "4:4707135762292969199",
+          "name": "currencies",
+          "type": 30
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:2025963102896358134",
-  "lastIndexId": "3:8497793461173662522",
+  "lastEntityId": "4:426964183182267877",
+  "lastIndexId": "4:2627334481061616400",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
@@ -127,7 +154,9 @@
   ],
   "retiredPropertyUids": [
     1240353994706892832,
-    589111626369934704
+    589111626369934704,
+    3990875950768703397,
+    4230795316302467768
   ],
   "retiredRelationUids": [],
   "version": 1

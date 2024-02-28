@@ -8,11 +8,6 @@ abstract class CurrencyPrice extends Equatable {
     required this.gbp,
     required this.ars,
     required this.brl,
-    required this.cad,
-    required this.aud,
-    required this.jpy,
-    required this.cny,
-    required this.btc,
   });
 
   final Currency usd;
@@ -20,12 +15,7 @@ abstract class CurrencyPrice extends Equatable {
   final Currency gbp;
   final Currency ars;
   final Currency brl;
-  final Currency cad;
-  final Currency aud;
-  final Currency jpy;
-  final Currency cny;
-  final Currency btc;
 
   @override
-  List<Object> get props => [usd, eur, gbp, ars, brl, cad, jpy, cny, btc];
+  List<Object> get props => [usd, eur, gbp, ars, brl];
 }

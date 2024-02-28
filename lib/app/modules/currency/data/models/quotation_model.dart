@@ -11,7 +11,7 @@ import 'package:objectbox/objectbox.dart';
 class QuotationModel extends Quotation {
   QuotationModel({
     required super.date,
-    required super.currrencies,
+    required super.currencies,
     super.id,
   });
 
@@ -19,9 +19,9 @@ class QuotationModel extends Quotation {
     return QuotationModel(
       id: map['id'] as int? ?? 0,
       date: map['date'] as DateTime? ?? DateTime.now(),
-      currrencies: ToMany<Currency>(
+      currencies: ToMany<Currency>(
         items: List<CurrencyModel>.from(
-          (map['currrencies'] as List<Map<String, dynamic>>)
+          (map['currencies'] as List<Map<String, dynamic>>)
               .map(CurrencyModel.fromMap),
         ),
       ),
@@ -39,15 +39,15 @@ class QuotationModel extends Quotation {
     return QuotationModel(
       id: id ?? this.id,
       date: date ?? this.date,
-      currrencies: currrencies ?? this.currrencies,
+      currencies: currrencies ?? currencies,
     );
   }
 
   DataMap toMap() => {
         'id': id,
         'date': date,
-        'currrencies':
-            currrencies.map((x) => (x as CurrencyModel).toMap()).toList(),
+        'currencies':
+            currencies.map((x) => (x as CurrencyModel).toMap()).toList(),
       };
 
   String toJson() => json.encode(toMap());

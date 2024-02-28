@@ -28,23 +28,23 @@ class ConvertButton extends StatelessWidget {
           ),
         ),
         onPressed: () async {
-          convert();
-          final controller = Modular.get<CurrencyController>();
-          final history = CurrencyHistoryModel(
-            date: DateTime.now(),
-            currency: double.tryParse(currencyCtrlState.value.text) ?? 0,
-            currencyConverted: cGroupState.value.hasOne
-                ? cGroupState.value.currencies.first.conversion
-                : null,
-            origin: currencyLeftSate.value!.code,
-            destiny: cGroupState.value.hasOne
-                ? cGroupState.value.currencies.first.code
-                : cGroupState.value.name,
-          );
-          final result = await controller.saveHistory(history: history);
-          if (!result) {
-            CoreUtils.bottomSnackBar(controller.errorMessage);
-          }
+          // convert();
+          // final controller = Modular.get<CurrencyController>();
+          // final history = CurrencyHistoryModel(
+          //   date: DateTime.now(),
+          //   currency: double.tryParse(currencyCtrlState.value.text) ?? 0,
+          //   currencyConverted: cGroupState.value.hasOne
+          //       ? cGroupState.value.currencies.first.conversion
+          //       : null,
+          //   origin: currencyLeftSate.value!.code,
+          //   destiny: cGroupState.value.hasOne
+          //       ? cGroupState.value.currencies.first.code
+          //       : cGroupState.value.name,
+          // );
+          // final result = await controller.saveHistory(history: history);
+          // if (!result) {
+          //   CoreUtils.bottomSnackBar(controller.errorMessage);
+          // }
         },
         child: const Text(
           'Convert',

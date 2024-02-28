@@ -1,12 +1,9 @@
 import 'package:demo/app/modules/currency/presenter/components/currency_bottom_nav.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/currency_controller.dart';
-import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
 import 'package:demo/app/modules/currency/presenter/views/converter/currency_converter_view.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_group_view.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_history_view.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_profile.dart';
-import 'package:demo/core/common/actions/app_actions.dart';
-import 'package:demo/core/common/states/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -25,8 +22,7 @@ class _CurrencyViewState extends State<CurrencyView>
   @override
   void initState() {
     super.initState();
-    currencyState.setValue(currencyCtrl.quotation.currrencies);
-    currencyLeftSate.setValue(currencyCtrl.quotation.currrencies.first);
+
     tabController = TabController(vsync: this, length: 4);
   }
 
@@ -47,13 +43,7 @@ class _CurrencyViewState extends State<CurrencyView>
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          if (appConfigState.value.isDarkMode) {
-            await setTheme(ThemeMode.light);
-          } else {
-            await setTheme(ThemeMode.dark);
-          }
-        },
+        onPressed: currencyCtrl.getWebQuotation,
       ),
       bottomNavigationBar: CurrencyBottomNav(tabController: tabController),
     );

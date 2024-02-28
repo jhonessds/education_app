@@ -10,7 +10,6 @@ class Currency extends Equatable {
     required this.code,
     required this.name,
     required this.buy,
-    required this.variation,
     this.id = 0,
     this.checked = false,
     this.sell,
@@ -18,21 +17,21 @@ class Currency extends Equatable {
   });
 
   int id;
-  bool checked;
   final String code;
   final String name;
   final double buy;
   final double? sell;
-  final double variation;
+  @Transient()
+  bool checked;
   @Transient()
   String conversion;
 
   final quotation = ToOne<Quotation>();
+  final currencyGroup = ToOne<Quotation>();
 
   @override
   String toString() {
-    return 'Currency(code: $code, name: $name, buy: $buy, sell: $sell,'
-        ' variation: $variation)';
+    return 'Currency(code: $code, name: $name, buy: $buy, sell: $sell)';
   }
 
   @override
