@@ -66,7 +66,7 @@
     },
     {
       "id": "3:2025963102896358134",
-      "lastPropertyId": "6:3807325016158916988",
+      "lastPropertyId": "10:912494739329702814",
       "name": "CurrencyHistory",
       "properties": [
         {
@@ -76,29 +76,29 @@
           "flags": 1
         },
         {
-          "id": "2:2058328295909026876",
-          "name": "currency",
-          "type": 8
-        },
-        {
-          "id": "3:7006777561967198443",
-          "name": "currencyConverted",
-          "type": 9
-        },
-        {
-          "id": "4:2180329148440598595",
-          "name": "origin",
-          "type": 9
-        },
-        {
-          "id": "5:4241632329172693139",
-          "name": "destiny",
-          "type": 9
-        },
-        {
           "id": "6:3807325016158916988",
           "name": "date",
           "type": 10
+        },
+        {
+          "id": "7:7997710656669572077",
+          "name": "currencyOrigin",
+          "type": 9
+        },
+        {
+          "id": "8:7334256370889864136",
+          "name": "amount",
+          "type": 8
+        },
+        {
+          "id": "9:6405076859351721866",
+          "name": "groupName",
+          "type": 9
+        },
+        {
+          "id": "10:912494739329702814",
+          "name": "isGroup",
+          "type": 1
         }
       ],
       "relations": []
@@ -129,7 +129,7 @@
     },
     {
       "id": "5:3911077812266453737",
-      "lastPropertyId": "4:8536098861279714612",
+      "lastPropertyId": "5:5472011296467964429",
       "name": "CurrencySimple",
       "properties": [
         {
@@ -154,15 +154,21 @@
           "type": 11,
           "flags": 520,
           "indexId": "5:3826230971380721578",
-          "relationTarget": "Quotation"
+          "relationTarget": "CurrencyGroup"
         }
       ],
-      "relations": []
+      "relations": [
+        {
+          "id": "1:4624417458074045148",
+          "name": "currencyHistory",
+          "targetId": "3:2025963102896358134"
+        }
+      ]
     }
   ],
   "lastEntityId": "5:3911077812266453737",
-  "lastIndexId": "5:3826230971380721578",
-  "lastRelationId": "0:0",
+  "lastIndexId": "6:8122085175867102497",
+  "lastRelationId": "1:4624417458074045148",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
@@ -170,7 +176,8 @@
   "retiredIndexUids": [
     8943152762162809433,
     6356226495738518737,
-    2627334481061616400
+    2627334481061616400,
+    8122085175867102497
   ],
   "retiredPropertyUids": [
     1240353994706892832,
@@ -178,7 +185,12 @@
     3990875950768703397,
     4230795316302467768,
     5622483667290549900,
-    4707135762292969199
+    4707135762292969199,
+    2058328295909026876,
+    7006777561967198443,
+    2180329148440598595,
+    4241632329172693139,
+    5472011296467964429
   ],
   "retiredRelationUids": [],
   "version": 1

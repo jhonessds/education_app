@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:demo/app/modules/currency/domain/entities/quotation.dart';
+import 'package:demo/app/modules/currency/domain/entities/currency_group.dart';
+import 'package:demo/app/modules/currency/domain/entities/currency_history.dart';
 import 'package:equatable/equatable.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -16,8 +17,9 @@ class CurrencySimple extends Equatable {
   final String code;
   String conversion;
 
-  final currencyGroup = ToOne<Quotation>();
+  final currencyGroup = ToOne<CurrencyGroup>();
+  final currencyHistory = ToMany<CurrencyHistory>();
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [id, code, conversion];
 }

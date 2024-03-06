@@ -16,47 +16,44 @@ class CurrencyConvertedList extends StatelessWidget {
     return ValueListenableBuilder<CurrencyListState>(
       valueListenable: store,
       builder: (context, value, child) {
-        if (value is SuccessCurrencyListState) {
-          return Container(
-            margin: EdgeInsets.only(
-              top: context.height * 0.4,
-              bottom: 20,
-              left: 15,
-              right: 15,
+        return Container(
+          margin: EdgeInsets.only(
+            top: context.height * 0.4,
+            bottom: 20,
+            left: 15,
+            right: 15,
+          ),
+          child: ListView.separated(
+            padding: EdgeInsets.zero,
+            separatorBuilder: (context, index) => const Divider(
+              thickness: 1,
+              height: 5,
             ),
-            child: ListView.separated(
-              padding: EdgeInsets.zero,
-              separatorBuilder: (context, index) => const Divider(
-                thickness: 1,
-                height: 5,
-              ),
-              itemCount: store.group.currencies.length,
-              itemBuilder: (context, index) {
-                final currency = store.group.currencies[index];
-                return ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: Text(
-                    CurrencyUtils.currencyToEmoji(currency.code),
-                    style: const TextStyle(
-                      fontSize: 35,
-                    ),
+            itemCount: store.group.currencies.length,
+            itemBuilder: (context, index) {
+              final currency = store.group.currencies[index];
+              return ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: Text(
+                  CurrencyUtils.currencyToEmoji(currency.code),
+                  style: const TextStyle(
+                    fontSize: 35,
                   ),
-                  title: SimpleText(
-                    text: currency.code,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  trailing: SimpleText(
-                    text: currency.conversion,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              },
-            ),
-          );
-        }
-        return const SizedBox.shrink();
+                ),
+                title: SimpleText(
+                  text: currency.code,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                trailing: SimpleText(
+                  text: currency.conversion,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            },
+          ),
+        );
       },
     );
   }

@@ -5,7 +5,6 @@ import 'package:demo/app/modules/currency/data/models/currency_simple_model.dart
 import 'package:demo/app/modules/currency/domain/entities/currency_simple.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/currency_controller.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/state/currency_state.dart';
-import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:objectbox/objectbox.dart';
@@ -38,9 +37,7 @@ class CurrencyListStore extends ValueNotifier<CurrencyListState> {
     value = SuccessCurrencyListState(mainList);
   }
 
-  void convert() {
-    final currency = double.tryParse(currencyCtrlState.value.text) ?? 1;
-
+  void convert(double currency) {
     final currencyCtrl = Modular.get<CurrencyController>();
     final buy = currencyCtrl.quotation.currencies
         .where((e) => e.code == currencyLeft)
@@ -52,9 +49,7 @@ class CurrencyListStore extends ValueNotifier<CurrencyListState> {
           .where((e) => e.code == item.code)
           .first
           .buy;
-      item.conversion = currencyCtrlState.value.text.isEmpty
-          ? '0.0'
-          : (val / rbuy).toStringAsFixed(2);
+      item.conversion = currency == 0 ? '0.0' : (val / rbuy).toStringAsFixed(2);
     }
     notifyListeners();
   }
@@ -80,11 +75,17 @@ class CurrencyListStore extends ValueNotifier<CurrencyListState> {
   void check({required int index, required bool check}) {
     final currencies = (value as SuccessCurrencyListState).currencies;
     currencies[index].checked = check;
+    final code = currencies[index].code;
+    debugPrint(code);
 
     if (check) {
-      group.currencies.add(CurrencySimpleModel(code: currencies[index].code));
+      group.currencies.add(CurrencySimpleModel(code: code));
     } else {
-      group.currencies.removeWhere((e) => e.code == currencies[index].code);
+      // necessario pois deve ter algum erro com lista no object_box
+      final tempList = group.currencies.toList()
+        ..removeWhere((e) => e.code == code);
+      group.currencies.clear();
+      group.currencies.addAll(ToMany<CurrencySimple>(items: tempList));
     }
 
     final allIsChecked = mainList.any((element) => element.checked == false);

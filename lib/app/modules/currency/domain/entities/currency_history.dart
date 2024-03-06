@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:demo/app/modules/currency/domain/entities/currency_simple.dart';
 import 'package:equatable/equatable.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -7,20 +8,24 @@ import 'package:objectbox/objectbox.dart';
 class CurrencyHistory extends Equatable {
   CurrencyHistory({
     required this.date,
-    required this.currency,
-    required this.origin,
-    required this.destiny,
-    this.currencyConverted,
+    required this.amount,
+    required this.currencyOrigin,
+    required this.currencies,
+    required this.isGroup,
+    this.groupName,
     this.id = 0,
   });
 
   int id;
-  final double currency;
-  final String? currencyConverted;
-  final String origin;
-  final String destiny;
+  final String currencyOrigin;
+  final double amount;
+  final String? groupName;
+  final bool isGroup;
   @Property(type: PropertyType.date)
   final DateTime date;
+
+  @Backlink('currencyHistory')
+  ToMany<CurrencySimple> currencies = ToMany<CurrencySimple>();
 
   @override
   List<Object> get props => [id];

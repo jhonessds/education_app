@@ -14,6 +14,8 @@ class HistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final text =
+        history.isGroup ? history.groupName : history.currencies.first.code;
     return Card(
       elevation: 2,
       margin: const EdgeInsets.only(
@@ -23,33 +25,30 @@ class HistoryCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            margin: const EdgeInsets.all(18),
-            child: Column(
-              children: [
-                SimpleText(
-                  alignment: Alignment.centerLeft,
-                  text: '${history.origin} to ${history.destiny}',
-                  fontWeight: FontWeight.bold,
-                  color: context.theme.primaryColor,
-                  fontSize: 20,
-                ),
-                const SimpleText(
-                  mgTop: 10,
-                  mgBottom: 5,
-                  alignment: Alignment.centerLeft,
-                  text: 'Amount',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                ),
-                HistoryRow(history: history),
-              ],
+      child: Container(
+        margin: const EdgeInsets.all(18),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SimpleText(
+              alignment: Alignment.centerLeft,
+              text: '${history.currencyOrigin} to $text',
+              fontWeight: FontWeight.bold,
+              color: context.theme.primaryColor,
+              fontSize: 20,
             ),
-          ),
-        ],
+            SimpleText(
+              mgTop: 10,
+              mgBottom: 5,
+              alignment: Alignment.centerLeft,
+              text: 'Amount ${history.amount}',
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+            ),
+            const Divider(),
+            HistoryRow(history: history),
+          ],
+        ),
       ),
     );
   }

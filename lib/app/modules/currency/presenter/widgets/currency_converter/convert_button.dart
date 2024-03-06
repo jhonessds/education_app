@@ -1,7 +1,5 @@
-import 'package:demo/app/modules/currency/data/models/currency_history_model.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/currency_controller.dart';
 import 'package:demo/app/modules/currency/presenter/controllers/store/currency_store.dart';
-import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:demo/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +7,17 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class ConvertButton extends StatelessWidget {
   const ConvertButton({
+    required this.formKey,
     super.key,
   });
+
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
     final store = Modular.get<CurrencyListStore>();
     final currencyCtrl = Modular.get<CurrencyController>();
+
     return Positioned(
       top: context.height * 0.32,
       child: ElevatedButton(
@@ -30,22 +32,13 @@ class ConvertButton extends StatelessWidget {
           ),
         ),
         onPressed: () async {
-          store.convert();
+          if (formKey.currentState!.validate()) {
+            store.convert(currencyCtrl.currency);
+            final result = await currencyCtrl.saveHistory();
 
-          final history = CurrencyHistoryModel(
-            date: DateTime.now(),
-            currency: double.tryParse(currencyCtrlState.value.text) ?? 0,
-            currencyConverted: store.group.hasOne
-                ? store.group.currencies.first.conversion
-                : null,
-            origin: store.currencyLeft!,
-            destiny: store.group.hasOne
-                ? store.group.currencies.first.code
-                : store.group.name,
-          );
-          final result = await currencyCtrl.saveHistory(history: history);
-          if (!result) {
-            CoreUtils.bottomSnackBar(currencyCtrl.errorMessage);
+            if (!result) {
+              CoreUtils.bottomSnackBar(currencyCtrl.errorMessage);
+            }
           }
         },
         child: const Text(

@@ -41,7 +41,9 @@ class OneCurrency extends StatelessWidget {
                 ],
               ),
               SimpleText(
-                text: currencyText(store.currencyLeft!),
+                text: store.currencyLeft != null
+                    ? currencyText(store.currencyLeft!)
+                    : '',
                 color: context.theme.disabledColor,
                 fontWeight: FontWeight.w600,
               ),

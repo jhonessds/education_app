@@ -1,18 +1,24 @@
 import 'package:demo/app/modules/currency/presenter/components/converter/select_currency_left.dart';
 import 'package:demo/app/modules/currency/presenter/components/converter/select_currency_right.dart';
-import 'package:demo/app/modules/currency/presenter/interactor/state/currency_state.dart';
+import 'package:demo/app/modules/currency/presenter/controllers/currency_controller.dart';
+import 'package:demo/core/common/actions/app_actions.dart';
 import 'package:demo/core/common/widgets/custom_input.dart';
 import 'package:demo/core/common/widgets/simple_text.dart';
 import 'package:demo/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class CardConverter extends StatelessWidget {
   const CardConverter({
+    required this.formKey,
     super.key,
   });
 
+  final GlobalKey<FormState> formKey;
+
   @override
   Widget build(BuildContext context) {
+    final txtCtrl = TextEditingController();
     return Card(
       elevation: 2,
       margin: EdgeInsets.only(
@@ -42,13 +48,22 @@ class CardConverter extends StatelessWidget {
               ],
             ),
           ),
-          CustomInput(
-            controller: currencyCtrlState.value,
-            mgLeft: 30,
-            borderRadius: 25,
-            mgRight: 30,
-            mgBottom: 40,
-            keyboardType: TextInputType.number,
+          Form(
+            key: formKey,
+            child: CustomInput(
+              controller: txtCtrl,
+              mgLeft: 30,
+              borderRadius: 25,
+              mgRight: 30,
+              mgBottom: 40,
+              keyboardType: TextInputType.number,
+              validator: InputValidator.emptyCheck(translation().requiredField),
+              onChange: (value) {
+                final currencyCtrl = Modular.get<CurrencyController>();
+                final parsed = double.parse(value);
+                currencyCtrl.currency = parsed;
+              },
+            ),
           ),
         ],
       ),

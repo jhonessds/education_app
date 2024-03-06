@@ -30,15 +30,23 @@ class _HistoryRowState extends State<HistoryRow> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
       children: [
-        SimpleText(
-          text: conversion(),
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: widget.history.currencies.length,
+          itemBuilder: (context, index) {
+            final currency = widget.history.currencies[index];
+            return SimpleText(
+              text: '${currency.code} = ${currency.conversion}',
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            );
+          },
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Icon(
               IconlyLight.time_circle,
@@ -63,13 +71,5 @@ class _HistoryRowState extends State<HistoryRow> {
         ),
       ],
     );
-  }
-
-  String conversion() {
-    var text = widget.history.currency.toStringAsFixed(2);
-    if (widget.history.currencyConverted != null) {
-      text += ' = ${widget.history.currencyConverted}';
-    }
-    return text;
   }
 }

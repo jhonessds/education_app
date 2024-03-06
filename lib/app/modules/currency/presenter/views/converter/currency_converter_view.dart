@@ -18,6 +18,7 @@ class CurrencyConverterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = Modular.get<CurrencyListStore>();
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       body: SizedBox(
         height: context.height,
@@ -26,8 +27,8 @@ class CurrencyConverterView extends StatelessWidget {
           children: [
             const Waves(),
             const TopGroup(),
-            const CardConverter(),
-            const ConvertButton(),
+            CardConverter(formKey: formKey),
+            ConvertButton(formKey: formKey),
             ValueListenableBuilder<CurrencyListState>(
               valueListenable: store,
               builder: (context, value, child) {

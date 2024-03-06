@@ -4,6 +4,8 @@ import 'package:demo/app/modules/currency/presenter/views/converter/currency_con
 import 'package:demo/app/modules/currency/presenter/views/currency_group_view.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_history_view.dart';
 import 'package:demo/app/modules/currency/presenter/views/currency_profile.dart';
+import 'package:demo/core/abstraction/logger.dart';
+import 'package:demo/core/services/web/web_service_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -43,7 +45,20 @@ class _CurrencyViewState extends State<CurrencyView>
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: currencyCtrl.getWebQuotation,
+        onPressed: () async {
+          final web = WebServiceImpl(
+            'https://openexchangerates.org/api/latest.json?app_id=1abfc475e76b45f6919fbe7bc63a92a9',
+            isAuthenticated: false,
+          );
+
+          await web.getModel(
+            '',
+            (json) {
+              final temp = json;
+              logger(json);
+            },
+          );
+        },
       ),
       bottomNavigationBar: CurrencyBottomNav(tabController: tabController),
     );

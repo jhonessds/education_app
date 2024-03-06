@@ -11,11 +11,7 @@ class CurrencyHistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: HistoryAppBar(),
-      body: Column(
-        children: [
-          HistoryList(),
-        ],
-      ),
+      body: HistoryList(),
     );
   }
 }
